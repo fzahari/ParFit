@@ -1,0 +1,36 @@
+
+
+Required:
+
+ * Python 2.7.0 (or higher but not Python 3): 
+
+If Python is not installed on your system, one can download 
+the installation source from www.python.org. The website
+contains detailed instructions on how to install. There are
+pre-compiled binaries for selected systems. Python and most
+of its libraries are open-source.
+
+ * numpy and scipy Pyevolve Python libraries:
+
+One can check if numpy/scipy libraries are already installed on your system
+by going into the interactive mode of Python (for example, by
+typing "python" at the prompt of a Linux/Unix system) and attempting
+"import numpy", "import pyevolve, and "import scipy". 
+The source of numpy and scipy with detailed installation instructions 
+can be downloded from www.scipy.org. There are pre-compiled binaries for 
+selected systems.
+
+ * "Engine":
+
+The proprietory MM ENGINE software from www.serenasoft.com has to be 
+installed and the directory of installation has to be put into the variable 
+engine_path in Fit/_Engine.py.
+
+Optional:
+
+ * matplotlib Python library:
+
+Matplotlib is a nice plotting facility within Python that is quite handy for
+a visual comparison of target and fitted curves. One can check if it
+is already available by "import matplotlib". The website for installation
+is matlplotlib.org. 

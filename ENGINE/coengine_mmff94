@@ -1,0 +1,6 @@
+mode opt
+infile  temp_inp.pcm
+outfile temp_out.pcm
+print 3
+forcefield mmff94
+addpar add_MMFF94.prm

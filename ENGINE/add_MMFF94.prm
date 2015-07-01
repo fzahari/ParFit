@@ -1,0 +1,45 @@
+torsion        1    1   25    1      0.0000 +1    0.0000 -2   0.2000 +3     
+torsion        1    1   25   32      0.2300 +1    0.0000 -2   0.2000 +3     
+torsion        5    1   25    1      0.0000 +1    0.0000 -2   0.1800 +3      FIT TO MP2
+torsion        5    1   25    2      0.0000 +1    0.0000 -2   0.1800 +3      assume same 5-1-25-1
+torsion        5    1   25   32      0.0000 +1    0.0000 -2   0.1800 +3      FIT TO MP2
+torsion        5    1   25   37      0.0000 +1    0.0000 -2   0.1800 +3      assume same 5-1-25-1
+torsion        2    2   25    1      0.0000 +1   -0.2500 -2  -0.3700 +3      FIT TO MP2
+torsion        2    2   25   32      0.0000 +1    0.3000 -2  -0.3700 +3      FIT TO MP2     
+torsion        5    2   25    1      0.0000 +1   -0.2500 -2   0.3700 +3      FIT TO MP2
+torsion        5    2   25   32      0.0000 +1    0.2500 -2   0.3700 +3      FIT TO MP2
+torsion        5    1    1   25      0.0000 +1    0.0000 -2   0.2950 +3      X94 default
+torsion        2    2    2   25      0.0000 +1   10.0000 -2   0.0000 +3      guess      
+torsion        5    2    2   25      0.0000 +1   10.0000 -2   0.0000 +3      guess
+torsion          1   25   37   37       0.000 +1    0.000 -2 -0.370 +3     
+torsion         32   25   37   37       0.000 +1    0.000 -2 -0.370 +3     
+torsion        5   37   37   25      0.0000 +1   10.0000 -2   0.0000 +3      guess
+torsion        5   37   25    1      0.0000 +1   10.0000 -2   0.0000 +3      guess
+torsion        5   37   25   32      0.0000 +1   10.0000 -2   0.0000 +3      guess
+torsion       37   37   37   25      0.0000 +1   10.0000 -2   0.0000 +3      guess 
+//bonds to phosphorus
+bond         1   25   2.9800    1.8100       X94 default
+bond         2   25   3.7500    1.7420       E94 default
+bond        25   32   8.2960    1.5100       X94 default
+bond        25   37   3.5860    1.7550       E94 default
+//angles subtended at phosphorus
+angle        1   25    1     1.0720   99.1580       X94 default
+angle        1   25    2     0.9720  104.9240       not in default, assume same 1-25-37 
+angle        1   25   32     1.1860  107.8910       X94 default
+angle        1   25   37     0.9720  104.9240       E94 default
+angle        2   25   32     0.9830  120.1270       E94 default
+angle       32   25   37     1.0970  113.4300       E94 default
+//angles with phosphorus at the terminus
+angle        1    1   25     0.8030  112.3560       X94 default
+angle        5    1   25     0.4870  109.4860       X94 default
+angle        2    2   25     0.7000  123.8300       E94 default
+angle        5    2   25     0.3950  124.0000       E94 default
+angle       25   37   37     0.7180  121.6000       E94 default
+//Default MMFF94 atom types
+//   1 alkane carbon
+//   2 alkene carbon
+//   5 hydrogen on carbon
+//   6 divalent oxygen
+//  25 tetravalent phosphorus
+//  32 monovalent oxygen
+//  37 benzene carbon
