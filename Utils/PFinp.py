@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-#    error out if dihedral is given incorrectly (such as two numers are the same or not all numbers are given)
+#    error out if dihedral is given incorrectly (such as two numbers are the same or not all numbers are given)
 
 # --- Determine ParFit input file name ---
 
@@ -8,7 +8,7 @@ pyout = raw_input( "Name of ParFit input file to create:\n" )           # take f
 
 # --- Open the file for writing ---
 
-f = open(pyout,'w')   # ................................................  open a file for writting ('w')
+f = open(pyout,'w')   # ................................................  open a file for writing ('w')
 
 # --- Create GAMESS input files or use existing energy/geometry data. ---
 
@@ -104,9 +104,9 @@ elif ( runtyp == 'a' or 'b' ) :
     elif ( runtyp == 'b') :
         filenameroot = raw_input("\nEnter the root file name. It should match the root file\nname of your GAMESS log files minus '***.log' where *** is an angle.\n" )
 
-# --- Printin csv file option ---
+# --- Print csv file option ---
 
-    printcsv = raw_input( "\nEnter \"n\" if you do NOT want ParFit to print a csv format file\ncontaining the angles, QM energy, and the optmized MM energies.\n" )
+    printcsv = raw_input( "\nEnter \"n\" if you do NOT want ParFit to print a csv format file\ncontaining the angles, QM energy, and the optimized MM energies.\n" )
     if ( printcsv == 'n') :
         csv = "csv_off"
     else :
