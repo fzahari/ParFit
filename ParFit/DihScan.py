@@ -258,7 +258,7 @@ class DihScan(object):
         ge0,ee0=self._ged[n0],self._eed[n0]
         rmse=0.
         if csv=="csv_on":
-            f=open("../utils/opt.csv",'w')
+            f=open("../Utils/opt.csv",'w')
         for m in self._ml:
             name=m.name
             ged,eed=(self._ged[name]-ge0)*self.hartree2kcal_mol,self._eed[name]-ee0
