@@ -65,7 +65,7 @@ elif gopt_type=="ginp":
     ds.write_gamess_inputs()
     quit()
 else:
-    "Par_Fit: Wrong gopt_type!"
+    print "\nPar_Fit: Wrong run type. \nAccepted values: full, comp, and ginp. \nPlease check input file.\n\n"
 ds.write_engine_inputs()
 
 if mode=="sense":
