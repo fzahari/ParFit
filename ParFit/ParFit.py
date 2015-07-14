@@ -65,7 +65,7 @@ elif gopt_type=="ginp":
     ds.write_gamess_inputs()
     quit()
 else:
-    print "\nPar_Fit: Wrong run type. \nAccepted values: full, comp, and ginp. \nPlease check input file.\n\n"
+    print "\nPar_Fit: Wrong run type. \nAccepted values: full, comp, and ginp. \nPlease check the input file.\n\n"
 ds.write_engine_inputs()
 
 if mode=="sense":
@@ -90,4 +90,4 @@ else:
    elif alg=="fmin":
       print fmin(engine_rmse,p)
    else: 
-      "'alg' is not a known algorithm!"
+      print "\nPar_Fit: Wrong algorithm.\nAccepted values: ga and fmin.\nPlease check the input file.\n\n"
