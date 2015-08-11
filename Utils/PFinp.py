@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-#    error out if dihedral is given incorrectly (such as two numbers are the same or not all numbers are given)
-
 # --- Determine ParFit input file name ---
 
 pyout = raw_input( "Enter the name of ParFit input file to create, if blank, the file name will be PFinput.\n" )           # take file name form stdin
@@ -41,17 +39,33 @@ else :
 # --- Description of Molecule and Rotation used for the Fit ---
 
 torsion = raw_input( "What are the indices of the four atoms creating the dihedral angle to be fit?\n" )
+
 TorInit = raw_input( "What is the initial torsion angle? Default is 0.\n" )
-if ( TorInit == "" ) :
+if ( TorInit == "") :
     TorInit = "0"
 else :
-    TorInit = TorInit
+    try :
+        TorInit = int(TorInit)
+    except ValueError :
+        TorInit = "0"
+        print "WARNING: invalid or no initial torsion. Choosing default value."
+
 TorFin  = raw_input( "What is the final torsion angle?\n" )
+try :
+    TorFin = int(TorFin)
+except ValueError :
+    TorFin = "[final torsion]"
+    print "WARNING: invalid or no final torsion. Place holder printed in file."
+
 TorStep = raw_input( "What is the angle step size? Default is 5.\n" )
 if ( TorStep == "" ) :
     TorStep = "5"
 else :
-    TorStep = TorStep
+    try :
+        TorStep = int(TorStep)
+    except ValueError :
+        TorStep = "5"
+        print "WARNING: invalid step size. Choosing default value."
 
 # --- Create short form input file ---
 
@@ -151,8 +165,3 @@ open input file to modify.".format( line_no )
     print >> f,inputfile
     print "\nYour ParFit input file name {0} has been generated.\n".format( pyout )
     exit()
-
-else :
-    print "\nError: the only options are a, b, or c. Please start over.\n"
-    exit()
-
