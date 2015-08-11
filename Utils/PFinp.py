@@ -4,7 +4,11 @@
 
 # --- Determine ParFit input file name ---
 
-pyout = raw_input( "Name of ParFit input file to create:\n" )           # take file name form stdin
+pyout = raw_input( "Enter the name of ParFit input file to create, if blank, the file name will be PFinput.\n" )           # take file name form stdin
+if ( pyout == "" ) :
+    pyout = 'PFinput'
+else :
+    pyout == pyout
 
 # --- Open the file for writing ---
 
