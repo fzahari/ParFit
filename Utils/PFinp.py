@@ -40,10 +40,18 @@ else :
 
 # --- Description of Molecule and Rotation used for the Fit ---
 
-torsion   = raw_input( "What are the indices of the four atoms creating the dihedral angle to be fit?\n" )
-TorInit = raw_input( "What is the initial torsion angle?\n" )
+torsion = raw_input( "What are the indices of the four atoms creating the dihedral angle to be fit?\n" )
+TorInit = raw_input( "What is the initial torsion angle? Default is 0.\n" )
+if ( TorInit == "" ) :
+    TorInit = "0"
+else :
+    TorInit = TorInit
 TorFin  = raw_input( "What is the final torsion angle?\n" )
-TorStep = raw_input( "What is the angle step size?\n" )
+TorStep = raw_input( "What is the angle step size? Default is 5.\n" )
+if ( TorStep == "" ) :
+    TorStep = "5"
+else :
+    TorStep = TorStep
 
 # --- Create short form input file ---
 
