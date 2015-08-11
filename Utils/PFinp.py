@@ -23,12 +23,20 @@ runtyp = raw_input( '''Choose from the scenarios below:
 (c) I need GAMESS input files to run a series of constrained optimizations with the
     torsion angles described above.
     \n
-Enter: a, b, or c.\n''' )  # Prompt for defining run type options.
+Enter: a, b, or c. Default is a.\n''' )  # Prompt for defining run type options.
 
-dict = {}   #........................................................ Run type definitions.
-dict['a'] = 'comp'
-dict['b'] = 'full'
-dict['c'] = 'ginp'
+if ( runtyp == "a" ) :
+    runtyp = 'comp'
+elif ( runtyp == "b" ) :
+    runtyp = 'full'
+elif ( runtyp == "c" ) :
+    runtyp = 'ginp'
+else :
+    runtyp = 'comp'
+#dict = {}   #........................................................ Run type definitions.
+#dict['a'] = 'comp'
+#dict['b'] = 'full'
+#dict['c'] = 'ginp'
 
 # --- Description of Molecule and Rotation used for the Fit ---
 
@@ -39,16 +47,16 @@ TorStep = raw_input( "What is the angle step size?\n" )
 
 # --- Create short form input file ---
 
-if ( runtyp == 'c' ) :
+if ( runtyp == 'ginp' ) :
     filenameroot = raw_input( "Enter the filename root of the series of GAMESS input files to be generated.\nFormat: String with no spaces.\n" )
-    onlyline = '{0}, {1}, {2}, {3} {4} {5}'.format( dict[runtyp] , filenameroot , torsion , TorInit , TorFin , TorStep ) # formats only line in short form input file.
+    onlyline = '{0}, {1}, {2}, {3} {4} {5}'.format( runtyp , filenameroot , torsion , TorInit , TorFin , TorStep ) # formats only line in short form input file.
     print >> f,onlyline
     print "\nYour ParFit input file name {0} has been generated.\n".format( pyout )
     exit()
 
 # --- Create long form input file ---
 
-elif ( runtyp == 'a' or 'b' ) :
+elif ( runtyp == 'comp' or 'full' ) :
 
 # --- Get engine path ---
 
@@ -99,15 +107,17 @@ elif ( runtyp == 'a' or 'b' ) :
         elif ( var_param == 'c' ) :
             param = "c c p"
         else :
-            print "\nWarning: check the parameter in line {0} that should be fit.\n".format( line_no )
+            param = "p c c"
+            print "\nWARNING: check the parameter in line {0} that should be fit. Input file will be printed with default values: p c c.\n\
+open input file to modify.".format( line_no )
         formatedline = "{0} {1}\n".format( line_no , param )
         prm_lines += formatedline
 
 # --- Obtain file name root ---
 
-    if ( runtyp == 'a' ) :
+    if ( runtyp == 'comp' ) :
         filenameroot = raw_input("\nEnter the root file name. It should match the name of the\ncompact file containing energies and geometries, minus the word 'scan'.\n" )
-    elif ( runtyp == 'b') :
+    elif ( runtyp == 'full') :
         filenameroot = raw_input("\nEnter the root file name. It should match the root file\nname of your GAMESS log files minus '***.log' where *** is an angle.\n" )
 
 # --- Print csv file option ---
@@ -122,7 +132,7 @@ elif ( runtyp == 'a' or 'b' ) :
 # --- Format and print the ParFit input file ---
 
     inputfile = '''{0}, {1}, {2}, {3} {4} {5}\n{6}\n{7}\n{8}\n{9}{10}'''\
-            .format( dict[runtyp] , filenameroot , torsion , TorInit , TorFin , TorStep , \
+            .format( runtyp , filenameroot , torsion , TorInit , TorFin , TorStep , \
             engine_path , \
             mmtyp , \
             alg , \
