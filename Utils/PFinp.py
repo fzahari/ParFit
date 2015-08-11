@@ -28,7 +28,7 @@ dict['c'] = 'ginp'
 
 # --- Description of Molecule and Rotation used for the Fit ---
 
-torsion   = raw_input( "What are the indices of the four atoms creating the dihedral angle to be fit?\n" )
+torsion   = raw_input( "What are the indices of the four atoms creating the dihedral angle to be fit?\n Format: space separated integers.\n" )
 TorInit = raw_input( "What is the initial torsion angle?\n" )
 TorFin  = raw_input( "What is the final torsion angle?\n" )
 TorStep = raw_input( "What is the angle step size?\n" )
@@ -36,7 +36,7 @@ TorStep = raw_input( "What is the angle step size?\n" )
 # --- Create short form input file ---
 
 if ( runtyp == 'c' ) :
-    filenameroot = "opmmm-mp2-popt-dd-"
+    filenameroot = raw_input( "Enter the filename root.\n Format: string with no spaces.\n" )
     onlyline = '{0}, {1}, {2}, {3} {4} {5}'.format( dict[runtyp] , filenameroot , torsion , TorInit , TorFin , TorStep ) # formats only line in short form input file.
     print >> f,onlyline
     print "\nYour ParFit input file name {0} has been generated.\n".format( pyout )
