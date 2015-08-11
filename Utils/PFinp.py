@@ -64,13 +64,15 @@ elif ( runtyp == 'a' or 'b' ) :
 
 # --- Determine the type of MM file that is to be modified ---
 
-    mmtyp = raw_input( "\nWhat type of MM (mm3 or mmff94) are you going to calculate parameters for?\n" )
-    if ( mmtyp == 'mm3' ) :
+    mmtyp = raw_input( "\nChoose the MM type (mm3 or mmff94) parameters to be fit\n(a) MM3\n(b) MMFF94\nChoose a or b.\n" ) # a = mm3 and b = mmff94 MM type
+    if ( mmtyp == 'a' ) :
         carbontyp = 50
-    elif ( mmtyp == 'mmff94' ) :
+        mmtyp = 'mm3'
+    elif ( mmtyp == 'b' ) :
         carbontyp = 37
+        mmtyp = 'mmff94'
     else :
-        print "\nWarning: Check the MM type you entered, the only options are mm3 and mmff94\n"
+        print "\nWarning: Check the MM type you entered, the only options are a for mm3 and b for mmff94\n"
 
 # --- Choose the algorithm used to fit parameters. ---
 
