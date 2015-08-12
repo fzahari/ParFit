@@ -31,10 +31,6 @@ elif ( runtyp == "c" ) :
     runtyp = 'ginp'
 else :
     runtyp = 'comp'
-#dict = {}   #........................................................ Run type definitions.
-#dict['a'] = 'comp'
-#dict['b'] = 'full'
-#dict['c'] = 'ginp'
 
 # --- Description of Molecule and Rotation used for the Fit ---
 
@@ -48,14 +44,14 @@ else :
         TorInit = int(TorInit)
     except ValueError :
         TorInit = "0"
-        print "WARNING: invalid or no initial torsion. Choosing default value."
+        print "WARNING: invalid or no initial torsion. Choosing default value.\n"
 
 TorFin  = raw_input( "What is the final torsion angle?\n" )
 try :
     TorFin = int(TorFin)
 except ValueError :
     TorFin = "[final torsion]"
-    print "WARNING: invalid or no final torsion. Place holder printed in file."
+    print "WARNING: invalid or no final torsion. Place holder printed in file.\n"
 
 TorStep = raw_input( "What is the angle step size? Default is 5.\n" )
 if ( TorStep == "" ) :
@@ -65,7 +61,7 @@ else :
         TorStep = int(TorStep)
     except ValueError :
         TorStep = "5"
-        print "WARNING: invalid step size. Choosing default value."
+        print "WARNING: invalid step size. Choosing default value.\n"
 
 # --- Create short form input file ---
 
@@ -98,7 +94,7 @@ elif ( runtyp == 'comp' or 'full' ) :
 
 # --- Determine the type of MM file that is to be modified ---
 
-    mmtyp = raw_input( "\nChoose the MM type (mm3 or mmff94) parameters to be fit\n(a) MM3\n(b) MMFF94\nChoose a or b.\n" ) # a = mm3 and b = mmff94 MM type
+    mmtyp = raw_input( "\nChoose the MM type (mm3 or mmff94) parameters to be fit\n(a) MM3\n(b) MMFF94\nChoose a or b. Default is MM3.\n" ) # a = mm3 and b = mmff94 MM type
     if ( mmtyp == 'a' ) :
         carbontyp = 50
         mmtyp = 'mm3'
@@ -106,7 +102,9 @@ elif ( runtyp == 'comp' or 'full' ) :
         carbontyp = 37
         mmtyp = 'mmff94'
     else :
-        print "\nWarning: Check the MM type you entered, the only options are a for mm3 and b for mmff94\n"
+        carbontyp = 50
+        mmtyp = 'mm3'
+        print "WARNING: MM type not understood. Choosing default.\n"
 
 # --- Choose the algorithm used to fit parameters. ---
 
