@@ -110,8 +110,15 @@ elif ( runtyp == 'comp' or 'full' ) :
 
 # --- Choose the algorithm used to fit parameters. ---
 
-    print "\nPlease choose the fitting algorithm."
-    alg = raw_input("Enter ga for genetic algorithm, or fmin for simplex algorithm.\n")
+    print "\nPlease choose the fitting algorithm. The default is the simplex algorithm.\n"
+    alg = raw_input("    (a) genetic algorithm\n    (b) simplex algorithm\n")
+    if ( alg == 'a' ) :
+        alg = 'ga'
+    elif ( alg == 'b' ) :
+        alg = 'fmin'
+    else :
+        alg = 'fmin'
+        print "WARNING: algorithm not understood. Using default."
 
 # --- Determine which parameters will be changed by ParFit ---
 
