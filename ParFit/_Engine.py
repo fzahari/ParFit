@@ -27,10 +27,10 @@ class RunCmd(threading.Thread):
         return self.status
 
 def pert_add_param(add_name):
-    f=open("../ENGINE/"+add_name,'r')
+    f=open("../Data/Engine/"+add_name,'r')
     lines=f.readlines()
     f.close()
-    f=open("../ENGINE/"+add_name,'w')
+    f=open("../Data/Engine/"+add_name,'w')
     sline0=lines[0].split()
     print >>f,"%s          %s    %s  %s    %s       %.3f %s    %s %s  %s %s"%(
                sline0[0],sline0[1],sline0[2],sline0[3],sline0[4],float(sline0[5])+0.001,sline0[6],sline0[7],sline0[8],sline0[9],sline0[10])
@@ -39,17 +39,17 @@ def pert_add_param(add_name):
     f.close()
 
 def run_engine_timeout(engine_path,coengine_name,timeout):
-    os.chdir("../ENGINE")
-    status=RunCmd([engine_path+"engine.x","../ENGINE/"+coengine_name],timeout).Run()
-    os.chdir("../ParFit")
+    os.chdir("../Data/Engine")
+    status=RunCmd([engine_path+"engine.x",coengine_name],timeout).Run()
+    os.chdir("../../ParFit")
     return status
 
 def restore_hang_prm():
-    shutil.copy("../ENGINE/add_MM3_hang.prm_orig","../ENGINE/add_MM3_hang.prm")
+    shutil.copy("../Data/Engine/add_MM3_hang.prm_orig","../Data/Engine/add_MM3_hang.prm")
 
 if __name__=="__main__":
-    engine_path="/home/fzahari/Work/CMI/CODES/MM_engine_source/"
-    os.environ["ENGINE_DIR"]=engine_path+"engine_dir"
+    engine_path="/home/federico/CODES/MM_engine_source/"
+    os.environ["Engine_DIR"]=engine_path+"engine_dir"
     coeng_name="coengine_hang"
     timeout=10
     restore_hang_prm()

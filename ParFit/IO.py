@@ -13,7 +13,7 @@ def par_fit_inp(input_fname):
     t1,t2,t3,t4=map(int,t1234.split())    
     b,e,s=map(int,bes.split())    
     if gopt_type=="ginp":
-       return gopt_type,gopt_scan_fnameb,(t1,t2,t3,t4),(b,e,s),None,None,None,None,None
+       return gopt_type,gopt_scan_fnameb,(t1,t2,t3,t4),(b,e,s),None,None,None,None,None,None,None,None
     engine_path=lines[1][:-1]
     l2s=lines[2].split()
     mm=l2s[0].lower()
@@ -41,8 +41,16 @@ def par_fit_inp(input_fname):
             if t[i+1]=='c': 
                nc+=1
         opt_lin.update({int(t[0])-1:(t[1],t[2],t[3])})
-    csv=lines[-1][:-1].strip()
-    return gopt_type,gopt_scan_fnameb,(t1,t2,t3,t4),(b,e,s),engine_path,mm,mode,alg,opt_lin,np,nc,csv
+    last_line=lines[-1].split()
+    if len(last_line)==1:
+       step_int=10
+       csv=lines[-1].strip()
+    elif len(last_line)==2:
+       step_int,csv=lines[-1].split()
+    else:
+       print "Wrong csv line in the input file!"
+
+    return gopt_type,gopt_scan_fnameb,(t1,t2,t3,t4),(b,e,s),engine_path,mm,mode,alg,opt_lin,np,nc,step_int,csv
 
 def read_add(mm,opt_lin,np,nc,fl):
 
@@ -51,14 +59,14 @@ def read_add(mm,opt_lin,np,nc,fl):
      
     if mm=="mm3":
         if fl==1:
-           add_name="../ENGINE/add_MM3.prm"
+           add_name="../Data/Engine/add_MM3.prm"
         else:
-           add_name="../ENGINE/add_MM3_PF.prm"
+           add_name="../Data/Engine/add_MM3_PF.prm"
     elif mm=="mmff94":
         if fl==1:
-           add_name="../ENGINE/add_MMFF94.prm"
+           add_name="../Data/Engine/add_MMFF94.prm"
         else:
-           add_name="../ENGINE/add_MMFF94_PF.prm"
+           add_name="../Data/Engine/add_MMFF94_PF.prm"
     else:
         print "read_add: Wrong MM-type!"
 
@@ -105,20 +113,19 @@ def read_add(mm,opt_lin,np,nc,fl):
 
     return p,c,ol_templ,lines
 
-def write_add(p,c,mm,ol_templ,lines,fl):
-
+def write_add(p,c,mm,ol_templ,lines,fl,step,step_int):
     if mm=="mm3":
-        if fl==1:
-           add_name="../ENGINE/add_MM3.prm"
-        else:
-           add_name="../ENGINE/add_MM3_PF.prm"
+       if fl==1:
+          add_name="../Data/Engine/add_MM3.prm"
+       else:
+          add_name="../Data/Engine/add_MM3_PF.prm"
     elif mm=="mmff94":
-        if fl==1:
-           add_name="../ENGINE/add_MMFF94.prm"
-        else:
-           add_name="../ENGINE/add_MMFF94_PF.prm"
+       if fl==1:
+          add_name="../Data/Engine/add_MMFF94.prm"
+       else:
+          add_name="../Data/Engine/add_MMFF94_PF.prm"
     else:
-        print "write_add: Wrong MM-type!"
+       print "write_add: Wrong MM-type!"
 
     f=open(add_name,'w')
 
@@ -128,13 +135,24 @@ def write_add(p,c,mm,ol_templ,lines,fl):
         exec 'lines['+str(ol_sk)+']='+ol_templ[ol_sk]
 
     for line in lines:
-        print >>f,line[:-1]
+       print >>f,line[:-1]
 
     f.close()
 
+    if (step-1)%step_int==0:
+       if mm=="mm3":
+          add_name_arch="../Data/ParFit/add_MM3_"+str(step)+".prm"
+       elif mm=="mmff94":
+          add_name_arch="../Data/ParFit/add_MMFF94_"+str(step)+".prm"
+
+       f=open(add_name_arch,'w')
+       for line in lines:
+          print >>f,line[:-1]
+       f.close()
+
 class DihGOpt_Molecule(Molecule):
     """\
-    A class to handle GAMESS and ENGINE input/output. 
+    A class to handle Gamess and Engine input/output. 
     For now, it works on (constraint dihedral angle)
     geometry optimization cases only.
     """
@@ -177,7 +195,7 @@ class DihGOpt_Molecule(Molecule):
         gkey="EQUILIBRIUM GEOMETRY LOCATED"
         ekey="TOTAL ENERGY      ="
         #
-        fname="../GAMESS/"+fname_base+"-dlc.log"
+        fname="../Data/Gamess/"+fname_base+"-dlc.log"
         f=open(fname,'r')
         lines=f.readlines()
         f.close()
@@ -210,10 +228,10 @@ class DihGOpt_Molecule(Molecule):
         self.bond_ord()
 
     def read_ginp(self,fname_base):	
-        dkey="$DATA"
+        dkey="$Data"
         ekey="$END"
         #
-        fname="../GAMESS/"+fname_base+".inp"
+        fname="../Data/Gamess/"+fname_base+".inp"
         f=open(fname,'r')
         lines=f.readlines()
         f.close()
@@ -248,7 +266,7 @@ class DihGOpt_Molecule(Molecule):
         pass
 
     def write_inp_pcm(self,fname_base):
-        f=open("../ENGINE/"+fname_base+"_inp.pcm",'w')
+        f=open("../Data/Engine/"+fname_base+"_inp.pcm",'w')
         if self._mm=="mm3":
             self.input_pcm_head2=self.input_pcm_head2+str(3)
         elif self._mm=="mmff94":
@@ -292,7 +310,7 @@ class DihGOpt_Molecule(Molecule):
         f.close() 
 
     def read_out_pcm(self,fname_base):
-        f=open("../ENGINE/"+fname_base+"_out.pcm",'r')
+        f=open("../Data/Engine/"+fname_base+"_out.pcm",'r')
         lines=f.readlines()
         f.close()
         self._na=int(lines[1].split()[1])
