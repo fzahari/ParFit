@@ -241,7 +241,7 @@ class DihScan(object):
                 else:
                     p[0]+=0.001
                     #pert_add_param("add_MM3.prm")
-                    write_add(p,c,mm,ol_templ,lines,0)
+                    write_add(p,c,mm,ol_templ,lines,1,None,None)
             #
             comm="rm ../Data/Engine/"+coengine_name
             system(comm)
@@ -299,7 +299,9 @@ if __name__=="__main__":
 
     def engine_rmse(p):
        print p
-       write_add(p,c,mm,ol_templ,lines,0)
+       step=1
+       step_int=10
+       write_add(p,c,mm,ol_templ,lines,1,step,step_int)
        ds.run_dih_scan(p,c,mm,ol_templ,lines)
        rmse=ds.calc_rmse(csv)
        print rmse

@@ -13,7 +13,7 @@ def par_fit_inp(input_fname):
     t1,t2,t3,t4=map(int,t1234.split())    
     b,e,s=map(int,bes.split())    
     if gopt_type=="ginp":
-       return gopt_type,gopt_scan_fnameb,(t1,t2,t3,t4),(b,e,s),None,None,None,None,None,None,None,None
+       return gopt_type,gopt_scan_fnameb,(t1,t2,t3,t4),(b,e,s),None,None,None,None,None,None,None,None,None
     engine_path=lines[1][:-1]
     l2s=lines[2].split()
     mm=l2s[0].lower()

@@ -60,7 +60,7 @@ def engine_rmse(p):
     ls=f.readlines()
     f.close()
     step=int(ls[0])
-    write_add(p,c,mm,ol_templ,lines,0,step,step_int)
+    write_add(p,c,mm,ol_templ,lines,1,step,step_int)
     ds.run_dih_scan(p,c,mm,ol_templ,lines)
     rmse=ds.calc_rmse(csv,step,step_int)
     print step,rmse
