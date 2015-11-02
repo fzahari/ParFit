@@ -7,15 +7,34 @@ def par_fit_inp(input_fname):
     f=open(input_fname,'r')
     lines=f.readlines()
     f.close()
-    gopt_type,gopt_scan_fnameb,t1234,bes=lines[0][:-1].split(',')
-    gopt_type=gopt_type.strip()
-    gopt_scan_fnameb=gopt_scan_fnameb.strip()
-    t1,t2,t3,t4=map(int,t1234.split())    
-    b,e,s=map(int,bes.split())    
+    line1=lines[0][:-1].split(',')
+    if line1[0]=="mult": 
+       n=int(line1[1])
+       gopt_type=[]
+       gopt_scan_fnameb=[]
+       t1234=[]
+       bes=[]
+       for i in range(n):
+          sgopt_type,sgopt_scan_fnameb,st1234,sbes=lines[i+1].split(',')
+          gopt_type.append(sgopt_type.strip())
+          gopt_scan_fnameb.append(sgopt_scan_fnameb.strip())
+          t1,t2,t3,t4=map(int,st1234.split())    
+          t1234.append((t1,t2,t3,t4))
+          b,e,s=map(int,sbes.split())    
+          bes.append((b,e,s))
+    else:
+       n=0
+       gopt_type,gopt_scan_fnameb,t1234,bes=line1
+       gopt_type=[gopt_type.strip(),]
+       gopt_scan_fnameb=[gopt_scan_fnameb.strip(),]
+       t1,t2,t3,t4=map(int,t1234.split())
+       t1234=[(t1,t2,t3,t4),]
+       b,e,s=map(int,bes.split())
+       bes=[(b,e,s),]
     if gopt_type=="ginp":
-       return gopt_type,gopt_scan_fnameb,(t1,t2,t3,t4),(b,e,s),None,None,None,None,None,None,None,None,None
-    engine_path=lines[1][:-1]
-    l2s=lines[2].split()
+       return gopt_type,gopt_scan_fnameb,t1234,bes,None,None,None,None,None,None,None,None,None
+    engine_path=lines[n+1][:-1]
+    l2s=lines[n+2].split()
     mm=l2s[0].lower()
     if len(l2s)==2:
        mode=l2s[1].lower()
@@ -25,8 +44,8 @@ def par_fit_inp(input_fname):
     plist=[]
     nc=0
     opt_lin={}
-    alg=lines[3].strip()
-    for line in lines[4:-1]:
+    alg=lines[n+3].strip()
+    for line in lines[n+4:-1]:
 	t=line.split()
         for i in range(3):
             t[i+1]=t[i+1].lower()
@@ -50,7 +69,7 @@ def par_fit_inp(input_fname):
     else:
        print "Wrong csv line in the input file!"
 
-    return gopt_type,gopt_scan_fnameb,(t1,t2,t3,t4),(b,e,s),engine_path,mm,mode,alg,opt_lin,np,nc,step_int,csv
+    return gopt_type,gopt_scan_fnameb,t1234,bes,engine_path,mm,mode,alg,opt_lin,np,nc,step_int,csv
 
 def read_add(mm,opt_lin,np,nc,fl):
 
@@ -138,7 +157,9 @@ def write_add(p,c,mm,ol_templ,lines,fl,step,step_int):
        print >>f,line[:-1]
 
     f.close()
-
+   
+    if step==None: return
+    
     if (step-1)%step_int==0:
        if mm=="mm3":
           add_name_arch="../Data/ParFit/add_MM3_"+str(step)+".prm"
@@ -150,6 +171,8 @@ def write_add(p,c,mm,ol_templ,lines,fl,step,step_int):
           print >>f,line[:-1]
        f.close()
 
+    return
+    
 class DihGOpt_Molecule(Molecule):
     """\
     A class to handle Gamess and Engine input/output. 
