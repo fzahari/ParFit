@@ -13,6 +13,28 @@ from pyevolve import Initializators, Mutators
 from pyevolve import Consts
 from pyevolve import DBAdapters
 
+import random
+import numpy
+from deap import algorithms, base, creator, tools
+
+def run_ga2(engine_rmse,np):
+
+   creator.create("FitnessMax",base.Fitness,weights=(-1.0,))
+   creator.create("Individual",numpy.ndarray,fitness=creator.FitnessMax)
+
+   toolbox=base.Toolbox()
+   toolbox.register("attr_float",random.random)
+   toolbox.register("individual",tools.initRepeat,creator.Individual,toolbox.attr_float,n=np)
+   toolbox.register("population",tools.initRepeat,list,toolbox.individual)
+   toolbox.register("evaluate",engine_rmse)
+   toolbox.register("mate",tools.cxTwoPoint)
+   toolbox.register("mutate", tools.mutGaussian, mu=0, sigma=3, indpb=0.05)
+   toolbox.register("select",tools.selTournament,tournsize=3)
+
+   pop=toolbox.population(n=50)
+   algorithms.eaSimple(pop,toolbox,cxpb=0.3,mutpb=0.05,ngen=10)
+   print(tools.selBest(pop,k=1)[0])
+
 def run_ga(eval_func,n):
    
    genome = G1DList.G1DList(n)
@@ -114,6 +136,8 @@ def pf_run(input_fname):
       np=len(p)
       if alg=="ga": 
          run_ga(engine_rmse,np)
+      elif alg=="ga2":
+         run_ga2(engine_rmse,np)
       elif alg=="fmin":
          #print fmin_powell(engine_rmse,p)
          print fmin(engine_rmse,p)
