@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from os import environ
-from numpy import zeros
+from numpy import zeros,ndarray,random
 from scipy.optimize import minimize,basinhopping,anneal,fmin,fmin_powell,fmin_cg,fmin_tnc
 from DihScan import DihScan
 from IO import par_fit_inp,read_add,write_add
@@ -13,22 +13,49 @@ from pyevolve import Initializators, Mutators
 from pyevolve import Consts
 from pyevolve import DBAdapters
 
-import random
-import numpy
 from deap import algorithms, base, creator, tools
 
 def run_ga2(engine_rmse,np):
 
    creator.create("FitnessMax",base.Fitness,weights=(-1.0,))
-   creator.create("Individual",numpy.ndarray,fitness=creator.FitnessMax)
+   creator.create("Individual",ndarray,fitness=creator.FitnessMax)
 
    toolbox=base.Toolbox()
    toolbox.register("attr_float",random.random)
    toolbox.register("individual",tools.initRepeat,creator.Individual,toolbox.attr_float,n=np)
    toolbox.register("population",tools.initRepeat,list,toolbox.individual)
    toolbox.register("evaluate",engine_rmse)
-   toolbox.register("mate",tools.cxTwoPoint)
-   toolbox.register("mutate", tools.mutGaussian, mu=0, sigma=3, indpb=0.05)
+
+   def cxComb(ind1,ind2):
+      if random.randint(2)==0:
+         tools.cxOnePoint(ind1,ind2)
+      else:
+         tools.cxBlend(ind1,ind2,0.0)
+      return ind1,ind2
+
+   toolbox.register("mate",cxComb)
+   toolbox.register("mutate", tools.mutGaussian, mu=0, sigma=3, indpb=1.)
+
+   def checkBounds(min, max):
+    def decorator(func):
+        def wrapper(*args, **kargs):
+            offspring = func(*args, **kargs)
+            for child in offspring:
+                for i in xrange(len(child)):
+                    if child[i] > max:
+                        child[i] = max
+                    elif child[i] < min:
+                        child[i] = min
+            return offspring
+        return wrapper
+    return decorator
+
+   MIN=-3.0
+   MAX=3.0
+
+   toolbox.decorate("mate", checkBounds(MIN, MAX))
+   toolbox.decorate("mutate", checkBounds(MIN, MAX))
+
    toolbox.register("select",tools.selTournament,tournsize=3)
 
    pop=toolbox.population(n=50)
@@ -88,6 +115,30 @@ def pf_run(input_fname):
 
       return rmse
 
+   def engine_rmse2(p):
+
+      print p
+
+      f=open("../Data/ParFit/step",'r')
+      ls=f.readlines()
+      f.close()
+      step=int(ls[0])
+
+      n=len(ds)
+      rmse=0.
+      for i in range(n):
+         write_add(p,c,mm,ol_templ,lines,1,step,step_int)
+         ds[i].run_dih_scan(p,c,mm,ol_templ)
+         rmse+=ds[i].calc_rmse(csv,i,step,step_int)
+      print step,rmse/n
+
+      step+=1
+      f=open("../Data/ParFit/step",'w')
+      print >>f,step
+      f.close()
+
+      return (rmse,)
+
    gopt_type,gopt_s_fnameb,t1234,bes,engine_path,mm,mode,alg,opt_lin,np,nc,step_int,csv=par_fit_inp(input_fname)
 
    n=len(gopt_type)
@@ -137,7 +188,7 @@ def pf_run(input_fname):
       if alg=="ga": 
          run_ga(engine_rmse,np)
       elif alg=="ga2":
-         run_ga2(engine_rmse,np)
+         run_ga2(engine_rmse2,np)
       elif alg=="fmin":
          #print fmin_powell(engine_rmse,p)
          print fmin(engine_rmse,p)
