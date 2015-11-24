@@ -145,7 +145,7 @@ def pf_run(input_fname):
       elif alg=="fmin":
          #print fmin_powell(engine_rmse,p)
          print fmin(engine_rmse,p)
-      elif alg="hybr":
+      elif alg=="hybr":
          hof=run_ga2(engine_rmse2,np,40)
          hof=numpy.array(hof)
          fmin(engine_rmse2,hof[0])
