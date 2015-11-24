@@ -76,7 +76,6 @@ def eaSimple(population, toolbox, cxpb, mutpb, ngen, stats=None,
         if verbose:
             print logbook.stream
 
-        print flag, best_ind, halloffame[0]
         if flag==4: break
 
     return population, logbook
