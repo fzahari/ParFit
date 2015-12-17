@@ -62,13 +62,16 @@ elif ( qmdata == 'comp' or 'full' ) :
 
 # --- Determine the type of MM file that is to be modified ---
 
-    mmtyp = raw_input( "\nWhat type of MM (mm3 or mmff94) are you going to calculate parameters for?\n" )
-    if ( mmtyp == 'mm3' ) :
+    mmtypchoice = raw_input( "\nChoose the MM type (mm3 or mmff94) parameters to be fit\n(a) MM3 - default\n(b) MMFF94\nChoose a or b.\n" )
+    if ( mmtypchoice == 'a' ) :
         carbontyp = 50
-    elif ( mmtyp == 'mmff94' ) :
+        mmtyp = 'mm3'
+    elif ( mmtypchoice == 'b' ) :
         carbontyp = 37
+        mmtyp = 'mmff94'
     else :
-        print "\nWarning: Check the MM type you entered, the only options are mm3 and mmff94\n"
+        mmtyp = 'mm3'
+        print "\nWarning: Check the MM type you entered, the only options are a and b. Default will be chosen.\n"
 
 # --- Choose the algorithm used to fit parameters. ---
 
