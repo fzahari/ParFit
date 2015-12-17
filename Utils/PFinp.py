@@ -46,7 +46,7 @@ TorStep = raw_input( "What is the angle step size?\n" )
 # --- Create short form input file ---
 
 if ( qmdata == 'ginp' ) :
-    filenameroot = "opmmm-mp2-popt-dd-"
+    filenameroot = raw_input( "Enter the filename root.\n Format: string with no spaces.\n" )
     onlyline = '{0}, {1}, {2}, {3} {4} {5}'.format( qmdata , filenameroot , torsion , TorInit , TorFin , TorStep ) 
     print >> f,onlyline
     print "\nYour ParFit input file name {0} has been generated.\n".format( pyout )
