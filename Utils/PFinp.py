@@ -1,6 +1,12 @@
 #!/usr/bin/env python
-
-#    error out if dihedral is given incorrectly (such as two numers are the same or not all numbers are given)
+#
+# This a ParFit input file generating program.
+# For values that are not known, the program will leave a place holder that a
+#  user can then change using a text editor.
+#
+#  To Do:
+#  1. Error out if dihedral is given incorrectly (such as two numbers are the
+#     same or not all numbers are given)
 
 # --- Determine ParFit input file name ---
 
@@ -12,19 +18,23 @@ f = open(pyout,'w')
 
 # --- Create GAMESS input files or use existing energy/geometry data. ---
 
-runtyp = raw_input( '''Choose from the scenarios below:
+qmdatachoice = raw_input( '''Choose from the scenarios below:
 (a) I have compact file that includes all of the geometry and energy information
     for the torsion angles described above.
 (b) I have a GAMESS output file for each torsion angles in the range described above.
 (c) I need GAMESS input files to run a series of constrained optimizations with the
     torsion angles described above.
     \n
-Enter: a, b, or c.\n''' )  
+Enter: a, b, or c. Default is a.\n''' )  
 
-dict = {}   
-dict['a'] = 'comp'
-dict['b'] = 'full'
-dict['c'] = 'ginp'
+if ( qmdatachoice == "a" ) :
+    qmdata = 'comp'
+elif ( qmdatachoice == "b" ) :
+    qmdata = 'full'
+elif ( qmdatachoice == "c" ) :
+    qmdata = 'ginp'
+else :
+    qmdata = 'comp'
 
 # --- Description of Molecule and Rotation used for the Fit ---
 
@@ -35,16 +45,16 @@ TorStep = raw_input( "What is the angle step size?\n" )
 
 # --- Create short form input file ---
 
-if ( runtyp == 'c' ) :
+if ( qmdata == 'ginp' ) :
     filenameroot = "opmmm-mp2-popt-dd-"
-    onlyline = '{0}, {1}, {2}, {3} {4} {5}'.format( dict[runtyp] , filenameroot , torsion , TorInit , TorFin , TorStep ) 
+    onlyline = '{0}, {1}, {2}, {3} {4} {5}'.format( qmdata , filenameroot , torsion , TorInit , TorFin , TorStep ) 
     print >> f,onlyline
     print "\nYour ParFit input file name {0} has been generated.\n".format( pyout )
     exit()
 
 # --- Create long form input file ---
 
-elif ( runtyp == 'a' or 'b' ) :
+elif ( qmdata == 'comp' or 'full' ) :
 
 # --- Get engine path ---
 
@@ -87,9 +97,9 @@ elif ( runtyp == 'a' or 'b' ) :
 
 # --- Obtain file name root ---
 
-    if ( runtyp == 'a' ) :
+    if ( qmdata == 'comp' ) :
         filenameroot = raw_input("\nEnter the root file name. It should match the name of the\ncompact file containing energies and geometries, minus the word 'scan'.\n" )
-    elif ( runtyp == 'b') :
+    elif ( qmdata == 'b') :
         filenameroot = raw_input("\nEnter the root file name. It should match the root file\nname of your GAMESS log files minus '***.log' where *** is an angle.\n" )
 
 # --- Printin csv file option ---
@@ -104,7 +114,7 @@ elif ( runtyp == 'a' or 'b' ) :
 # --- Format and print the ParFit input file ---
 
     inputfile = '''{0}, {1}, {2}, {3} {4} {5}\n{6}\n{7}\n{8}\n{9}{10}'''\
-            .format( dict[runtyp] , filenameroot , torsion , TorInit , TorFin , TorStep , \
+            .format( qmdata , filenameroot , torsion , TorInit , TorFin , TorStep , \
             engine_path , \
             mmtyp , \
             alg , \
