@@ -10,11 +10,15 @@
 
 # --- Determine ParFit input file name ---
 
-pyout = raw_input( "Name of ParFit input file to create:\n" )
+pyout = raw_input( "Enter the name of ParFit input file to create, if blank, the file name will be PFinput.\n" )
+if ( pyout == "" ) :
+    pyout == "PFinp"
+else :
+    pyout == pyout
 
 # --- Open the file for writing ---
 
-f = open(pyout,'w')   
+f = open(pyout,'w')
 
 # --- Create GAMESS input files or use existing energy/geometry data. ---
 
@@ -25,7 +29,7 @@ qmdatachoice = raw_input( '''Choose from the scenarios below:
 (c) I need GAMESS input files to run a series of constrained optimizations with the
     torsion angles described above.
     \n
-Enter: a, b, or c. Default is a.\n''' )  
+Enter: a, b, or c. Default is a.\n''' )
 
 if ( qmdatachoice == "a" ) :
     qmdata = 'comp'
@@ -47,9 +51,9 @@ TorStep = raw_input( "What is the angle step size?\n" )
 
 if ( qmdata == 'ginp' ) :
     filenameroot = raw_input( "Enter the filename root.\n Format: string with no spaces.\n" )
-    onlyline = '{0}, {1}, {2}, {3} {4} {5}'.format( qmdata , filenameroot , torsion , TorInit , TorFin , TorStep ) 
+    onlyline = '{0}, {1}, {2}, {3} {4} {5}'.format( qmdata , filenameroot , torsion , TorInit , TorFin , TorStep )
     print >> f,onlyline
-    print "\nYour ParFit input file name {0} has been generated.\n".format( pyout )
+    print "\nThe ParFit input file named {0} has been generated.\n".format( pyout )
     exit()
 
 # --- Create long form input file ---
