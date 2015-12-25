@@ -251,7 +251,7 @@ class DihGOpt_Molecule(Molecule):
         self.bond_ord()
 
     def read_ginp(self,fname_base):	
-        dkey="$Data"
+        dkey="$DATA"
         ekey="$END"
         #
         fname="../Data/Gamess/"+fname_base+".inp"
@@ -261,12 +261,12 @@ class DihGOpt_Molecule(Molecule):
         #
         ln=len(lines)
         for i in range(ln):
-            if dkey in lines[i]: break
+            if dkey.upper() in lines[i]: break
         #
         self._ginp_templ=lines[:i+3]
         #
         for line in lines[i+3:]:
-            if ekey in line: break
+            if ekey in line.upper(): break
             s,c,x,y,z=line[:-1].split()
             self._sl.append(s)
             self._rl.append(array(map(float,[x,y,z]),'d'))

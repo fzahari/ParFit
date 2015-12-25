@@ -148,7 +148,7 @@ def pf_run(input_fname):
       elif alg=="hybr":
          hof=run_ga2(engine_rmse2,np,40)
          hof=numpy.array(hof)
-         fmin(engine_rmse2,hof[0])
+         fmin(engine_rmse,hof[0])
       else: 
          "'alg' is not a known algorithm!"
    print "inside"
