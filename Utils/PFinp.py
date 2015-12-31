@@ -20,6 +20,9 @@ else :
 
 f = open(pyout,'w')
 
+# --- Determine the number of torsions to be fit. ---
+molno = raw_input( '''Enter the number of torsions to be fit by ParFit.\n''' )
+
 # --- Create GAMESS input files or use existing energy/geometry data. ---
 
 qmdatachoice = raw_input( '''Choose from the scenarios below:
@@ -127,7 +130,7 @@ elif ( qmdata == 'comp' or 'full' ) :
 #        print "\nSorry, I didn't understand your input. The default, 'yes' will be set and a csv file will be printed.\n"
 
 # --- Format and print the ParFit input file ---
-
+    molnoline = "mult, " + molno
     inputfile = '''{0}, {1}, {2}, {3} {4} {5}\n{6}\n{7}\n{8}\n{9}{10}'''\
             .format( qmdata , filenameroot , torsion , TorInit , TorFin , TorStep , \
             engine_path , \
@@ -137,7 +140,10 @@ elif ( qmdata == 'comp' or 'full' ) :
             prm_lines , \
             csv )
 
-    print >> f,inputfile
+# --- Print the ParFit input file. ---
+    print >> f, molnoline
+    print >> f, inputfile
+
     print "\nYour ParFit input file name {0} has been generated.\n".format( pyout )
     exit()
 
