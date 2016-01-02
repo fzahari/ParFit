@@ -29,17 +29,13 @@ qmdatachoice = raw_input( '''Choose from the scenarios below:
 (a) I have compact file that includes all of the geometry and energy information
     for the torsion angles described above.
 (b) I have a GAMESS output file for each torsion angles in the range described above.
-(c) I need GAMESS input files to run a series of constrained optimizations with the
-    torsion angles described above.
     \n
-Enter: a, b, or c. Default is a.\n''' )
+Enter: a or b. Default is a.\n''' )
 
 if ( qmdatachoice == "a" ) :
     qmdata = 'comp'
 elif ( qmdatachoice == "b" ) :
     qmdata = 'full'
-elif ( qmdatachoice == "c" ) :
-    qmdata = 'ginp'
 else :
     qmdata = 'comp'
 
@@ -58,18 +54,9 @@ if ( TorStep == "" ) :
 else :
     TorStep = TorStep
 
-# --- Create short form input file ---
-
-if ( qmdata == 'ginp' ) :
-    filenameroot = raw_input( "Enter the filename root.\n Format: string with no spaces.\n" )
-    onlyline = '{0}, {1}, {2}, {3} {4} {5}'.format( qmdata , filenameroot , torsion , TorInit , TorFin , TorStep )
-    print >> f,onlyline
-    print "\nThe ParFit input file named {0} has been generated.\n".format( pyout )
-    exit()
-
 # --- Create long form input file ---
 
-elif ( qmdata == 'comp' or 'full' ) :
+if ( qmdata == 'comp' or 'full' ) :
 
 # --- Get engine path ---
 
