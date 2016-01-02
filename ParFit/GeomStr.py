@@ -325,20 +325,23 @@ class Molecule(object):
            if not inb: nbrings.append(i)
 
         #for i in range(self._na):
+        #print nbrings,self._conn
         for i in nbrings:
+           #print i, self._conn[i]
            for j in self._conn[i]:
               if j>i: 
                  if self._sl[i]=='P' and self._sl[j]=='O' or self._sl[i]=='O' and self._sl[j]=='P':
                     s,d,t=bond_ords['PO']
                     #if d>self.calc_dist(i,j)>t: print "double"; self._db.append([i,j])
-                    if d>self.calc_dist(i,j): print "double"; self._db.append([i,j])
+                    if d>self.calc_dist(i,j): print i,j,"double PO"; self._db.append([i,j])
                  elif self._sl[i]=='O' and self._sl[j]=='C' or self._sl[i]=='C' and self._sl[j]=='O':
                     s,d,t=bond_ords['OC']
-                    if d>self.calc_dist(i,j)>t: print "double"; self._db.append([i,j])
+                    if d>self.calc_dist(i,j)>t: print "double CO"; self._db.append([i,j])
                  elif self._sl[i]=='C' and self._sl[j]=='C':
                     s,d,t=bond_ords['CC']
-                    if d>self.calc_dist(i,j)>t: print "double"; self._db.append([i,j])
+                    if d>self.calc_dist(i,j)>t: print "double OO"; self._db.append([i,j])
                  #else: print "Uknown bond type: ",self._sl[i],"-",self._sl[j]
+        #print self._db
         return self._db
  
 if __name__=="__main__":

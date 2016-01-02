@@ -7,48 +7,12 @@ from scipy.optimize import minimize,basinhopping,anneal,fmin,fmin_powell,fmin_cg
 from DihScan import DihScan
 from IO import par_fit_inp,read_add,write_add
 
-from pyevolve import GSimpleGA
-from pyevolve import G1DList
-from pyevolve import Selectors
-from pyevolve import Initializators, Mutators
-from pyevolve import Consts
-from pyevolve import DBAdapters
-
-from Ga import run_ga2
-
-def run_ga(eval_func,n):
-   
-   genome = G1DList.G1DList(n)
-   #genome.setParams(rangemin=-3.0, rangemax=3.0)
-   genome.setParams(rangemin=-3.0, rangemax=3.0, bestrawscore=1.0, roundecimal=0)
-
-   genome.initializator.set(Initializators.G1DListInitializatorReal)
-
-   genome.mutator.set(Mutators.G1DListMutatorRealGaussian)
-
-   genome.evaluator.set(eval_func)
-
-   ga = GSimpleGA.GSimpleGA(genome)
-   ga.setMinimax(Consts.minimaxType["minimize"])
-   ga.setPopulationSize(20)
-   ga.selector.set(Selectors.GRouletteWheel)
-   ga.setGenerations(40)
-   
-   sqlite_adapter = DBAdapters.DBSQLite(identify="fit3b", resetDB=True)
-   ga.setDBAdapter(sqlite_adapter)
-
-   ga.evolve(freq_stats=1)
-
-   bi=ga.bestIndividual()
-   print bi
-   return bi
+from Ga import run_ga
 
 def pf_run(input_fname):
   
    def engine_rmse(p):
 
-      print p
-
       f=open("../Data/ParFit/step",'r')
       ls=f.readlines()
       f.close()
@@ -60,19 +24,17 @@ def pf_run(input_fname):
          write_add(p,c,mm,ol_templ,lines,1,step,step_int)
          ds[i].run_dih_scan(p,c,mm,ol_templ)
          rmse+=ds[i].calc_rmse(csv,i,step,step_int)
-      print step,rmse/n
+      print step,round(rmse/n,4),p
 
       step+=1
       f=open("../Data/ParFit/step",'w')
       print >>f,step
       f.close()
 
-      return rmse
+      return round(rmse/n,4)
   
    def engine_rmse2(p):
 
-      #print p
-
       f=open("../Data/ParFit/step",'r')
       ls=f.readlines()
       f.close()
@@ -90,7 +52,7 @@ def pf_run(input_fname):
       print >>f,step
       f.close()
 
-      return (round(rmse/n,5),)
+      return (round(rmse/n,4),)
 
    gopt_type,gopt_s_fnameb,t1234,bes,engine_path,mm,mode,alg,opt_lin,np,nc,step_int,csv=par_fit_inp(input_fname)
 
@@ -100,7 +62,7 @@ def pf_run(input_fname):
       sds=DihScan(gopt_s_fnameb[i],engine_path,mm,opt_lin,np,nc,bes[i],t1234[i])
       ds.append(sds)
 
-   if not gopt_type=="ginp":
+   if not gopt_type[0]=="ginp":
       environ["ENGINE_DIR"]=engine_path+"engine_dir"
       p,c,ol_templ,lines=read_add(mm,opt_lin,np,nc,1)
 
@@ -138,17 +100,20 @@ def pf_run(input_fname):
          print i+1,(pM-p0)/eps,(pP-p0)/eps
    else:
       np=len(p)
-      if alg=="ga": 
-         run_ga(engine_rmse,np)
-      elif alg=="ga2":
-         run_ga2(engine_rmse2,np,20)
+      elif alg=="ga":
+         print "Warning: The genetic algorithm printout will not start immediately!"
+         hof=run_ga(engine_rmse2,np,40)
+         hof0=numpy.array(hof[0])
+         write_add(hof0,c,mm,ol_templ,lines,1,"ga",None)
       elif alg=="fmin":
          #print fmin_powell(engine_rmse,p)
          print fmin(engine_rmse,p)
       elif alg=="hybr":
-         hof=run_ga2(engine_rmse2,np,40)
-         hof=numpy.array(hof)
-         fmin(engine_rmse,hof[0])
+         print "Warning: The genetic algorithm printout will not start immediately!"
+         hof=run_ga(engine_rmse2,np,40)
+         hof0=numpy.array(hof[0])
+         write_add(hof0,c,mm,ol_templ,lines,1,"ga",None)
+         fmin(engine_rmse,hof0)
       else: 
          "'alg' is not a known algorithm!"
    print "inside"

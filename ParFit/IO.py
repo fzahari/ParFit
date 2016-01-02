@@ -3,6 +3,19 @@
 from numpy import zeros,array,rad2deg,pi
 from GeomStr import Molecule,default_mm3_type,default_mmff94_type
 
+def ginp_inp(input_fname):
+    f=open(input_fname,'r')
+    lines=f.readlines()
+    f.close()
+    line1=lines[0][:-1].split(',')
+    gopt_scan_fnameb,t1234,bes=line1
+    gopt_scan_fnameb=gopt_scan_fnameb.strip()
+    t1,t2,t3,t4=map(int,t1234.split())
+    t1234=(t1,t2,t3,t4)
+    b,e,s=map(int,bes.split())
+    bes=(b,e,s)
+    return gopt_scan_fnameb,t1234,bes
+
 def par_fit_inp(input_fname):
     f=open(input_fname,'r')
     lines=f.readlines()
@@ -31,7 +44,7 @@ def par_fit_inp(input_fname):
        t1234=[(t1,t2,t3,t4),]
        b,e,s=map(int,bes.split())
        bes=[(b,e,s),]
-    if gopt_type=="ginp":
+    if gopt_type[0]=="ginp":
        return gopt_type,gopt_scan_fnameb,t1234,bes,None,None,None,None,None,None,None,None,None
     engine_path=lines[n+1][:-1]
     l2s=lines[n+2].split()
@@ -41,7 +54,7 @@ def par_fit_inp(input_fname):
     else:
        mode="opt"
     np=0
-    plist=[]
+    #plist=[]
     nc=0
     opt_lin={}
     alg=lines[n+3].strip()
@@ -50,12 +63,12 @@ def par_fit_inp(input_fname):
         for i in range(3):
             t[i+1]=t[i+1].lower()
             if t[i+1][0]=='p': 
-               plab=t[i+1][1:]
-               if len(plab)>0:               
-                  if plab in plist:
-                     continue
-                  else:
-                     plist.append(plab)
+               #plab=t[i+1][1:]
+               #if len(plab)>0:               
+               #   if plab in plist:
+               #      continue
+               #   else:
+               #      plist.append(plab)
                np+=1
             if t[i+1]=='c': 
                nc+=1
@@ -160,7 +173,7 @@ def write_add(p,c,mm,ol_templ,lines,fl,step,step_int):
    
     if step==None: return
     
-    if (step-1)%step_int==0:
+    if step=="ga" or (step-1)%step_int==0:
        if mm=="mm3":
           add_name_arch="../Data/ParFit/add_MM3_"+str(step)+".prm"
        elif mm=="mmff94":
@@ -261,7 +274,7 @@ class DihGOpt_Molecule(Molecule):
         #
         ln=len(lines)
         for i in range(ln):
-            if dkey.upper() in lines[i]: break
+            if dkey in lines[i].upper(): break
         #
         self._ginp_templ=lines[:i+3]
         #
