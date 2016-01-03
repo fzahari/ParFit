@@ -77,8 +77,20 @@ if ( qmdata == 'comp' or 'full' ) :
 
 # --- Choose the algorithm used to fit parameters. ---
 
-    print "\nPlease choose the fitting algorithm."
-    alg = raw_input("Enter ga for genetic algorithm, or fmin for simplex algorithm.\n")
+    print "\nPlease choose from the following options for algorithm to be used."
+    print "(a) genetic algorithm"
+    print "(b) Nedler-Mead algorithm"
+    print "(c) hybrid: genetic followed by Nedler-Mead algorithm - default"
+    alg = raw_input("For default, just press enter.\n")
+    if ( alg == 'a' ) :
+        alg = 'ga'
+    elif ( alg == 'b' ) :
+        alg = 'fmin'
+    elif ( alg == 'c' ) :
+        alg = 'hybr'
+    else :
+       alg = 'hybr'
+       print "Default was chosen."
 
 # --- Determine which parameters will be changed by ParFit ---
 
