@@ -100,7 +100,7 @@ def pf_run(input_fname):
          print i+1,(pM-p0)/eps,(pP-p0)/eps
    else:
       np=len(p)
-      elif alg=="ga":
+      if alg=="ga":
          print "Warning: The genetic algorithm printout will not start immediately!"
          hof=run_ga(engine_rmse2,np,40)
          hof0=numpy.array(hof[0])
