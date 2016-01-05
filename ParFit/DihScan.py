@@ -15,7 +15,8 @@ copy_reg.pickle(types.MethodType,_reduce_method)
 
 class DihScan(object):
     hartree2kcal_mol=627.509469
-    def __init__(self,gopt_s_fnameb,engine_path,mm,opt_lin,np,nc,da_range_tuple,dih_tuple=(),gopt_b_fnameb="mp2_base"):
+    def __init__(self,sdir,gopt_s_fnameb,engine_path,mm,opt_lin,np,nc,da_range_tuple,dih_tuple=(),gopt_b_fnameb="mp2_base"):
+        self.sdir=sdir
         self.gopt_base_fnameb=gopt_b_fnameb
         self.engine_path=engine_path
         self.gopt_scan_fnameb=gopt_s_fnameb
@@ -245,7 +246,7 @@ class DihScan(object):
                     p,c,ol_templ,lines=read_add(self._mm,self._opt_lin,self._np,self._nc,1)
                     p[0]+=0.001
                     #pert_add_param("add_MM3.prm")
-                    write_add(p,c,self._mm,ol_templ,lines,1,None,None)
+                    write_add(self.sdir,p,c,self._mm,ol_templ,lines,1,None,None)
             #
             comm="rm ../Data/Engine/"+coengine_name
             system(comm)
@@ -266,7 +267,7 @@ class DihScan(object):
         ge0,ee0=self._ged[n0],self._eed[n0]
         rmse=0.
         if csv=="csv_on" and (step-1)%step_int==0:
-            f=open("../Data/ParFit/opt"+str(mi)+"_"+str(step)+".csv",'w')
+            f=open(self.sdir[mi+1]+"/opt"+"_"+str(step)+".csv",'w')
         for m in self._ml:
             name=m.name
             ged,eed=(self._ged[name]-ge0)*self.hartree2kcal_mol,self._eed[name]-ee0

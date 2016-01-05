@@ -145,7 +145,7 @@ def read_add(mm,opt_lin,np,nc,fl):
 
     return p,c,ol_templ,lines
 
-def write_add(p,c,mm,ol_templ,lines,fl,step,step_int):
+def write_add(sdir,p,c,mm,ol_templ,lines,fl,step,step_int):
     if mm=="mm3":
        if fl==1:
           add_name="../Data/Engine/add_MM3.prm"
@@ -175,9 +175,9 @@ def write_add(p,c,mm,ol_templ,lines,fl,step,step_int):
     
     if step=="ga" or (step-1)%step_int==0:
        if mm=="mm3":
-          add_name_arch="../Data/ParFit/add_MM3_"+str(step)+".prm"
+          add_name_arch=sdir[0]+"/add_MM3_"+str(step)+".prm"
        elif mm=="mmff94":
-          add_name_arch="../Data/ParFit/add_MMFF94_"+str(step)+".prm"
+          add_name_arch=sdir[0]+"/add_MMFF94_"+str(step)+".prm"
 
        f=open(add_name_arch,'w')
        for line in lines:
