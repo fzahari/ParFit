@@ -13,6 +13,9 @@ def pf_run(PF_if):
 
    gopt_type,gopt_s_fnameb,t1234,bes,engine_path,mm,mode,alg,opt_lin,np,nc,step_int,csv=par_fit_inp(PF_if)
 
+   if engine_path=="":
+      engine_path="../Engine"
+
    sdir=[]
    pref="../Data/ParFit/"+PF_if
    sdir.append(pref)
@@ -34,7 +37,7 @@ def pf_run(PF_if):
       ds.append(sds)
 
    if not gopt_type[0]=="ginp":
-      os.environ["ENGINE_DIR"]=engine_path+"engine_dir"
+      os.environ["ENGINE_DIR"]=engine_path+"/engine_dir"
       p,c,ol_templ,lines=read_add(mm,opt_lin,np,nc,1)
 
    f=open(pref+"/step",'w')
