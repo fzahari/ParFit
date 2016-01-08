@@ -1,110 +1,46 @@
 #!/usr/bin/env python
 
+import sys,os
 import numpy
 
-from os import environ
 from scipy.optimize import minimize,basinhopping,anneal,fmin,fmin_powell,fmin_cg,fmin_tnc
 from DihScan import DihScan
 from IO import par_fit_inp,read_add,write_add
 
-from pyevolve import GSimpleGA
-from pyevolve import G1DList
-from pyevolve import Selectors
-from pyevolve import Initializators, Mutators
-from pyevolve import Consts
-from pyevolve import DBAdapters
+from Ga import run_ga
 
-from Ga import run_ga2
+def pf_run(PF_if):
 
-def run_ga(eval_func,n):
-   
-   genome = G1DList.G1DList(n)
-   #genome.setParams(rangemin=-3.0, rangemax=3.0)
-   genome.setParams(rangemin=-3.0, rangemax=3.0, bestrawscore=1.0, roundecimal=0)
+   gopt_type,gopt_s_fnameb,t1234,bes,engine_path,mm,mode,alg,opt_lin,np,nc,step_int,csv=par_fit_inp(PF_if)
 
-   genome.initializator.set(Initializators.G1DListInitializatorReal)
+   if engine_path=="":
+      engine_path="../Engine"
 
-   genome.mutator.set(Mutators.G1DListMutatorRealGaussian)
-
-   genome.evaluator.set(eval_func)
-
-   ga = GSimpleGA.GSimpleGA(genome)
-   ga.setMinimax(Consts.minimaxType["minimize"])
-   ga.setPopulationSize(20)
-   ga.selector.set(Selectors.GRouletteWheel)
-   ga.setGenerations(40)
-   
-   sqlite_adapter = DBAdapters.DBSQLite(identify="fit3b", resetDB=True)
-   ga.setDBAdapter(sqlite_adapter)
-
-   ga.evolve(freq_stats=1)
-
-   bi=ga.bestIndividual()
-   print bi
-   return bi
-
-def pf_run(input_fname):
-  
-   def engine_rmse(p):
-
-      print p
-
-      f=open("../Data/ParFit/step",'r')
-      ls=f.readlines()
-      f.close()
-      step=int(ls[0])
-
-      n=len(ds)
-      rmse=0.
-      for i in range(n):
-         write_add(p,c,mm,ol_templ,lines,1,step,step_int)
-         ds[i].run_dih_scan(p,c,mm,ol_templ)
-         rmse+=ds[i].calc_rmse(csv,i,step,step_int)
-      print step,rmse/n
-
-      step+=1
-      f=open("../Data/ParFit/step",'w')
-      print >>f,step
-      f.close()
-
-      return rmse
-  
-   def engine_rmse2(p):
-
-      #print p
-
-      f=open("../Data/ParFit/step",'r')
-      ls=f.readlines()
-      f.close()
-      step=int(ls[0])
-
-      n=len(ds)
-      rmse=0.
-      for i in range(n):
-         write_add(p,c,mm,ol_templ,lines,1,step,step_int)
-         ds[i].run_dih_scan(p,c,mm,ol_templ)
-         rmse+=ds[i].calc_rmse(csv,i,step,step_int)
-
-      step+=1
-      f=open("../Data/ParFit/step",'w')
-      print >>f,step
-      f.close()
-
-      return (round(rmse/n,5),)
-
-   gopt_type,gopt_s_fnameb,t1234,bes,engine_path,mm,mode,alg,opt_lin,np,nc,step_int,csv=par_fit_inp(input_fname)
+   sdir=[]
+   pref="../Data/ParFit/"+PF_if
+   sdir.append(pref)
+   if os.path.exists(pref):
+      print
+      print 'Warning: The directory',pref,'exists!'
+      print
+      sys.exit()
+   os.mkdir(pref)   
+   for gsf in gopt_s_fnameb:
+      sd_gsf=pref+"/"+gsf
+      sdir.append(sd_gsf)
+      os.mkdir(sd_gsf)
 
    n=len(gopt_type)
    ds=[]
    for i in range(n):
-      sds=DihScan(gopt_s_fnameb[i],engine_path,mm,opt_lin,np,nc,bes[i],t1234[i])
+      sds=DihScan(sdir,gopt_s_fnameb[i],engine_path,mm,opt_lin,np,nc,bes[i],t1234[i])
       ds.append(sds)
 
-   if not gopt_type=="ginp":
-      environ["ENGINE_DIR"]=engine_path+"engine_dir"
+   if not gopt_type[0]=="ginp":
+      os.environ["ENGINE_DIR"]=engine_path+"/engine_dir"
       p,c,ol_templ,lines=read_add(mm,opt_lin,np,nc,1)
 
-   f=open("../Data/ParFit/step",'w')
+   f=open(pref+"/step",'w')
    print >>f,1
    f.close()
  
@@ -120,6 +56,49 @@ def pf_run(input_fname):
          "Par_Fit: Wrong gopt_type!"
 
       ds[i].write_engine_inputs()
+
+   def engine_rmse(p):
+
+      f=open(pref+"/step",'r')
+      ls=f.readlines()
+      f.close()
+      step=int(ls[0])
+
+      n=len(ds)
+      rmse=0.
+      for i in range(n):
+         write_add(sdir,p,c,mm,ol_templ,lines,1,step,step_int)
+         ds[i].run_dih_scan(p,c,mm,ol_templ)
+         rmse+=ds[i].calc_rmse(csv,i,step,step_int)
+      print step,round(rmse/n,4),p
+
+      step+=1
+      f=open(pref+"/step",'w')
+      print >>f,step
+      f.close()
+
+      return round(rmse/n,4)
+  
+   def engine_rmse2(p):
+
+      f=open(pref+"/step",'r')
+      ls=f.readlines()
+      f.close()
+      step=int(ls[0])
+
+      n=len(ds)
+      rmse=0.
+      for i in range(n):
+         write_add(sdir,p,c,mm,ol_templ,lines,1,step,step_int)
+         ds[i].run_dih_scan(p,c,mm,ol_templ)
+         rmse+=ds[i].calc_rmse(csv,i,step,step_int)
+
+      step+=1
+      f=open(pref+"/step",'w')
+      print >>f,step
+      f.close()
+
+      return (round(rmse/n,4),)
 
    if mode=="sense":
       eps=0.01
@@ -138,21 +117,31 @@ def pf_run(input_fname):
          print i+1,(pM-p0)/eps,(pP-p0)/eps
    else:
       np=len(p)
-      if alg=="ga": 
-         run_ga(engine_rmse,np)
-      elif alg=="ga2":
-         run_ga2(engine_rmse2,np,20)
+      if alg=="ga":
+         print "Warning: The genetic algorithm printout will not start immediately!"
+         hof=run_ga(engine_rmse2,np,40)
+         hof0=numpy.array(hof[0])
+         write_add(sdir,hof0,c,mm,ol_templ,lines,1,"ga",None)
       elif alg=="fmin":
          #print fmin_powell(engine_rmse,p)
          print fmin(engine_rmse,p)
       elif alg=="hybr":
-         hof=run_ga2(engine_rmse2,np,40)
-         hof=numpy.array(hof)
-         fmin(engine_rmse2,hof[0])
+         print "Warning: The genetic algorithm printout will not start immediately!"
+         hof=run_ga(engine_rmse2,np,40)
+         hof0=numpy.array(hof[0])
+         write_add(sdir,hof0,c,mm,ol_templ,lines,1,"ga",None)
+         fmin(engine_rmse,hof0)
       else: 
          "'alg' is not a known algorithm!"
-   print "inside"
 
-default_input_fname="dih_scan_inp"
+PF_input_fname="dih_scan_inp"
 
-pf_run(default_input_fname)
+lsa=len(sys.argv)
+if lsa>2:
+   print 
+   print 'Use: "./ParFit.py name_of_ParFit_input_file"'
+   print 
+elif lsa==2:
+   PF_input_fname=h=sys.argv[1]
+
+pf_run(PF_input_fname)

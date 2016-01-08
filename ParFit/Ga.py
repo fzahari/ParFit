@@ -76,11 +76,12 @@ def eaSimple(population, toolbox, cxpb, mutpb, ngen, stats=None,
         if verbose:
             print logbook.stream
 
+        #print flag, best_ind, halloffame[0]
         if flag==4: break
 
     return population, logbook
 
-def run_ga2(engine_rmse,np,ngen):
+def run_ga(engine_rmse,np,ngen):
 
    creator.create("FitnessMax",base.Fitness,weights=(-1.0,))
    creator.create("Individual",numpy.ndarray,fitness=creator.FitnessMax)
@@ -133,7 +134,7 @@ def run_ga2(engine_rmse,np,ngen):
 
    pop=toolbox.population(n=50)
    eaSimple(pop,toolbox,cxpb=0.3,mutpb=0.05,ngen=ngen,stats=stats,halloffame=hof,verbose=True)
-   print("Best individual is ", hof[0], hof[0].fitness.values[0])
+   print "The best rmse is", hof[0].fitness.values[0],"corresponding to the parameters",numpy.array(hof[0])
 
    #return hof[0:int(np/20)]
    return hof
