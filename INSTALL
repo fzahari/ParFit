@@ -10,7 +10,7 @@ contains detailed instructions on how to install. There are
 pre-compiled binaries for selected systems. Python and most
 of its libraries are open-source.
 
- * numpy and scipy Pyevolve Python libraries:
+ * numpy, scipy, and Deap Python libraries:
 
 One can check if numpy/scipy libraries are already installed on your system
 by going into the interactive mode of Python (for example, by
@@ -18,7 +18,7 @@ typing "python" at the prompt of a Linux/Unix system) and attempting
 "import numpy", "import pyevolve, and "import scipy". 
 The source of numpy and scipy with detailed installation instructions 
 can be downloded from www.scipy.org. There are pre-compiled binaries for 
-selected systems.
+selected systems. For the Deap library, visit https://pypi.python.org/pypi/deap
 
  * "Engine":
 
