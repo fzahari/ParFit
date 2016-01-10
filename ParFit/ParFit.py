@@ -124,13 +124,13 @@ def pf_run(PF_if):
          write_add(sdir,hof0,c,mm,ol_templ,lines,1,"ga",None)
       elif alg=="fmin":
          #print fmin_powell(engine_rmse,p)
-         print fmin(engine_rmse,p)
+         print fmin(engine_rmse,p,ftol=0.2)
       elif alg=="hybr":
          print "Warning: The genetic algorithm printout will not start immediately!"
          hof=run_ga(engine_rmse2,np,40)
          hof0=numpy.array(hof[0])
          write_add(sdir,hof0,c,mm,ol_templ,lines,1,"ga",None)
-         fmin(engine_rmse,hof0)
+         fmin(engine_rmse,hof0,ftol=0.2)
       else: 
          "'alg' is not a known algorithm!"
 

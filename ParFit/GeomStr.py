@@ -116,6 +116,7 @@ class Molecule(object):
         self._mm=mm
         self._br=[]
         self._db=[]
+        self._tb=[]
         for a in a_tuple:
             #if not self._mm==None: a.mm=self._mm
             a.mm=self._mm
@@ -184,6 +185,10 @@ class Molecule(object):
     @property
     def db(self):
         return self._db
+
+    @property
+    def tb(self):
+        return self._tb
 
     def set_conn(self):
         wdv_dist_tol=0.45
@@ -332,14 +337,20 @@ class Molecule(object):
               if j>i: 
                  if self._sl[i]=='P' and self._sl[j]=='O' or self._sl[i]=='O' and self._sl[j]=='P':
                     s,d,t=bond_ords['PO']
-                    #if d>self.calc_dist(i,j)>t: print "double"; self._db.append([i,j])
-                    if d>self.calc_dist(i,j): print i,j,"double PO"; self._db.append([i,j])
+                    if d>self.calc_dist(i,j)>t: print i,j,"double PO"; self._db.append([i,j])
+                    if t>self.calc_dist(i,j): print i,j,"triple PO"; self._tb.append([i,j])
+                 elif self._sl[i]=='P' and self._sl[j]=='C' or self._sl[i]=='C' and self._sl[j]=='P':
+                    s,d,t=bond_ords['PC']
+                    if d>self.calc_dist(i,j)>t: print i,j,"double PC"; self._db.append([i,j])
+                    if t>self.calc_dist(i,j): print i,j,"triple PC"; self._tb.append([i,j])
                  elif self._sl[i]=='O' and self._sl[j]=='C' or self._sl[i]=='C' and self._sl[j]=='O':
                     s,d,t=bond_ords['OC']
                     if d>self.calc_dist(i,j)>t: print "double CO"; self._db.append([i,j])
+                    if t>self.calc_dist(i,j): print "triple CO"; self._tb.append([i,j])
                  elif self._sl[i]=='C' and self._sl[j]=='C':
                     s,d,t=bond_ords['CC']
                     if d>self.calc_dist(i,j)>t: print "double OO"; self._db.append([i,j])
+                    if t>self.calc_dist(i,j): print "triple OO"; self._tb.append([i,j])
                  #else: print "Uknown bond type: ",self._sl[i],"-",self._sl[j]
         #print self._db
         return self._db
