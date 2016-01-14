@@ -1,72 +1,84 @@
-
+Development of ParFit has been supported in part by the Critical Materials 
+Institute, an Energy Innovation Hub funded by the U.S Department of Energy 
+(DOE), Office of Energy Efficiency and Renewable Energy, Advanced Manufacturing
+Office, in part by the Chemical Sciences, Office of Basic Energy Sciences, 
+Office of Science, DOE, and in part by the Laboratory Directed Research and 
+Development Program, Fundamental Science Division of the Pacific Northwest 
+National Laboratory.
 
 This file contains the basic information to get started. Refer to Doc/Manual.pdf 
 for more detailed information.
 
-The main directory, ParFit_0_9, contains subdirectories: ParFit, GAMESS, ENGINE,
-Utils, and Doc. The ParFit subdirectory contains the Python scripts and example input
-files with root name "dih_scan_inp," run ParFit from this directory 
-using command: ./Parfit.py.  The GAMESS and ENGINE subdirectories 
-contain the GAMESS and MM Engine input and output files, respectively. 
-The ENGINE subdirectory also contains the coengine_mm3, coengine_mmff94 
-and add_MM3.prm, add_MMFF94.prm files. The Utils subdirectory contains 
-an interactive ParFit input generating program (PFinp.py) and template 
-scripts that can rename multiple files (rename.py), automatically 
-submit multiple jobs on a typical cluster (submit.py) and visualize fit 
-using matplotlib (mp2_mm3_OPMMPH.py).
+The main directory, ParFit, contains subdirectories: Data, Doc, ParFit, and 
+Utils. The Data subdirectory contains the Engine, Gamess, and ParFit 
+subdirectories. The Data/Engine directory contains the mmengine input, output, 
+and parameter files. The Data/Gamess directory contains the QM molecular 
+information. The Data/ParFit subdirectory contains the energy profile and 
+parameters at optimization intervals. The Doc subdirectory contains the ParFit 
+user manual, Manual.pdf. The ParFit subdirectory contains the Python scripts and 
+example input files with root filename "dih_scan_inp." ParFit should be run from 
+this directory using the command:
 
-ParFit.py is the main script in the ParFit subdirectory. ParFit 
-uses an input file (dih_scan_inp). One can generate an input file using
-script PFinp.py with a descriptive name and copied to dih_scan_inp. 
-The input file has a short and a long format. 
+./Parfit.py
 
-The short format is used for generating a sequence of GAMESS input files 
-needed for the ab-initio constrained optimization
-of a dihedral-angle energy scan. In this format the input file contains
-just one comma-separated line of keywords. The first keyword is 
-neccessarily "ginp", the second is "the file-name root", i.e. the name
-without ".inp", the third is "the indices of the atoms forming the dihedral angle",
-i.e. four numbers defining the dihedral angle and the fourth is "a triple
-defining the dihedral angle range", i.e. initial, final, step size.
+The Utils subdirectory contains an interactive ParFit input file generating 
+program (PFinp.py) and template scripts that can rename multiple files 
+(rename.py), automatically submit multiple jobs on a typical cluster (submit.py) 
+and visualize the energy profile fit using matplotlib (QM_vs_MM_energies.py).
 
-The long format consists of multiple lines:
+ParFit.py is the main program in the ParFit subdirectory. ParFit uses an input 
+file named dih_scan_inp. One can generate an input file using the PFinp.py
+program.
 
- 1st line: the full/comp file type, the file-name root, 
-           the atoms forming the dihedral angle, and the triplet defining
-           the dihedral atom: comma separated
- 
-           "the full/comp file type": if "full" all the GAMESS output file
-           in the GAMESS directory, if "comp" the compact form of the same
-           information stored in one file in the GAMESS directory
+The input file format is as follows:
 
-           "the file-name root": the name without "***.log" where "***" 
-           is the dihedral angle (if "full") or the name without "scan"
-           (if "comp")
+ Line/Block       Description
+--------------- --------------------------------------------------------------
+1 optional      |Two values, "mult", and the number of molecules for which to
+                |fit. Example: 
+                |mult, Y
+                |where Y is the the number of molecules to use for parameter
+                |fitting, Y must be 1 or greater.
+                |
+2 to N          |the full/comp file type, the root filename, the atoms forming
+                |the dihedral angle, and the triplet defining the dihedral 
+                |angle.
+                |
+                |"full/comp QM data”: if "full" all the Gamess output files 
+                |must be in the Data/Gamess subdirectory. If "comp,” a compact 
+                |form of the QM data should be contained in one file in the 
+                |/Data/Gamess subdirectory.
+                |
+                |"the root filename": the name without "X.log" where "X"
+                |is the dihedral angle, if "full,” or the name without "scan,”
+                |if "comp.”
+                |
+                |"the atoms forming the dihedral angle": four numbers defining
+                |the dihedral angle
+                |
+                |"a triple defining the dihedral angle range": initial, final,
+                |and angle step size.
+                |
+N + 1           |The full mmengine path.
+                |
+N + 2           |MM-type: "mm3" or "mmf94" 
+                |
+N + 3           |Optimization algorithm: "ga," "fmin," or "hybr"
+                |
+N + 4 to M      |The choice of the parameters to be optimized according to the
+                |following format:
+                |line number in add_MM3.prm or add_MMFF94.prm, 'c' or 'p', i.e.
+                |"constant parameter" and "parameter to be optimized,"
+                |respectively.
+                |i.e, "15 c c p" means that within line 15, the first and second
+                |parameters will remain constant and only the third parameter
+                |will be optimized.
+                |
+M + 1 last line |Include "csv_on" to request comma separated value snapshot
+                |files to be printed in the /Data/ParFit subdirectory. Each 
+                |snapshot file contains the relative abinitio and MM energy for 
+                |each dihedral angle. If the file is not needed, use "csv_off".
 
-           "the atoms forming the dihedral angle": four numbers defining
-           the dihedral angle
-
-           "a triple defining the dihedral angle range": initial, final, step 
- 2nd line: the ENGINE path
- 3rd line: MM-type: "mm3" or "mmf94"
- 4th line: optimization agorithm: "ga" or "fmin"
- 5th line until the end of the file (without the very last line): the choice of the 
- parameters to be optimized according to the following format:
-
- line number in add_MM3.prm or add_MMFF94.prm, 'c' stands for "constant" 
- and 'p' for a "parameter" to be optimized (for example, "c c p" means 
- that within the given line only the last parameter will be optimized) 
- 
-
- Last line: "csv_on" if the Util/opt.csv file is requested
- or "csv_off" if not. The Util/opt.csv contains the dihedral angle,
- relative ab-initio energy and relative MM energy (comma separated).
- It can be visualized by either EXCELL or Util/mp2_mm3_*_csv.py 
- appropriately adapted for a given case.
-
-The current input file is based on the OPMMPH example and the files 
-needed for this example are supplied in the GAMESS subdirectory.
-
-The "dih_scan_inp_*_mm3" are sample inputs for MM3 and "dih_scan_inp_*_mmf94" 
-for MMFF94. (In order to use the samples one has to copy any of them 
-to the default input name "dih_scan_inp".)
+Sample inputs can be found in the ParFit subdirectory. The "dih_scan_inp_*_mm3" 
+are sample inputs for MM3 and "dih_scan_inp_*_mmf94" for MMFF94. To use 
+templates, copy to a different filename and change the mmengine path.

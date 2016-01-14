@@ -15,11 +15,15 @@ copy_reg.pickle(types.MethodType,_reduce_method)
 
 class DihScan(object):
     hartree2kcal_mol=627.509469
-    def __init__(self,gopt_s_fnameb,engine_path,mm,da_range_tuple,dih_tuple=(),gopt_b_fnameb="mp2_base"):
+    def __init__(self,sdir,gopt_s_fnameb,engine_path,mm,opt_lin,np,nc,da_range_tuple,dih_tuple=(),gopt_b_fnameb="mp2_base"):
+        self.sdir=sdir
         self.gopt_base_fnameb=gopt_b_fnameb
         self.engine_path=engine_path
         self.gopt_scan_fnameb=gopt_s_fnameb
         self._mm=mm
+        self._opt_lin=opt_lin
+        self._np=np
+        self._nc=nc
         assert len(da_range_tuple)==3
         self._da_rt=da_range_tuple
         if not dih_tuple==():
@@ -90,7 +94,7 @@ class DihScan(object):
               sn="0"+sn0
            else:
               sn=sn0
-           f=open("../GAMESS/"+fnameb+"-"+sn+".inp",'w')
+           f=open("../Data/Gamess/"+fnameb+"-"+sn+".inp",'w')
            print >>f," $ZMAT DLC=.T. AUTO=.T. $END"
            print >>f," $ZMAT IFZMAT(1)=3,",t1+1,",",t2+1,",",t3+1,",",t4+1," FVALUE(1)=",float(n),"$END"
            print >>f," $CONTRL COORD=UNIQUE NZVAR=",3*na-6,"$END"
@@ -128,7 +132,7 @@ class DihScan(object):
 
     def write_gouts_data(self):
         fnameb=self.gopt_scan_fnameb
-        f=open("../GAMESS/"+fnameb+"scan",'w')
+        f=open("../Data/Gamess/"+fnameb+"scan",'w')
         t1,t2,t3,t4=self._dt
         print >>f,t1,t2,t3,t4
         b,e,s=self._da_rt
@@ -147,7 +151,7 @@ class DihScan(object):
 
     def read_gouts_data(self):
         fnameb=self.gopt_scan_fnameb
-        f=open("../GAMESS/"+fnameb+"scan",'r')
+        f=open("../Data/Gamess/"+fnameb+"scan",'r')
         lines=f.readlines() 
         f.close()
         self._dt=map(int,lines[0][:-1].split())
@@ -218,7 +222,7 @@ class DihScan(object):
     def run_dih_elem(self,m):
             fnameb=m.name
             coengine_name="coengine_"+fnameb
-            f=open("../ENGINE/"+coengine_name,'w')
+            f=open("../Data/Engine/"+coengine_name,'w')
             print >>f,"mode opt"
             print >>f,"infile  "+fnameb+"_inp.pcm"
             print >>f,"outfile "+fnameb+"_out.pcm"
@@ -239,33 +243,38 @@ class DihScan(object):
                 if status:
                     break
                 else:
+                    p,c,ol_templ,lines=read_add(self._mm,self._opt_lin,self._np,self._nc,1)
                     p[0]+=0.001
                     #pert_add_param("add_MM3.prm")
-                    write_add(p,c,mm,ol_templ,lines,0)
+                    write_add(self.sdir,p,c,self._mm,ol_templ,lines,1,None,None)
             #
-            comm="rm ../ENGINE/"+coengine_name
+            comm="rm ../Data/Engine/"+coengine_name
             system(comm)
 
-    def run_dih_scan(self,p,c,mm,ol_templ,lines):
-        from multiprocessing import Pool
-        p=Pool()
-        p.map(self.run_dih_elem,self._ml)
+    def run_dih_scan(self,p,c,mm,ol_templ):
+        #from multiprocessing import Pool
+        #p=Pool()
+        #p.map(self.run_dih_elem,self._ml)
+        map(self.run_dih_elem,self._ml)
 
-    def calc_rmse(self,csv):
+    def calc_rmse(self,csv,mi,step,step_int):
         self.read_engine_outputs()
+        #print self._ml
+        #import sys
+        #sys.exit()
         m0=self._ml[0]
         n0=m0.name
         ge0,ee0=self._ged[n0],self._eed[n0]
         rmse=0.
-        if csv=="csv_on":
-            f=open("../Utils/opt.csv",'w')
+        if csv=="csv_on" and (step-1)%step_int==0:
+            f=open(self.sdir[mi+1]+"/opt"+"_"+str(step)+".csv",'w')
         for m in self._ml:
             name=m.name
             ged,eed=(self._ged[name]-ge0)*self.hartree2kcal_mol,self._eed[name]-ee0
             rmse+=(ged-eed)**2
-            if csv=="csv_on":
+            if csv=="csv_on" and (step-1)%step_int==0:
                 print >>f,"%f,%f,%f"%(self._dad[name],ged,eed)
-        if csv=="csv_on":
+        if csv=="csv_on" and (step-1)%step_int==0:
             f.close()
         nm=len(self._ml)
         rmse=sqrt(rmse/nm)
@@ -291,17 +300,19 @@ if __name__=="__main__":
     #engine_rmse(p)
     default_input_fname="dih_scan_inp"
 
-    gopt_type,gopt_s_fnameb,t1234,bes,engine_path,mm,opt_lin,np,csv=par_fit_inp(default_input_fname)
-    ds=DihScan(gopt_s_fnameb,engine_path,mm,bes,t1234)
+    gopt_type,gopt_s_fnameb,t1234,bes,engine_path,mm,mode,alg,opt_lin,np,nc,step_int,csv=par_fit_inp(default_input_fname)
+    ds=DihScan(gopt_s_fnameb,engine_path,mm,opt_lin,np,nc,bes,t1234)
     if not gopt_type=="ginp":
        environ["ENGINE_DIR"]=engine_path+"engine_dir"
-       p,c,ol_templ,lines=read_add(mm,opt_lin,np,1)
-
+       p,c,ol_templ,lines=read_add(mm,opt_lin,np,nc,1)
+  
     def engine_rmse(p):
        print p
-       write_add(p,c,mm,ol_templ,lines,0)
+       step=1
+       step_int=10
+       write_add(p,c,mm,ol_templ,lines,1,step,step_int)
        ds.run_dih_scan(p,c,mm,ol_templ,lines)
-       rmse=ds.calc_rmse(csv)
+       rmse=ds.calc_rmse(csv,step,step_int)
        print rmse
        return rmse
 
