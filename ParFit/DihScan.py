@@ -252,10 +252,10 @@ class DihScan(object):
             system(comm)
 
     def run_dih_scan(self,p,c,mm,ol_templ):
-        #from multiprocessing import Pool
-        #p=Pool()
-        #p.map(self.run_dih_elem,self._ml)
-        map(self.run_dih_elem,self._ml)
+        from multiprocessing import Pool
+        p=Pool()
+        p.map(self.run_dih_elem,self._ml)
+        #map(self.run_dih_elem,self._ml)
 
     def calc_rmse(self,csv,mi,step,step_int):
         self.read_engine_outputs()
