@@ -14,7 +14,8 @@ default_mm3_type={
   'H':5,
   'C':1,
   'O':7,
-  'P':153
+  'P':153,
+  'La':338
 }
 
 default_mmff94_type={
@@ -28,7 +29,8 @@ cov_radii={
  'H':0.32,
  'C':0.77,
  'O':0.73,
- 'P':1.06
+ 'P':1.06,
+ 'La':2.07
 }
 
 bond_ords={
