@@ -189,9 +189,17 @@ class ScanElem(Molecule):
         elif styp=="DihA":
            self._e=float(lines[2].split()[8])
 
-    def dih_rot(self,dih_angle_rot):
-        if not dih_angle_rot==None:
-            super(ScanElem,self).dih_rot(self._t,dih_angle_rot)
+    def diha_rot(self,diha_rot_val):
+        if not diha_rot_val==None:
+            super(ScanElem,self).diha_rot(self._t,diha_rot_val)
+
+    def bond_tra(self,bond_tra_val):
+        if not bond_tra_val==None:
+            super(ScanElem,self).bond_tra(self._t,bond_tra_val)
+
+    def angl_rot(self,angl_rot_val):
+        if not angl_rot_val==None:
+            super(ScanElem,self).angl_rot(self._t,angl_rot_val)
 
 class Scan(object):
     """\
@@ -210,8 +218,8 @@ class Scan(object):
         if not ran_tup==():
            assert len(ran_tup)==3
         self._rt=ran_tup
-        if not tup==():
-           assert len(tup)==4
+        #if not tup==():
+        #   assert len(tup)==4
         self._t=tuple(map(lambda x:x-1,tup))
         self._ml=[]
         self._v={}
@@ -323,8 +331,8 @@ class Scan(object):
             se._rl=array(se._rl,'d')
             se._na=len(se._rl)
             se.set_conn()
-            se.bens_ring()
-            se.bond_ord()
+            #se.bens_ring()
+            #se.bond_ord()
             self._ml.append(se)
             v,e=map(float,[v,e])
             self._v.update({fnameb:v})
@@ -408,15 +416,94 @@ class Scan(object):
 
 class BondScan(Scan):
     def __init__(self,sdir,gopt_s_fnameb,engine_path,mm,opt_lin,np,nc,ran_tup,tup=(),gopt_b_fnameb="mp2_base"):
+       if not tup==():
+          assert len(tup)==2
        super(BondScan,self).__init__(sdir,gopt_s_fnameb,engine_path,mm,opt_lin,np,nc,ran_tup,tup,gopt_b_fnameb,"Bond")
+
+    def write_gamess_inputs(self):
+        #self._gen_geometries()
+        fnameb=self.gopt_scan_fnameb
+        rt=self.rt
+        se=ScanElem(tup=self.t,mm=self.mm,name=fnameb)
+        se.read_ginp(fnameb)
+        t1,t2=self.t
+        dar=se.calc_dist(t1,t2)
+        b,e,s=rt
+        se.bond_tra(b-dar)
+        e+=1
+        na=se.na
+        for n in range(b,e,s):
+           sn0=str(n)
+           if (n<10):
+              sn="00"+sn0
+           elif (n<100):
+              sn="0"+sn0
+           else:
+              sn=sn0
+           f=open("../Data/Gamess/"+fnameb+"-"+sn+".inp",'w')
+           print >>f," $ZMAT DLC=.T. AUTO=.T. $END"
+           print >>f," $ZMAT IFZMAT(1)=1,",t1+1,",",t2+1," FVALUE(1)=",0.1*float(n),"$END"
+           print >>f," $CONTRL COORD=UNIQUE NZVAR=",3*na-6,"$END"
+           for line in se._ginp_templ:
+              print >>f,line[:-1]
+           se.bond_tra(float(n))
+           rl=se.rl
+           cl=se.cl
+           sl=se.sl
+           for i in range(na):
+              x,y,z=rl[i]
+              print >>f,"",sl[i],cl[i],x,y,z
+           print >>f," $END"
+           f.close()
 
 class AnglScan(Scan):
     def __init__(self,sdir,gopt_s_fnameb,engine_path,mm,opt_lin,np,nc,ran_tup,tup=(),gopt_b_fnameb="mp2_base"):
+       if not tup==():
+          assert len(tup)==3
        super(AnglScan,self).__init__(sdir,gopt_s_fnameb,engine_path,mm,opt_lin,np,nc,ran_tup,tup,gopt_b_fnameb,"Angl")
+
+    def write_gamess_inputs(self):
+        #self._gen_geometries()
+        fnameb=self.gopt_scan_fnameb
+        rt=self.rt
+        se=ScanElem(tup=self.t,mm=self.mm,name=fnameb)
+        se.read_ginp(fnameb)
+        t1,t2,t3=self.t
+        dar=se.calc_angle(t1,t2,t3)
+        b,e,s=rt
+        se.angl_rot(b-dar)
+        e+=1
+        na=se.na
+        for n in range(b,e,s):
+           sn0=str(n)
+           if (n<10):
+              sn="00"+sn0
+           elif (n<100):
+              sn="0"+sn0
+           else:
+              sn=sn0
+           f=open("../Data/Gamess/"+fnameb+"-"+sn+".inp",'w')
+           print >>f," $ZMAT DLC=.T. AUTO=.T. $END"
+           print >>f," $ZMAT IFZMAT(1)=2,",t1+1,",",t2+1,",",t3+1," FVALUE(1)=",float(n),"$END"
+           print >>f," $CONTRL COORD=UNIQUE NZVAR=",3*na-6,"$END"
+           for line in se._ginp_templ:
+              print >>f,line[:-1]
+           se.angl_rot(float(n))
+           rl=se.rl
+           cl=se.cl
+           sl=se.sl
+           for i in range(na):
+              x,y,z=rl[i]
+              print >>f,"",sl[i],cl[i],x,y,z
+           print >>f," $END"
+           f.close()
 
 class DihAScan(Scan):
     def __init__(self,sdir,gopt_s_fnameb,engine_path,mm,opt_lin,np,nc,ran_tup,tup=(),gopt_b_fnameb="mp2_base"):
+       if not tup==():
+          assert len(tup)==4
        super(DihAScan,self).__init__(sdir,gopt_s_fnameb,engine_path,mm,opt_lin,np,nc,ran_tup,tup,gopt_b_fnameb,"DihA")
+
     def write_gamess_inputs(self):
         #self._gen_geometries()
         fnameb=self.gopt_scan_fnameb
@@ -425,7 +512,7 @@ class DihAScan(Scan):
         se.read_ginp(fnameb)
         t1,t2,t3,t4=self.t
         dar=se.calc_dihedral(t1,t2,t3,t4)
-        se.dih_rot(-dar)
+        se.diha_rot(-dar)
         b,e,s=rt
         e+=1
         na=se.na
@@ -443,7 +530,7 @@ class DihAScan(Scan):
            print >>f," $CONTRL COORD=UNIQUE NZVAR=",3*na-6,"$END"
            for line in se._ginp_templ:
               print >>f,line[:-1]
-           se.dih_rot(float(n))
+           se.diha_rot(float(n))
            rl=se.rl
            cl=se.cl
            sl=se.sl

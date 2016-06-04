@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from numpy import array,pi
-from _GeomCalc import dist,angle,dihedral,norm_vec,rotu
+from _GeomCalc import dist,angle,dihedral,norm_vec,uangl,rotu,tra
 
 default_charge={
   'H':1.0,
@@ -243,14 +243,30 @@ class Molecule(object):
         nset,pset=bnd_spl_rec(orig_nset,orig_pset,self._conn)
         return list(nset-orig_nset-orig_pset)
 
-    def dih_rot(self,dih_tuple,dih_angle_rot):
-        assert len(dih_tuple)==4
-        #self.set_conn()
-        t1,t2,t3,t4=dih_tuple
-        uvr=norm_vec(self._rl[t2],self._rl[t3])
+    def bond_tra(self,bond_tup,bond_tra_val):
+        assert len(bond_tup)==2
+        t1,t2=bond_tup        
+        u=norm_vec(self._rl[t1],self._rl[t2])
+        bsl=self.calc_bsplit(t1,t2)
+        for ai in bsl:
+            self._rl[ai]=tra(self._rl[ai],u,bond_tra_val)
+
+    def angl_rot(self,angl_tup,angl_rot_val):
+        assert len(angl_tup)==3
+        t1,t2,t3=angl_tup        
+        u=uangl(self._rl[t1],self._rl[t2],self._rl[t3])
         bsl=self.calc_bsplit(t2,t3)
         for ai in bsl:
-            self._rl[ai]=rotu(self._rl[ai],uvr,dih_angle_rot)
+            self._rl[ai]=rotu(self._rl[ai],u,angl_rot_val)
+
+    def diha_rot(self,diha_tup,diha_rot_val):
+        assert len(diha_tup)==4
+        #self.set_conn()
+        t1,t2,t3,t4=diha_tup
+        u=norm_vec(self._rl[t2],self._rl[t3])
+        bsl=self.calc_bsplit(t2,t3)
+        for ai in bsl:
+            self._rl[ai]=rotu(self._rl[ai],u,diha_rot_val)
  
     def bens_ring(self):
         #mol=["C","C","C","H","H","H","H","H","H","C","C","C","C","C","C","C","C","C","C","C"]
@@ -339,20 +355,20 @@ class Molecule(object):
               if j>i: 
                  if self._sl[i]=='P' and self._sl[j]=='O' or self._sl[i]=='O' and self._sl[j]=='P':
                     s,d,t=bond_ords['PO']
-                    if d>self.calc_dist(i,j)>t: print i,j,"double PO"; self._db.append([i,j])
-                    if t>self.calc_dist(i,j): print i,j,"triple PO"; self._tb.append([i,j])
+                    #if d>self.calc_dist(i,j)>t: print i,j,"double PO"; self._db.append([i,j])
+                    #if t>self.calc_dist(i,j): print i,j,"triple PO"; self._tb.append([i,j])
                  elif self._sl[i]=='P' and self._sl[j]=='C' or self._sl[i]=='C' and self._sl[j]=='P':
                     s,d,t=bond_ords['PC']
-                    if d>self.calc_dist(i,j)>t: print i,j,"double PC"; self._db.append([i,j])
-                    if t>self.calc_dist(i,j): print i,j,"triple PC"; self._tb.append([i,j])
+                    #if d>self.calc_dist(i,j)>t: print i,j,"double PC"; self._db.append([i,j])
+                    #if t>self.calc_dist(i,j): print i,j,"triple PC"; self._tb.append([i,j])
                  elif self._sl[i]=='O' and self._sl[j]=='C' or self._sl[i]=='C' and self._sl[j]=='O':
                     s,d,t=bond_ords['OC']
-                    if d>self.calc_dist(i,j)>t: print "double CO"; self._db.append([i,j])
-                    if t>self.calc_dist(i,j): print "triple CO"; self._tb.append([i,j])
+                    #if d>self.calc_dist(i,j)>t: print "double CO"; self._db.append([i,j])
+                    #if t>self.calc_dist(i,j): print "triple CO"; self._tb.append([i,j])
                  elif self._sl[i]=='C' and self._sl[j]=='C':
                     s,d,t=bond_ords['CC']
-                    if d>self.calc_dist(i,j)>t: print "double OO"; self._db.append([i,j])
-                    if t>self.calc_dist(i,j): print "triple OO"; self._tb.append([i,j])
+                    #if d>self.calc_dist(i,j)>t: print "double OO"; self._db.append([i,j])
+                    #if t>self.calc_dist(i,j): print "triple OO"; self._tb.append([i,j])
                  #else: print "Uknown bond type: ",self._sl[i],"-",self._sl[j]
         #print self._db
         return self._db

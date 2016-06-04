@@ -22,7 +22,7 @@ def ginp_inp(input_fname):
     elif scan_type=="angl":
        t1,t2,t3=map(int,tup.split())    
        tup=(t1,t2,t3)
-    b,e,s=map(int,bes.split())
+    b,e,s=map(float,bes.split())
     bes=(b,e,s)
     return scan_type,gopt_scan_fnameb,tup,bes
 
