@@ -484,7 +484,7 @@ class AnglScan(Scan):
               sn=sn0
            f=open("../Data/Gamess/"+fnameb+"-"+sn+".inp",'w')
            print >>f," $ZMAT DLC=.T. AUTO=.T. $END"
-           print >>f," $ZMAT IFZMAT(1)=2,",t1+1,",",t2+1,",",t3+1," FVALUE(1)=",float(n),"$END"
+           print >>f," $ZMAT IFZMAT(1)=2,",t1+1,",",t2+1,",",t3+1," FVALUE(1)=",0.1*float(n),"$END"
            print >>f," $CONTRL COORD=UNIQUE NZVAR=",3*na-6,"$END"
            for line in se._ginp_templ:
               print >>f,line[:-1]
