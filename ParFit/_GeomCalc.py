@@ -4,24 +4,24 @@
 from numpy import arccos,cross,dot,allclose,cos,sin,matrix,array,pi
 from numpy.linalg import norm
 
-def norm_vec(a,b):
-    #return b-a
-    return (b-a)/norm(b-a)
+def norm_vec(r1,r2):
+    #return r2-r1
+    return (r2-r1)/norm(r2-r1)
 
-def vangle(a,b):
-    #return rad2deg(arccos(dot(a/norm(a),b/norm(b))))
-    return arccos(dot(a/norm(a),b/norm(b)))
+def vangle(v1,v2):
+    #return rad2deg(arccos(dot(v1/norm(v1),v2/norm(v2))))
+    return arccos(dot(v1/norm(v1),v2/norm(v2)))
 
-def dist(a,b):
-        return norm(a-b)
+def dist(r1,r2):
+        return norm(r1-r2)
 
-def angle(a,b,c):
-        return vangle(a-b,c-b)
+def angle(r1,r2,r3):
+        return vangle(r1-r2,r3-r2)
 
-def dihedral(a,b,c,d):
-    v1 = norm_vec(a, b)
-    v2 = norm_vec(b, c)
-    v3 = norm_vec(c, d)
+def dihedral(r1,r2,r3,r4):
+    v1 = norm_vec(r1, r2)
+    v2 = norm_vec(r2, r3)
+    v3 = norm_vec(r3, r4)
     v1xv2 = cross(v1,v2)
     v2xv3 = cross(v2,v3)
     sign=dot(v1xv2,v3)
@@ -32,6 +32,23 @@ def dihedral(a,b,c,d):
     return dih
 
 def rotu(r,u,th):
+
+    try:
+        if not allclose(norm(u),1.):
+            raise Exception("u is not a unit vector!")
+        
+        dru=dot(r,u)
+        nr=r-dru*u
+        nnr=norm(nr)
+        unr=nr/nnr
+        v=cross(u,unr)
+
+    except Exception, msg:
+        print msg
+
+    return cos(th)*nr+sin(th)*nnr*v+dru*u
+
+def rotu2(r,u,th):
 
     try:
         if not allclose(norm(u),1.):
@@ -58,6 +75,23 @@ def rotu(r,u,th):
 
     return array(rot_r.T)[0]
 
+def tra(r,u,d):
+
+   try:
+      if not allclose(norm(u),1.):
+         raise Exception("u is not a unit vector!")
+
+      rt=r+d*u
+
+   except Exception, msg:
+      print msg
+
+   return rt
+
+def uangl(r1,r2,r3):
+   v=cross(r2-r1,r3-r2) 
+   return v/norm(v)
+
 if __name__=="__main__":
     a=array([0.,0.,0.])
     b=array([1.,0.,0.])
@@ -74,3 +108,11 @@ if __name__=="__main__":
     u=array([0.,0.,1.])
     r=array([2.,0.,0.])
     print rotu(r,u,pi/2.)
+    # 
+    print rotu2(r,u,pi/2)
+    # 
+    d=d/norm(d)
+    print rotu(r,d,pi)
+    # 
+    print rotu2(r,d,pi)
+    print tra(r,u,3.)

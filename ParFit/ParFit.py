@@ -4,14 +4,15 @@ import sys,os
 import numpy
 
 from scipy.optimize import minimize,basinhopping,anneal,fmin,fmin_powell,fmin_cg,fmin_tnc
-from DihScan import DihScan
+from Scan import BondScan,AnglScan,DihAScan
 from IO import par_fit_inp,read_add,write_add
 
 from Ga import run_ga
 
 def pf_run(PF_if):
 
-   gopt_type,gopt_s_fnameb,t1234,bes,engine_path,mm,mode,alg,opt_lin,np,nc,step_int,csv=par_fit_inp(PF_if)
+   scan_type,gopt_type,gopt_s_fnameb,tup,bes,engine_path,mm,mode,alg,opt_lin,np,nc,step_int,csv=par_fit_inp(PF_if)
+   scan_type=scan_type.strip()   
 
    if engine_path=="":
       engine_path="../Engine"
@@ -32,18 +33,23 @@ def pf_run(PF_if):
 
    n=len(gopt_type)
    ds=[]
-   for i in range(n):
-      sds=DihScan(sdir,gopt_s_fnameb[i],engine_path,mm,opt_lin,np,nc,bes[i],t1234[i])
-      ds.append(sds)
+   if scan_type=="diha":
+      for i in range(n):
+         sds=DihAScan(sdir,gopt_s_fnameb[i],engine_path,mm,opt_lin,np,nc,bes[i],tup[i])
+         ds.append(sds)
+   elif scan_type=="bond":
+      for i in range(n):
+         sds=BondScan(sdir,gopt_s_fnameb[i],engine_path,mm,opt_lin,np,nc,bes[i],tup[i])
+         ds.append(sds)
+   elif scan_type=="angl":
+      for i in range(n):
+         sds=AnglScan(sdir,gopt_s_fnameb[i],engine_path,mm,opt_lin,np,nc,bes[i],tup[i])
+         ds.append(sds)
 
    if not gopt_type[0]=="ginp":
       os.environ["ENGINE_DIR"]=engine_path+"/engine_dir"
-      p,c,ol_templ,lines=read_add(mm,opt_lin,np,nc,1)
+      p,c,ol_templ,lines=read_add(mm,opt_lin,np,nc,1,scan_type)
 
-   f=open(pref+"/step",'w')
-   print >>f,1
-   f.close()
- 
    for i in  range(n):
       if gopt_type[i]=="full":
          ds[i].read_gamess_outputs()
@@ -59,46 +65,34 @@ def pf_run(PF_if):
 
    def engine_rmse(p):
 
-      f=open(pref+"/step",'r')
-      ls=f.readlines()
-      f.close()
-      step=int(ls[0])
-
       n=len(ds)
       rmse=0.
       for i in range(n):
-         write_add(sdir,p,c,mm,ol_templ,lines,1,step,step_int)
-         ds[i].run_dih_scan(p,c,mm,ol_templ)
-         rmse+=ds[i].calc_rmse(csv,i,step,step_int)
-      print step,round(rmse/n,4),p
+         write_add(sdir,p,c,mm,ol_templ,lines,1,engine_rmse.step,step_int)
+         ds[i].run_scan(p,c,mm,ol_templ)
+         rmse+=ds[i].calc_rmse(csv,i,engine_rmse.step,step_int)
+      print engine_rmse.step,round(rmse/n,4),p
 
-      step+=1
-      f=open(pref+"/step",'w')
-      print >>f,step
-      f.close()
+      engine_rmse.step+=1
 
       return round(rmse/n,4)
   
-   def engine_rmse2(p):
+   engine_rmse.step=1
 
-      f=open(pref+"/step",'r')
-      ls=f.readlines()
-      f.close()
-      step=int(ls[0])
+   def engine_rmse2(p):
 
       n=len(ds)
       rmse=0.
       for i in range(n):
-         write_add(sdir,p,c,mm,ol_templ,lines,1,step,step_int)
-         ds[i].run_dih_scan(p,c,mm,ol_templ)
-         rmse+=ds[i].calc_rmse(csv,i,step,step_int)
+         write_add(sdir,p,c,mm,ol_templ,lines,1,engine_rmse2.step,step_int)
+         ds[i].run_scan(p,c,mm,ol_templ)
+         rmse+=ds[i].calc_rmse(csv,i,engine_rmse2.step,step_int)
 
-      step+=1
-      f=open(pref+"/step",'w')
-      print >>f,step
-      f.close()
+      engine_rmse2.step+=1
 
       return (round(rmse/n,4),)
+
+   engine_rmse2.step=1
 
    if mode=="sense":
       eps=0.01
