@@ -13,6 +13,7 @@ def ginp_inp(input_fname):
     else:
        gopt_scan_fnameb,tup,bes,scan_type=line1
     gopt_scan_fnameb=gopt_scan_fnameb.strip()
+    scan_type=scan_type.strip()
     if scan_type=="diha":
        t1,t2,t3,t4=map(int,tup.split())
        tup=(t1,t2,t3,t4)
@@ -60,7 +61,7 @@ def par_fit_inp(input_fname):
              elif scan_type=="angl":
                 t1,t2,t3=map(int,stup.split())    
                 tup.append((t1,t2,t3))
-             b,e,s=map(int,sbes.split())    
+             b,e,s=map(float,sbes.split())    
              bes.append((b,e,s))
     else:
        n=0
@@ -72,16 +73,18 @@ def par_fit_inp(input_fname):
              gopt_type,gopt_scan_fnameb,scan_type=line1
           gopt_type=[gopt_type.strip(),]
           gopt_scan_fnameb=[gopt_scan_fnameb.strip(),]
+          scan_type=scan_type.strip()
           tup=[(),]
           bes=[(),]
        else:
-          if len(sline)==4:
+          if len(line1)==4:
              gopt_type,gopt_scan_fnameb,tup,bes=line1
              scan_type="diha"
           else:
              gopt_type,gopt_scan_fnameb,tup,bes,scan_type=line1
           gopt_type=[gopt_type.strip(),]
           gopt_scan_fnameb=[gopt_scan_fnameb.strip(),]
+          scan_type=scan_type.strip()
           if scan_type=="diha":
              t1,t2,t3,t4=map(int,tup.split())
              tup=[(t1,t2,t3,t4),]
@@ -91,7 +94,7 @@ def par_fit_inp(input_fname):
           elif scan_type=="angl":
              t1,t2,t3=map(int,tup.split())    
              tup=[(t1,t2,t3),]
-          b,e,s=map(int,bes.split())
+          b,e,s=map(float,bes.split())
           bes=[(b,e,s),]
     if gopt_type[0]=="ginp":
        return scan_type,gopt_type,gopt_scan_fnameb,tup,bes,None,None,None,None,None,None,None,None,None

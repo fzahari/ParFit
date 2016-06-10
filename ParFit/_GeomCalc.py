@@ -10,7 +10,10 @@ def norm_vec(r1,r2):
 
 def vangle(v1,v2):
     #return rad2deg(arccos(dot(v1/norm(v1),v2/norm(v2))))
-    return arccos(dot(v1/norm(v1),v2/norm(v2)))
+    vdot=dot(v1/norm(v1),v2/norm(v2))
+    if allclose(vdot,1.0): return 0.0 
+    if allclose(vdot,-1.0): return pi/2. 
+    return arccos(vdot)
 
 def dist(r1,r2):
         return norm(r1-r2)
@@ -89,7 +92,7 @@ def tra(r,u,d):
    return rt
 
 def uangl(r1,r2,r3):
-   v=cross(r2-r1,r3-r2) 
+   v=cross(r1-r2,r3-r2) 
    return v/norm(v)
 
 if __name__=="__main__":
@@ -97,6 +100,7 @@ if __name__=="__main__":
     b=array([1.,0.,0.])
     c=array([1.,1.,0.])
     d=array([1.,1.,1.])
+    e=array([0.,1.,0.])
     #
     print dist(a,b)
     print angle(b,a,c)
@@ -116,3 +120,5 @@ if __name__=="__main__":
     # 
     print rotu2(r,d,pi)
     print tra(r,u,3.)
+    #
+    print uangl(b,a,e)

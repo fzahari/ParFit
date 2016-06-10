@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from os import system,environ
-from numpy import rad2deg,array,sqrt,pi,around
+from numpy import rad2deg,array,sqrt,pi,around,deg2rad
 from IO import par_fit_inp,read_add,write_add
 from _Engine import run_engine_timeout, pert_add_param
 from GeomStr import Molecule,default_mm3_type,default_mmff94_type
@@ -26,7 +26,8 @@ class ScanElem(Molecule):
         self._t=tuple(tup)
         self._v=None
         self._e=None
-        self._ginp_templ=None
+        self._ginp_templ1=None
+        self._ginp_templ2=None
 
     @property
     def t(self):
@@ -37,15 +38,19 @@ class ScanElem(Molecule):
         self._t=tuple(tup)
 
     @property
-    def da(self):
+    def v(self):
         if self._na>0:
             assert not self._t==()
             if len(self._t)==4:
                t1,t2,t3,t4=self._t
-               #print "da property1:",t1,t2,t3,t4
-               self._da=self.calc_dihedral(t1,t2,t3,t4)
-               #print "da property2:",self._da
-        return self._da
+               self._v=self.calc_dihedral(t1,t2,t3,t4)
+            elif len(self._t)==2:
+               t1,t2=self._t
+               self._v=self.calc_dist(t1,t2)
+            elif len(self._t)==3:
+               t1,t2,t3=self._t
+               self._v=self.calc_angle(t1,t2,t3)
+        return self._v
 
     @property
     def e(self):
@@ -55,7 +60,8 @@ class ScanElem(Molecule):
         gkey="EQUILIBRIUM GEOMETRY LOCATED"
         ekey="TOTAL ENERGY      ="
         #
-        fname="../Data/Gamess/"+fname_base+"-dlc.log"
+        #fname="../Data/Gamess/"+fname_base+"-dlc.log"
+        fname="../Data/Gamess/"+fname_base+".log"
         f=open(fname,'r')
         lines=f.readlines()
         f.close()
@@ -100,11 +106,12 @@ class ScanElem(Molecule):
         for i in range(ln):
             if dkey in lines[i].upper(): break
         #
-        self._ginp_templ=lines[:i+3]
+        self._ginp_templ1=lines[:i+3]
         #
-        for line in lines[i+3:]:
-            if ekey in line.upper(): break
-            s,c,x,y,z=line[:-1].split()
+        for j in range(i+3,ln):
+            if ekey in lines[j].upper(): break
+            s,c,x,y,z=lines[j][:-1].split()
+            s=s.upper()
             self._sl.append(s)
             self._rl.append(array(map(float,[x,y,z]),'d'))
             self._cl.append(float(c))
@@ -114,6 +121,7 @@ class ScanElem(Molecule):
                 self._tl.append(default_mmff94_type[s])
             else:
                 print "ScanElem.read_gopt_log: Wrong MM-type!"
+        self._ginp_templ2=lines[j+1:]
         self._rl=array(self._rl,'d')
         self._na=len(self._rl)
         #
@@ -167,8 +175,8 @@ class ScanElem(Molecule):
            print >>f,"}"
         elif styp=="DihA":
            t1,t2,t3,t4=self._t
-           self._da=self.calc_dihedral(t1,t2,t3,t4)
-           da=rad2deg(self._da)
+           self._v=self.calc_dihedral(t1,t2,t3,t4)
+           da=rad2deg(self._v)
            st1,st2,st3,st4=map(str,map(lambda x:x+1,self._t))
            tail="DD "+st1+" "+st2+" "+st3+" "+st4+" FROM %.1f TO %.1f BY 0.0\n}"%(da,da)
            print >>f,tail
@@ -220,7 +228,10 @@ class Scan(object):
         self._rt=ran_tup
         #if not tup==():
         #   assert len(tup)==4
-        self._t=tuple(map(lambda x:x-1,tup))
+        if not tup==():
+           self._t=tuple(map(lambda x:x-1,tup))
+        else: 
+           self._t=()
         self._ml=[]
         self._v={}
         self._ge={}
@@ -274,7 +285,7 @@ class Scan(object):
             se=ScanElem(tup=self._t,mm=self._mm,name=fnameb)
             se.read_gopt_log(fnameb)
             self._ml.append(se)
-            self._v.update({se.name:rad2deg(se.da)})
+            self._v.update({se.name:rad2deg(se.v)})
             self._ge.update({se.name:se.e})
 
     def write_gouts_data(self):
@@ -302,6 +313,7 @@ class Scan(object):
         lines=f.readlines() 
         f.close()
         self._t=map(int,lines[0][:-1].split())
+        self._t=map(lambda x:x-1,self._t)
         self._rt=map(int,map(float,lines[1][:-1].split()))
         l=int(lines[2][:-1])
         lines=lines[3:]
@@ -349,7 +361,7 @@ class Scan(object):
         for m in self._ml:
             fnameb=m.name
             m.read_out_pcm(fnameb,self._styp)
-            #self._v.update({m.name:rad2deg(m.da)})
+            #self._v.update({m.name:rad2deg(m.v)})
             self._ee.update({m.name:m.e})
 
     def run_dih_elem(self,m):
@@ -429,7 +441,7 @@ class BondScan(Scan):
         t1,t2=self.t
         dar=se.calc_dist(t1,t2)
         b,e,s=rt
-        se.bond_tra(b-dar)
+        se.bond_tra(0.1*b-dar)
         e+=1
         na=se.na
         for n in range(b,e,s):
@@ -444,9 +456,10 @@ class BondScan(Scan):
            print >>f," $ZMAT DLC=.T. AUTO=.T. $END"
            print >>f," $ZMAT IFZMAT(1)=1,",t1+1,",",t2+1," FVALUE(1)=",0.1*float(n),"$END"
            print >>f," $CONTRL COORD=UNIQUE NZVAR=",3*na-6,"$END"
-           for line in se._ginp_templ:
+           for line in se._ginp_templ1:
               print >>f,line[:-1]
-           se.bond_tra(float(n))
+           if not n==b:
+              se.bond_tra(0.1*s)
            rl=se.rl
            cl=se.cl
            sl=se.sl
@@ -454,6 +467,8 @@ class BondScan(Scan):
               x,y,z=rl[i]
               print >>f,"",sl[i],cl[i],x,y,z
            print >>f," $END"
+           for line in se._ginp_templ2:
+              print >>f,line[:-1]
            f.close()
 
 class AnglScan(Scan):
@@ -471,7 +486,7 @@ class AnglScan(Scan):
         t1,t2,t3=self.t
         dar=se.calc_angle(t1,t2,t3)
         b,e,s=rt
-        se.angl_rot(b-dar)
+        se.angl_rot(deg2rad(0.1*b)-dar)
         e+=1
         na=se.na
         for n in range(b,e,s):
@@ -486,9 +501,10 @@ class AnglScan(Scan):
            print >>f," $ZMAT DLC=.T. AUTO=.T. $END"
            print >>f," $ZMAT IFZMAT(1)=2,",t1+1,",",t2+1,",",t3+1," FVALUE(1)=",0.1*float(n),"$END"
            print >>f," $CONTRL COORD=UNIQUE NZVAR=",3*na-6,"$END"
-           for line in se._ginp_templ:
+           for line in se._ginp_templ1:
               print >>f,line[:-1]
-           se.angl_rot(float(n))
+           if not n==b:
+              se.angl_rot(deg2rad(0.1*s))
            rl=se.rl
            cl=se.cl
            sl=se.sl
@@ -496,6 +512,8 @@ class AnglScan(Scan):
               x,y,z=rl[i]
               print >>f,"",sl[i],cl[i],x,y,z
            print >>f," $END"
+           for line in se._ginp_templ2:
+              print >>f,line[:-1]
            f.close()
 
 class DihAScan(Scan):
@@ -512,8 +530,8 @@ class DihAScan(Scan):
         se.read_ginp(fnameb)
         t1,t2,t3,t4=self.t
         dar=se.calc_dihedral(t1,t2,t3,t4)
-        se.diha_rot(-dar)
         b,e,s=rt
+        se.diha_rot(deg2rad(b)-dar)
         e+=1
         na=se.na
         for n in range(b,e,s):
@@ -528,9 +546,10 @@ class DihAScan(Scan):
            print >>f," $ZMAT DLC=.T. AUTO=.T. $END"
            print >>f," $ZMAT IFZMAT(1)=3,",t1+1,",",t2+1,",",t3+1,",",t4+1," FVALUE(1)=",float(n),"$END"
            print >>f," $CONTRL COORD=UNIQUE NZVAR=",3*na-6,"$END"
-           for line in se._ginp_templ:
+           for line in se._ginp_templ1:
               print >>f,line[:-1]
-           se.diha_rot(float(n))
+           if not n==b:
+              se.diha_rot(deg2rad(s))
            rl=se.rl
            cl=se.cl
            sl=se.sl
@@ -538,6 +557,8 @@ class DihAScan(Scan):
               x,y,z=rl[i]
               print >>f,"",sl[i],cl[i],x,y,z
            print >>f," $END"
+           for line in se._ginp_templ2:
+              print >>f,line[:-1]
            f.close()
 
 if __name__=="__main__":
