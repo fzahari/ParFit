@@ -12,7 +12,7 @@ from Ga import run_ga
 def pf_run(PF_if):
 
    scan_type,gopt_type,gopt_s_fnameb,tup,bes,engine_path,mm,mode,alg,opt_lin,np,nc,step_int,csv=par_fit_inp(PF_if)
-   scan_type=scan_type.strip()   
+   #scan_type=scan_type.strip()   
 
    if engine_path=="":
       engine_path="../Engine"
@@ -35,14 +35,19 @@ def pf_run(PF_if):
    ds=[]
    if scan_type=="diha":
       for i in range(n):
+         bes[i]=map(int,bes[i])
          sds=DihAScan(sdir,gopt_s_fnameb[i],engine_path,mm,opt_lin,np,nc,bes[i],tup[i])
          ds.append(sds)
    elif scan_type=="bond":
       for i in range(n):
+         bes[i]=map(lambda x:10.*x,bes[i])
+         bes[i]=map(int,bes[i])
          sds=BondScan(sdir,gopt_s_fnameb[i],engine_path,mm,opt_lin,np,nc,bes[i],tup[i])
          ds.append(sds)
    elif scan_type=="angl":
       for i in range(n):
+         bes[i]=map(lambda x:10.*x,bes[i])
+         bes[i]=map(int,bes[i])
          sds=AnglScan(sdir,gopt_s_fnameb[i],engine_path,mm,opt_lin,np,nc,bes[i],tup[i])
          ds.append(sds)
 

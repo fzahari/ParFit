@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from numpy import array,pi
-from _GeomCalc import dist,angle,dihedral,norm_vec,uangl,rotu,tra
+from _GeomCalc import dist,angle,dihedral,norm_vec,uangl,rotu,tra,angle
 
 default_charge={
   'H':1.0,
@@ -15,7 +15,7 @@ default_mm3_type={
   'C':1,
   'O':7,
   'P':153,
-  'La':338
+  'LA':338
 }
 
 default_mmff94_type={
@@ -30,7 +30,7 @@ cov_radii={
  'C':0.77,
  'O':0.73,
  'P':1.06,
- 'La':2.07
+ 'LA':2.07
 }
 
 bond_ords={
@@ -248,6 +248,7 @@ class Molecule(object):
         t1,t2=bond_tup        
         u=norm_vec(self._rl[t1],self._rl[t2])
         bsl=self.calc_bsplit(t1,t2)
+        self._rl[t2]=tra(self._rl[t2],u,bond_tra_val)
         for ai in bsl:
             self._rl[ai]=tra(self._rl[ai],u,bond_tra_val)
 
@@ -255,9 +256,10 @@ class Molecule(object):
         assert len(angl_tup)==3
         t1,t2,t3=angl_tup        
         u=uangl(self._rl[t1],self._rl[t2],self._rl[t3])
-        bsl=self.calc_bsplit(t2,t3)
+        bsl=self.calc_bsplit(t1,t2)
         for ai in bsl:
-            self._rl[ai]=rotu(self._rl[ai],u,angl_rot_val)
+            delr=rotu(self._rl[ai]-self._rl[t2],u,angl_rot_val)
+            self._rl[ai]=self._rl[t2]+delr
 
     def diha_rot(self,diha_tup,diha_rot_val):
         assert len(diha_tup)==4
@@ -266,7 +268,8 @@ class Molecule(object):
         u=norm_vec(self._rl[t2],self._rl[t3])
         bsl=self.calc_bsplit(t2,t3)
         for ai in bsl:
-            self._rl[ai]=rotu(self._rl[ai],u,diha_rot_val)
+            delr=rotu(self._rl[ai]-self._rl[t2],u,diha_rot_val)
+            self._rl[ai]=self._rl[t2]+delr
  
     def bens_ring(self):
         #mol=["C","C","C","H","H","H","H","H","H","C","C","C","C","C","C","C","C","C","C","C"]
@@ -417,8 +420,9 @@ if __name__=="__main__":
     print m.name
     print m.conn
 
-    a=Atom('C',(0.,0.,0.),mm="mmff94")
-    b=Atom('P',(1.,0.,0.),mm="mmff94")
+    a=Atom('C',(0.,-1.,0.),mm="mmff94")
+    #b=Atom('P',(1.,0.,0.),mm="mmff94")
+    b=Atom('P',(0.,0.,0.),mm="mmff94")
     c=Atom('C',(2.,0.,0.),mm="mmff94")
     d=Atom('H',(3.,1.,0.),mm="mmff94")
     m=Molecule((a,b,c,d),"mm3")
@@ -426,9 +430,10 @@ if __name__=="__main__":
     m.set_conn()
     print m.conn
     print m.calc_bsplit(0,1)
-    print m.rl
-    m.dih_rot((0,1,2,3),pi/2.)
-    print m.rl
+    print "1",m.rl
+    #m.diha_rot((0,1,2,3),pi/2.)
+    m.angl_rot((0,1,2),pi/2.)
+    print "2",m.rl
     m.bond_ord()
     print m.db
     print m.bens_ring()
