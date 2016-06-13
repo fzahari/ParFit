@@ -1,3 +1,30 @@
+ $CONTRL ICHARG=+3 MULT=1
+         MPLEVL=2  
+         SCFTYP=RHF 
+         MAXIT=200 ISPHER=1 ICUT=11
+         RUNTYP=OPTIMIZE
+         PP=READ
+         $END
+ $SCF    DIRSCF=.T. FDIFF=.F. $END
+ $TRANS  DIRTRF=.T. $END
+ $SYSTEM MWORDS=300 MEMDDI=300 $END
+ $GUESS  GUESS=HUCKEL $END
+ $BASIS  BASNAM(1)=METAL, 
+                   LIGP,
+                   LIGO,
+                   LIGC,
+                   LIGC,
+                   LIGC,
+                   LIGH,
+                   LIGH,
+                   LIGH,
+                   LIGH,
+                   LIGH,
+                   LIGH,
+                   LIGH,
+                   LIGH,
+                   LIGH
+ $END
  $DATA
  
  C1
@@ -17,3 +44,48 @@
  H           1.0  -0.9209438254  -2.0300891851  -0.0223114425
  H           1.0   0.0299478650  -1.8453895216   1.4604579161
  $END
+!
+ $ECP
+ La-ECP SBKJC
+ P-ECP  NONE
+ O-ECP  NONE
+ C-ECP  NONE
+ C-ECP  NONE
+ C-ECP  NONE
+ H-ECP  NONE
+ H-ECP  NONE
+ H-ECP  NONE
+ H-ECP  NONE
+ H-ECP  NONE
+ H-ECP  NONE
+ H-ECP  NONE
+ H-ECP  NONE
+ H-ECP  NONE
+ $END
+!
+!       sbkjc for La
+ $METAL
+ SBKJC
+
+ $END
+!       cc-pVTZ for P
+ $LIGP
+ CCT
+
+ $END
+!       cc-pVTZ for O 
+ $LIGO
+ CCT
+
+ $END
+!       cc-pVTZ for C
+ $LIGC
+ CCT
+
+ $END
+!       cc-pVTZ for H
+ $LIGH
+ CCT
+
+ $END
+

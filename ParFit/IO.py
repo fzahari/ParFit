@@ -45,11 +45,13 @@ def par_fit_inp(input_fname):
        for i in range(n):
           sline=lines[i+1].split(',')
           if sline[0].strip()=="comp":
+             sgopt_type,sgopt_scan_fnameb=sline
              gopt_type.append(sgopt_type.strip())
              gopt_scan_fnameb.append(sgopt_scan_fnameb.strip())
              tup.append(())
              bes.append(())
           else:
+             sgopt_type,sgopt_scan_fnameb,stup,sbes=sline
              gopt_type.append(sgopt_type.strip())
              gopt_scan_fnameb.append(sgopt_scan_fnameb.strip())
              if scan_type=="diha":

@@ -35,19 +35,22 @@ def pf_run(PF_if):
    ds=[]
    if scan_type=="diha":
       for i in range(n):
-         bes[i]=map(int,bes[i])
+         if not bes[i]==():
+            bes[i]=map(int,bes[i])
          sds=DihAScan(sdir,gopt_s_fnameb[i],engine_path,mm,opt_lin,np,nc,bes[i],tup[i])
          ds.append(sds)
    elif scan_type=="bond":
       for i in range(n):
-         bes[i]=map(lambda x:10.*x,bes[i])
-         bes[i]=map(int,bes[i])
+         if not bes[i]==():
+            bes[i]=map(lambda x:10.*x,bes[i])
+            bes[i]=map(int,bes[i])
          sds=BondScan(sdir,gopt_s_fnameb[i],engine_path,mm,opt_lin,np,nc,bes[i],tup[i])
          ds.append(sds)
    elif scan_type=="angl":
       for i in range(n):
-         bes[i]=map(lambda x:10.*x,bes[i])
-         bes[i]=map(int,bes[i])
+         if not bes[i]==():
+            bes[i]=map(lambda x:10.*x,bes[i])
+            bes[i]=map(int,bes[i])
          sds=AnglScan(sdir,gopt_s_fnameb[i],engine_path,mm,opt_lin,np,nc,bes[i],tup[i])
          ds.append(sds)
 
@@ -133,7 +136,7 @@ def pf_run(PF_if):
       else: 
          "'alg' is not a known algorithm!"
 
-PF_input_fname="dih_scan_inp"
+PF_input_fname="scan_inp"
 
 lsa=len(sys.argv)
 if lsa>2:

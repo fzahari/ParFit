@@ -1,0 +1,12 @@
+mult,3
+comp, P0101-mp2-popt-dd-
+comp, P0102-mp2-popt-dd-
+comp, P0103-mp2-popt-dd-
+/Users/federicozahariev1/Work/Programs/CODES/MM_engine_source/
+mm3 
+hybr
+9 p c p
+10 p c p
+11 p c p 
+13 p c p
+csv_on
