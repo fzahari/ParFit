@@ -74,6 +74,7 @@ class ScanElem(Molecule):
         for line in lines[i+4:]:
             if line[:-1]=="": break
             s,c,x,y,z=line[:-1].split()
+            s=s.upper()
             self._sl.append(s)
             self._rl.append(array(map(float,[x,y,z]),'d'))
             self._cl.append(float(c))
@@ -288,25 +289,6 @@ class Scan(object):
             self._v.update({se.name:rad2deg(se.v)})
             self._ge.update({se.name:se.e})
 
-    def write_gouts_data(self):
-        fnameb=self.gopt_scan_fnameb
-        f=open("../Data/Gamess/"+fnameb+"scan",'w')
-        t1,t2,t3,t4=self._t
-        print >>f,t1,t2,t3,t4
-        b,e,s=self._rt
-        print >>f,b,e,s
-        l=len(self._ml)
-        print >>f,l
-        for i in range(l):
-            m=self._ml[i]
-            n=m._n
-            na=m._na
-            print >>f,n,na,self._v[n],self._ge[n]
-            for j in range(na):
-                x,y,z=m.rl[j]
-                print >>f,m.sl[j],x,y,z,m.cl[j]
-        f.close()
-
     def read_gouts_data(self):
         fnameb=self.gopt_scan_fnameb
         f=open("../Data/Gamess/"+fnameb+"scan",'r')
@@ -331,6 +313,7 @@ class Scan(object):
             lines=lines[1:]
             for j in range(na):
                 s,x,y,z,c=lines[j].split()
+                s=s.upper()
                 se._sl.append(s)
                 se._rl.append(array(map(float,[x,y,z]),'d'))
                 se._cl.append(float(c))
@@ -453,6 +436,7 @@ class BondScan(Scan):
            else:
               sn=sn0
            f=open("../Data/Gamess/"+fnameb+"-"+sn+".inp",'w')
+           #f=open("../Data/Gamess/"+fnameb+sn+".inp",'w')
            print >>f," $ZMAT DLC=.T. AUTO=.T. $END"
            print >>f," $ZMAT IFZMAT(1)=1,",t1+1,",",t2+1," FVALUE(1)=",0.1*float(n),"$END"
            print >>f," $CONTRL COORD=UNIQUE NZVAR=",3*na-6,"$END"
@@ -470,6 +454,25 @@ class BondScan(Scan):
            for line in se._ginp_templ2:
               print >>f,line[:-1]
            f.close()
+
+    def write_gouts_data(self):
+        fnameb=self.gopt_scan_fnameb
+        f=open("../Data/Gamess/"+fnameb+"scan",'w')
+        t1,t2=map(str,map(lambda x:x+1,self._t))
+        print >>f,t1,t2
+        b,e,s=map(lambda x:0.1*x,map(float,self._rt))
+        print >>f,b,e,s
+        l=len(self._ml)
+        print >>f,l
+        for i in range(l):
+            m=self._ml[i]
+            n=m._n
+            na=m._na
+            print >>f,n,na,self._v[n],self._ge[n]
+            for j in range(na):
+                x,y,z=m.rl[j]
+                print >>f,m.sl[j],x,y,z,m.cl[j]
+        f.close()
 
 class AnglScan(Scan):
     def __init__(self,sdir,gopt_s_fnameb,engine_path,mm,opt_lin,np,nc,ran_tup,tup=(),gopt_b_fnameb="mp2_base"):
@@ -516,6 +519,25 @@ class AnglScan(Scan):
               print >>f,line[:-1]
            f.close()
 
+    def write_gouts_data(self):
+        fnameb=self.gopt_scan_fnameb
+        f=open("../Data/Gamess/"+fnameb+"scan",'w')
+        t1,t2,t3=map(str,map(lambda x:x+1,self._t))
+        print >>f,t1,t2,t3
+        b,e,s=map(lambda x:0.1*x,map(float,self._rt))
+        print >>f,b,e,s
+        l=len(self._ml)
+        print >>f,l
+        for i in range(l):
+            m=self._ml[i]
+            n=m._n
+            na=m._na
+            print >>f,n,na,self._v[n],self._ge[n]
+            for j in range(na):
+                x,y,z=m.rl[j]
+                print >>f,m.sl[j],x,y,z,m.cl[j]
+        f.close()
+
 class DihAScan(Scan):
     def __init__(self,sdir,gopt_s_fnameb,engine_path,mm,opt_lin,np,nc,ran_tup,tup=(),gopt_b_fnameb="mp2_base"):
        if not tup==():
@@ -560,6 +582,25 @@ class DihAScan(Scan):
            for line in se._ginp_templ2:
               print >>f,line[:-1]
            f.close()
+
+    def write_gouts_data(self):
+        fnameb=self.gopt_scan_fnameb
+        f=open("../Data/Gamess/"+fnameb+"scan",'w')
+        t1,t2,t3,t4=map(str,map(lambda x:x+1,self._t))
+        print >>f,t1,t2,t3,t4
+        b,e,s=map(float,self._rt)
+        print >>f,b,e,s
+        l=len(self._ml)
+        print >>f,l
+        for i in range(l):
+            m=self._ml[i]
+            n=m._n
+            na=m._na
+            print >>f,n,na,self._v[n],self._ge[n]
+            for j in range(na):
+                x,y,z=m.rl[j]
+                print >>f,m.sl[j],x,y,z,m.cl[j]
+        f.close()
 
 if __name__=="__main__":
     ##ds.write_gamess_inputs()
