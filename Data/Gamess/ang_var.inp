@@ -1,0 +1,91 @@
+ $CONTRL ICHARG=+3 MULT=1
+         MPLEVL=2  
+         SCFTYP=RHF 
+         MAXIT=200 ISPHER=1 ICUT=11
+         RUNTYP=OPTIMIZE
+         PP=READ
+         $END
+ $SCF    DIRSCF=.T. FDIFF=.F. $END
+ $TRANS  DIRTRF=.T. $END
+ $SYSTEM MWORDS=300 MEMDDI=300 $END
+ $GUESS  GUESS=HUCKEL $END
+ $BASIS  BASNAM(1)=METAL, 
+                   LIGP,
+                   LIGO,
+                   LIGC,
+                   LIGC,
+                   LIGC,
+                   LIGH,
+                   LIGH,
+                   LIGH,
+                   LIGH,
+                   LIGH,
+                   LIGH,
+                   LIGH,
+                   LIGH,
+                   LIGH
+ $END
+ $DATA
+ 
+ C1
+La    57.0     0.31435     0.88028    -4.02887
+P    15.0    -0.04116     0.29864    -0.32306
+O     8.0    -0.10013     0.67027    -1.98246
+C     6.0    -1.49163     1.01391     0.40096
+C     6.0     1.45123     1.02415     0.29832
+C     6.0    -0.03097    -1.46949    -0.20757
+H     1.0    -1.49319     2.09804     0.29433
+H     1.0    -1.45856     0.77732     1.46993
+H     1.0    -2.39817     0.57558    -0.01466
+H     1.0     2.32968     0.59195    -0.17941
+H     1.0     1.49428     0.78768     1.36697
+H     1.0     1.43786     2.10823     0.19205
+H     1.0     0.85339    -1.89168    -0.68335
+H     1.0    -0.94341    -1.89790    -0.62061
+H     1.0     0.00715    -1.71448     0.85935
+ $END
+!
+ $ECP
+ La-ECP SBKJC
+ P-ECP  NONE
+ O-ECP  NONE
+ C-ECP  NONE
+ C-ECP  NONE
+ C-ECP  NONE
+ H-ECP  NONE
+ H-ECP  NONE
+ H-ECP  NONE
+ H-ECP  NONE
+ H-ECP  NONE
+ H-ECP  NONE
+ H-ECP  NONE
+ H-ECP  NONE
+ H-ECP  NONE
+ $END
+!
+!       sbkjc for La
+ $METAL
+ SBKJC
+
+ $END
+!       cc-pVTZ for P
+ $LIGP
+ CCT
+
+ $END
+!       cc-pVTZ for O 
+ $LIGO
+ CCT
+
+ $END
+!       cc-pVTZ for C
+ $LIGC
+ CCT
+
+ $END
+!       cc-pVTZ for H
+ $LIGH
+ CCT
+
+ $END
+

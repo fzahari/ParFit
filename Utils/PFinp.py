@@ -19,19 +19,32 @@ else :
     pyout == pyout
 
 # --- Open the file for writing ---
+f = open(pyout,'w')  
 
-f = open(pyout,'w')
+# Select the parameter type, bond length, bond angle, torsion.
+property_type = raw_input( '''Choose from the properties below:
+(a) bond length
+(b) bond angle
+(c) torsion (default)
+    \n
+Enter: a, b, or c.\n''' ) 
 
-# --- Determine the number of torsions to be fit. ---
+if ( property_type == "a" ) :
+    property_type = 'bond'
+    perameterize = "bond length"
+elif ( property_type == "b" ) :
+    property_type = 'angl'
+    perameterize = "bond angle"
+elif ( property_type == "c" ) :
+    property_type = 'diha'
+    perameterize = "torsion angle"
+else :
+    print "The default, torsion angle, was chosen."
+    property_type = 'diha'
+    perameterize = "torsion angle"
 
-molno = int( raw_input( '''Enter the number of torsions to be fit by ParFit.\n''' ))
-molnoline = "mult, " + str(molno)
-print >> f, molnoline
-
-# --- Designate the type of existing energy/geometry data for each torsion. ---
-
-for i in range( molno ) :
-    qmdatachoice = raw_input( '''Choose from the scenarios below:
+# --- Create GAMESS input files or use existing energy/geometry data. ---
+runtyp = raw_input( '''Choose from the scenarios below:
 (a) I have compact file that includes all of the geometry and energy information
     for the torsion angles described above.
 (b) I have a GAMESS output file for each torsion angles in the range described above.
@@ -65,8 +78,7 @@ Enter: a or b. Default is a.\n''' )
 
 # --- Get engine path ---
 
-engine_path = raw_input( "\nWhat is the full engine.exe path?\n" )
-print >> f, engine_path
+    engine_path = raw_input( "\nWhat is the full engine.exe path?\n" )
 
 # --- Determine the type of MM file that is to be modified ---
 

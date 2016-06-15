@@ -11,26 +11,29 @@ def pf_run(input_fname):
    if scan_type=="diha":
       bes=map(int,bes)
       ds=DihAScan(None,gopt_s_fnameb,None,"mm3",None,None,None,bes,tup)
-      ds.write_gamess_inputs()
+      ds.read_gamess_outputs()
+      ds.write_gouts_data()
    elif scan_type=="bond":
       bes=map(lambda x:10.*x,bes)
       bes=map(int,bes)
       ds=BondScan(None,gopt_s_fnameb,None,"mm3",None,None,None,bes,tup)
-      ds.write_gamess_inputs()
+      ds.read_gamess_outputs()
+      ds.write_gouts_data()
    elif scan_type=="angl":
       bes=map(lambda x:10.*x,bes)
       bes=map(int,bes)
       ds=AnglScan(None,gopt_s_fnameb,None,"mm3",None,None,None,bes,tup)
-      ds.write_gamess_inputs()
+      ds.read_gamess_outputs()
+      ds.write_gouts_data()
 
-GI_input_fname="gout_inp"
+GO_input_fname="gout_inp"
 
 lsa=len(sys.argv)
 if lsa>2:
    print
-   print 'Use: "./Ginp.py name_of_Ginp_input_file"'
+   print 'Use: "./Gout.py name_of_Gout_input_file"'
    print
 elif lsa==2:
-   GI_input_fname=h=sys.argv[1]
+   GO_input_fname=h=sys.argv[1]
 
-pf_run(GI_input_fname)
+pf_run(GO_input_fname)
