@@ -21,12 +21,17 @@ Enter: a, b, or c.\n''' )
 
 if ( property_type == "a" ) :
     property_type = 'bond'
+    perameterize = "bond length"
 elif ( property_type == "b" ) :
     property_type = 'angl'
+    perameterize = "bond angle"
 elif ( property_type == "c" ) :
     property_type = 'diha'
+    perameterize = "torsion angle"
 else :
+    print "The default, torsion angle, was chosen."
     property_type = 'diha'
+    perameterize = "torsion angle"
 
 # --- Create GAMESS input files or use existing energy/geometry data. ---
 runtyp = raw_input( '''Choose from the scenarios below:
