@@ -9,11 +9,9 @@ else :
     pyout == pyout
 
 # --- Open the file for writing ---
-
-f = open(pyout,'w')   # ................................................  open a file for writing ('w')
+f = open(pyout,'w')  
 
 # --- Create GAMESS input files or use existing energy/geometry data. ---
-
 runtyp = raw_input( '''Choose from the scenarios below:
 (a) I have compact file that includes all of the geometry and energy information
     for the torsion angles described above.
@@ -79,18 +77,6 @@ elif ( runtyp == 'comp' or 'full' ) :
 # --- Get engine path ---
 
     engine_path = raw_input( "\nWhat is the full engine.exe path?\n" )
-
-# --- Identify and format the double bonds found in the molecule ---
-#
-#    n= int( raw_input( "\nNumber of double bonds in the molecule:\n" ) ) # take input and convert to an integer
-#    print "\nEnter the pair of atoms making up the double bonds.\nFor multiple double bonds, enter the atom numbers pairwise, #pressing return after each pair of atoms.\n"
-#    formatDblBndStr = ""
-#    for i in range( n ) :     # ........................................... loop prints comma separated pairs of integers designating #atom pairs forming double bonds.
-#           DblBndA,DblBndB = raw_input().split()     # .................... split input (pair of integers) into two strings
-#           DblBndA,DblBndB = int( DblBndA ),int( DblBndB )    # ........... convert the string values to integers
-#           formatDblBndStrElem="{0} {1}, "              # ................. format integers into a comma separated values
-#           formatDblBndStr += formatDblBndStrElem.format( DblBndA , DblBndB )
-#    Double_bonds = formatDblBndStr[:-2]
 
 # --- Determine the type of MM file that is to be modified ---
 
