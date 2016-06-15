@@ -11,6 +11,23 @@ else :
 # --- Open the file for writing ---
 f = open(pyout,'w')  
 
+# Select the parameter type, bond length, bond angle, torsion.
+property_type = raw_input( '''Choose from the properties below:
+(a) bond length
+(b) bond angle
+(c) torsion (default)
+    \n
+Enter: a, b, or c.\n''' ) 
+
+if ( property_type == "a" ) :
+    property_type = 'bond'
+elif ( property_type == "b" ) :
+    property_type = 'angl'
+elif ( property_type == "c" ) :
+    property_type = 'diha'
+else :
+    property_type = 'diha'
+
 # --- Create GAMESS input files or use existing energy/geometry data. ---
 runtyp = raw_input( '''Choose from the scenarios below:
 (a) I have compact file that includes all of the geometry and energy information
