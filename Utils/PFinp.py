@@ -48,7 +48,7 @@ else :
 if ( property_type == "diha" ) :
     no_torsions = int( raw_input( ''' How many torisions are to be fit?\n''' ) )
     print >> f, "mult, ", no_torsions
-    for n in range( 1, no_torsions ) :
+    for n in range( 0, no_torsions ) :
 # --- Create GAMESS input files or use existing energy/geometry data. ---
         qmdatachoice = raw_input( '''Choose from the scenarios below:
         (a) I have compact file that includes all of the geometry and energy information
