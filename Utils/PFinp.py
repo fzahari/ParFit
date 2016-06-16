@@ -46,11 +46,11 @@ else :
 
 # Multiple dihedral angle file fitting.
 if ( property_type == "diha" ) :
-    no_torsions = int( raw_input( ''' How many torisions are to be fit?''' ) )
+    no_torsions = int( raw_input( ''' How many torisions are to be fit?\n''' ) )
     print >> f, "mult, ", no_torsions
     for n in range( 1, no_torsions ) :
 # --- Create GAMESS input files or use existing energy/geometry data. ---
-        runtyp = raw_input( '''Choose from the scenarios below:
+        qmdatachoice = raw_input( '''Choose from the scenarios below:
         (a) I have compact file that includes all of the geometry and energy information
             for the torsion angles described above.
         (b) I have a GAMESS output file for each torsion angles in the range described above.
