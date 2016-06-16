@@ -15,9 +15,11 @@
 
 pyout = raw_input( "Enter the name of ParFit input file to create, if blank, the file name will be PFinput.\n" )
 if ( pyout == "" ) :
-    pyout = "PFinp"
+    pyout = "PFinput"
+    print "[PFinp]: Input filename:", pyout, "\n"
 else :
     pyout == pyout
+    print "[PFinp]: Input filename:", pyout, "\n"
 
 # --- Open the file for writing ---
 f = open(pyout,'w')
