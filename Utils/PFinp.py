@@ -8,6 +8,7 @@
 #  2. For values that are not known, the program will leave a place holder that a
 #     user can then change using a text editor.
 #  3. Add option to change two or three parameters per line.
+#  4. Add new parameter fitting options, bond length, bond angle.
 #
 
 # --- Determine ParFit input file name ---
@@ -19,7 +20,7 @@ else :
     pyout == pyout
 
 # --- Open the file for writing ---
-f = open(pyout,'w')  
+f = open(pyout,'w')
 
 # Select the parameter type, bond length, bond angle, torsion.
 property_type = raw_input( '''Choose from the properties below:
@@ -27,58 +28,67 @@ property_type = raw_input( '''Choose from the properties below:
 (b) bond angle
 (c) torsion (default)
     \n
-Enter: a, b, or c.\n''' ) 
+Enter: a, b, or c.\n''' )
 
 if ( property_type == "a" ) :
     property_type = 'bond'
-    perameterize = "bond length"
+    parameterize = "bond length"
 elif ( property_type == "b" ) :
     property_type = 'angl'
-    perameterize = "bond angle"
+    parameterize = "bond angle"
 elif ( property_type == "c" ) :
     property_type = 'diha'
-    perameterize = "torsion angle"
+    parameterize = "torsion angle"
 else :
     print "The default, torsion angle, was chosen."
     property_type = 'diha'
-    perameterize = "torsion angle"
+    parameterize = "torsion angle"
 
+# Multiple dihedral angle file fitting.
+if ( property_type == "diha" ) :
+    no_torsions = int( raw_input( ''' How many torisions are to be fit?''' ) )
+    print >> f, "mult, ", no_torsions
+    for n in range( 1, no_torsions ) :
 # --- Create GAMESS input files or use existing energy/geometry data. ---
-runtyp = raw_input( '''Choose from the scenarios below:
-(a) I have compact file that includes all of the geometry and energy information
-    for the torsion angles described above.
-(b) I have a GAMESS output file for each torsion angles in the range described above.
-    \n
-Enter: a or b. Default is a.\n''' )
-    if ( qmdatachoice == "a" ) :
-        qmdata = 'comp'
-        filenameroot = raw_input("\nEnter the root file name. It should match the name of the\ncompact file containing energies and geometries, minus the word 'scan'.\n" )
-    elif ( qmdatachoice == "b" ) :
-        qmdata = 'full'
-        filenameroot = raw_input("\nEnter the root file name. It should match the root file\nname of your GAMESS log files minus '***.log' where *** is an angle.\n" )
-    else :
-        qmdata = 'comp'
-        filenameroot = raw_input("\nEnter the root file name. It should match the name of the\ncompact file containing energies and geometries, minus the word 'scan'.\n" )
+        runtyp = raw_input( '''Choose from the scenarios below:
+        (a) I have compact file that includes all of the geometry and energy information
+            for the torsion angles described above.
+        (b) I have a GAMESS output file for each torsion angles in the range described above.
+            \n
+        Enter: a or b. Default is a.\n''' )
+        if ( qmdatachoice == "a" ) :
+            qmdata = 'comp'
+            filenameroot = raw_input("\nEnter the root file name. It should match the name of the\ncompact file containing energies and geometries, minus the word 'scan'.\n" )
+        elif ( qmdatachoice == "b" ) :
+            qmdata = 'full'
+            filenameroot = raw_input("\nEnter the root file name. It should match the root file\nname of your GAMESS log files minus '***.log' where *** is an angle.\n" )
+        else :
+                qmdata = 'comp'
+                filenameroot = raw_input("\nEnter the root file name. It should match the name of the\ncompact file containing energies and geometries, minus the word 'scan'.\n" )
 
 # --- Description of Molecule and Rotation used for the Fit ---
 
-    torsion = raw_input( "What are the indices of the four atoms creating the dihedral angle to be fit?\n" )
-    TorInit = raw_input( "What is the initial torsion angle? \nFor the default of 0 degrees, press enter.\n" )
-    if ( TorInit == "" ) :
-        TorInit = "0"
-    else :
-        TorInit = TorInit
-    TorFin  = raw_input( "What is the final torsion angle?\n" )
-    TorStep = raw_input( "What is the angle step size?\nFor the default of 5 degrees, press enter.\n" )
-    if ( TorStep == "" ) :
-        TorStep = "5"
-    else :
-        TorStep = TorStep
-    print >> f, "{0}, {1}, {2}, {3} {4} {5}".format( qmdata , filenameroot , torsion , TorInit , TorFin , TorStep )
+        torsion = raw_input( "What are the indices of the four atoms creating the dihedral angle to be fit?\n" )
+        TorInit = raw_input( "What is the initial torsion angle? \nFor the default of 0 degrees, press enter.\n" )
+        if ( TorInit == "" ) :
+            TorInit = "0"
+        else :
+            TorInit = TorInit
+        TorFin  = raw_input( "What is the final torsion angle?\n" )
+        TorStep = raw_input( "What is the angle step size?\nFor the default of 5 degrees, press enter.\n" )
+        if ( TorStep == "" ) :
+            TorStep = "5"
+        else :
+            TorStep = TorStep
+        print >> f, "{0}, {1}, {2}, {3} {4} {5}".format( qmdata , filenameroot , torsion , TorInit , TorFin , TorStep )
+
+# if not running a bond length/angle run, use this path.
+else :
+    print "You have chosen to create an input file for a", parameterize ,"."
 
 # --- Get engine path ---
 
-    engine_path = raw_input( "\nWhat is the full engine.exe path?\n" )
+engine_path = raw_input( "\nWhat is the full engine.exe path?\n" )
 
 # --- Determine the type of MM file that is to be modified ---
 
