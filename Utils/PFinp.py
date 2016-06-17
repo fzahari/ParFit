@@ -47,7 +47,13 @@ else :
     parameterize = "torsion angle"
 
 # Multiple dihedral angle file fitting.
-if ( property_type == "diha" ) :
+if ( property_type == "bond" ) :
+############# insert making an input file for a bond parameter fitting
+    print "Place holder for bond parameter fitting."
+elif ( property_type == "angl" ):
+############# insert making an input file for a bond parameter fitting
+    print "Place holder for bond parameter fitting."
+elif ( property_type == "diha" ) :
     no_torsions = int( raw_input( ''' How many torisions are to be fit?\n''' ) )
     print >> f, "mult, ", no_torsions
     for n in range( 0, no_torsions ) :
@@ -86,7 +92,7 @@ if ( property_type == "diha" ) :
 
 # if not running a bond length/angle run, use this path.
 else :
-    print "You have chosen to create an input file for a", parameterize ,"."
+    print "[PFinp] Error: You have not properly chosen a property to parameterize."
 
 # --- Get engine path ---
 
