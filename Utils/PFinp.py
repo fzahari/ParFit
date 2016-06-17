@@ -77,7 +77,7 @@ elif ( property_type == "diha" ) :
     print >> f, "mult, ", no_torsions
     for n in range( 0, no_torsions ) :
         qmdata_prompt()
-        qmdata = quantumdata( qmdatachoice = raw_input() )
+        qm_file_properties = quantumdata( qmdatachoice = raw_input() )
 
 # --- Description of Molecule and Rotation used for the Fit ---
 
@@ -93,7 +93,7 @@ elif ( property_type == "diha" ) :
             TorStep = "5"
         else :
             TorStep = TorStep
-        print >> f, "{0}, {1}, {2} {3} {4}".format( qmdata , torsion , TorInit , TorFin , TorStep )
+        print >> f, "{0}, {1}, {2} {3} {4}".format( qm_file_properties , torsion , TorInit , TorFin , TorStep )
 
 # if not running a bond length/angle run, use this path.
 else :
