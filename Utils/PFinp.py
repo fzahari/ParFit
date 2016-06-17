@@ -11,6 +11,23 @@
 #  4. Add new parameter fitting options, bond length, bond angle.
 #
 
+# --- Functions ---
+def quantumdata() :
+    print "Choose the QM data format:"
+    print "\t(a) Compact: one file that includes fixed torsion angle geometries."
+    print "\t(b) Series: GAMESS log files, one for each fixed torsion angle geometry."
+    qmdatachoice = raw_input( "Enter: a or b. Default is a.\n" )
+    if ( qmdatachoice == "a" ) :
+        qmdata = 'comp'
+        filenameroot = raw_input( '''\nEnter the root file name. It should match the name of the compact file containing energies and geometries, minus the word 'scan'.\n''' )
+    elif ( qmdatachoice == "b" ) :
+        qmdata = 'full'
+        filenameroot = raw_input('''\nEnter the root file name. It should match the root file name of your GAMESS log files minus '***.log' where *** is an angle.\n''' )
+    else :
+        qmdata = 'comp'
+        filenameroot = raw_input('''\nEnter the root file name. It should match the name of
+the compact file containing energies and geometries, minus the word 'scan'.\n''' )
+
 # --- Determine ParFit input file name ---
 
 pyout = raw_input( "Enter the name of ParFit input file to create, if blank, the file name will be PFinput.\n" )
