@@ -24,6 +24,12 @@ def quantumdata( qmdatachoice ) :
         filenameroot = raw_input('''\nSelected default. Enter the root file name of the compact file containing the QM data.\n''' )
     return qmdata + " , " + filenameroot
 
+def qmdata_prompt():
+    print "Choose the QM data format:"
+    print "\t(a) Compact: one file that includes fixed bond lengths, bond angles, or torsion angle geometries."
+    print "\t(b) Series: GAMESS log files, one for each fixed bond length, bond angle, or torsion angle geometry."
+    print "Enter: a or b. Default is a.\n"
+
 # --- Determine ParFit input file name ---
 
 pyout = raw_input( "Enter the name of ParFit input file to create, if blank, the file name will be PFinput.\n" )
@@ -70,10 +76,8 @@ elif ( property_type == "diha" ) :
     no_torsions = int( raw_input( ''' How many torisions are to be fit?\n''' ) )
     print >> f, "mult, ", no_torsions
     for n in range( 0, no_torsions ) :
-        print "Choose the QM data format:"
-        print "\t(a) Compact: one file that includes fixed torsion angle geometries."
-        print "\t(b) Series: GAMESS log files, one for each fixed torsion angle geometry."
-        qmdata = quantumdata( qmdatachoice = raw_input( "Enter: a or b. Default is a.\n" ) )
+        qmdata_prompt()
+        qmdata = quantumdata( qmdatachoice = raw_input() )
 
 # --- Description of Molecule and Rotation used for the Fit ---
 
