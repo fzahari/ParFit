@@ -15,14 +15,13 @@
 def quantumdata( qmdatachoice ) :
     if ( qmdatachoice == "a" ) :
         qmdata = 'comp'
-        filenameroot = raw_input( '''\nEnter the root file name. It should match the name of the compact file containing energies and geometries, minus the word 'scan'.\n''' )
+        filenameroot = raw_input( '''\nEnter the root file name of the compact file containing the QM data.\n''' )
     elif ( qmdatachoice == "b" ) :
         qmdata = 'full'
-        filenameroot = raw_input('''\nEnter the root file name. It should match the root file name of your GAMESS log files minus '***.log' where *** is an angle.\n''' )
+        filenameroot = raw_input('''\nEnter the root file name of the series of files containing the QM data.\n''' )
     else :
         qmdata = 'comp'
-        filenameroot = raw_input('''\nEnter the root file name. It should match the name of
-the compact file containing energies and geometries, minus the word 'scan'.\n''' )
+        filenameroot = raw_input('''\nSelected default. Enter the root file name of the compact file containing the QM data.\n''' )
     return qmdata + " , " + filenameroot
 
 # --- Determine ParFit input file name ---
