@@ -12,11 +12,7 @@
 #
 
 # --- Functions ---
-def quantumdata() :
-    print "Choose the QM data format:"
-    print "\t(a) Compact: one file that includes fixed torsion angle geometries."
-    print "\t(b) Series: GAMESS log files, one for each fixed torsion angle geometry."
-    qmdatachoice = raw_input( "Enter: a or b. Default is a.\n" )
+def quantumdata( qmdatachoice ) :
     if ( qmdatachoice == "a" ) :
         qmdata = 'comp'
         filenameroot = raw_input( '''\nEnter the root file name. It should match the name of the compact file containing energies and geometries, minus the word 'scan'.\n''' )
@@ -27,6 +23,7 @@ def quantumdata() :
         qmdata = 'comp'
         filenameroot = raw_input('''\nEnter the root file name. It should match the name of
 the compact file containing energies and geometries, minus the word 'scan'.\n''' )
+    return qmdata + " , " + filenameroot
 
 # --- Determine ParFit input file name ---
 
@@ -74,22 +71,10 @@ elif ( property_type == "diha" ) :
     no_torsions = int( raw_input( ''' How many torisions are to be fit?\n''' ) )
     print >> f, "mult, ", no_torsions
     for n in range( 0, no_torsions ) :
-# --- Create GAMESS input files or use existing energy/geometry data. ---
-        qmdatachoice = raw_input( '''Choose from the scenarios below:
-        (a) I have compact file that includes all of the geometry and energy information
-            for the torsion angles described above.
-        (b) I have a GAMESS output file for each torsion angles in the range described above.
-            \n
-        Enter: a or b. Default is a.\n''' )
-        if ( qmdatachoice == "a" ) :
-            qmdata = 'comp'
-            filenameroot = raw_input("\nEnter the root file name. It should match the name of the\ncompact file containing energies and geometries, minus the word 'scan'.\n" )
-        elif ( qmdatachoice == "b" ) :
-            qmdata = 'full'
-            filenameroot = raw_input("\nEnter the root file name. It should match the root file\nname of your GAMESS log files minus '***.log' where *** is an angle.\n" )
-        else :
-                qmdata = 'comp'
-                filenameroot = raw_input("\nEnter the root file name. It should match the name of the\ncompact file containing energies and geometries, minus the word 'scan'.\n" )
+        print "Choose the QM data format:"
+        print "\t(a) Compact: one file that includes fixed torsion angle geometries."
+        print "\t(b) Series: GAMESS log files, one for each fixed torsion angle geometry."
+        qmdata = quantumdata( qmdatachoice = raw_input( "Enter: a or b. Default is a.\n" ) )
 
 # --- Description of Molecule and Rotation used for the Fit ---
 
@@ -105,7 +90,7 @@ elif ( property_type == "diha" ) :
             TorStep = "5"
         else :
             TorStep = TorStep
-        print >> f, "{0}, {1}, {2}, {3} {4} {5}".format( qmdata , filenameroot , torsion , TorInit , TorFin , TorStep )
+        print >> f, "{0}, {1}, {2} {3} {4}".format( qmdata , torsion , TorInit , TorFin , TorStep )
 
 # if not running a bond length/angle run, use this path.
 else :
