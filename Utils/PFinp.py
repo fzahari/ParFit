@@ -26,8 +26,8 @@ def quantumdata( qmdatachoice ) :
 
 def qmdata_prompt():
     print "Choose the QM data format:"
-    print "\t(a) Compact: one file that includes fixed bond lengths, bond angles, or torsion angle geometries."
-    print "\t(b) Series: GAMESS log files, one for each fixed bond length, bond angle, or torsion angle geometry."
+    print "(a) Compact: one file that includes fixed bond lengths, bond angles, \n    or torsion angle geometries."
+    print "(b) Series: GAMESS log files, one for each fixed bond length, bond angle,\n    or torsion angle geometry."
     print "Enter: a or b. Default is a.\n"
 
 # --- Determine ParFit input file name ---
@@ -67,11 +67,11 @@ else :
 
 # Multiple dihedral angle file fitting.
 if ( property_type == "bond" ) :
-############# insert making an input file for a bond parameter fitting
-    print "Place holder for bond parameter fitting."
+    qmdata_prompt()
+    qm_file_properties = quantumdata( qmdatachoice = raw_input() )
 elif ( property_type == "angl" ):
-############# insert making an input file for a bond parameter fitting
-    print "Place holder for bond parameter fitting."
+    qmdata_prompt()
+    qm_file_properties = quantumdata( qmdatachoice = raw_input() )
 elif ( property_type == "diha" ) :
     no_torsions = int( raw_input( ''' How many torisions are to be fit?\n''' ) )
     print >> f, "mult, ", no_torsions
