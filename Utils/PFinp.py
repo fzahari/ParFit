@@ -80,12 +80,12 @@ if ( property_type == "bond" ) :
     qmdata_prompt()
     qm_f_properties = quantumdata( qmdatachoice = raw_input() )
     PES_properties = PES_coordinate()
-    print >> f, "{0}, {1}, {2} {3} {4}".format( qm_f_properties , PES_properties )
+    print >> f, "{0}, {1}".format( qm_f_properties , PES_properties )
 elif ( property_type == "angl" ):
     qmdata_prompt()
     qm_f_properties = quantumdata( qmdatachoice = raw_input() )
     PES_properties = PES_coordinate()
-    print >> f, "{0}, {1}, {2} {3} {4}".format( qm_f_properties , PES_properties )
+    print >> f, "{0}, {1}".format( qm_f_properties , PES_properties )
 elif ( property_type == "diha" ) :
     no_torsions = int( raw_input( ''' How many torisions are to be fit?\n''' ) )
     print >> f, "mult, ", no_torsions
@@ -93,7 +93,7 @@ elif ( property_type == "diha" ) :
         qmdata_prompt()
         qm_f_properties = quantumdata( qmdatachoice = raw_input() )
         PES_properties = PES_coordinate()
-        print >> f, "{0}, {1}, {2} {3} {4}".format( qm_f_properties , PES_properties )
+        print >> f, "{0}, {1}".format( qm_f_properties , PES_properties )
 
 # if not running a bond length/angle run, use this path.
 else :
