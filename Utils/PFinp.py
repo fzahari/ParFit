@@ -12,6 +12,16 @@
 #
 
 # --- Functions ---
+def PES_coordinate():
+    print "In the following prompts, enter the atom indices making up the"
+    print "bond length, bond angle, or torsion angle measured in angstroms"
+    print "and degrees."
+    atom_indices = raw_input( "Enter atom indices separated by a space.\n" )
+    i_coord = raw_input( "Enter the initial length or angle.\n" )
+    f_coord  = raw_input( "Enter the final length or angle.\n" )
+    coord_s = raw_input( "Enter the lenght or angle step size.\n")
+    return "{0}, {1} {2} {3}".format( atom_indices , i_coord , f_coord , coord_s )
+
 def quantumdata( qmdatachoice ) :
     if ( qmdatachoice == "a" ) :
         qmdata = 'comp'
@@ -68,32 +78,22 @@ else :
 # Multiple dihedral angle file fitting.
 if ( property_type == "bond" ) :
     qmdata_prompt()
-    qm_file_properties = quantumdata( qmdatachoice = raw_input() )
+    qm_f_properties = quantumdata( qmdatachoice = raw_input() )
+    PES_properties = PES_coordinate()
+    print >> f, "{0}, {1}, {2} {3} {4}".format( qm_f_properties , PES_properties )
 elif ( property_type == "angl" ):
     qmdata_prompt()
-    qm_file_properties = quantumdata( qmdatachoice = raw_input() )
+    qm_f_properties = quantumdata( qmdatachoice = raw_input() )
+    PES_properties = PES_coordinate()
+    print >> f, "{0}, {1}, {2} {3} {4}".format( qm_f_properties , PES_properties )
 elif ( property_type == "diha" ) :
     no_torsions = int( raw_input( ''' How many torisions are to be fit?\n''' ) )
     print >> f, "mult, ", no_torsions
     for n in range( 0, no_torsions ) :
         qmdata_prompt()
-        qm_file_properties = quantumdata( qmdatachoice = raw_input() )
-
-# --- Description of Molecule and Rotation used for the Fit ---
-
-        torsion = raw_input( "What are the indices of the four atoms creating the dihedral angle to be fit?\n" )
-        TorInit = raw_input( "What is the initial torsion angle? \nFor the default of 0 degrees, press enter.\n" )
-        if ( TorInit == "" ) :
-            TorInit = "0"
-        else :
-            TorInit = TorInit
-        TorFin  = raw_input( "What is the final torsion angle?\n" )
-        TorStep = raw_input( "What is the angle step size?\nFor the default of 5 degrees, press enter.\n" )
-        if ( TorStep == "" ) :
-            TorStep = "5"
-        else :
-            TorStep = TorStep
-        print >> f, "{0}, {1}, {2} {3} {4}".format( qm_file_properties , torsion , TorInit , TorFin , TorStep )
+        qm_f_properties = quantumdata( qmdatachoice = raw_input() )
+        PES_properties = PES_coordinate()
+        print >> f, "{0}, {1}, {2} {3} {4}".format( qm_f_properties , PES_properties )
 
 # if not running a bond length/angle run, use this path.
 else :
