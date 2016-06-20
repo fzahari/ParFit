@@ -13,9 +13,8 @@
 
 # --- Functions ---
 def PES_coordinate():
-    print "In the following prompts, enter the atom indices making up the"
-    print "bond length, bond angle, or torsion angle measured in angstroms"
-    print "and degrees."
+    print "In the following prompts, enter the potential energy surface"
+    print "information."
     atom_indices = raw_input( "Enter atom indices separated by a space.\n" )
     i_coord = raw_input( "Enter the initial length or angle.\n" )
     f_coord  = raw_input( "Enter the final length or angle.\n" )
