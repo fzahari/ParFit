@@ -42,7 +42,7 @@ def qmdata_prompt():
 
 def parameter_lines( PEStype , no_PESs ):
     if PEStype == "diha" :
-        no_of_parameter_lines = no_torsions
+        no_of_parameter_lines = no_PESs
         p_list_len = no_of_parameter_lines * 4
         list_params = [ None ] * p_list_len
         for m in range( 0 , p_list_len , 4 ) :
