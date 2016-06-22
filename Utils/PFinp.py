@@ -40,7 +40,7 @@ def qmdata_prompt():
     print "(b) Series: GAMESS log files, one for each fixed bond length, bond angle,\n    or torsion angle geometry."
     print "Enter: a or b. Default is a.\n"
 
-def parameter_lines( PEStype , no_torsions ):
+def parameter_lines( PEStype , no_PESs ):
     if PEStype == "diha" :
         no_of_parameter_lines = no_torsions
         p_list_len = no_of_parameter_lines * 4
@@ -113,14 +113,14 @@ else :
     parameterize = "torsion angle"
 
 # --- Multiple dihedral angle file fitting. ---
-if ( property_type == "bond" ) :
+if ( property_type == "bond" or "angle" ) :
     qmdata_prompt()
     qm_file_properties = quantumdata( qmdatachoice = raw_input() )
     no_PESs = 1
-elif ( property_type == "angl" ):
-    qmdata_prompt()
-    qm_file_properties = quantumdata( qmdatachoice = raw_input() )
-    no_PESs = 1
+#elif ( property_type == "angl" ):
+#    qmdata_prompt()
+#    qm_file_properties = quantumdata( qmdatachoice = raw_input() )
+#    no_PESs = 1
 elif ( property_type == "diha" ) :
     no_PESs = int( raw_input( "Enter the number of PESs to be fit.\n" ) )
     print >> f, "mult, ", no_PESs
@@ -135,7 +135,7 @@ else :
     print "[PFinp] Error: You have not properly chosen a property to parameterize."
 
 # --- Determine which parameters will be changed by ParFit ---
-parameter_lines( property_type , no_torsions )
+parameter_lines( property_type , no_PESs )
 
 # --- Get engine path ---
 engine_path = raw_input( "\nWhat is the full engine.exe path?\n" )
@@ -151,7 +151,6 @@ elif ( mmtypchoice == 'b' ) :
 else :
     mmtyp = 'mm3'
     print "\nWarning: Check the MM type you entered, the only options are a and b. Default will be chosen.\n"
-print >> f, mmtyp
 
 # --- Choose the algorithm used to fit parameters. ---
 print "\nPlease choose from the following options for algorithm to be used."
@@ -168,7 +167,6 @@ elif ( alg == 'c' ) :
 else :
    alg = 'hybr'
    print "Default was chosen."
-print >> f, alg
 
 # --- Printing csv file option ---
 printcsv = raw_input( "\nEnter \"n\" if you do NOT want ParFit to print a csv format file\ncontaining the angles, QM energy, and the optmized MM energies.\n" )
@@ -176,6 +174,10 @@ if ( printcsv == 'n') :
     csv = "csv_off"
 else :
     csv = "csv_on"
+
+print >> f, engine_path
+print >> f, mmtyp
+print >> f, alg
 print >> f, csv
 
 print "\nYour ParFit input file name {0} has been generated.\n".format( pyout )
