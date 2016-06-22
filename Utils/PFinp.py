@@ -11,6 +11,7 @@
 #  4. Add new parameter fitting options, bond length, bond angle.
 #
 
+###########################################################################################################
 # --- Functions ---
 def PES_coordinate():
     print "In the following prompts, enter the potential energy surface"
@@ -39,6 +40,43 @@ def qmdata_prompt():
     print "(b) Series: GAMESS log files, one for each fixed bond length, bond angle,\n    or torsion angle geometry."
     print "Enter: a or b. Default is a.\n"
 
+def parameter_lines( PEStype , no_torsions ):
+    if PEStype == "diha" :
+        no_of_parameter_lines = no_torsions
+        p_list_len = no_of_parameter_lines * 4
+        list_params = [ None ] * p_list_len
+        for m in range( 0 , p_list_len , 4 ) :
+            list_params[ m ]= raw_input( "Enter parameter line number for the dihedral to be fit. " )
+            for i in range( 1, 4 ) :
+                c_or_p = raw_input( "Enter 'p' if Line " + list_params[ m ] + " V" +
+                        str( i ) + " should be varied during ParFit run. " )
+                if c_or_p == "p" :
+                    c_or_p = "p"
+                else :
+                    c_or_p = "c"
+                list_params[ m + i ] = c_or_p
+        i = raw_input( "How many pairs of parameters are coupled? [0] " )
+        if i == "" :
+            i = 0
+        else :
+            i = int( i )
+            print( "Please identify the coupled parameters by giving the line numbers \n" +
+                    "and parameter (1, 2 or 3 for V1, V2 and V3) " +
+                    "in the following format: \n" +
+                    "\t[line number] [line number] [parameter number] " )
+        for n in range( i ) :
+            q, r, s = str.split( raw_input( "Enter the line and parameter numbers. " ) )
+            q_index = int( list_params.index( q ) )
+            r_index = int( list_params.index( r ) )
+            s = int( s )
+            list_params[ q_index + s ] = list_params[ r_index + s ] = "p" + str( n + 1 )
+    else :
+        m = raw_input( "Enter parameter line number of the parameters to be fit. " )
+        list_params = m + " p p"
+    return list_params
+###########################################################################################################
+###########################################################################################################
+
 # --- Determine ParFit input file name ---
 
 pyout = raw_input( "Enter the name of ParFit input file to create, if blank, the file name will be PFinput.\n" )
@@ -52,7 +90,7 @@ else :
 # --- Open the file for writing ---
 f = open(pyout,'w')
 
-# Select the parameter type, bond length, bond angle, torsion.
+# --- Select the parameter type, bond length, bond angle, torsion. ---
 property_type = raw_input( '''Choose from the properties below:
 (a) bond length
 (b) bond angle
@@ -74,7 +112,7 @@ else :
     property_type = 'diha'
     parameterize = "torsion angle"
 
-# Multiple dihedral angle file fitting.
+# --- Multiple dihedral angle file fitting. ---
 if ( property_type == "bond" ) :
     qmdata_prompt()
     qm_f_properties = quantumdata( qmdatachoice = raw_input() )
@@ -98,12 +136,13 @@ elif ( property_type == "diha" ) :
 else :
     print "[PFinp] Error: You have not properly chosen a property to parameterize."
 
-# --- Get engine path ---
+# --- Determine which parameters will be changed by ParFit ---
+parameter_lines( property_type , no_torsions )
 
+# --- Get engine path ---
 engine_path = raw_input( "\nWhat is the full engine.exe path?\n" )
 
 # --- Determine the type of MM file that is to be modified ---
-
 mmtypchoice = raw_input( "\nChoose the MM type (mm3 or mmff94) parameters to be fit\n(a) MM3 - default\n(b) MMFF94\nChoose a or b.\n" )
 if ( mmtypchoice == 'a' ) :
     carbontyp = 50
@@ -117,7 +156,6 @@ else :
 print >> f, mmtyp
 
 # --- Choose the algorithm used to fit parameters. ---
-
 print "\nPlease choose from the following options for algorithm to be used."
 print "(a) genetic algorithm"
 print "(b) Nedler-Mead algorithm"
@@ -134,27 +172,7 @@ else :
    print "Default was chosen."
 print >> f, alg
 
-# --- Determine which parameters will be changed by ParFit ---
-
-print "\nNow you will be prompted to enter the line numbers that contain the parameters to be fit.\n"
-m = int( raw_input( "\nHow many parameters in add_{0}.prm are to be fit?\n".format( mmtyp ) ) )
-print "\nYou have {0} parameters to fit. When prompted, please enter each line number followed by the parameter designation.\n".format( m )
-prm_lines = ""
-for i in range( m ) :
-    line_no = raw_input( "\nLine number:\n" )
-    var_param = raw_input( "\nWhich parameter in line {0} is to be fit?\n\t(a) first\n\t(b) second\n\t(c) third\n".format( line_no ) )
-    if ( var_param == 'a' ) :
-        param = "p c c"
-    elif ( var_param == 'b' ) :
-        param = "c p c"
-    elif ( var_param == 'c' ) :
-        param = "c c p"
-    else :
-        print "\nWarning: check the parameter in line {0} that should be fit.\n".format( line_no )
-    print >> f, "{0} {1}".format( line_no , param )
-
 # --- Printing csv file option ---
-
 printcsv = raw_input( "\nEnter \"n\" if you do NOT want ParFit to print a csv format file\ncontaining the angles, QM energy, and the optmized MM energies.\n" )
 if ( printcsv == 'n') :
     csv = "csv_off"
@@ -163,4 +181,5 @@ else :
 print >> f, csv
 
 print "\nYour ParFit input file name {0} has been generated.\n".format( pyout )
+
 exit()
