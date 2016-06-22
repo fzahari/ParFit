@@ -135,7 +135,7 @@ else :
     print "[PFinp] Error: You have not properly chosen a property to parameterize."
 
 # --- Determine which parameters will be changed by ParFit ---
-parameter_lines( property_type , no_PESs )
+list_params = parameter_lines( property_type , no_PESs )
 
 # --- Get engine path ---
 engine_path = raw_input( "\nWhat is the full engine.exe path?\n" )
@@ -178,6 +178,9 @@ else :
 print >> f, engine_path
 print >> f, mmtyp
 print >> f, alg
+for i in range( 0, no_PESs, 4):
+    parameters = str(list_params[i]) + " " + list_params[ i + 1 ] + " " + list_params[ i + 2 ]
+    print >> f, parameters
 print >> f, csv
 
 print "\nYour ParFit input file name {0} has been generated.\n".format( pyout )
