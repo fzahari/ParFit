@@ -31,7 +31,7 @@ def quantumdata( qmdatachoice ) :
         qmdata = 'full'
         print "Selected full; a series of files contain QM data."
         filenameroot = raw_input( "Enter the root filename. " )
-    return qmdata + " , " + filenameroot
+    return qmdata, filenameroot
 
 def qmdata_prompt():
     print( "<< QM data file format >>\n" +
@@ -128,9 +128,10 @@ elif ( property_type == "diha" ) :
     print >> f, "mult, ", no_PESs
     for n in range( 0, no_PESs ) :
         qmdata_prompt()
-        qm_f_properties = quantumdata( qmdatachoice = raw_input() )
-        PES_properties = PES_coordinate()
-        print >> f, "{0}, {1}".format( qm_f_properties , PES_properties )
+        qm_f_properties =  quantumdata( qmdatachoice = raw_input() )
+        print qm_f_properties
+        if (qm_f_properties[0] != "comp") :
+            PES_properties = PES_coordinate()
 
 # if not running a bond length/angle run, use this path.
 else :
