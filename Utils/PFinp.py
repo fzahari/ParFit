@@ -114,7 +114,7 @@ else :
     parameterize = "torsion angle"
 
 # --- Multiple dihedral angle file fitting. ---
-if ( property_type == "bond" or "angle" ) :
+if ( property_type == "bond" or "angl" ) :
     qmdata_prompt()
     qm_file_properties = quantumdata( qmdatachoice = raw_input() )
     no_PESs = 1
