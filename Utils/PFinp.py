@@ -14,8 +14,8 @@
 ####################################################################################
 # --- Functions ---
 def PES_coordinate():
-    print "In the following prompts, enter the potential energy surface"
-    print "information."
+    print( "The following prompts define the variables used to generate" +
+           "the QM PESs." )
     atom_indices = raw_input( "Enter atom indices separated by a space.\n" )
     i_coord = raw_input( "Enter the initial length or angle.\n" )
     f_coord  = raw_input( "Enter the final length or angle.\n" )
@@ -34,10 +34,12 @@ def quantumdata( qmdatachoice ) :
     return qmdata + " , " + filenameroot
 
 def qmdata_prompt():
-    print "Choose the QM data file format:"
-    print "(a) Compact: one file that includes fixed bond lengths, bond angles, \n    or torsion angle geometries."
-    print "(b) Series: GAMESS log files, one for each fixed bond length, bond angle,\n    or torsion angle geometry."
-    print "Enter: a or b. Default is a.\n"
+    print( "<< QM data file format >>\n" +
+           "(a) Compact: QM data is contained in one file that includes fixed\n" +
+           "    bond lengths, bond angles, or torsion angle geometries.\n" +
+           "(b) Series: GAMESS log files, one for each fixed bond length,\n" +
+           "    bond angle, or torsion angle geometry.\n" +
+           "Enter: a or b. [a]" )
 
 def parameter_lines( PEStype , no_PESs ):
     if PEStype == "diha" :
@@ -150,14 +152,15 @@ elif ( mmtypchoice == 'b' ) :
     mmtyp = 'mmff94'
 else :
     mmtyp = 'mm3'
-    print "\nWarning: Check the MM type you entered, the only options are a and b. Default will be chosen.\n"
+    print( "Warning: Check the MM type you entered, the only options are a and b.\n" +
+           "Default will be chosen." )
 
 # --- Choose the algorithm used to fit parameters. ---
-print "\nPlease choose from the following options for algorithm to be used."
-print "(a) genetic algorithm"
-print "(b) Nedler-Mead algorithm"
-print "(c) hybrid: genetic followed by Nedler-Mead algorithm - default"
-alg = raw_input("For default, just press enter.\n")
+print( "<< Fitting alorithms >>\n" +
+       "(a) genetic algorithm\n" +
+       "(b) Nedler-Mead algorithm\n" +
+       "(c) hybrid: genetic followed by Nedler-Mead algorithm\n" )
+alg = raw_input("Select a, b, or c. [c] ")
 if ( alg == 'a' ) :
     alg = 'ga'
 elif ( alg == 'b' ) :
