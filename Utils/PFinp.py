@@ -23,19 +23,18 @@ def PES_coordinate():
     return "{0}, {1} {2} {3}".format( atom_indices , i_coord , f_coord , coord_s )
 
 def quantumdata( qmdatachoice ) :
-    if ( qmdatachoice == "a" ) :
+    if ( qmdatachoice == "a" or qmdatachoice == "" ) :
         qmdata = 'comp'
-        filenameroot = raw_input( '''\nEnter the root file name of the compact file containing the QM data.\n''' )
+        print "Selected compact file; one file contains the QM data."
+        filenameroot = raw_input( "Enter the root filename. " )
     elif ( qmdatachoice == "b" ) :
         qmdata = 'full'
-        filenameroot = raw_input('''\nEnter the root file name of the series of files containing the QM data.\n''' )
-    else :
-        qmdata = 'comp'
-        filenameroot = raw_input('''\nSelected default. Enter the root file name of the compact file containing the QM data.\n''' )
+        print "Selected full; a series of files contain QM data."
+        filenameroot = raw_input( "Enter the root filename. " )
     return qmdata + " , " + filenameroot
 
 def qmdata_prompt():
-    print "Choose the QM data format:"
+    print "Choose the QM data file format:"
     print "(a) Compact: one file that includes fixed bond lengths, bond angles, \n    or torsion angle geometries."
     print "(b) Series: GAMESS log files, one for each fixed bond length, bond angle,\n    or torsion angle geometry."
     print "Enter: a or b. Default is a.\n"
