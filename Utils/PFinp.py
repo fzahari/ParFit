@@ -115,18 +115,16 @@ else :
 # --- Multiple dihedral angle file fitting. ---
 if ( property_type == "bond" ) :
     qmdata_prompt()
-    qm_f_properties = quantumdata( qmdatachoice = raw_input() )
-    PES_properties = PES_coordinate()
-    print >> f, "{0}, {1}".format( qm_f_properties , PES_properties )
+    qm_file_properties = quantumdata( qmdatachoice = raw_input() )
+    no_PESs = 1
 elif ( property_type == "angl" ):
     qmdata_prompt()
-    qm_f_properties = quantumdata( qmdatachoice = raw_input() )
-    PES_properties = PES_coordinate()
-    print >> f, "{0}, {1}".format( qm_f_properties , PES_properties )
+    qm_file_properties = quantumdata( qmdatachoice = raw_input() )
+    no_PESs = 1
 elif ( property_type == "diha" ) :
-    no_torsions = int( raw_input( ''' How many torisions are to be fit?\n''' ) )
-    print >> f, "mult, ", no_torsions
-    for n in range( 0, no_torsions ) :
+    no_PESs = int( raw_input( "Enter the number of PESs to be fit.\n" ) )
+    print >> f, "mult, ", no_PESs
+    for n in range( 0, no_PESs ) :
         qmdata_prompt()
         qm_f_properties = quantumdata( qmdatachoice = raw_input() )
         PES_properties = PES_coordinate()
