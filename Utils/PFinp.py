@@ -142,7 +142,7 @@ engine_path = raw_input( "\nWhat is the full engine.exe path?\n" )
 
 # --- Determine the type of MM file that is to be modified ---
 mmtypchoice = raw_input( "\nChoose the MM type (mm3 or mmff94) parameters to be fit\n(a) MM3 - default\n(b) MMFF94\nChoose a or b.\n" )
-if ( mmtypchoice == 'a' ) :
+if ( mmtypchoice == 'a' or mmtypechoice == "" ) :
     carbontyp = 50
     mmtyp = 'mm3'
 elif ( mmtypchoice == 'b' ) :
