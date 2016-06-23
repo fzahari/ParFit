@@ -73,6 +73,7 @@ def parameter_lines( PEStype , no_PESs ):
     else :
         m = raw_input( "Enter parameter line number of the parameters to be fit. " )
         list_params = m + " p p"
+        print list_params
     return list_params
 ###########################################################################################################
 ###########################################################################################################
@@ -178,9 +179,12 @@ else :
 print >> f, engine_path
 print >> f, mmtyp
 print >> f, alg
-for i in range( 0, no_PESs, 4):
-    parameters = str(list_params[i]) + " " + list_params[ i + 1 ] + " " + list_params[ i + 2 ]
-    print >> f, parameters
+if property_type == "diha" :
+    for i in range( 0, no_PESs, 4):
+        parameters = str(list_params[i]) + " " + list_params[ i + 1 ] + " " + list_params[ i + 2 ]
+        print >> f, parameters
+else :
+    print list_params
 print >> f, csv
 
 print "\nYour ParFit input file name {0} has been generated.\n".format( pyout )
