@@ -5,7 +5,8 @@ def GetParameterLines(VariedCoord, NoOfVariedCoords):
     ParamList = []
     if VariedCoord == "diha":
         for m in range(NoOfVariedCoords):
-            ParamList.append(raw_input("Enter parameter line number for the dihedral to be fit. "))
+            ParamList.append(raw_input("Enter parameter line number for the"
+                + "dihedral to be fit. "))
             for i in range(1, 4):
                 ParamOrConst = raw_input("Enter 'p' if Line " + ParamList[m] + " V"
                     + str(i) + " should be varied during ParFit run. ")
@@ -33,4 +34,4 @@ def GetParameterLines(VariedCoord, NoOfVariedCoords):
 #        print ParamList  #print for debugging
     return ParamList
 
-print GetParameterLines("angl", 2)
+print GetParameterLines("diha", 2)
