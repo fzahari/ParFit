@@ -43,29 +43,26 @@ def PromptQMFileFormat():
           "Enter: a or b. [a]")
 
 def GetParameterLines(VariedCoord, NoOfVariedCoords):
+    ParamList = []
     if VariedCoord == "diha":
-        NoOfParamLines = NoOfVariedCoords
-        ParamListLen = NoOfParamLines*4
-        ParamList = [None] * ParamListLen
-        for m in range(0, ParamListLen, 4):
-            ParamList[m]= raw_input("Enter parameter line number for the dihedral to be fit. ")
+        for m in range(NoOfVariedCoords):
+            ParamList.append(raw_input("Enter parameter line number for the"
+                + "dihedral to be fit. "))
             for i in range(1, 4):
-                c_or_p = raw_input("Enter 'p' if Line " + ParamList[m] + " V" +
-                        str(i) + " should be varied during ParFit run. ")
-                if c_or_p == "p":
-                    c_or_p = "p"
-                else:
-                    c_or_p = "c"
-                ParamList[m + i] = c_or_p
+                ParamOrConst = raw_input("Enter 'p' if Line " + ParamList[m] + " V"
+                    + str(i) + " should be varied during ParFit run. ")
+                if ParamOrConst != "p":
+                    ParamOrConst = "c"
+                ParamList.append(ParamOrConst)
         i = raw_input("How many pairs of parameters are coupled? [0] ")
         if i == "":
             i = 0
         else:
             i = int(i)
-            print("Please identify the coupled parameters by giving the line numbers \n" +
-                  "and parameter (1, 2 or 3 for V1, V2 and V3) " +
-                  "in the following format: \n" +
-                  "\t[line number] [line number] [parameter number] ")
+            print("Please identify the coupled parameters by giving the line numbers \n"
+                + "and parameter (1, 2 or 3 for V1, V2 and V3) "
+                + "in the following format: \n"
+                + "\t[line number] [line number] [parameter number] ")
         for n in range(i):
             q, r, s = str.split(raw_input("Enter the line and parameter numbers. "))
             q_index = int(ParamList.index(q))
@@ -73,8 +70,8 @@ def GetParameterLines(VariedCoord, NoOfVariedCoords):
             s = int(s)
             ParamList[q_index + s] = ParamList[r_index + s] = "p" + str(n + 1)
     else:
-        m = raw_input("Enter parameter line number of the parameters to be fit. ")
-        ParamList = m + " p p"
+        ParamList.append(raw_input("Enter parameter line number of the "
+            + "parameters to be fit. ") + " p p")
 #        print ParamList  #print for debugging
     return ParamList
 ###################################################################################
@@ -121,10 +118,6 @@ if (VariedCoord == "bond" or VariedCoord == "angl"):
     PromptQMFileFormat()
     QMFileProperties = GetQMFileFormat(QMFormatChoice = raw_input())
     NoOfVariedCoords = 1
-#elif (VariedCoord == "angl"):
-#    PromptQMFileFormat()
-#    QMFileProperties = GetQMFileFormat(QMFormatChoice = raw_input())
-#    NoOfVariedCoords = 1
 elif (VariedCoord == "diha"):
     NoOfVariedCoords = int(raw_input("Enter the number of PESs to be fit.\n"))
     for n in range(0, NoOfVariedCoords):
@@ -185,13 +178,14 @@ if (VariedCoord == "diha"):
     print >> f, "mult, " + str(NoOfVariedCoords)
     for i in range(NoOfVariedCoords):
         print >> f, ", ".join(QMFileProperties) + ", " + VariedCoord
+        i += 1
 else:
     print >> f, ", ".join(QMFileProperties) + ", " + VariedCoord
 print >> f, engine_path
 print >> f, mmtyp
 print >> f, alg
 if VariedCoord == "diha":
-    for i in range(0, NoOfVariedCoords*4, 4):
+    for i in range(0, len(ParamList), 4):
         n = i + 4
         print >> f, " ".join(ParamList[i:n])
 else:
