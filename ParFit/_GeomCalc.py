@@ -115,7 +115,7 @@ if __name__=="__main__":
     # 
     print rotu2(r,u,pi/2)
     # 
-    d=d/norm(d)
+    d /= norm(d)
     print rotu(r,d,pi)
     # 
     print rotu2(r,d,pi)

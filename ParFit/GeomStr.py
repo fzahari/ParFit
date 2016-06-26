@@ -48,18 +48,18 @@ class Atom(object):
         self._s=symbol
         assert len(r)==3
         self._r=array(r,'d')
-        if charge==None:
+        if charge is None:
             self._c=default_charge[self._s]
         else:
             self._c=charge
         self._mm=mm
         if self._mm=="mm3":
-            if mm_type==None:
+            if mm_type is None:
                 self._t=default_mm3_type[self._s]
             else:
                 self._t=mm_type
         elif self._mm=="mmff94":
-            if mm_type==None:
+            if mm_type is None:
                 self._t=default_mmff94_type[self._s]
             else:
                 self._t=mm_type
@@ -110,7 +110,9 @@ class Atom(object):
         self._t=mm_type
 
 class Molecule(object):
-    def __init__(self,a_tuple=(),mm=None,t_list=[],name="Molecule"):
+    def __init__(self, a_tuple=(), mm=None, t_list=[], name="Molecule"):
+        if t_list is None:
+            t_list = []
         self._sl=[]
         self._rl=[]
         self._cl=[]
@@ -358,20 +360,28 @@ class Molecule(object):
               if j>i: 
                  if self._sl[i]=='P' and self._sl[j]=='O' or self._sl[i]=='O' and self._sl[j]=='P':
                     s,d,t=bond_ords['PO']
-                    #if d>self.calc_dist(i,j)>t: print i,j,"double PO"; self._db.append([i,j])
-                    #if t>self.calc_dist(i,j): print i,j,"triple PO"; self._tb.append([i,j])
+                    #if d>self.calc_dist(i,j)>t: print i,j,"double PO"; self._db.append((i,j))
+                    #if t>self.calc_dist(i,j): print i,j,"triple PO"; self._tb.append((i,j))
+                    if d>self.calc_dist(i,j)>t: self._db.append((i,j))
+                    if t>self.calc_dist(i,j): self._tb.append((i,j))
                  elif self._sl[i]=='P' and self._sl[j]=='C' or self._sl[i]=='C' and self._sl[j]=='P':
                     s,d,t=bond_ords['PC']
-                    #if d>self.calc_dist(i,j)>t: print i,j,"double PC"; self._db.append([i,j])
-                    #if t>self.calc_dist(i,j): print i,j,"triple PC"; self._tb.append([i,j])
+                    #if d>self.calc_dist(i,j)>t: print i,j,"double PC"; self._db.append((i,j))
+                    #if t>self.calc_dist(i,j): print i,j,"triple PC"; self._tb.append((i,j))
+                    if d>self.calc_dist(i,j)>t: self._db.append((i,j))
+                    if t>self.calc_dist(i,j): self._tb.append((i,j))
                  elif self._sl[i]=='O' and self._sl[j]=='C' or self._sl[i]=='C' and self._sl[j]=='O':
                     s,d,t=bond_ords['OC']
-                    #if d>self.calc_dist(i,j)>t: print "double CO"; self._db.append([i,j])
-                    #if t>self.calc_dist(i,j): print "triple CO"; self._tb.append([i,j])
+                    #if d>self.calc_dist(i,j)>t: print "double CO"; self._db.append((i,j))
+                    #if t>self.calc_dist(i,j): print "triple CO"; self._tb.append((i,j))
+                    if d>self.calc_dist(i,j)>t: self._db.append((i,j))
+                    if t>self.calc_dist(i,j): self._tb.append((i,j))
                  elif self._sl[i]=='C' and self._sl[j]=='C':
                     s,d,t=bond_ords['CC']
-                    #if d>self.calc_dist(i,j)>t: print "double OO"; self._db.append([i,j])
-                    #if t>self.calc_dist(i,j): print "triple OO"; self._tb.append([i,j])
+                    #if d>self.calc_dist(i,j)>t: print "double OO"; self._db.append((i,j))
+                    #if t>self.calc_dist(i,j): print "triple OO"; self._tb.append((i,j))
+                    if d>self.calc_dist(i,j)>t: self._db.append((i,j))
+                    if t>self.calc_dist(i,j): self._tb.append((i,j))
                  #else: print "Uknown bond type: ",self._sl[i],"-",self._sl[j]
         #print self._db
         return self._db

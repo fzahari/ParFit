@@ -2,7 +2,7 @@
 
 from os import system,environ
 from numpy import rad2deg,array,sqrt,pi,around,deg2rad
-from IO import par_fit_inp,read_add,write_add
+from _IO import par_fit_inp,read_add,write_add
 from _Engine import run_engine_timeout, pert_add_param
 from GeomStr import Molecule,default_mm3_type,default_mmff94_type
 
@@ -137,9 +137,9 @@ class ScanElem(Molecule):
     def write_inp_pcm(self,fname_base,styp):
         f=open("../Data/Engine/"+fname_base+"_inp.pcm",'w')
         if self._mm=="mm3":
-            self.input_pcm_head2=self.input_pcm_head2+str(3)
+            self.input_pcm_head2 += str(3)
         elif self._mm=="mmff94":
-            self.input_pcm_head2=self.input_pcm_head2+str(7)
+            self.input_pcm_head2 += str(7)
         else:
             print "ScanElem.write_inp_pcm: Wrong MM-type!"
         print >>f,self.input_pcm_head1+str(self._na)+self.input_pcm_head2
@@ -165,7 +165,7 @@ class ScanElem(Molecule):
             x,y,z=self.rl[i]
             print >>f,"AT %d %d %10.4f %10.4f %10.4f B"%((i+1),t,x,y,z),
             for j in iconn:
-                if set((i,j)) in self._db:
+                if (i,j) in self._db or (j,i) in self._db:
                     print >>f,j+1,"2",
                 else:
                     print >>f,j+1,"1",
@@ -199,15 +199,15 @@ class ScanElem(Molecule):
            self._e=float(lines[2].split()[8])
 
     def diha_rot(self,diha_rot_val):
-        if not diha_rot_val==None:
+        if not diha_rot_val is None:
             super(ScanElem,self).diha_rot(self._t,diha_rot_val)
 
     def bond_tra(self,bond_tra_val):
-        if not bond_tra_val==None:
+        if not bond_tra_val is None:
             super(ScanElem,self).bond_tra(self._t,bond_tra_val)
 
     def angl_rot(self,angl_rot_val):
-        if not angl_rot_val==None:
+        if not angl_rot_val is None:
             super(ScanElem,self).angl_rot(self._t,angl_rot_val)
 
 class Scan(object):

@@ -181,7 +181,13 @@ def read_add(mm,opt_lin,np,nc,fl,scan_type):
     for ol_sk in ol_keys:
         s=""
         t=opt_lin[ol_sk]
+        minuses=[]
         for k in range(n):
+            if t[k][0]=='-':
+                t[k]=t[k][1:]
+                minuses.append(k)
+            elif t[k][0]=='+':
+                t[k]=t[k][1:]
             if t[k][0]=='p':
                 plab=t[k][1:]
                 if len(plab)>0:
@@ -205,16 +211,25 @@ def read_add(mm,opt_lin,np,nc,fl,scan_type):
         v=lines[ol_sk].split()
         ol_vars=s[:-1]
         if scan_type=="diha":
+           v[4:9:2]=map(float,v[4:9:2])
+           for k in minuses:
+              v[5+2*k]=-v[5+2*k]  
            exec ol_vars+"="+v[5]+","+v[7]+","+v[9]
            v[1:5]=map(int,v[1:5])
            s1='"%s        %3i  %3i  %3i  %3i'%(v[0],v[1],v[2],v[3],v[4])
            s2='      %6.3f +1   %6.3f -2 %6.3f +3      "%('+ol_vars+')'
         elif scan_type=="bond":
+           v[2:4]=map(float,v[2:4])
+           for k in minuses:
+              v[3+k]=-v[3+k]  
            exec ol_vars+"="+v[3]+","+v[4]
            v[1:3]=map(int,v[1:3])
            s1='"%s        %3i  %3i'%(v[0],v[1],v[2])
            s2='      %6.3f    %6.3f        "%('+ol_vars+')'
         elif scan_type=="angl":
+           v[3:5]=map(float,v[3:5])
+           for k in minuses:
+              v[4+k]=-v[4+k]  
            exec ol_vars+"="+v[4]+","+v[5]
            v[1:4]=map(int,v[1:4])
            s1='"%s        %3i  %3i  %3i'%(v[0],v[1],v[2],v[3])
@@ -249,7 +264,7 @@ def write_add(sdir,p,c,mm,ol_templ,lines,fl,step,step_int):
 
     f.close()
    
-    if step==None: return
+    if step is None: return
     
     if step=="ga" or (step-1)%step_int==0:
        if mm=="mm3":

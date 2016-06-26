@@ -5,7 +5,7 @@ import numpy
 
 from scipy.optimize import minimize,basinhopping,anneal,fmin,fmin_powell,fmin_cg,fmin_tnc
 from Scan import BondScan,AnglScan,DihAScan
-from IO import par_fit_inp,read_add,write_add
+from _IO import par_fit_inp,read_add,write_add
 
 from Ga import run_ga
 
@@ -112,8 +112,8 @@ def pf_run(PF_if):
          for j in range(np):
             ppM[j]=p[j]
             ppP[j]=p[j]
-         ppM[i]=ppM[i]-eps
-         ppP[i]=ppP[i]+eps
+         ppM[i] -= eps
+         ppP[i] += eps
          pM=engine_rmse(ppM)
          pP=engine_rmse(ppP)
          print i+1,(pM-p0)/eps,(pP-p0)/eps

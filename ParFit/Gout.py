@@ -2,7 +2,7 @@
 
 import sys
 from Scan import DihAScan,BondScan,AnglScan
-from IO import ginp_inp
+from _IO import ginp_inp
 
 def pf_run(input_fname):
   
