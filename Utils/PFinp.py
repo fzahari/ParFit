@@ -7,8 +7,7 @@
 #     same or not all numbers are given)
 #  2. For values that are not known, the program will leave a place holder that a
 #     user can then change using a text editor.
-#  3. Add option to change two or three parameters per line.
-#  4. Add new parameter fitting options, bond length, bond angle.
+#  3. Fix comp/full lines which are not printing properly.
 #
 
 ####################################################################################
