@@ -7,7 +7,6 @@
 #     same or not all numbers are given)
 #  2. For values that are not known, the program will leave a place holder that a
 #     user can then change using a text editor.
-#  3. Fix comp/full lines which are not printing properly.
 #
 
 ####################################################################################
