@@ -51,9 +51,9 @@ def getQMFilePropertyLines(variedCoord):
             QMFormatChoice = getQMFileFormat()
             QMFilenameRoot = raw_input("Enter the root filename. ")
             if QMFormatChoice == "comp":
-                filePropertyLines.extend((QMFormatChoice, QMFilenameRoot, variedCoord))
+                filePropertyLines.extend((QMFormatChoice, QMFilenameRoot))
             elif QMFormatChoice == "full":
-                filePropertyLines.extend((QMFormatChoice, QMFilenameRoot, getPESCoords(), variedCoord))
+                filePropertyLines.extend((QMFormatChoice, QMFilenameRoot, getPESCoords()))
     return filePropertyLines, noOfVariedCoords
 
 def getParameterLines(variedCoord):
@@ -179,10 +179,10 @@ if (variedCoord == "diha"):
     print >> f, "mult, " + str(noOfVariedCoords)
 for n in range(0, len(lines)):
     if lines[n] == "full":
-        print >> f, ", ".join(lines[n: n+4])
+        print >> f, ", ".join(lines[n: n+3])
 for s in range(0, len(lines)):
     if lines[s] == "comp":
-        print >> f, ", ".join(lines[s: s+3])
+        print >> f, ", ".join(lines[s: s+2])
 print >> f, enginePath
 print >> f, MMType
 print >> f, alg
