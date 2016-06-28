@@ -2,14 +2,18 @@
 #
 # This a ParFit input file generating program.
 #
-#  To Do:
-#  1. Error out if dihedral is given incorrectly (such as two numbers are the
-#     same or not all numbers are given)
-#  2. For values that are not known, the program will leave a place holder that a
-#     user can then change using a text editor.
+#   To Do:
+#   1.  Error out if dihedral is given incorrectly (such as two numbers are the
+#       same or not all numbers are given)
+#   2.  For values that are not known, the program will leave a place holder that a
+#       user can then change using a text editor.
+#   3.  Edit printouts to clarify user inputs and to differentiate from PFinp prog-
+#       ram prompts/output.
+#   4.  Prompt user to set system variables - MM type and engine path - so that PFinp
+#       program can check for it and return it as the default for path and MM type.
 #
-
-####################################################################################
+#
+#########################################################################################
 
 # --- Functions ---
 def getPESCoords():
