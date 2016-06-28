@@ -11,12 +11,12 @@ for more detailed information.
 
 The main directory, ParFit, contains subdirectories: Data, Doc, ParFit, and 
 Utils. The Data subdirectory contains the Engine, Gamess, and ParFit 
-subdirectories. The Data/Engine directory contains the mmengine input, output, 
+subdirectories. The Data/Engine directory contains the MM engine input, output,
 and parameter files. The Data/Gamess directory contains the QM molecular 
 information. The Data/ParFit subdirectory contains the energy profile and 
 parameters at optimization intervals. The Doc subdirectory contains the ParFit 
-user manual, Manual.pdf. The ParFit subdirectory contains the Python scripts and 
-example input files with root filename "dih_scan_inp." ParFit should be run from 
+user's manual (Manual.pdf/.doc). The ParFit subdirectory contains the main program
+(ParFit.py) and example input files with root filename "scan_inp." ParFit is run from 
 this directory using the command:
 
 ./Parfit.py
@@ -26,16 +26,12 @@ program (PFinp.py) and template scripts that can rename multiple files
 (rename.py), automatically submit multiple jobs on a typical cluster (submit.py) 
 and visualize the energy profile fit using matplotlib (QM_vs_MM_energies.py).
 
-ParFit.py is the main program in the ParFit subdirectory. ParFit uses an input 
-file named dih_scan_inp. One can generate an input file using the PFinp.py
-program.
-
 The input file format is as follows:
 
  Line/Block       Description
---------------- --------------------------------------------------------------
-1 optional      |Two values, "mult", and the number of molecules for which to
-                |fit. Example: 
+--------------- --------------------------------------------------------------------
+1 optional      |Two values, "mult", and the number of molecules for which to fit. 
+                |Example: 
                 |mult, Y
                 |where Y is the the number of molecules to use for parameter
                 |fitting, Y must be 1 or greater.
