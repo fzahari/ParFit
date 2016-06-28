@@ -56,10 +56,11 @@ def getQMFilePropertyLines(variedCoord):
                 filePropertyLines.extend((QMFormatChoice, QMFilenameRoot, getPESCoords(), variedCoord))
     return filePropertyLines, noOfVariedCoords
 
-def getParameterLines(variedCoord, noOfVariedCoords):
+def getParameterLines(variedCoord):
     paramList = []
     if variedCoord == "diha":
-        for m in range(noOfVariedCoords):
+        noOfParameterLines = int(raw_input("Enter number of parameter lines. "))
+        for m in range(noOfParameterLines):
             paramList.append(raw_input("Enter parameter line number for the "
                 + "dihedral to be fit. "))
             for i in range(1, 4):
@@ -132,7 +133,7 @@ lines, noOfVariedCoords = getQMFilePropertyLines(variedCoord)
 
 
 # --- Determine which parameters will be changed by ParFit ---
-paramList = getParameterLines(variedCoord, noOfVariedCoords)
+paramList = getParameterLines(variedCoord)
 
 # --- Get engine path ---
 enginePath = raw_input("\nWhat is the full engine.exe path?\n")
