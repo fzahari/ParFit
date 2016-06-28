@@ -13,16 +13,16 @@
 ####################################################################################
 
 # --- Functions ---
-def GetPESCoords():
+def getPESCoords():
     print("The following prompts define the variables used to generate" +
           "the QM PESs.")
-    AtomIndices = raw_input("Enter atom indices separated by a space.\n")
-    i_coord = raw_input("Enter the initial length or angle.\n")
-    f_coord = raw_input("Enter the final length or angle.\n")
-    coord_s = raw_input("Enter the length or angle step size.\n")
-    return "{0}, {1} {2} {3}".format(AtomIndices, i_coord, f_coord, coord_s)
+    atomIndices = raw_input("Enter atom indices separated by a space.\n")
+    iCoord = raw_input("Enter the initial length or angle.\n")
+    fCoord = raw_input("Enter the final length or angle.\n")
+    sCoord = raw_input("Enter the length or angle step size.\n")
+    return "{0}, {1} {2} {3}".format(atomIndices, iCoord, fCoord, sCoord)
 
-def GetQMFileFormat():
+def getQMFileFormat():
     print("<< QM data file format >>\n" +
           "(a) Compact: QM data is contained in one file that includes fixed\n" +
           "    bond lengths, bond angles, or torsion angle geometries.\n" +
@@ -36,39 +36,39 @@ def GetQMFileFormat():
         fileFormat = "full"
     return fileFormat
 
-def getQMFilePropertyLines(VariedCoord):
+def getQMFilePropertyLines(variedCoord):
     filePropertyLines = []
-    if (VariedCoord == "bond" or VariedCoord == "angl"):
+    if (variedCoord == "bond" or variedCoord == "angl"):
         QMFilenameRoot = raw_input("Enter the root filename. ")
-        NoOfVariedCoords = 1
-        QMFormatChoice = GetQMFileFormat()
+        noOfVariedCoords = 1
+        QMFormatChoice = getQMFileFormat()
         if QMFormatChoice == "comp":
-            filePropertyLines.extend((QMFormatChoice, QMFilenameRoot, VariedCoord))
+            filePropertyLines.extend((QMFormatChoice, QMFilenameRoot, variedCoord))
         elif QMFormatChoice == "full":
-            filePropertyLines.extend((QMFormatChoice, QMFilenameRoot, GetPESCoords(), VariedCoord))
-    elif (VariedCoord == "diha"):
-        NoOfVariedCoords = int(raw_input("Enter the number of PESs to be fit.\n"))
-        for n in range(0, NoOfVariedCoords):
-            QMFormatChoice = GetQMFileFormat()
+            filePropertyLines.extend((QMFormatChoice, QMFilenameRoot, getPESCoords(), variedCoord))
+    elif (variedCoord == "diha"):
+        noOfVariedCoords = int(raw_input("Enter the number of PESs to be fit.\n"))
+        for n in range(0, noOfVariedCoords):
+            QMFormatChoice = getQMFileFormat()
             QMFilenameRoot = raw_input("Enter the root filename. ")
             if QMFormatChoice == "comp":
-                filePropertyLines.extend((QMFormatChoice, QMFilenameRoot, VariedCoord))
+                filePropertyLines.extend((QMFormatChoice, QMFilenameRoot, variedCoord))
             elif QMFormatChoice == "full":
-                filePropertyLines.extend((QMFormatChoice, QMFilenameRoot, GetPESCoords(), VariedCoord))
-    return filePropertyLines, NoOfVariedCoords
+                filePropertyLines.extend((QMFormatChoice, QMFilenameRoot, getPESCoords(), variedCoord))
+    return filePropertyLines, noOfVariedCoords
 
-def GetParameterLines(VariedCoord, NoOfVariedCoords):
-    ParamList = []
-    if VariedCoord == "diha":
-        for m in range(NoOfVariedCoords):
-            ParamList.append(raw_input("Enter parameter line number for the "
+def getParameterLines(variedCoord, noOfVariedCoords):
+    paramList = []
+    if variedCoord == "diha":
+        for m in range(noOfVariedCoords):
+            paramList.append(raw_input("Enter parameter line number for the "
                 + "dihedral to be fit. "))
             for i in range(1, 4):
-                ParamOrConst = raw_input("Enter 'p' if Line " + ParamList[m] + " V"
+                paramOrConst = raw_input("Enter 'p' if Line " + paramList[m] + " V"
                     + str(i) + " should be varied during ParFit run. ")
-                if ParamOrConst != "p":
-                    ParamOrConst = "c"
-                ParamList.append(ParamOrConst)
+                if paramOrConst != "p":
+                    paramOrConst = "c"
+                paramList.append(paramOrConst)
         i = raw_input("How many pairs of parameters are coupled? [0] ")
         if i == "":
             i = 0
@@ -80,31 +80,31 @@ def GetParameterLines(VariedCoord, NoOfVariedCoords):
                 + "\t[line number] [line number] [parameter number] ")
         for n in range(i):
             q, r, s = str.split(raw_input("Enter the line and parameter numbers. "))
-            q_index = int(ParamList.index(q))
-            r_index = int(ParamList.index(r))
+            qIndex = int(paramList.index(q))
+            rIndex = int(paramList.index(r))
             s = int(s)
-            ParamList[q_index + s] = ParamList[r_index + s] = "p" + str(n + 1)
+            paramList[qIndex + s] = paramList[rIndex + s] = "p" + str(n + 1)
     else:
-        ParamList.append(raw_input("Enter parameter line number of the "
+        paramList.append(raw_input("Enter parameter line number of the "
             + "parameters to be fit. ") + " p p")
-#        print ParamList  #print for debugging
-    return ParamList
+#        print paramList  #print for debugging
+    return paramList
 ###################################################################################
 ###################################################################################
 
 # --- Determine ParFit input file name ---
 print("Enter the name of ParFit input file to create, if blank, the file " +
       "name will be PFinput.\n")
-OutFileName = raw_input()
-if (OutFileName == ""):
-    OutFileName = "PFinput"
-    print "[PFinp]: Input filename:", OutFileName, "\n"
+outFileName = raw_input()
+if (outFileName == ""):
+    outFileName = "PFinput"
+    print "[PFinp]: Input filename:", outFileName, "\n"
 else:
-    OutFileName == OutFileName
-    print "[PFinp]: Input filename:", OutFileName, "\n"
+    outFileName == outFileName
+    print "[PFinp]: Input filename:", outFileName, "\n"
 
 # --- Open the file for writing ---
-f = open(OutFileName,'w')
+f = open(outFileName,'w')
 
 # --- Select the parameter type, bond length, bond angle, torsion. ---
 property_type = raw_input('''Choose from the properties below:
@@ -115,39 +115,39 @@ property_type = raw_input('''Choose from the properties below:
 Enter: a, b, or c.\n''')
 
 if (property_type == "a"):
-    VariedCoord = 'bond'
+    variedCoord = 'bond'
     parameterize = "bond length"
 elif (property_type == "b"):
-    VariedCoord = 'angl'
+    variedCoord = 'angl'
     parameterize = "bond angle"
 elif (property_type == "c"):
-    VariedCoord = 'diha'
+    variedCoord = 'diha'
     parameterize = "torsion angle"
 else:
     print "The default, torsion angle, was chosen."
-    VariedCoord = 'diha'
+    variedCoord = 'diha'
     parameterize = "torsion angle"
 
 # --- Multiple dihedral angle file fitting. ---
-lines, NoOfVariedCoords = getQMFilePropertyLines(VariedCoord)
+lines, noOfVariedCoords = getQMFilePropertyLines(variedCoord)
 
 
 # --- Determine which parameters will be changed by ParFit ---
-ParamList = GetParameterLines(VariedCoord, NoOfVariedCoords)
+paramList = getParameterLines(variedCoord, noOfVariedCoords)
 
 # --- Get engine path ---
-engine_path = raw_input("\nWhat is the full engine.exe path?\n")
+enginePath = raw_input("\nWhat is the full engine.exe path?\n")
 
 # --- Determine the type of MM file that is to be modified ---
-mmtypchoice = raw_input("\nChoose the MM type (mm3 or mmff94) parameters to be fit\n(a) MM3 - default\n(b) MMFF94\nChoose a or b.\n")
-if (mmtypchoice == 'a' or mmtypchoice == ""):
+MMTypeChoice = raw_input("\nChoose the MM type (mm3 or mmff94) parameters to be fit\n(a) MM3 - default\n(b) MMFF94\nChoose a or b.\n")
+if (MMTypeChoice == 'a' or MMTypeChoice == ""):
     carbontyp = 50
-    mmtyp = 'mm3'
-elif (mmtypchoice == 'b'):
+    MMType = 'mm3'
+elif (MMTypeChoice == 'b'):
     carbontyp = 37
-    mmtyp = 'mmff94'
+    MMType = 'mmff94'
 else:
-    mmtyp = 'mm3'
+    MMType = 'mm3'
     print("Warning: Check the MM type you entered, the only options are a and b.\n" +
           "Default will be chosen.")
 
@@ -175,27 +175,27 @@ else:
     csv = "csv_on"
 
 # --- Print out input file ---
-if (VariedCoord == "diha"):
-    print >> f, "mult, " + str(NoOfVariedCoords)
+if (variedCoord == "diha"):
+    print >> f, "mult, " + str(noOfVariedCoords)
 for n in range(0, len(lines)):
     if lines[n] == "full":
         print >> f, ", ".join(lines[n: n+4])
 for s in range(0, len(lines)):
     if lines[s] == "comp":
         print >> f, ", ".join(lines[s: s+3])
-print >> f, engine_path
-print >> f, mmtyp
+print >> f, enginePath
+print >> f, MMType
 print >> f, alg
-if VariedCoord == "diha":
-    for i in range(0, len(ParamList), 4):
+if variedCoord == "diha":
+    for i in range(0, len(paramList), 4):
         n = i + 4
-        print >> f, " ".join(ParamList[i:n])
+        print >> f, " ".join(paramList[i:n])
 else:
-    print >> f, ParamList
+    print >> f, paramList
 #else:                 #print for debugging
-#    print ParamList  #print for debugging
+#    print paramList  #print for debugging
 print >> f, csv
 
-print "\nYour ParFit input file name {0} has been generated.\n".format(OutFileName)
+print "\nYour ParFit input file name {0} has been generated.\n".format(outFileName)
 
 exit()
