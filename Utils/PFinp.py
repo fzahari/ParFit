@@ -19,33 +19,49 @@ def GetPESCoords():
     AtomIndices = raw_input("Enter atom indices separated by a space.\n")
     i_coord = raw_input("Enter the initial length or angle.\n")
     f_coord = raw_input("Enter the final length or angle.\n")
-    coord_s = raw_input("Enter the lenght or angle step size.\n")
+    coord_s = raw_input("Enter the length or angle step size.\n")
     return "{0}, {1} {2} {3}".format(AtomIndices, i_coord, f_coord, coord_s)
 
-def GetQMFileFormat(QMFormatChoice):
-    if (QMFormatChoice == "a" or QMFormatChoice == ""):
-        QMFormat = 'comp'
-        print "Selected compact file; one file contains the QM data."
-        RootFilename = raw_input("Enter the root filename. ")
-    elif (QMFormatChoice == "b"):
-        QMFormat = 'full'
-        print "Selected full; a series of files contain QM data."
-        RootFilename = raw_input("Enter the root filename. ")
-    return QMFormat, RootFilename
-
-def PromptQMFileFormat():
+def GetQMFileFormat():
     print("<< QM data file format >>\n" +
           "(a) Compact: QM data is contained in one file that includes fixed\n" +
           "    bond lengths, bond angles, or torsion angle geometries.\n" +
           "(b) Series: GAMESS log files, one for each fixed bond length,\n" +
           "    bond angle, or torsion angle geometry.\n" +
           "Enter: a or b. [a]")
+    fileFormat = raw_input()
+    if fileFormat != "b" :
+        fileFormat = "comp"
+    else:
+        fileFormat = "full"
+    return fileFormat
+
+def getQMFilePropertyLines(VariedCoord):
+    filePropertyLines = []
+    if (VariedCoord == "bond" or VariedCoord == "angl"):
+        QMFilenameRoot = raw_input("Enter the root filename. ")
+        NoOfVariedCoords = 1
+        QMFormatChoice = GetQMFileFormat()
+        if QMFormatChoice == "comp":
+            filePropertyLines.extend((QMFormatChoice, QMFilenameRoot, VariedCoord))
+        elif QMFormatChoice == "full":
+            filePropertyLines.extend((QMFormatChoice, QMFilenameRoot, GetPESCoords(), VariedCoord))
+    elif (VariedCoord == "diha"):
+        NoOfVariedCoords = int(raw_input("Enter the number of PESs to be fit.\n"))
+        for n in range(0, NoOfVariedCoords):
+            QMFormatChoice = GetQMFileFormat()
+            QMFilenameRoot = raw_input("Enter the root filename. ")
+            if QMFormatChoice == "comp":
+                filePropertyLines.extend((QMFormatChoice, QMFilenameRoot, VariedCoord))
+            elif QMFormatChoice == "full":
+                filePropertyLines.extend((QMFormatChoice, QMFilenameRoot, GetPESCoords(), VariedCoord))
+    return filePropertyLines, NoOfVariedCoords
 
 def GetParameterLines(VariedCoord, NoOfVariedCoords):
     ParamList = []
     if VariedCoord == "diha":
         for m in range(NoOfVariedCoords):
-            ParamList.append(raw_input("Enter parameter line number for the"
+            ParamList.append(raw_input("Enter parameter line number for the "
                 + "dihedral to be fit. "))
             for i in range(1, 4):
                 ParamOrConst = raw_input("Enter 'p' if Line " + ParamList[m] + " V"
@@ -113,22 +129,8 @@ else:
     parameterize = "torsion angle"
 
 # --- Multiple dihedral angle file fitting. ---
-if (VariedCoord == "bond" or VariedCoord == "angl"):
-    PromptQMFileFormat()
-    QMFileProperties = GetQMFileFormat(QMFormatChoice = raw_input())
-    NoOfVariedCoords = 1
-elif (VariedCoord == "diha"):
-    NoOfVariedCoords = int(raw_input("Enter the number of PESs to be fit.\n"))
-    for n in range(0, NoOfVariedCoords):
-        PromptQMFileFormat()
-        QMFileProperties =  GetQMFileFormat(QMFormatChoice = raw_input())
-        print QMFileProperties
-        if (QMFileProperties[0] != "comp"):
-            PES_properties = GetPESCoords()
+lines, NoOfVariedCoords = getQMFilePropertyLines(VariedCoord)
 
-# if not running a bond length/angle run, use this path.
-else:
-    print "[PFinp] Error: You have not properly chosen a property to parameterize."
 
 # --- Determine which parameters will be changed by ParFit ---
 ParamList = GetParameterLines(VariedCoord, NoOfVariedCoords)
@@ -175,11 +177,12 @@ else:
 # --- Print out input file ---
 if (VariedCoord == "diha"):
     print >> f, "mult, " + str(NoOfVariedCoords)
-    for i in range(NoOfVariedCoords):
-        print >> f, ", ".join(QMFileProperties) + ", " + VariedCoord
-        i += 1
-else:
-    print >> f, ", ".join(QMFileProperties) + ", " + VariedCoord
+for n in range(0, len(lines)):
+    if lines[n] == "full":
+        print >> f, ", ".join(lines[n: n+4])
+for s in range(0, len(lines)):
+    if lines[s] == "comp":
+        print >> f, ", ".join(lines[s: s+3])
 print >> f, engine_path
 print >> f, mmtyp
 print >> f, alg
