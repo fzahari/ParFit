@@ -2,14 +2,18 @@
 #
 # This a ParFit input file generating program.
 #
-#  To Do:
-#  1. Error out if dihedral is given incorrectly (such as two numbers are the
-#     same or not all numbers are given)
-#  2. For values that are not known, the program will leave a place holder that a
-#     user can then change using a text editor.
+#   To Do:
+#   1.  Error out if dihedral is given incorrectly (such as two numbers are the
+#       same or not all numbers are given)
+#   2.  For values that are not known, the program will leave a place holder that a
+#       user can then change using a text editor.
+#   3.  Edit printouts to clarify user inputs and to differentiate from PFinp prog-
+#       ram prompts/output.
+#   4.  Prompt user to set system variables - MM type and engine path - so that PFinp
+#       program can check for it and return it as the default for path and MM type.
 #
-
-####################################################################################
+#
+#########################################################################################
 
 # --- Functions ---
 def getPESCoords():
@@ -51,15 +55,16 @@ def getQMFilePropertyLines(variedCoord):
             QMFormatChoice = getQMFileFormat()
             QMFilenameRoot = raw_input("Enter the root filename. ")
             if QMFormatChoice == "comp":
-                filePropertyLines.extend((QMFormatChoice, QMFilenameRoot, variedCoord))
+                filePropertyLines.extend((QMFormatChoice, QMFilenameRoot))
             elif QMFormatChoice == "full":
-                filePropertyLines.extend((QMFormatChoice, QMFilenameRoot, getPESCoords(), variedCoord))
+                filePropertyLines.extend((QMFormatChoice, QMFilenameRoot, getPESCoords()))
     return filePropertyLines, noOfVariedCoords
 
-def getParameterLines(variedCoord, noOfVariedCoords):
+def getParameterLines(variedCoord):
     paramList = []
     if variedCoord == "diha":
-        for m in range(noOfVariedCoords):
+        noOfParameterLines = int(raw_input("Enter number of parameter lines. "))
+        for m in range(noOfParameterLines):
             paramList.append(raw_input("Enter parameter line number for the "
                 + "dihedral to be fit. "))
             for i in range(1, 4):
@@ -132,7 +137,7 @@ lines, noOfVariedCoords = getQMFilePropertyLines(variedCoord)
 
 
 # --- Determine which parameters will be changed by ParFit ---
-paramList = getParameterLines(variedCoord, noOfVariedCoords)
+paramList = getParameterLines(variedCoord)
 
 # --- Get engine path ---
 enginePath = raw_input("\nWhat is the full engine.exe path?\n")
@@ -178,10 +183,10 @@ if (variedCoord == "diha"):
     print >> f, "mult, " + str(noOfVariedCoords)
 for n in range(0, len(lines)):
     if lines[n] == "full":
-        print >> f, ", ".join(lines[n: n+4])
+        print >> f, ", ".join(lines[n: n+3])
 for s in range(0, len(lines)):
     if lines[s] == "comp":
-        print >> f, ", ".join(lines[s: s+3])
+        print >> f, ", ".join(lines[s: s+2])
 print >> f, enginePath
 print >> f, MMType
 print >> f, alg
