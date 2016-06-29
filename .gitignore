@@ -1,3 +1,7 @@
 #Ignore files:
 # Generic output to PFinp.py.
 PFinput
+
+# Engine generated output files
+*inp.pcm
+*out.pcm
