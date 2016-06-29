@@ -11,12 +11,12 @@ for more detailed information.
 
 The main directory, ParFit, contains subdirectories: Data, Doc, ParFit, and 
 Utils. The Data subdirectory contains the Engine, Gamess, and ParFit 
-subdirectories. The Data/Engine directory contains the mmengine input, output, 
+subdirectories. The Data/Engine directory contains the MM engine input, output,
 and parameter files. The Data/Gamess directory contains the QM molecular 
 information. The Data/ParFit subdirectory contains the energy profile and 
 parameters at optimization intervals. The Doc subdirectory contains the ParFit 
-user manual, Manual.pdf. The ParFit subdirectory contains the Python scripts and 
-example input files with root filename "dih_scan_inp." ParFit should be run from 
+user's manual (Manual.pdf/.doc). The ParFit subdirectory contains the main program
+(ParFit.py) and example input files with root filename "scan_inp." ParFit is run from 
 this directory using the command:
 
 ./Parfit.py
@@ -26,59 +26,102 @@ program (PFinp.py) and template scripts that can rename multiple files
 (rename.py), automatically submit multiple jobs on a typical cluster (submit.py) 
 and visualize the energy profile fit using matplotlib (QM_vs_MM_energies.py).
 
-ParFit.py is the main program in the ParFit subdirectory. ParFit uses an input 
-file named dih_scan_inp. One can generate an input file using the PFinp.py
-program.
-
-The input file format is as follows:
+The input file format for torsion angle parameter calculations is as follows:
 
  Line/Block       Description
---------------- --------------------------------------------------------------
-1 optional      |Two values, "mult", and the number of molecules for which to
-                |fit. Example: 
-                |mult, Y
-                |where Y is the the number of molecules to use for parameter
-                |fitting, Y must be 1 or greater.
-                |
-2 to N          |the full/comp file type, the root filename, the atoms forming
-                |the dihedral angle, and the triplet defining the dihedral 
-                |angle.
-                |
-                |"full/comp QM data”: if "full" all the Gamess output files 
-                |must be in the Data/Gamess subdirectory. If "comp,” a compact 
-                |form of the QM data should be contained in one file in the 
-                |/Data/Gamess subdirectory.
-                |
-                |"the root filename": the name without "X.log" where "X"
-                |is the dihedral angle, if "full,” or the name without "scan,”
-                |if "comp.”
-                |
-                |"the atoms forming the dihedral angle": four numbers defining
-                |the dihedral angle
-                |
-                |"a triple defining the dihedral angle range": initial, final,
-                |and angle step size.
-                |
-N + 1           |The full mmengine path.
-                |
-N + 2           |MM-type: "mm3" or "mmf94" 
-                |
-N + 3           |Optimization algorithm: "ga," "fmin," or "hybr"
-                |
-N + 4 to M      |The choice of the parameters to be optimized according to the
-                |following format:
-                |line number in add_MM3.prm or add_MMFF94.prm, 'c' or 'p', i.e.
-                |"constant parameter" and "parameter to be optimized,"
-                |respectively.
-                |i.e, "15 c c p" means that within line 15, the first and second
-                |parameters will remain constant and only the third parameter
-                |will be optimized.
-                |
-M + 1 last line |Include "csv_on" to request comma separated value snapshot
-                |files to be printed in the /Data/ParFit subdirectory. Each 
-                |snapshot file contains the relative abinitio and MM energy for 
-                |each dihedral angle. If the file is not needed, use "csv_off".
+---------------- --------------------------------------------------------------------
+ Torsion angle parameter fitting:
+---------------- --------------------------------------------------------------------
+ 1 optional      | Two values, "mult", and the number of molecules for which to fit. 
+                 | Example: 
+                 | mult, Y
+                 | where Y is the the number of molecules to use for parameter
+                 | fitting, Y must be 1 or greater.
+                 | 
+ 2 to N          | the full/comp file type, the root filename, the atoms forming
+                 | the dihedral angle, the triplet defining the dihedral 
+                 | angle, "diha" keyword. For comp file type, omit angle information.
+                 | 
+                 | "full/comp QM data”: if "full" all the Gamess output files 
+                 | must be in the Data/Gamess subdirectory. If "comp,” a compact 
+                 | form of the QM data should be contained in one file in the 
+                 | /Data/Gamess subdirectory.
+                 | 
+                 | "the root filename": the name without "X.log" where "X"
+                 | is the dihedral angle, if "full,” or the name without "scan,”
+                 | if "comp.”
+                 | 
+                 | "the atoms forming the dihedral angle": four numbers defining
+                 | the dihedral angle
+                 | 
+                 | "a triple defining the dihedral angle range": initial, final,
+                 | and angle step size.
+                 | 
+                 | End the lines with "diha" keyword.
+                 | 
+ N + 1           | The full MM engine path.
+                 | 
+ N + 2           | MM-type: "mm3" or "mmf94" 
+                 | 
+ N + 3           | Optimization algorithm: "ga," "fmin," or "hybr"
+                 | 
+ N + 4 to M      | The choice of the parameters to be optimized according to the
+                 | following format:
+                 | line number in add_MM3.prm or add_MMFF94.prm, 'c' or 'p', i.e.
+                 | "constant parameter" and "parameter to be optimized,"
+                 | respectively.
+                 | i.e, "15 c c p" means that within line 15, the first and second
+                 | parameters will remain constant and only the third parameter
+                 | will be optimized.
+                 | 
+ M + 1 last line | Include "csv_on" to request comma separated value snapshot
+                 | files to be printed in the /Data/ParFit subdirectory. Each 
+                 | snapshot file contains the relative abinitio and MM energy for 
+                 | each dihedral angle. If the file is not needed, use "csv_off".
+---------------- --------------------------------------------------------------------
+ Bond length and bond angle parameter fitting:
+---------------- --------------------------------------------------------------------
+ 1               | the full/comp file type, the root filename, [the atom indices forming
+                 | the bond length or bond angle, the triplet defining the bond length/ 
+                 | angle], "bond/angl" keyword. For comp file type, omit angle information.
+                 | 
+                 | "full/comp QM data”: if "full" all the Gamess output files 
+                 | must be in the Data/Gamess subdirectory. If "comp,” a compact 
+                 | form of the QM data should be contained in one file in the 
+                 | /Data/Gamess subdirectory. 
+                 | 
+                 | "the root filename": the name without "X.log" where "X"
+                 | is the dihedral angle, if "full,” or the name without "scan,”
+                 | if "comp.”
+                 | 
+                 | ["the atoms forming the dihedral angle"]: the indices of the atoms
+                 | creating the bond or bond angle
+                 | 
+                 | "a triple defining the bond length/angle range": initial, final,
+                 | and step size measured in degrees or angstroms.
+                 | 
+                 | "bond/angl": End the line with "bond" or "angl" keyword.
+                 | 
+ 2               | The full MM engine path.
+                 | 
+ 3               | MM-type: "mm3" or "mmf94" 
+                 | 
+ 4               | Optimization algorithm: "ga," "fmin," or "hybr"
+                 | 
+ 5               | The choice of the parameters to be optimized according to the
+                 | following format:
+                 | line number in add_MM3.prm or add_MMFF94.prm, 'c' or 'p', i.e.
+                 | "constant parameter" and "parameter to be optimized,"
+                 | respectively.
+                 | i.e, "15 p p" means that within line 15, both parameters should be 
+		 | optimized.
+                 | 
+ 6               | Include "csv_on" to request comma separated value files with a snapshot
+                 | of the MM energies as compared to the QM energy at every 10th step in 
+		 | the calculation. The files are printed to the /Data/ParFit subdirectory.
+                 | To suppress printing the snapshots, use "csv_off".
 
-Sample inputs can be found in the ParFit subdirectory. The "dih_scan_inp_*_mm3" 
-are sample inputs for MM3 and "dih_scan_inp_*_mmf94" for MMFF94. To use 
-templates, copy to a different filename and change the mmengine path.
+Sample inputs can be found in the ParFit subdirectory. The "scan_inp_bond",
+"scan_inp_angl", and "scan_inp" are sample inputs for bond length, bond angle, and
+torsion angle, respectively. To use templates, copy to a different filename and change 
+the MM engine path.
