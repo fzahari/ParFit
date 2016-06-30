@@ -5,3 +5,6 @@ PFinput
 # Engine generated output files
 *inp.pcm
 *out.pcm
+
+# Python byte code
+*.pyc
