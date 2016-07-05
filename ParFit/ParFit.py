@@ -12,12 +12,15 @@ from Ga import run_ga
 def pf_run(PF_if):
 
    scan_type,gopt_type,gopt_s_fnameb,tup,bes,engine_path,mm,mode,alg,opt_lin,np,nc,step_int,csv=par_fit_inp(PF_if)
-   #scan_type=scan_type.strip()   
+   #scan_type=scan_type.strip()
 
    if engine_path=="":
       engine_path="../Engine"
 
    sdir=[]
+   PF_data="../Data/ParFit"
+   if os.path.exists(PF_data)==False:
+       os.mkdir(PF_data)
    pref="../Data/ParFit/"+PF_if
    sdir.append(pref)
    if os.path.exists(pref):
@@ -25,7 +28,7 @@ def pf_run(PF_if):
       print 'Warning: The directory',pref,'exists!'
       print
       sys.exit()
-   os.mkdir(pref)   
+   os.mkdir(pref)
    for gsf in gopt_s_fnameb:
       sd_gsf=pref+"/"+gsf
       sdir.append(sd_gsf)
@@ -84,7 +87,7 @@ def pf_run(PF_if):
       engine_rmse.step+=1
 
       return round(rmse/n,4)
-  
+
    engine_rmse.step=1
 
    def engine_rmse2(p):
@@ -108,7 +111,7 @@ def pf_run(PF_if):
       ppM=numpy.zeros(np)
       ppP=numpy.zeros(np)
       p0=engine_rmse(p)
-      for i in range(np): 
+      for i in range(np):
          for j in range(np):
             ppM[j]=p[j]
             ppP[j]=p[j]
@@ -133,16 +136,16 @@ def pf_run(PF_if):
          hof0=numpy.array(hof[0])
          write_add(sdir,hof0,c,mm,ol_templ,lines,1,"ga",None)
          fmin(engine_rmse,hof0,ftol=0.2)
-      else: 
+      else:
          "'alg' is not a known algorithm!"
 
 PF_input_fname="scan_inp"
 
 lsa=len(sys.argv)
 if lsa>2:
-   print 
+   print
    print 'Use: "./ParFit.py name_of_ParFit_input_file"'
-   print 
+   print
 elif lsa==2:
    PF_input_fname=h=sys.argv[1]
 
