@@ -70,7 +70,8 @@ class ScanElem(Molecule):
         for i in range(ln):
             if gkey in lines[i]: break
         #
-        self._rl=[]
+        #self._rl=[]
+        #atom_list=[]
         for line in lines[i+4:]:
             if line[:-1]=="": break
             s,c,x,y,z=line[:-1].split()
@@ -84,6 +85,12 @@ class ScanElem(Molecule):
                 self._tl.append(default_mmff94_type[s])
             else:
                 print "ScanElem.read_gopt_log: Wrong MM-type!"
+            #s,c,x,y,z=line[:-1].split()
+            #symbl=s.upper()
+            #coord=map(float,[x,y,z])
+            #charg=float(c)
+            #atom_list.append(Atom(symbl,coord,charg,self._mm))
+        #self.a_list_update(atom_list)
         self._rl=array(self._rl,'d')
         self._na=len(self._rl)
         #
@@ -109,6 +116,7 @@ class ScanElem(Molecule):
         #
         self._ginp_templ1=lines[:i+3]
         #
+        #atom_list=[]
         for j in range(i+3,ln):
             if ekey in lines[j].upper(): break
             s,c,x,y,z=lines[j][:-1].split()
@@ -122,9 +130,15 @@ class ScanElem(Molecule):
                 self._tl.append(default_mmff94_type[s])
             else:
                 print "ScanElem.read_gopt_log: Wrong MM-type!"
-        self._ginp_templ2=lines[j+1:]
+            #s,c,x,y,z=lines[j][:-1].split()
+            #symbl=s.upper()
+            #coord=map(float,[x,y,z])
+            #charg=float(c)
+            #atom_list.append(Atom(symbl,coord,charg,self._mm))
+        #self.a_list_update(atom_list)
         self._rl=array(self._rl,'d')
         self._na=len(self._rl)
+        self._ginp_templ2=lines[j+1:]
         #
         #
         self.set_conn()
@@ -295,7 +309,7 @@ class Scan(object):
         lines=f.readlines() 
         f.close()
         self._t=map(int,lines[0][:-1].split())
-        self._t=map(lambda x:x-1,self._t)
+        #self._t=map(lambda x:x-1,self._t)
         self._rt=map(int,map(float,lines[1][:-1].split()))
         l=int(lines[2][:-1])
         lines=lines[3:]
@@ -311,6 +325,7 @@ class Scan(object):
             se._cl=[]
             se._tl=[]
             lines=lines[1:]
+            #atom_list=[]
             for j in range(na):
                 s,x,y,z,c=lines[j].split()
                 s=s.upper()
@@ -323,6 +338,12 @@ class Scan(object):
                     se._tl.append(default_mmff94_type[s])
                 else:
                     print "ScanElem.read_gopt_log: Wrong MM-type!"
+                #s,x,y,z,c=lines[j].split()
+                #symbl=s.upper()
+                #coord=map(float,[x,y,z])
+                #charg=float(c)
+                #atom_list.append(Atom(symbl,coord,charg,self._mm))
+            #se.a_list_update(atom_list)
             se._rl=array(se._rl,'d')
             se._na=len(se._rl)
             se.set_conn()

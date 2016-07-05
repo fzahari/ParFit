@@ -133,7 +133,7 @@ def run_ga(engine_rmse,np,ngen):
    hof = tools.HallOfFame(np, similar=numpy.allclose)
 
    pop=toolbox.population(n=50)
-   eaSimple(pop,toolbox,cxpb=0.3,mutpb=0.05,ngen=ngen,stats=stats,halloffame=hof,verbose=True)
+   eaSimple(pop,toolbox,cxpb=0.35,mutpb=0.05,ngen=ngen,stats=stats,halloffame=hof,verbose=True)
    print "The best rmse is", hof[0].fitness.values[0],"corresponding to the parameters",numpy.array(hof[0])
 
    #return hof[0:int(np/20)]

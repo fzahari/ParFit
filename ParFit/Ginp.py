@@ -4,7 +4,7 @@ import sys
 from Scan import DihAScan,BondScan,AnglScan
 from _IO import ginp_inp
 
-def pf_run(input_fname):
+def pf_inp_run(input_fname):
   
    scan_type,gopt_s_fnameb,tup,bes=ginp_inp(input_fname)
 
@@ -33,4 +33,4 @@ if lsa>2:
 elif lsa==2:
    GI_input_fname=h=sys.argv[1]
 
-pf_run(GI_input_fname)
+pf_inp_run(GI_input_fname)

@@ -182,6 +182,7 @@ class Molecule(object):
     @property 
     def conn(self):
         return self._conn
+
     @property
     def br(self):
         return self._br
