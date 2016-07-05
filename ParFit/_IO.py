@@ -112,27 +112,41 @@ def par_fit_inp(input_fname):
     nc=0
     opt_lin={}
     alg=lines[n+3].strip()
+    sflag=False
     for line in lines[n+4:-1]:
 	t=line.split()
         n=len(t)-1
         for i in range(n):
             t[i+1]=t[i+1].lower()
-            if t[i+1][0]=='p': 
+            if t[i+1][0]=='-':
+                #t[i+1]=t[i+1][1:]
+                sflag=True
+            elif t[i+1][0]=='+':
+                sflag=True
+                #t[i+1]=t[i+1][1:]
+            if sflag:
+               if t[i+1][1]=='p': 
+                  np+=1
+            else:
+               if t[i+1][0]=='p': 
                #plab=t[i+1][1:]
                #if len(plab)>0:               
                #   if plab in plist:
                #      continue
                #   else:
                #      plist.append(plab)
-               np+=1
+                  np+=1
             if t[i+1]=='c': 
                nc+=1
         if n==3:
-           opt_lin.update({int(t[0])-1:(t[1],t[2],t[3])})
+           #opt_lin.update({int(t[0])-1:(t[1],t[2],t[3])})
+           opt_lin.update({int(t[0])-1:[t[1],t[2],t[3]]})
         elif n==2:
-           opt_lin.update({int(t[0])-1:(t[1],t[2])})
+           #opt_lin.update({int(t[0])-1:(t[1],t[2])})
+           opt_lin.update({int(t[0])-1:[t[1],t[2]]})
         elif n==1:
-           opt_lin.update({int(t[0])-1:(t[1],)})
+           #opt_lin.update({int(t[0])-1:(t[1],)})
+           opt_lin.update({int(t[0])-1:[t[1],]})
     last_line=lines[-1].split()
     if len(last_line)==1:
        step_int=10
@@ -178,14 +192,16 @@ def read_add(mm,opt_lin,np,nc,fl,scan_type):
        n=2
     elif scan_type=="angl":
        n=2
+    #mflag=False
     for ol_sk in ol_keys:
         s=""
         t=opt_lin[ol_sk]
-        minuses=[]
+        #minuses=[]
         for k in range(n):
             if t[k][0]=='-':
                 t[k]=t[k][1:]
-                minuses.append(k)
+                #minuses.append(k)
+                #mflag=True
             elif t[k][0]=='+':
                 t[k]=t[k][1:]
             if t[k][0]=='p':
@@ -211,31 +227,42 @@ def read_add(mm,opt_lin,np,nc,fl,scan_type):
         v=lines[ol_sk].split()
         ol_vars=s[:-1]
         if scan_type=="diha":
-           v[4:9:2]=map(float,v[4:9:2])
-           for k in minuses:
-              v[5+2*k]=-v[5+2*k]  
+           #v[5:10:2]=map(float,v[5:10:2])
+           #for k in minuses:
+           #    print v[5+2*k]
+           #   v[5+2*k]=float(v[5+2*k])  
+           #   v[5+2*k]=str(v[5+2*k])  
+           #v[5:10:2]=map(str,v[5:10:2])
            exec ol_vars+"="+v[5]+","+v[7]+","+v[9]
+           print "minuses",ol_vars
            v[1:5]=map(int,v[1:5])
            s1='"%s        %3i  %3i  %3i  %3i'%(v[0],v[1],v[2],v[3],v[4])
            s2='      %6.3f +1   %6.3f -2 %6.3f +3      "%('+ol_vars+')'
         elif scan_type=="bond":
-           v[2:4]=map(float,v[2:4])
-           for k in minuses:
-              v[3+k]=-v[3+k]  
+           #v[3:5]=map(float,v[3:5])
+           #for k in minuses:
+           #   v[3+k]=-float(v[3+k])  
+           #   v[3+k]=str(v[3+k])  
+           #v[3:5]=map(str,v[3:5])
            exec ol_vars+"="+v[3]+","+v[4]
            v[1:3]=map(int,v[1:3])
            s1='"%s        %3i  %3i'%(v[0],v[1],v[2])
            s2='      %6.3f    %6.3f        "%('+ol_vars+')'
         elif scan_type=="angl":
-           v[3:5]=map(float,v[3:5])
-           for k in minuses:
-              v[4+k]=-v[4+k]  
+           #v[4:6]=map(float,v[4:6])
+           #for k in minuses:
+           #   v[4+k]=-float(v[4+k])  
+           #   v[4+k]=str(v[4+k])  
+           #v[4:6]=map(str,v[4:6])
            exec ol_vars+"="+v[4]+","+v[5]
            v[1:4]=map(int,v[1:4])
            s1='"%s        %3i  %3i  %3i'%(v[0],v[1],v[2],v[3])
            s2='      %6.3f    %6.3f        "%('+ol_vars+')'
         ol_templ.update({ol_sk:s1+s2})
-
+    
+    ncon=len(pdict)     
+    p=p[:-ncon] 
+ 
     return p,c,ol_templ,lines
 
 def write_add(sdir,p,c,mm,ol_templ,lines,fl,step,step_int):

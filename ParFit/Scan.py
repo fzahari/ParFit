@@ -184,11 +184,11 @@ class ScanElem(Molecule):
                 else:
                     print >>f,j+1,"1",
             print >>f
-        if styp=="Bond":
+        if styp=="bond":
            print >>f,"}"
-        elif styp=="Angl":
+        elif styp=="angl":
            print >>f,"}"
-        elif styp=="DihA":
+        elif styp=="diha":
            t1,t2,t3,t4=self._t
            self._v=self.calc_dihedral(t1,t2,t3,t4)
            da=rad2deg(self._v)
@@ -205,11 +205,11 @@ class ScanElem(Molecule):
         self._rl=[]
         for line in lines[5:5+self._na]:
             self._rl.append(array(map(float,line.split()[3:6])))
-        if styp=="Bond":
+        if styp=="bond":
            self._e=float(lines[2].split()[6])
-        elif styp=="Angl":
+        elif styp=="angl":
            self._e=float(lines[2].split()[6])
-        elif styp=="DihA":
+        elif styp=="diha":
            self._e=float(lines[2].split()[8])
 
     def diha_rot(self,diha_rot_val):
@@ -372,7 +372,7 @@ class Scan(object):
             fnameb=m.name
             coengine_name="coengine_"+fnameb
             f=open("../Data/Engine/"+coengine_name,'w')
-            if self._styp=="DihA":
+            if self._styp=="diha":
                print >>f,"mode opt"
             else:
                print >>f,"mode single"
@@ -434,7 +434,7 @@ class BondScan(Scan):
     def __init__(self,sdir,gopt_s_fnameb,engine_path,mm,opt_lin,np,nc,ran_tup,tup=(),gopt_b_fnameb="mp2_base"):
        if not tup==():
           assert len(tup)==2
-       super(BondScan,self).__init__(sdir,gopt_s_fnameb,engine_path,mm,opt_lin,np,nc,ran_tup,tup,gopt_b_fnameb,"Bond")
+       super(BondScan,self).__init__(sdir,gopt_s_fnameb,engine_path,mm,opt_lin,np,nc,ran_tup,tup,gopt_b_fnameb,"bond")
 
     def write_gamess_inputs(self):
         #self._gen_geometries()
@@ -499,7 +499,7 @@ class AnglScan(Scan):
     def __init__(self,sdir,gopt_s_fnameb,engine_path,mm,opt_lin,np,nc,ran_tup,tup=(),gopt_b_fnameb="mp2_base"):
        if not tup==():
           assert len(tup)==3
-       super(AnglScan,self).__init__(sdir,gopt_s_fnameb,engine_path,mm,opt_lin,np,nc,ran_tup,tup,gopt_b_fnameb,"Angl")
+       super(AnglScan,self).__init__(sdir,gopt_s_fnameb,engine_path,mm,opt_lin,np,nc,ran_tup,tup,gopt_b_fnameb,"angl")
 
     def write_gamess_inputs(self):
         #self._gen_geometries()
@@ -563,7 +563,7 @@ class DihAScan(Scan):
     def __init__(self,sdir,gopt_s_fnameb,engine_path,mm,opt_lin,np,nc,ran_tup,tup=(),gopt_b_fnameb="mp2_base"):
        if not tup==():
           assert len(tup)==4
-       super(DihAScan,self).__init__(sdir,gopt_s_fnameb,engine_path,mm,opt_lin,np,nc,ran_tup,tup,gopt_b_fnameb,"DihA")
+       super(DihAScan,self).__init__(sdir,gopt_s_fnameb,engine_path,mm,opt_lin,np,nc,ran_tup,tup,gopt_b_fnameb,"diha")
 
     def write_gamess_inputs(self):
         #self._gen_geometries()
