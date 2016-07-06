@@ -234,7 +234,7 @@ def read_add(mm,opt_lin,np,nc,fl,scan_type):
            #   v[5+2*k]=str(v[5+2*k])  
            #v[5:10:2]=map(str,v[5:10:2])
            exec ol_vars+"="+v[5]+","+v[7]+","+v[9]
-           print "minuses",ol_vars
+           #print "minuses",ol_vars
            v[1:5]=map(int,v[1:5])
            s1='"%s        %3i  %3i  %3i  %3i'%(v[0],v[1],v[2],v[3],v[4])
            s2='      %6.3f +1   %6.3f -2 %6.3f +3      "%('+ol_vars+')'

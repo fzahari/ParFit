@@ -48,7 +48,7 @@ def restore_hang_prm():
     shutil.copy("../Data/Engine/add_MM3_hang.prm_orig","../Data/Engine/add_MM3_hang.prm")
 
 if __name__=="__main__":
-    engine_path="/home/federico/CODES/MM_engine_source/"
+    engine_path="/Users/federicozahariev1/Work/Programs/CODES/MM_engine_source/"
     os.environ["Engine_DIR"]=engine_path+"engine_dir"
     coeng_name="coengine_hang"
     timeout=10
