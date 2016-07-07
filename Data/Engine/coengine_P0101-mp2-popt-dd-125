@@ -1,6 +1,0 @@
-mode opt
-infile  P0101-mp2-popt-dd-125_inp.pcm
-outfile P0101-mp2-popt-dd-125_out.pcm
-print 3
-forcefield mm3
-addpar add_MM3.prm
