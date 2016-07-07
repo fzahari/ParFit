@@ -119,16 +119,15 @@ def par_fit_inp(input_fname):
         for i in range(n):
             t[i+1]=t[i+1].lower()
             if t[i+1][0]=='-':
-                #t[i+1]=t[i+1][1:]
                 sflag=True
             elif t[i+1][0]=='+':
                 sflag=True
-                #t[i+1]=t[i+1][1:]
             if sflag:
                if t[i+1][1]=='p': 
                   np+=1
             else:
                if t[i+1][0]=='p': 
+            #if t[i+1][0]=='p': 
                #plab=t[i+1][1:]
                #if len(plab)>0:               
                #   if plab in plist:
@@ -228,6 +227,7 @@ def read_add(mm,opt_lin,np,nc,fl,scan_type):
         ol_vars=s[:-1]
         if scan_type=="diha":
            #v[5:10:2]=map(float,v[5:10:2])
+           #v[4:9:2]=map(float,v[4:9:2])
            #for k in minuses:
            #    print v[5+2*k]
            #   v[5+2*k]=float(v[5+2*k])  
@@ -261,7 +261,8 @@ def read_add(mm,opt_lin,np,nc,fl,scan_type):
         ol_templ.update({ol_sk:s1+s2})
     
     ncon=len(pdict)     
-    p=p[:-ncon] 
+    if ncon>0:
+       p=p[:-ncon] 
  
     return p,c,ol_templ,lines
 

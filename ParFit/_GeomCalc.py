@@ -12,7 +12,7 @@ def vangle(v1,v2):
     #return rad2deg(arccos(dot(v1/norm(v1),v2/norm(v2))))
     vdot=dot(v1/norm(v1),v2/norm(v2))
     if allclose(vdot,1.0): return 0.0 
-    if allclose(vdot,-1.0): return pi/2. 
+    if allclose(vdot,-1.0): return pi
     return arccos(vdot)
 
 def dist(r1,r2):
