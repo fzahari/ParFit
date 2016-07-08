@@ -112,11 +112,11 @@ def par_fit_inp(input_fname):
     nc=0
     opt_lin={}
     alg=lines[n+3].strip()
-    sflag=False
     for line in lines[n+4:-1]:
 	t=line.split()
         n=len(t)-1
         for i in range(n):
+            sflag=False
             t[i+1]=t[i+1].lower()
             if t[i+1][0]=='-':
                 sflag=True
@@ -191,16 +191,17 @@ def read_add(mm,opt_lin,np,nc,fl,scan_type):
        n=2
     elif scan_type=="angl":
        n=2
-    mflag=False
+    constr_count=0
     for ol_sk in ol_keys:
         s=""
         s2=""
         t=opt_lin[ol_sk]
-        #minuses=[]
+        minuses=[]
         for k in range(n):
+            mflag=False
             if t[k][0]=='-':
                 t[k]=t[k][1:]
-                #minuses.append(k)
+                minuses.append(k)
                 mflag=True
             elif t[k][0]=='+':
                 t[k]=t[k][1:]
@@ -209,6 +210,7 @@ def read_add(mm,opt_lin,np,nc,fl,scan_type):
                 if len(plab)>0:
                    if pdict.has_key(plab):
                       ii=pdict[plab]
+                      constr_count+=1
                    else:
                       pdict.update({plab:i})
                       ii=i
@@ -233,13 +235,13 @@ def read_add(mm,opt_lin,np,nc,fl,scan_type):
         ol_vars=s[:-1]
         ol_vars2=s2[:-1]
         if scan_type=="diha":
-           #v[5:10:2]=map(float,v[5:10:2])
+           v[5:10:2]=map(float,v[5:10:2])
            #v[4:9:2]=map(float,v[4:9:2])
-           #for k in minuses:
+           for k in minuses:
            #    print v[5+2*k]
-           #   v[5+2*k]=float(v[5+2*k])  
+              v[5+2*k]=-v[5+2*k]  
            #   v[5+2*k]=str(v[5+2*k])  
-           #v[5:10:2]=map(str,v[5:10:2])
+           v[5:10:2]=map(str,v[5:10:2])
            exec ol_vars+"="+v[5]+","+v[7]+","+v[9]
            #print "minuses",ol_vars
            v[1:5]=map(int,v[1:5])
@@ -267,9 +269,8 @@ def read_add(mm,opt_lin,np,nc,fl,scan_type):
            s2='      %6.3f    %6.3f        "%('+ol_vars2+')'
         ol_templ.update({ol_sk:s1+s2})
     
-    ncon=len(pdict)     
-    if ncon>0:
-       p=p[:-ncon] 
+    if constr_count>0:
+       p=p[:-constr_count] 
    
     return p,c,ol_templ,lines
 
