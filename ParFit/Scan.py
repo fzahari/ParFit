@@ -373,8 +373,8 @@ class Scan(object):
     def run_dih_elem(self,m):
             fnameb=m.name
             coengine_name="coengine_"+fnameb
-            #f=open("../Data/Engine/"+coengine_name,'w')
-            f=open(coengine_name,'w')
+            f=open("../Data/Engine/"+coengine_name,'w')
+            #f=open(coengine_name,'w')
             if self._styp=="diha":
                print >>f,"mode opt"
             else:
@@ -403,12 +403,12 @@ class Scan(object):
                     #pert_add_param("add_MM3.prm")
                     write_add(self.sdir,p,c,self._mm,ol_templ,lines,1,None,None)
             #
-            #comm="rm ../Data/Engine/"+coengine_name
-            comm="rm "+coengine_name
+            comm="rm ../Data/Engine/"+coengine_name
+            #comm="rm "+coengine_name
             system(comm)
 
     def run_scan(self,p,c,mm,ol_templ):
-        os.chdir("../Data/Engine")
+        #os.chdir("../Data/Engine")
         from multiprocessing import Pool
         p=Pool()
         p.map(self.run_dih_elem,self._ml)
@@ -416,7 +416,7 @@ class Scan(object):
         #p.close()
         #p.join()
         #map(self.run_dih_elem,self._ml)
-        os.chdir("../../ParFit")
+        #os.chdir("../../ParFit")
 
     def calc_rmse(self,csv,mi,step,step_int):
         self.read_engine_outputs()
