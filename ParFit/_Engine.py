@@ -40,9 +40,9 @@ def pert_add_param(add_name):
 
 def run_engine_timeout(engine_path,coengine_name,timeout):
     os.chdir("../Data/Engine")
-    #status=RunCmd([engine_path+"/engine.x",coengine_name],timeout).Run()
-    os.system(engine_path+"/engine.x "+coengine_name)
-    status=True
+    status=RunCmd([engine_path+"/engine.x",coengine_name],timeout).Run()
+    #os.system(engine_path+"/engine.x "+coengine_name)
+    #status=True
     os.chdir("../../ParFit")
     return status
 
