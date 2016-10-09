@@ -7,6 +7,11 @@ def ginp_inp(input_fname):
     lines=f.readlines()
     f.close()
     line1=lines[0][:-1].split(',')
+    if line1[0].lower()=="nwchem":
+       prog_type="nwchem"
+       line1=line1[1:]
+    else:
+       prog_type="gamess"   
     if len(line1)==3:
        gopt_scan_fnameb,tup,bes=line1
        scan_type="diha"
@@ -25,7 +30,7 @@ def ginp_inp(input_fname):
        tup=(t1,t2,t3)
     b,e,s=map(float,bes.split())
     bes=(b,e,s)
-    return scan_type,gopt_scan_fnameb,tup,bes
+    return prog_type,scan_type,gopt_scan_fnameb,tup,bes
 
 def par_fit_inp(input_fname):
     f=open(input_fname,'r')

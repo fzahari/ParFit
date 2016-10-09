@@ -6,24 +6,33 @@ from _IO import ginp_inp
 
 def pf_inp_run(input_fname):
   
-   scan_type,gopt_s_fnameb,tup,bes=ginp_inp(input_fname)
+   prog_type,scan_type,gopt_s_fnameb,tup,bes=ginp_inp(input_fname)
 
    if scan_type=="diha":
       bes=map(int,bes)
       ds=DihAScan(None,gopt_s_fnameb,None,"mm3",None,None,None,bes,tup)
-      ds.write_gamess_inputs()
+      if prog_type=="nwchem":
+         ds.write_nwchem_inputs()
+      else:
+         ds.write_gamess_inputs()
    elif scan_type=="bond":
       bes=map(lambda x:10.*x,bes)
       bes=map(int,bes)
       ds=BondScan(None,gopt_s_fnameb,None,"mm3",None,None,None,bes,tup)
-      ds.write_gamess_inputs()
+      if prog_type=="nwchem":
+         ds.write_nwchem_inputs()
+      else:
+         ds.write_gamess_inputs()
    elif scan_type=="angl":
       bes=map(lambda x:10.*x,bes)
       bes=map(int,bes)
       ds=AnglScan(None,gopt_s_fnameb,None,"mm3",None,None,None,bes,tup)
-      ds.write_gamess_inputs()
+      if prog_type=="nwchem":
+         ds.write_nwchem_inputs()
+      else:
+         ds.write_gamess_inputs()
 
-GI_input_fname="gout_inp"
+GI_input_fname="ginp_inp"
 
 lsa=len(sys.argv)
 if lsa>2:

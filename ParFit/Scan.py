@@ -4,7 +4,7 @@ from os import system,environ
 from numpy import rad2deg,array,sqrt,pi,around,deg2rad
 from _IO import par_fit_inp,read_add,write_add
 from _Engine import run_engine_timeout, pert_add_param
-from GeomStr import Molecule,default_mm3_type,default_mmff94_type
+from GeomStr import Molecule,default_mm3_type,default_mmff94_type,default_charge
 
 import os
 
@@ -94,13 +94,56 @@ class ScanElem(Molecule):
             #atom_list.append(Atom(symbl,coord,charg,self._mm))
         #self.a_list_update(atom_list)
         self._rl=array(self._rl,'d')
+        self._cl=array(self._cl,'d')
         self._na=len(self._rl)
         #
         for line in lines[i+5+self._na:]:
             if ekey in line: self._e=float(line.split()[3])
         #
         self.set_conn()
-        self.bens_ring()
+        self.benz_ring()
+        self.bond_ord()
+
+    def read_nopt_out(self,fname_base):	
+        gkey="Optimization converged"
+        #ekey="Step       Energy"
+        ckey="Output coordinates in angstroms"
+        #
+        fname="../Data/Nwchem/"+fname_base+".out"
+        f=open(fname,'r')
+        lines=f.readlines()
+        f.close()
+        #
+        ln=len(lines)
+        for i in range(ln):
+            if gkey in lines[i]: break
+        #
+        self._e=float(lines[i+6][:-1].split()[2])
+        #
+        lines=lines[i+7:]
+        ln=len(lines)
+        for i in range(ln):
+            if ckey in lines[i]: break
+        #
+        for line in lines[i+4:]:
+            if len(line[:-1].split())==0: break
+            n,s,c,x,y,z=line[:-1].split()
+            s=s.upper()
+            self._sl.append(s)
+            self._rl.append(array(map(float,[x,y,z]),'d'))
+            self._cl.append(float(c))
+            if self._mm=="mm3":
+                self._tl.append(default_mm3_type[s])
+            elif self._mm=="mmff94":
+                self._tl.append(default_mmff94_type[s])
+            else:
+                print "ScanElem.read_gopt_log: Wrong MM-type!"
+        self._rl=array(self._rl,'d')
+        self._cl=array(self._cl,'d')
+        self._na=len(self._rl)
+        #
+        self.set_conn()
+        self.benz_ring()
         self.bond_ord()
 
     def read_ginp(self,fname_base):	
@@ -139,12 +182,51 @@ class ScanElem(Molecule):
             #atom_list.append(Atom(symbl,coord,charg,self._mm))
         #self.a_list_update(atom_list)
         self._rl=array(self._rl,'d')
+        self._cl=array(self._cl,'d')
         self._na=len(self._rl)
         self._ginp_templ2=lines[j+1:]
         #
         #
         self.set_conn()
-        self.bens_ring()
+        self.benz_ring()
+        self.bond_ord()
+
+    def read_ninp(self,fname_base):	
+        dkey="geometry"
+        ekey="end"
+        #
+        fname="../Data/Nwchem/"+fname_base+".nw"
+        f=open(fname,'r')
+        lines=f.readlines()
+        f.close()
+        #
+        ln=len(lines)
+        for i in range(ln):
+            if dkey in lines[i].lower(): break
+        #
+        self._ginp_templ1=lines[:i+1]
+        #
+        for j in range(i+1,ln):
+            if ekey in lines[j].lower(): break
+            s,x,y,z=lines[j][:-1].split()
+            s=s.upper()
+            self._sl.append(s)
+            self._rl.append(array(map(float,[x,y,z]),'d'))
+            self._cl.append(default_charge[s])
+            if self._mm=="mm3":
+                self._tl.append(default_mm3_type[s])
+            elif self._mm=="mmff94":
+                self._tl.append(default_mmff94_type[s])
+            else:
+                print "ScanElem.read_gopt_log: Wrong MM-type!"
+        self._rl=array(self._rl,'d')
+        self._cl=array(self._cl,'d')
+        self._na=len(self._rl)
+        self._ginp_templ2=lines[j:]
+        #
+        #
+        self.set_conn()
+        self.benz_ring()
         self.bond_ord()
 
     def write_gopt_inp(self,fname_base):
@@ -305,6 +387,25 @@ class Scan(object):
             self._v.update({se.name:rad2deg(se.v)})
             self._ge.update({se.name:se.e})
 
+    def read_nwchem_outputs(self):
+        self._ge={}
+        b,e,s=self._rt
+        e+=1
+        for n in range(b,e,s):
+            sn0=str(n)
+            if (n<10):
+                sn="00"+sn0
+            elif (n<100):
+                sn="0"+sn0
+            else:
+                sn=sn0
+            fnameb=self.gopt_scan_fnameb+sn
+            se=ScanElem(tup=self._t,mm=self._mm,name=fnameb)
+            se.read_nopt_out(fnameb)
+            self._ml.append(se)
+            self._v.update({se.name:rad2deg(se.v)})
+            self._ge.update({se.name:se.e})
+
     def read_gouts_data(self):
         fnameb=self.gopt_scan_fnameb
         f=open("../Data/Gamess/"+fnameb+"scan",'r')
@@ -349,7 +450,7 @@ class Scan(object):
             se._rl=array(se._rl,'d')
             se._na=len(se._rl)
             se.set_conn()
-            se.bens_ring()
+            se.benz_ring()
             se.bond_ord()
             self._ml.append(se)
             v,e=map(float,[v,e])
@@ -484,6 +585,42 @@ class BondScan(Scan):
               print >>f,line[:-1]
            f.close()
 
+    def write_nwchem_inputs(self):
+        fnameb=self.gopt_scan_fnameb
+        rt=self.rt
+        se=ScanElem(tup=self.t,mm=self.mm,name=fnameb)
+        se.read_ninp(fnameb)
+        t1,t2=self.t
+        dar=se.calc_dist(t1,t2)
+        b,e,s=rt
+        se.bond_tra(0.1*b-dar)
+        e+=1
+        na=se.na
+        for n in range(b,e,s):
+           sn0=str(n)
+           if (n<10):
+              sn="00"+sn0
+           elif (n<100):
+              sn="0"+sn0
+           else:
+              sn=sn0
+           f=open("../Data/Nwchem/"+fnameb+"-"+sn+".nw",'w')
+           for line in se._ginp_templ1:
+              print >>f,line[:-1]
+           if not n==b:
+              se.bond_tra(0.1*s)
+           rl=se.rl
+           #cl=se.cl
+           sl=se.sl
+           print >>f," zcoord; bond ",t1+1,t2+1,0.1*float(n)," constant; end"
+           for i in range(na):
+              x,y,z=rl[i]
+              #print >>f,"",sl[i],cl[i],x,y,z
+              print >>f,"",sl[i],x,y,z
+           for line in se._ginp_templ2:
+              print >>f,line[:-1]
+           f.close()
+
     def write_gouts_data(self):
         fnameb=self.gopt_scan_fnameb
         f=open("../Data/Gamess/"+fnameb+"scan",'w')
@@ -548,6 +685,42 @@ class AnglScan(Scan):
               print >>f,line[:-1]
            f.close()
 
+    def write_nwchem_inputs(self):
+        fnameb=self.gopt_scan_fnameb
+        rt=self.rt
+        se=ScanElem(tup=self.t,mm=self.mm,name=fnameb)
+        se.read_ninp(fnameb)
+        t1,t2,t3=self.t
+        dar=se.calc_angle(t1,t2,t3)
+        b,e,s=rt
+        se.angl_rot(deg2rad(0.1*b)-dar)
+        e+=1
+        na=se.na
+        for n in range(b,e,s):
+           sn0=str(n)
+           if (n<10):
+              sn="00"+sn0
+           elif (n<100):
+              sn="0"+sn0
+           else:
+              sn=sn0
+           f=open("../Data/Nwchem/"+fnameb+"-"+sn+".nw",'w')
+           for line in se._ginp_templ1:
+              print >>f,line[:-1]
+           if not n==b:
+              se.angl_rot(deg2rad(0.1*s))
+           rl=se.rl
+           #cl=se.cl
+           sl=se.sl
+           print >>f," zcoord; angle ",t1+1,t2+1,t3+1,0.1*float(n)," constant; end"
+           for i in range(na):
+              x,y,z=rl[i]
+              #print >>f,"",sl[i],cl[i],x,y,z
+              print >>f,"",sl[i],x,y,z
+           for line in se._ginp_templ2:
+              print >>f,line[:-1]
+           f.close()
+
     def write_gouts_data(self):
         fnameb=self.gopt_scan_fnameb
         f=open("../Data/Gamess/"+fnameb+"scan",'w')
@@ -608,6 +781,41 @@ class DihAScan(Scan):
               x,y,z=rl[i]
               print >>f,"",sl[i],cl[i],x,y,z
            print >>f," $END"
+           for line in se._ginp_templ2:
+              print >>f,line[:-1]
+           f.close()
+
+    def write_nwchem_inputs(self):
+        fnameb=self.gopt_scan_fnameb
+        b,e,s=self.rt
+        se=ScanElem(tup=self.t,mm=self.mm,name=fnameb)
+        se.read_ninp(fnameb)
+        t1,t2,t3,t4=self.t
+        dar=se.calc_dihedral(t1,t2,t3,t4)
+        se.diha_rot(deg2rad(b)-dar)
+        e+=1
+        na=se.na
+        for n in range(b,e,s):
+           sn0=str(n)
+           if (n<10):
+              sn="00"+sn0
+           elif (n<100):
+              sn="0"+sn0
+           else:
+              sn=sn0
+           f=open("../Data/Nwchem/"+fnameb+"-"+sn+".nw",'w')
+           for line in se._ginp_templ1:
+              print >>f,line[:-1]
+           if not n==b:
+              se.diha_rot(deg2rad(s))
+           rl=se.rl
+           #cl=se.cl
+           sl=se.sl
+           print >>f," zcoord; torsion ",t1+1,t2+1,t3+1,t4+1,float(n)," constant; end"
+           for i in range(na):
+              x,y,z=rl[i]
+              #print >>f,"",sl[i],cl[i],x,y,z
+              print >>f,"",sl[i],x,y,z
            for line in se._ginp_templ2:
               print >>f,line[:-1]
            f.close()

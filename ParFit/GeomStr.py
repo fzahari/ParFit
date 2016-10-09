@@ -274,7 +274,7 @@ class Molecule(object):
             delr=rotu(self._rl[ai]-self._rl[t2],u,diha_rot_val)
             self._rl[ai]=self._rl[t2]+delr
  
-    def bens_ring(self):
+    def benz_ring(self):
         #mol=["C","C","C","H","H","H","H","H","H","C","C","C","C","C","C","C","C","C","C","C"]
         #conn=[[1,9],[0,2],[1,11],[0],[1],[2],[9],[10],[11],[0,10],[9,11],[10,2],[13,17],[12,14],[13,15],[14,16],[15,17],[16,12],[17,19],[18,0]]
         mol=self._sl
@@ -447,4 +447,4 @@ if __name__=="__main__":
     print "2",m.rl
     m.bond_ord()
     print m.db
-    print m.bens_ring()
+    print m.benz_ring()
