@@ -1,0 +1,17 @@
+double energy(void);
+void tncg(int,int,int *,double *,double *, double, double (*)(),  void (*)());
+void mqn(int , int, int *,double *,double *, double, double (*)() );
+double minimize1(double *, double *);
+void search(int,double *,double *,double *,double *,double,double *,int *,double (*)(),int *);
+double newton1(double *, double *);
+void newton2(int, double *,double *,int *, int *, int *, double *);
+void hessian(double *, int *, int *, int *,double *);
+void gradient(void);
+void piseq(int, int);
+void piden(void);
+void inesc(char *);
+void update(void);
+void hdel(int);
+void hadd(void);
+void minimize(void);
+double minimiz1(double *, double *);

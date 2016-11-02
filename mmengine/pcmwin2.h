@@ -1,0 +1,18 @@
+void deleteatom(int);
+int make_atom(int, float, float, float,char *);
+void make_bond(int, int, int);
+void hadd(void);
+void hdel(int);
+void type(void);
+void set_atomtypes(int);        
+void nhadd(void);
+void  hcoord(void);
+void revec(void);
+void  xyplan(float *, float *, float *);
+void xaxis(float *,float *,float *);
+void getvec(void);
+void reseq(void);
+void check_methane(void);
+void generate_bonds(void);
+void set_atomdata(int, int,int,int,int,int);
+void message_alert(char *, char *);

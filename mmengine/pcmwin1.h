@@ -1,0 +1,12 @@
+void type_mmx(void);
+void type_mm3(void);
+void hdel(int);
+void quick_type(void);
+void set_atomdata(int,int,int,int,int,int);
+void message_alert(char *, char *);
+void set_atomtypes(int);   
+void type(void);
+double dihdrl(int,int,int,int);
+void avgleg(void);
+void center(int);
+double ooplane(int,int,int,int);     

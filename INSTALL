@@ -22,9 +22,10 @@ selected systems. For the Deap library, visit https://pypi.python.org/pypi/deap
 
  * "Engine":
 
-The proprietory MM ENGINE software from www.serenasoft.com has to be 
-installed and the directory of installation has to be put into the variable 
-engine_path in Fit/_Engine.py.
+The BSD licensed MM ENGINE software from www.serenasoft.com has 
+to be installed. The MM ENGINE source code is located in the ParFit/mmengine directory.
+Update the variable engine_path = “” in the file: ParFit/_Engine.py to the location of
+the MM ENGINE executable file.
 
 Optional:
 

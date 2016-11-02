@@ -1,0 +1,11 @@
+void picon(void);
+void dircos(void);
+void vescf(void);
+void piread(int);
+void pirite(void);
+void border(int);
+void piseq(int, int);
+void otable(void);
+void printmatrix(float **, char *);
+void diag(int,float **);
+void piden(void);

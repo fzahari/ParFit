@@ -1,0 +1,10 @@
+int FetchRecord(FILE *, char *);
+FILE * fopen_path ( char * , char * , char * ) ;
+int is_bond(int, int);
+int get_bondorder(int,int);
+void check_numfile(int);
+void mopaco(int,int);
+void message_alert(char *, char *);
+void make_bond(int,int,int);
+void type(void);   
+void clean_string(char *);

@@ -1,0 +1,12 @@
+void piplane(int **);
+void free_orbit(void);
+void orbital(void);
+float zetac(int ,int );
+void pireset(void);
+void printarray(float *,char *);
+void message_alert(char *, char *);
+void find_pigroups(void);
+int is_bond(int,int);
+void piseq(int,int);
+void korbit(void);
+void initial_picalc(void);
