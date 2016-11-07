@@ -1,0 +1,47 @@
+      ##############################
+      ##                          ##
+      ##  Force Field Definition  ##
+      ##                          ##
+      ##############################
+
+
+forcefield              AMBER95
+
+bondunit                1.00
+bond-cubic              0.00
+bond-quartic            0.00 
+angleunit               0.000305
+angle-cubic             0.00
+angle-quartic           0.00
+angle-pentic            0.00
+angle-sextic            0.00
+str-bndunit             0.00
+ang-angunit             0.00
+torsionunit             1.00
+str-torunit             0.00
+
+
+
+vdwtype           LENNARD-JONES
+radiusrule        GEOMETRIC
+radiustype        SIGMA
+radiussize        DIAMETER
+epsilonrule       GEOMETRIC
+dielectric        1.0
+vdw-scale               2.0
+chg-scale               1.2
+dielectric              1.0
+
+
+atom     21     OW       OSP3 in Water               8     15.995     2     2     21
+atom     30     HW       H in Water                  1      1.008     1     1     30
+
+vdw         21            3.150656111     0.152072595
+vdw         30                  0.000     0.000
+
+bond        21    30             529.6     0.9572
+angle       30    21   30        34.05     104.52
+ureybrad    30    21   30        38.25     1.5139
+charge      21                  -0.834
+charge      30                   0.417
+bndchrg        21   30      0.4170    #C94 

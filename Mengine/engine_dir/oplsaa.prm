@@ -1,0 +1,2718 @@
+
+      ##############################
+      ##                          ##
+      ##  Force Field Definition  ##
+      ##                          ##
+      ##############################
+
+
+forcefield              OPLSAA
+
+bondunit                1.00
+bond-cubic              0.00
+bond-quartic            0.00 
+angleunit               0.000305
+angle-cubic             0.00
+angle-quartic           0.00
+angle-pentic            0.00
+angle-sextic            0.00
+str-bndunit             0.00
+ang-angunit             0.00
+torsionunit             0.50
+str-torunit             0.00
+
+vdwtype                 LENNARD-JONES
+radiustype              SIGMA
+radiusrule              GEOMETRIC
+radiussize              DIAMETER
+epsilonrule             GEOMETRIC
+vdw-14-scale            2.0
+chg-14-scale            2.0
+dielectric              1.0
+
+
+      #############################
+      ##                         ##
+      ##  Literature References  ##
+      ##                         ##
+      #############################
+
+
+W. L. Jorgensen, D. S. Maxwell and J. Tirado-Rives, "Development
+and Testing of the OPLS All-Atom Force Field on Conformational
+Energetics and Properties of Organic Liquids", J. Am. Chem. Soc.,
+117, 11225-11236 (1996)
+
+D. S. Maxwell, J. Tirado-Rives and W. L. Jorgensen, "A Comprehensive
+Study of the Rotational Energy Profiles of Organic Systems by Ab Initio
+MO Theory, Forming a Basis for Peptide Torsional Parameters", J. Comput.
+Chem, 16, 984-1010 (1995)
+
+W. L. Jorgensen and N. A. McDonald, "Development of an All-Atom Force
+Field for Heterocycles. Properties of Liquid Pyridine and Diazenes",
+THEOCHEM-J. Mol. Struct., 424, 145-155 (1998)
+
+N. A. McDonald and W. L. Jorgensen, "Development of an All-Atom
+Force Field for Heterocycles. Properties of Liquid Pyrrole, Furan,
+Diazoles, and Oxazoles", J. Phys. Chem. B, 102, 8049-8059 (1998)
+
+R. C. Rizzo and W. L. Jorgensen, "OPLS All-Atom Model for Amines:
+Resolution of the Amine Hydration Problem", J. Am. Chem. Soc.,
+121, 4827-4836 (1999)
+
+All parameters distributed with PCMODEL are from "OPLS and OPLS-AA
+Parameters for Organic Molecules, Ions, and Nucleic Acids" as provided
+by J. Tirado-Rives, Yale University, November 2000
+
+
+      #############################
+      ##                         ##
+      ##  Atom Type Definitions  ##
+      ##                         ##
+      #############################
+
+
+atom      1    CT      RCH3 Alkane               6     12.000     4     4     1
+atom      2    CT      CF3 Trifluoroethanol      6     12.000     4     4     1
+atom      3    CT      Thymine C5,1MeU,9MeA      6     12.000     4     4     1
+atom      4    CT      CH3 in MeOP               6     12.000     4     4     1
+atom      5    C       NC=O Amide                6     12.000     3     4     5
+atom      6    C       not used                  6     12.000     3     4     5
+atom      7    CA      CH Benzene                6     12.000     3     4     7
+atom      8    CA      C+ Guanidinium            6     12.000     3     4     7
+atom      9    CA      DAP,Cyt C4,Ade C6         6     12.000     3     4     7
+atom     10    CM      R2C=C Alkene              6     12.000     3     4     10
+atom     11    CN      Csp2, Trp                 6     12.000     3     4     11
+atom     12    CC      CSP2 C5 w1 Sub            6     12.000     3     4     5
+atom     13    CV      C HID CD2 & HIE CG        6     12.000     3     4     12
+atom     14    CW      C HID CG & HIE CD2        6     12.000     3     4     13
+atom     15    CR      C2 in imidazole           6     12.000     3     4     14
+atom     16    CB      C TRP CD2                 6     12.000     3     4     15
+atom     17    C*      CSP2 C5 next 2C           6     12.000     3     4     10
+atom     18    CK      C8 Adenine                6     12.000     3     4     16
+atom     19    CQ      C2 in Adenine             6     12.000     3     4     17
+atom     20    CQ      C2 in pyrimidine          6     12.000     3     4     17
+atom     21    CO      CH2O2 Acetal              6     12.000     4     4     1
+atom     22    CS      C3 in furan               6     12.000     3     4     10
+atom     23    CU      C3 in pyrazole            6     12.000     3     4     10
+atom     24    CZ      Alkyne Terminal C         6     12.000     2     4     24
+atom     25    CZ      Alkyne C2 w 2,3 H         6     12.000     2     4     1
+atom     26    CZ      Alkyne C2 w 1H            6     12.000     2     4     1
+atom     27    CZ      Alkyne C2 w 0H            6     12.000     2     4     1
+atom     28    CY      Cyclopropane              6     12.000     4     4     1
+atom     29    HC      HR Alkane                 1      1.008     1     1     29
+atom     30    HC      H-C=C Alkene              1      1.008     1     1     29
+atom     31    HC      H-C Formimide             1      1.008     1     1     29
+atom     32    HC      HC=O Aldehyde             1      1.008     1     1     29
+atom     33    HC      H-Alkyne                  1      1.008     1     1     29
+atom     34    HA      H Benzene                 1      1.008     1     1     33
+atom     35    HA      H Cytosine                1      1.008     1     1     34
+atom     36    HO      HO Alcohol                1      1.008     1     1     34
+atom     37    HS      HS Thiol                  1      1.008     1     1     36
+atom     38    H2      HN Primary Amine          1      1.008     1     1     36
+atom     39    H       H2NC=O Amide              1      1.008     1     1     36
+atom     40    H3      NH4+ Ammonium             1      1.008     1     1     40
+atom     41    HW      H Water (TIP3P)           1      1.008     1     1     41
+atom     42    H4      H Cytosine                1      1.008     1     1     30
+atom     43    H5      H Adenine                 1      1.008     1     1     30
+atom     44    OH      OH Alcohol                8     15.999     2     2     44
+atom     45    OH      OH Trifluoroethanol       8     15.999     2     2     44
+atom     46    OH      OH Carboxylic Acid        8     15.999     2     2     46
+atom     47    OS      O Ether                   8     15.999     2     2     47
+atom     48    OS      O Acetal                  8     15.999     2     2     47
+atom     49    O       NC=O Amide                8     15.999     1     1     49
+atom     50    O2      COO- Carboxylate          8     15.999     1     1     50
+atom     51    OW      O Water (TIP3P)           8     15.999     2     2     51
+atom     52    O-      O- Hydroxide Ion          8     15.999     1     1     52
+atom     53    NT      NH2 Primary Amine         7     14.007     3     3     53
+atom     54    NT      N Aniline                 7     14.007     3     4     53
+atom     55    N       H2NC=O Amide              7     14.007     3     4     55
+atom     56    N3      NH4+ Ammonium             7     14.007     4     4     56
+atom     57    N2      NH2 Guanidinium           7     14.007     3     3     57
+atom     58    NA      NH TRP NE1 & HID/E        7     14.007     3     3     58
+atom     59    NB      N HID NE2 & HIE ND1       7     14.007     2     3     59
+atom     60    NC      N Cyt, Ade, Pyridin       7     14.007     2     3     60
+atom     61    N*      N1 Cyt, Ade, Pyridin      7     14.007     2     3     61
+atom     62    F       F Trifluoroethanol        9     18.998     1     1     11
+atom     63    Cl      Chlorine                  9     18.998     1     1     11
+atom     64    Br      Bromine                   9     18.998     1     1     11
+atom     65    I       Iodine                    9     18.998     1     1     11
+atom     66    P       Phosphorus                9     18.998     1     1     11
+atom     67    P5      P5 Phosphate              9     18.998     1     1     11
+atom     68    SH      SH Thiol                 16     32.066     2     2     15
+atom     69    S       S Sulfide                16     32.066     2     2     17
+atom     70    Li+     Li+ Lithium Ion           3      6.941     0     0     48
+atom     71    Na+     Na+ Sodium Ion           11     22.990     0     0     49
+atom     72    K+      K+ Potassium Ion         19     39.098     0     0     50
+atom     73    Rb+     Rb+ Rubidium Ion         37     85.468     0     0     51
+atom     74    Cs+     Cs+ Cesium Ion           55    132.905     0     0     52
+atom     75    Mg+     Mg+2 Magnesium Ion       12     24.305     0     0     53
+atom     76    Ca+     Ca+2 Calcium Ion         20     40.078     0     0     54
+atom     77    Sr+     Sr+2 Strontium Ion       38     87.620     0     0     55
+atom     78    Ba+     Ba+2 Barium Ion          56    137.327     0     0     56
+atom     79    F-      F- Fluoride Ion           9     18.998     0     0     57
+atom     80    Cl-     Cl- Chloride Ion         17     35.453     0     0     58
+atom     81    Br-     Br- Bromide Ion          35     79.904     0     0     59
+atom     82    He      Helium Atom               2      4.003     0     0     60
+atom     83    Ne      Neon Atom                10     20.179     0     0     61
+atom     84    Ar      Argon Atom               18     39.948     0     0     62
+atom     85    Kr      Krypton Atom             36     83.800     0     0     63
+atom     86    Xe      Xenon Atom               54    131.300     0     0     64
+atom     87    NZ      Nsp                       7     14.007     1     3     87
+
+// pos metal atoms
+atom    301      Li    Lithium                3       6.941    10       0    301
+atom    302      Be    Berylium               4       9.0121   10       0    302
+atom    303      Na    Sodium                11      22.989    10       0    303
+atom    304      Mg    Magnesium             12      24.305    10       0    304
+atom    305      K     Potassium             19      39.098    10       0    305
+atom    306      Ca    Calcium               20      40.080    10       0    306
+atom    307      Sc    Scandium              21      44.956    10       0    307
+atom    308      Ti    Titanium              22      47.900    10       0    308
+atom    309      V     Vanadium              23      50.941    10       0    309
+atom    310      Cr    Chromium              24      51.996    10       0    310
+atom    311      Mn    Manganese             25      54.938    10       0    311
+atom    312      Fe    Iron                  26      55.84     10       0    312
+atom    313      Co    Cobalt                27      58.93     10       0    313
+atom    314      Ni    Nickel                28      58.7      10       0    314
+atom    315      Cu    Copper                29      63.54     10       0    315
+atom    316      Zn    Zinc                  30      65.38     10       0    316
+atom    317      Ga    Galium                31      69.72     10       0    317
+atom    318      Ge    Germanium             32      72.5      10       0    318
+atom    319      As    Arsenic               33      74.92     10       0    319
+atom    320      Rb    Rubidium              37      85.46     10       0    320
+atom    321      Sr    Strontium             38      87.62     10       0    321
+atom    322      Y     Ytrium                39      88.9      10       0    322
+atom    323      Zr    Zirconium             40      91.22     10       0    323
+atom    324      Nb    Niobium               41      92.90     10       0    324
+atom    325      Mo    Molybdenum            42      95.9      10       0    325
+atom    326      Tc    Technetium            43      98.90     10       0    326
+atom    327      Ru    Ruthenium             44      101.0     10       0    327
+atom    328      Rh    Rhodium               45      102.9     10       0    328
+atom    329      Pd    Palladium             46      106.4     10       0    329
+atom    330      Ag    Silver                47      107.87    10       0    330
+atom    331      Cd    Cadmium               48      112.4     10       0    331
+atom    332      In    Indium                49      114.82    10       0    332
+atom    333      Sn    Tin                   50      118.6     10       0    333
+atom    334      Sb    Antimony              51      121.7     10       0    334
+atom    335      Te    Tellurium             52      127.6     10       0    335
+atom    336      Cs    Cesium                55      132.9     10       0    336
+atom    337      Ba    Barium                56      137.3     10       0    337
+atom    338      La    Lanthanum             57      138.9     10       0    338
+atom    339      Ce    Cerium                58      140.12    10       0    339
+atom    340      Pr    Prasedodymium         59      140.91    10       0    340
+atom    341      Nd    Neodymium             60      144.24    10       0    341
+atom    342      Pm    Promethium            61      147.0     10       0    342
+atom    343      Sm    Samarium              62      150.35    10       0    343
+atom    344      Eu    Europium              63      151.36    10       0    344
+atom    345      Gd    Gadolinium            64      157.25    10       0    345
+atom    346      Tb    Terbium               65      158.92    10       0    346
+atom    347      Dy    Dysprosium            66      162.50    10       0    347
+atom    348      Ho    Holmium               67      164.93    10       0    348
+atom    349      Er    Erbium                68      167.26    10       0    349
+atom    350      Tm    Thulium               69      168.93    10       0    350
+atom    351      Yb    Ytterbium             70      173.04    10       0    351
+atom    352      Lu    Lutetium              71      174.97    10       0    352
+atom    353      Hf    Hafnium               72      178.4     10       0    353
+atom    354      Ta    Tantalum              73      180.95    10       0    354
+atom    355      W     Tungstun              74      183.8     10       0    355
+atom    356      Re    Rhenium               75      186.2     10       0    356
+atom    357      Os    Osmium                76      190.2     10       0    357
+atom    358      Ir    Iridium               77      192.2     10       0    358
+atom    359      Pt    Platinum              78      195.0     10       0    359
+atom    360      Au    Gold                  79      196.97    10       0    360
+atom    361      Hg    Mercury               80      200.5     10       0    361
+atom    362      Tl    Thallium              81      204.3     10       0    362
+atom    363      Pb    Lead                  82      207.2     10       0    363
+atom    364      Bi    Bismuth               83      208.98    10       0    364
+atom    365      Po    Polonium              84      210.0     10       0    365
+atom    366      At    Astatine              85      210.0     10       0    366
+atom    367      Fr    Francium              87      223.0     10       0    367
+atom    368      Ra    Radium                88      226.0     10       0    368
+atom    369      Ac    Actinium              89      227.0     10       0    369
+atom    370      Th    Thorium               90      232.04    10       0    370
+atom    371      Pa    Protactinium          91      231.0     10       0    371
+atom    372      U     Uranium               92      238.03    10       0    372
+atom    373      Np    Neptunium             93      237.0     10       0    373
+atom    374      Pu    Plutonium             94      242.0     10       0    374
+atom    375      Am    Americium             95      243.0     10       0    375
+atom    376      Cm    Curium                96      247.0     10       0    376
+atom    377      Bk    Berkelium             97      249.0     10       0    377
+atom    378      Cf    Californium           98      251.0     10       0    378
+atom    379      Es    Einsteinium           99      254.0     10       0    379
+atom    380      Fm    Fermium              100      253.0     10       0    380
+atom    381      Md    Mendelevium          101      256.0     10       0    381
+atom    382      No    Nobelium             102      253.0     10       0    382
+
+bond      63  314   4.4900   2.150
+
+      ################################
+      ##                            ##
+      ##  Van der Waals Parameters  ##
+      ##                            ##
+      ################################
+
+
+vdw          1              3.5000     0.0660    // CT
+vdw          2              3.2500     0.0620    // CT1
+vdw          3              3.5000     0.0800    // CT2
+vdw          4              3.5500     0.0660    // CT3
+vdw          5              3.7500     0.1050    // C
+vdw          6              3.7500     0.1050    // not used
+vdw          7              3.5500     0.0700    // CA
+vdw          8              2.2500     0.0500    // CA1
+vdw          9              3.5000     0.0800    // CA2
+vdw         10              3.5500     0.0760    // CM
+vdw         11              3.5000     0.0800    // CN
+vdw         12              3.5000     0.0700    // CC
+vdw         13              3.5500     0.0600    // CV
+vdw         14              3.5500     0.0700    // CW
+vdw         15              3.5500     0.0700    // CR
+vdw         16              3.5000     0.0800    // CB
+vdw         17              3.5000     0.0800    // C*
+vdw         18              3.5000     0.0800    // CK
+vdw         19              3.5000     0.0800    // CQ
+vdw         20              3.5500     0.0700    // CQ1
+vdw         21              3.5000     0.0660    // CO
+vdw         22              3.5500     0.0700    // CS
+vdw         23              3.5500     0.0700    // CU
+vdw         24              3.3000     0.0860    // CZ
+vdw         25              3.3000     0.2100    // CZ1
+vdw         26              3.3000     0.1350    // CZ2
+vdw         27              3.3000     0.1000    // CZ3
+vdw         28              3.5000     0.0660    // CY
+vdw         29              2.5000     0.0300    // HC
+vdw         30              2.4200     0.0300    // HC1
+vdw         31              2.4200     0.0150    // HC2
+vdw         32              2.5000     0.0500    // HC3
+vdw         33              2.5000     0.0150    // HC4
+vdw         34              2.4200     0.0300    // HA
+vdw         35              2.5000     0.0500    // HA1
+vdw         36              0.0000     0.0000    // HO
+vdw         37              0.0000     0.0000    // HS
+vdw         38              0.0000     0.0000    // H
+vdw         39              0.0000     0.0000    // H2
+vdw         40              0.0000     0.0000    // H3
+vdw         41              0.0000     0.0000    // HW
+vdw         42              2.5000     0.0500    // H4
+vdw         43              2.5000     0.0500    // H5
+vdw         44              3.1200     0.1700    // OH
+vdw         45              3.0700     0.1700    // OH1
+vdw         46              3.0000     0.1700    // OH2
+vdw         47              2.9000     0.1400    // OS
+vdw         48              3.0000     0.1700    // OS1
+vdw         49              2.9600     0.2100    // O
+vdw         50              2.9600     0.2100    // O2
+vdw         51              3.1506     0.1521    // OW
+vdw         52              3.16557    0.1554    // OW1
+vdw         53              3.2000     0.2500    // O-
+vdw         54              3.2500     0.1700    // NT
+vdw         55              3.3000     0.1700    // NT1
+vdw         56              3.2500     0.1700    // N
+vdw         57              3.2500     0.1700    // N3
+vdw         58              3.2500     0.1700    // N2
+vdw         59              3.2500     0.1700    // NA
+vdw         60              3.2500     0.1700    // NB
+vdw         61              3.2500     0.1700    // NC
+vdw         62              2.9400     0.0610    // F
+vdw         63              3.4700     0.3000    // Cl
+vdw         64              3.5500     0.2500    // Br
+vdw         65              3.5500     0.2500    // I
+vdw         66              3.7400     0.2000    // P
+vdw         67              3.7400     0.2000    // P5
+vdw         68              3.5500     0.2500    // SH
+vdw         69              3.5500     0.2500    // S
+vdw         70              2.126452     0.018279    // Li+
+vdw         71              3.330445     0.002772    // Na+
+vdw         72              4.934628     0.000328    // K+
+vdw         73              5.621773     0.000171    // Rb+
+vdw         74              6.715999     0.000081    // Cs+
+vdw         75              1.644471     0.875044    // Mg+2
+vdw         76              2.412031     0.449657    // Ca+2
+vdw         77              3.102688     0.118226    // Sr+2
+vdw         78              3.816610     0.047096    // Ba+2
+vdw         79              2.73295    0.7200    // F-
+vdw         80              4.41724    0.1179    // Cl-
+vdw         81              4.62376    0.0900    // Br-
+vdw         82              2.5560     0.0200    // He
+vdw         83              2.7800     0.0690    // Ne
+vdw         84              3.4010     0.2339    // Ar
+vdw         85              3.6240     0.3170    // Kr
+vdw         86              3.9350     0.4330    // Xe
+
+// pos metals
+vdw       300    2.31      4.0       0       0       0
+vdw       301    1.52      4.0       0       0       0
+vdw       302    1.11      4.0       0       0       0
+vdw       303    1.86      4.0       0       0       0
+vdw       304    1.60      4.0       0       0       0
+vdw       305    2.31      4.0       0       0       0
+vdw       306    1.97      4.0       0       0       0
+vdw       307    1.60      4.0       0       0       0
+vdw       308    1.46      4.0       0       0       0
+vdw       309    1.31      4.0       0       0       0
+vdw       310    1.25      4.0       0       0       0
+vdw       311    1.29      4.0       0       0       0 
+vdw       312    1.26      3.0       0       0       0
+vdw       313    1.26      4.0       0       0       0
+vdw       314    1.26      0.4       0       0       0
+vdw       315    1.26      4.0       0       0       0
+vdw       316    1.355     4.0       0       0       0 
+vdw       317    1.26      4.0       0       0       0
+vdw       318    1.22      4.0       0       0       0
+vdw       319    1.21      4.0       0       0       0
+vdw       320    2.44      4.0       0       0       0
+vdw       321    2.15      4.0       0       0       0
+vdw       322    1.85      4.0       0       0       0
+vdw       323    1.50      4.0       0       0       0
+vdw       324    1.455     4.0       0       0       0
+vdw       325    1.39      4.0       0       0       0
+vdw       326    1.355     4.0       0       0       0
+vdw       327    1.355     4.0       0       0       0
+vdw       328    1.355     4.0       0       0       0
+vdw       329    1.355     4.0       0       0       0
+vdw       330    1.455     4.0       0       0       0
+vdw       331    1.51      4.0       0       0       0
+vdw       332    1.45      4.0       0       0       0
+vdw       333    1.40      4.0       0       0       0
+vdw       334    1.41      4.0       0       0       0
+vdw       335    1.37      4.0       0       0       0
+vdw       336    2.62      4.0       0       0       0
+vdw       337    2.15      4.0       0       0       0
+vdw       338    1.85      4.0       0       0       0
+vdw       339    1.85      4.0       0       0       0
+vdw       340    1.85      4.0       0       0       0
+vdw       341    1.85      4.0       0       0       0
+vdw       342    1.85      4.0       0       0       0
+vdw       343    1.85      4.0       0       0       0
+vdw       344    1.85      4.0       0       0       0
+vdw       345    1.85      4.0       0       0       0
+vdw       346    1.85      4.0       0       0       0
+vdw       347    1.85      4.0       0       0       0
+vdw       348    1.85      4.0       0       0       0
+vdw       349    1.85      4.0       0       0       0
+vdw       350    1.85      4.0       0       0       0
+vdw       351    1.85      4.0       0       0       0
+vdw       352    1.85      4.0       0       0       0
+vdw       353    1.6       4.0       0       0       0
+vdw       354    1.455     4.0       0       0       0
+vdw       355    1.39      4.0       0       0       0
+vdw       356    1.355     4.0       0       0       0
+vdw       357    1.355     4.0       0       0       0
+vdw       358    1.39      4.0       0       0       0
+vdw       359    1.455     4.0       0       0       0
+vdw       360    1.51      4.0       0       0       0
+vdw       361    1.70      4.0       0       0       0
+vdw       362    1.50      4.0       0       0       0
+vdw       363    1.51      4.0       0       0       0
+vdw       364    1.51      4.0       0       0       0
+vdw       365    1.51      4.0       0       0       0
+vdw       366    1.51      4.0       0       0       0
+vdw       367    1.51      4.0       0       0       0
+vdw       368    1.51      4.0       0       0       0
+vdw       369    1.51      4.0       0       0       0
+vdw       370    1.51      4.0       0       0       0
+vdw       371    1.51      4.0       0       0       0
+vdw       372    1.51      4.0       0       0       0
+vdw       373    1.51      4.0       0       0       0
+vdw       374    1.51      4.0       0       0       0
+vdw       375    1.51      4.0       0       0       0
+vdw       376    1.51      4.0       0       0       0
+vdw       377    1.51      4.0       0       0       0
+vdw       378    1.51      4.0       0       0       0
+vdw       379    1.51      4.0       0       0       0
+vdw       380    1.51      4.0       0       0       0
+vdw       381    1.51      4.0       0       0       0
+vdw       382    1.51      4.0       0       0       0
+
+      ##################################
+      ##                              ##
+      ##  Bond Stretching Parameters  ##
+      ##                              ##
+      ##################################
+
+bond      1    1       268.        1.529        CHARMM 22 parameter file
+bond      1    5       317.        1.522
+bond      1    7       317.        1.51         PHE,TYR
+bond      1   10       317.        1.51         wlj
+bond      1   12       317.        1.504        
+bond      1   13       317.        1.504        jtr: HIE CB-CG
+bond      1   14       317.        1.504        jtr: HID CB-CG
+bond      1   16       317.        1.50         Added DSM (from CA-   1)
+bond      1   17       317.        1.495        TRP(OL)
+
+bond      1   21       268.        1.529        wlj
+bond      1   22       317.        1.495        wlj
+bond      1   25       390.        1.470        wlj 9/98 do 11/98
+bond      1   28       280.        1.510        wlj 9/98 do 11/98
+bond      1   29       340.        1.09         CHARMM 22 parameter file
+
+bond      1   44       320.        1.41
+bond      1   47       320.        1.41
+bond      1   48       320.        1.41
+
+bond      1   53       382.        1.448         "
+bond      1   54       382.        1.448        jtr - neutral Arg; MLL
+bond      1   55       337.        1.449
+bond      1   56       367.        1.471        LYS(OL)
+bond      1   57       375.        1.490        wlj nitro
+bond      1   58       337.        1.475        Copy from above for CytH+ (jtr 5-14-91)
+bond      1   60       337.        1.449        wj azide
+bond      1   61       337.        1.475        Copy from above for CytH+ (jtr 5-14-91)
+bond      1   62       367.       1.332          PAK    1-F for CHF3 (emd 5-09-94)
+bond      1   63       245.       1.781        wlj - from MM2 (Tet 31, 1971 (75))
+bond      1   64       245.       1.945        wlj
+bond      1   66       212.       1.843         wlj 11/95 MM3 based JAC69114, 8536 (92)
+bond      1   67       212.       1.820         wlj 9/97
+bond      1   68       222.       1.81         CYX(OL)
+bond      1   69       222.       1.81         CYS(OL)
+bond      5    5       350.       1.510        wlj oxalic acid, etc.
+bond      5    7       469.       1.40         TYR
+delocal   5    7       400.       1.490        wlj 8/97
+delocal   5   10       385.       1.460        wlj acrolein
+bond      5   11       410.       1.444        THY
+bond      5   14       400.       1.490        bhap,                   Copy from C -CA         rcr HIVRT
+bond      5   16       447.       1.419        GUA
+bond      5   31       340.       1.09         wlj 7/96
+bond      5   32       340.       1.09         wlj 7/96
+bond      5   46       450.       1.364        TYR
+bond      5   47       214.       1.327        J.Comp.Chem.1990,11,1181 SKF8
+bond      5   49       570.       1.229        URAGUA,CYT,AA
+bond      5   50       656.       1.25         GLU,ASP
+bond      5   53       317.       1.522          nev,                    21py from C - 1         rcr HIVRT
+bond      5   55       490.       1.335        AA
+bond      5   58       418.       1.388        URAGUA
+bond      5   60       457.       1.358        CYT
+bond      5   61       424.       1.383        CYT,URA
+bond      5   62       420.       1.357        wlj
+bond      5   63       300.       1.79         wlj
+bond      5   64       300.       1.98
+bond      5   69       400.       1.640        wlj thioamide, etc.
+bond      7    7       469.       1.40         TRP,TYR,PHE
+bond      7   11       469.       1.40
+bond      7   12       469.       1.40         TRP,TYR,PHE
+bond      7   13       546.       1.367        pyrrole - wlj
+bond      7   14       546.       1.367        keg
+bond      7   15       469.       1.404        ADE
+bond      7   16       469.       1.404        ADE
+bond      7   17       469.       1.404        ADE
+bond      7   18       469.       1.404        ADE
+bond      7   20       469.       1.421         "
+bond      7   23       469.       1.421         "
+bond      7   27       400.       1.451        wlj 9/98
+bond      7   34       367.       1.080        PHE, etc.
+bond      7   44       450.       1.364
+bond      7   47       450.       1.364        wlj
+bond      7   53       481.       1.340        wj/rr anilines
+bond      7   54       481.       1.340        wj/rr anilines
+bond      7   56       400.       1.460        wlj nitro
+bond      7   57       481.       1.340        ARG
+bond      7   58       427.       1.381        GUA
+bond      7   59       414.       1.391        Added DSM (from CB-NB)
+bond      7   60       483.       1.339        ADE,GUA,CYT
+bond      7   62       420.       1.354        wlj
+bond      7   63       300.       1.725        wlj
+bond      7   64       300.       1.87         wlj
+bond      7   66       220.       1.78
+bond      7   68       250.       1.74         wlj
+bond      7   69       250.       1.76         thioanisole             Copy from CW-S          rcr HIVRT
+bond      8   57       481.       1.340        ARG
+bond      9   10       427.       1.433        cytosine c4
+bond      9   57       481.       1.340        ARG
+bond      9   60       483.       1.339        ADE,GUA,CYT
+
+bond     10   10       549.       1.340        wlj
+delocal  10   10       317.       1.51         butadiene central bond
+bond     10   30       340.       1.08         wlj
+bond     10   34       367.       1.080        cytosine h-c5
+bond     10   36       450.       1.370        wlj
+bond     10   37       450.       1.370        wlj
+bond     10   42       367.       1.08  
+bond     10   58       448.       1.365        Copy from above for CytH+ (jtr 5-14-91)
+bond     10   60       448.       1.365        Copy from above for CytH+ (jtr 5-14-91)
+bond     10   61       448.       1.365        Copy from above for CytH+ (jtr 5-14-91)
+bond     10   62       420.       1.340        wlj
+bond     10   63       300.       1.725        wlj
+bond     10   64       300.       1.90         wlj
+bond     10   69       250.       1.76         hept,                   Copy from CW-S          rcr HIVRT
+bond     11   16       547.       1.419        wlj
+bond     11   58       428.       1.380        wlj
+
+bond     12   13       512.       1.375        wlj imidazole
+bond     12   14       518.       1.371        HIS
+bond     12   42       367.       1.08         HIS
+bond     12   58       422.       1.385        HIS
+bond     12   59       410.       1.394        ADE,GUA,HIS
+bond     13   14       520.       1.370        HIS
+bond     13   17       546.0      1.3520       taken from amber
+bond     13   30       367.       1.08         HIS
+bond     13   34       367.       1.08         HIS
+bond     13   42       367.       1.08         HIS
+bond     13   58       422.       1.385        HIS
+bond     13   59       410.       1.394        ADE,GUA,HIS
+bond     14   14       512.       1.375
+bond     14   17       546.       1.352
+bond     14   22       546.       1.367        wj/nm
+bond     14   34       367.       1.08
+bond     14   42       367.       1.08         pyrrole - wlj
+bond     14   47       340.       1.36         Furan  - wlj 4/97
+bond     14   58       427.       1.381        TRP,HIS
+bond     14   59       410.       1.394
+bond     14   69       250.       1.74         wlj
+bond     15   22       520.       1.370        wj
+bond     15   37       462.       1.357         "
+bond     15   34       367.       1.08
+bond     15   43       367.       1.08
+bond     15   57       481.       1.340        wlj
+bond     15   58       477.       1.343        HIS
+bond     15   59       488.       1.335        HIS(MOD)
+bond     15   60       461.       1.354        wj
+bond     15   69       250.       1.76         wlj
+bond     16   16       520.       1.370        ADE,GUA
+bond     16   17       388.       1.459        TRP
+bond     16   22       469.       1.424         "
+bond     16   37       340.       1.360        wlj
+bond     16   58       436.       1.374        wlj
+bond     16   59       414.       1.391        ADE,GUA,HIS
+bond     16   60       461.       1.354        ADE,GUA
+bond     16   61       436.       1.374        ADE,GUA
+bond     17   30       340.       1.08
+bond     18   34       340.       1.08
+bond     18   43       367.       1.08
+bond     18   58       440.       1.371
+bond     18   59       529.       1.304
+bond     18   61       440.       1.371
+bond     19   34       367.       1.08
+bond     19   43       367.       1.08
+bond     19   55       427.       1.381        wlj
+bond     19   57       481.       1.340        wlj
+bond     19   60       502.       1.324
+bond     21   44       320.       1.38         Acetal - wlj 2/93
+bond     21   48       320.       1.38         =Co-OS - wd 3/96
+bond     21   29       340.       1.09         = 1-HC - wd 3/95
+bond     22   22       469.       1.424         "
+bond     22   34       367.       1.080         "
+bond     23   34       367.       1.080         "
+bond     23   59       410.       1.320         "
+bond     24   24       1150.      1.210        do 11/98 - JPOC, 9, 191 (1996)
+bond     24   25       390.       1.470        do 11/98 - JPOC, 9, 191 (1996)
+bond     24   26       390.       1.470        do 11/98 - JPOC, 9, 191 (1996)
+bond     24   27       390.       1.470        do 11/98 - JPOC, 9, 191 (1996)
+bond     24   33       420.       1.080        do 01/99 - JPOC, 9, 191 (1996)
+bond     24   62       450.       1.279        wlj
+bond     24   63       330.       1.637        wlj
+bond     24   64       330.       1.784        wlj
+bond     25   29       340.        1.09         CHARMM 22 parameter file
+bond     26   29       340.        1.09         CHARMM 22 parameter file
+bond     28   28       260.       1.509        cyclopropanes - wlj
+bond     28   29       340.       1.088             "
+bond     28   53       382.       1.448        nev,                    Copy from  1-NT         rcr HIVRT
+bond     28   55       337.       1.449        wj
+bond     28   69       222.       1.81         wj
+
+bond     36   44       553.       0.945        SUG(OL) wlj mod 0.96 -> 0.945
+bond     36   46       553.       0.945        SUG(OL)      6/6/94
+bond     37   68       274.       1.336        CYS(OL)
+bond     38   53       434.       1.01         AA
+bond     38   54       434.       1.01         AA
+bond     38   55       434.       1.01         AA
+bond     38   57       434.       1.01         ADE,GUA,CYT,GLN,ASN,ARG
+bond     38   58       434.       1.01         ADE,GUA,CYT,GLN,ASN,ARG
+bond     39   53       434.       1.01
+bond     39   55       434.       1.01         AA
+bond     39   56       434.       1.01
+bond     39   57       434.       1.01         URA,GUA,HIS
+bond     39   58       434.       1.01         URA,GUA,HIS
+bond     39   61       434.       1.01
+bond     40   57       434.       1.01         ADE,GUA,CYT,GLN,ASN,ARG
+bond     40   56       434.       1.01         LYS(OL)
+//bond     41   OW       600.00     0.9572       For TIP4F Water - wlj 1/98  
+bond     41   51        529.60     0.9572      J Phys Chem 91, 3349 (1987) for TIP3F (OW-HW)
+bond     44   53        320.       1.45         wlj
+bond     44   55        400.       1.38         wlj
+bond     44   66        525.       1.61          SUG(OL)
+bond     46   66        525.       1.61          SUG(OL)
+bond     47   59        462.       1.399         "
+bond     47   53        320.       1.45         wlj
+bond     47   66        480.       1.61          SUG(OL)
+bond     48   66        480.       1.61          SUG(OL)
+bond     49   66        525.       1.48
+bond     50   56        550.       1.225        wlj nitro
+bond     50   66        525.       1.48          SUG(OL)
+bond     49   69        700.       1.44
+bond     50   69        700.       1.53
+bond     53   53        350.       1.445        wlj
+bond     53   69        340.       1.77           nev,                    Copy from SY- 1         rcr HIVRT
+bond     55   69        434.       1.67
+bond     58   59        400.       1.349         "
+bond     60   60        500.       1.320        wlj pyridazine
+bond     69   69        166.       2.038        CYX(OL)  SCHERAGA
+
+
+
+      ################################
+      ##                            ##
+      ##  Angle Bending Parameters  ##
+      ##                            ##
+      ################################
+
+angle        1    1     1     58.35      112.7      CHARMM 22 parameter file
+angle        1    1     5     63.0       111.1      AA
+angle        1    1     7     63.        114.       PHE(OL)         SCH J665 79,2379
+angle        1    1    10     63.0       111.1      " wlj
+angle        1    1    12     63.0       113.1      HIS(OL)
+angle        1    1    13     63.0       114.0     jtr: HIE  7-16-CG
+angle        1    1    14     63.0       114.0     jtr: HID  7-16-CG
+angle        1    1    16     63.        114.      Added DSM (from  7    1     1   )
+angle        1    1    17     63.0       115.6      TRP(OL)
+angle        1    1    21     58.35      112.7        "            :   1       1     1    - wd 6/95 Gluc47e
+angle        1    1    22     63.0       115.6    wj
+angle        1    1    24     58.35      112.7    wlj
+angle        1    1    29     37.5       110.7      CHARMM 22 parameter file
+angle        1    1    44     50.        109.5
+angle        1    1    47     50.        109.5
+angle        1    1    53     56.2       109.47    wlj - MM3 based - JA22 112, 8314 (90)
+angle        1    1    55     80.0       109.7     ALA    JA22 94, 2657
+angle        1    1    56     80.0       111.2     LYS(OL)   JC6676, 1439
+angle        1    1    57     80.0       111.2     ARG   JC6676, 1439
+angle        1    1    58     80.0       109.7     ALA    JA22 94, 2657
+angle        1    1    60     65.        109.0      wlj azide
+angle        1    1    61     50.        109.5
+angle        1    1    62     50.        109.5    PAK 62   1    29 (emd 5-09-94)
+angle        1    1    63     69.        109.8               wlj - from MM2
+angle        1    1    64     69.        110.0               wlj           
+angle        1    1    66     43.        109.5             "
+angle        1    1    67     43.        109.5      wlj 9/97
+angle        1    1    68     50.0       108.6      28S
+angle        1    1    69     50.        114.7      28X            SCHERAGA  J66579,1428
+angle        3    1     5     63.        109.5      from  7    1     1    
+angle        5    1     5     63.0       111.1      lac,                    21py from  5    1     1         rcr HIVRT
+angle        5    1     7     63.0       112.0      wlj
+angle        5    1    29     35.        109.5
+angle        5    1    47     50.        109.5      lac,                    21py from  1       1    47      rcr HIVRT
+angle        5    1    53     80.0       111.2      wlj
+angle        5    1    55     63.0       110.1      AA     WORK DONE O556/23/82
+angle        5    1    56     80.0       111.2      Amino termi58l residues
+angle        5    1    60     63.0       110.1      wj
+angle        5    1    63     69.        109.8               wlj
+angle        5    1    62     50.        109.5       bhap,                   21py from  1       1    62      rcr HIVRT
+angle        5    1    64     69.        109.8               wlj
+angle        7    1     7     40.0      109.5      "
+angle        7    1    10     40.0      109.5    hept,                   21py from  7    1     7      rcr HIVRT
+angle        7    1    29     35.        109.5
+angle        7    1    44     50.        109.5      wlj
+angle        7    1    47     50.        109.5
+angle        7    1    53     80.0       111.2      wlj
+angle        7    1    58     80.0       111.2      wlj
+angle        7    1    62     50.       109.5    wlj 
+angle        7    1    66     43.       109.5             "
+angle        7    1    69     50.       114.7      wlj
+angle       10    1    10     63.        112.4      mwm
+angle       10    1    29     35.        109.5
+angle       12    1    29     35.        109.5
+angle       13    1    29     35.0       109.5    jtr: HIE HB-16-CG
+angle       14    1    29     35.0       109.5    jtr: HID HB-16-CG
+angle       14    1    69     50.        114.7      wlj
+angle       16    1    29     35.        109.5    Added DSM (from  7    1    29)
+angle       17    1    29     35.        109.5
+angle       21    1    29     37.5      110.7        "            :   1       1    29 - wd 6/95 Gluc47e
+angle       21    1    44     50.       109.5        "            :   1       1    44 - wd 6/95 Gluc47e
+angle       22    1    29     35.        109.5    wj
+angle       29    1    24     35.        108.5    wlj
+angle       28    1    29     37.5       110.7            "
+angle       29    1    29     33.        107.8      CHARMM 22 parameter file
+angle       29    1    44     35.        109.5
+angle       29    1    47     35.0       109.5      SUG
+angle       29    1    53     35.        109.5      JA22 115, 9620 (93)
+angle       29    1    55     35.        109.5
+angle       29    1    56     35.        105.0      wlj  nitro
+angle       29    1    57     35.        109.5
+angle       29    1    58     35.        109.5      py from above for 28tH+ (jtr 5-14-91)
+angle       29    1    60     35.        109.5
+angle       29    1    61     35.        109.5
+angle       29    1    62     40.        107.0    wlj
+angle       29    1    63     51.        107.6               " see also JACS 121,9198
+angle       29    1    64     51.        107.6               wlj
+angle       29    1    66     41.        109.5      wlj 11/95 MM3 based JACS 114, 8536 (92)
+angle       29    1    67     41.        109.5      "
+angle       29    1    68     35.        109.5
+angle       29    1    69     35.        109.5
+angle       47    1    55     50.        109.5    lac,                    copy from  1       1    47      rcr HIVRT
+angle       47    1    61     50.        109.5
+angle       53    1    69     50.        114.7    nev,                    copy from  1       1    69      rcr HIVRT
+angle       62    1    62     77.        109.1    PAK 62   1    62 (emd 5-09-94)
+angle       63    1    63     78.        111.7               " Tet 31, 1971 (75)
+angle       64    1    64     78.        111.7               wlj
+angle        1   5    1    70.        116.    wlj 7/96
+angle        1   5    5    80.        117.2    (JP 1-6-91)  SKF8
+angle        1   5    7    70.        116.    wlj
+angle        1   5   46    70.        108.    RCO46  wlj 2/15/95
+angle        1   5   47    81.        111.4       "
+angle        1   5   49    80.        120.4
+angle        1   5   50    70.        117.    GLU(OL)     SCH JPC 79,2379
+angle        1   5   53    70.        116.0    nev,                    copy from  1   5    1      rcr HIVRT
+angle        1   5   55    70.        116.6
+angle        1   5   62    80.        111.0    wlj
+angle        1   5   63    75.        109.0               wlj
+angle        1   5   64    75.        109.0               wlj
+angle        1   5   69    70.        125.0   wlj
+angle        1   5   32    35.       115.0      wlj
+angle        5   5   49    80.        121.4    ketone (JP 1-5-91) SKF8
+angle        5   5   55    70.        116.6    (JP 1-5-91) SKF8
+angle        7   5    7    85.        120.     TYR(OL)         GELIN
+angle        7   5   32    35.       115.0      wlj
+angle        7   5   46    70.        120.     TYR(OL)        GELIN
+angle        7   5   49    80.        120.4   wlj
+angle        7   5   55    70.        115.5   wlj 8/97 benzamide
+angle        7   5   47    81.        111.4      wlj
+angle       10   5   49    80.        125.3    THY
+angle       10   5   58    70.        114.1    THY
+angle       14   5   49    80.        120.4    bhap,                   copy from  7   5   49      rcr HIVRT
+angle       14   5   53    70.        116.0    bhap,                   copy from  1   5    1      rcr HIVRT
+angle       16   5   49    80.        128.8    GUA
+angle       16   5   55    70.        111.3    wlj
+angle       16   5   58    70.        111.3    GUA
+angle       22   5   49    80.        128.2    wj
+angle       32   5   46    40.        115.       "
+angle       32   5   47    40.        115.       "
+angle       32   5   49    35.        123.0      wlj
+angle       32   5   55    40.        114.      wlj  
+angle       32   5   60    35.        122.0      wlj
+angle       32   5   69    35.        127.0      wlj
+angle       46   5   49    80.        121.0    RCO46  wlj 2/15/95
+angle       47   5   49    83.        123.4    J.Comp.Chem.1990,11,1181 for SKF8
+angle       47   5   55    81.        111.4    bhap,                   copy from 47   5    1      rcr HIVRT
+angle       49   5   49    80.        126.0     COO- termi58l residues
+angle       49   5   50    80.        126.0      adk
+angle       49   5   53    80.        120.4    nev,                    copy from  1   5   49      rcr HIVRT
+angle       49   5   55    80.        122.9    AA(OL)
+angle       49   5   58    80.        120.6    URA(2),GUA
+angle       49   5   60    80.        122.5    CYT
+angle       49   5   61    80.        120.9    URA,CYT
+angle       49   5   62    80.        121.0    wlj
+angle       49   5   63    75.        119.0               wlj
+angle       49   5   64    75.        119.0               wlj
+angle       50   5   50    80.        126.0     GLU(OL)      SCH JPC 79,2379
+angle       55   5   55    70.        114.2    copy from above for Urea (jtr 5-14-91)
+angle       55   5   69    70.        125.0    wlj
+angle       58   5   58    70.        118.6    copy from above for CytH+ (jtr 5-14-91)
+angle       58   5   60    70.        118.6
+angle       58   5   61    70.        115.4    URA
+angle       60   5   61    70.        118.6    CYT
+angle        1   7    7    70.        120.     PHE(OL)
+angle        1   7    5    70.        119.7      wlj
+angle        1   7   16    70.        128.6
+angle        1   7   58    70.        120.00   Added DSM (from  1-CC-58)
+angle        1   7   60    70.        116.0    wlj
+angle        5   7    7    85.        120.     TYR(OL)
+angle        5   7   34    35.        120.0
+angle        7   7    7    63.        120.     PHE(OL)
+angle        7   7   10    70.        124.     wlj/mp
+angle        7   7   11    85.        120.     wlj/mp
+angle        7   7   12    85.        120.     Added DSM (from  7   7    7)
+angle        7   7   14    70.        107.4    wlj  1/97 based o55pyrrole
+angle        7   7   16    63.        120.      TRP(OL)
+angle        7   7   27    70.        120.     wlj
+angle        7   7   34    35.        120.0
+angle        7   7   44    70.        120.
+angle        7   7   47    70.        120.     wlj
+angle        7   7   54    70.        120.1    wlj/rr anilines
+angle        7   7   56    85.        120.0   wlj  nitro
+angle        7   7   59    70.        108.7    Added DSM (from  7   7   58)
+angle        7   7   55    70.        120.0    Added DSM (from  7   7   58)
+angle        7   7   57    70.        120.1    wlj
+angle        7   7   58    70.        108.7     TRP(OL)
+angle        7   7   60    70.        124.0    wlj   "     "    "     "
+angle        7   7   62    80.        120.0    wlj
+angle        7   7   63    75.        120.0               wlj
+angle        7   7   64    75.        120.0               wlj
+angle        7   7   66    85.        119.4    
+angle        7   7   68    70.        120.     wlj
+angle        7   7   69    85.        119.4    thioanisole             copy from SY   7    7      rcr HIVRT
+angle       10   7   57    70.        120.1
+angle       10   7   60    70.        121.5
+angle       10   7   58    70.        121.5    copy from above for CytH+ (jtr 5-14-91)
+angle       11   7   34    35.        120.0
+angle       12   7   34    35.        120.0
+angle       14   7   16    63.0       106.4
+angle       14   7   23    63.0       106.4
+angle       14   7   34    35.        126.9    wlj - pyrrole
+angle       16   7   34    35.        120.0
+angle       16   7   57    70.        123.5    ADE
+angle       16   7   58    70.        108.7    Added DSM (from  7   7   58)
+angle       16   7   60    70.        117.3    ADE
+angle       23   7   34    35.        128.2     "
+angle       34   7   58    35.        120.0
+angle       34   7   59    35.        119.1    Added DSM (from HC-10-58)
+angle       34   7   60    35.        116.0    wlj 12/96 based o55pyridine
+angle       34   7   55    35.        119.1    wlj
+angle       54   7   69    70.        116.0    nev,                    copy from 60  7    1      rcr HIVRT
+angle       57   7   57    70.        120.       ARG(OL)
+angle       57   7   58    70.        116.0    GUA
+angle       57   7   60    70.        119.3    ADE,GUA
+angle       58   7   59    70.        123.3    Added DSM (from 58   7   NC)
+angle       58   7   60    70.        123.3    GUA
+angle       60   7   63    75.        120.0    nev,                    copy from  7   7   63      rcr HIVRT
+angle       57   8   57    70.        120.     arg                   copy from  7- 7-47      rcr HIVRT
+angle        1  10    1    70.        130.0      wlj
+angle        1  10    5    85.        119.7    wlj/mp
+angle        1  10   10    70.        124.0      wlj
+angle        1  10   30    35.        117.0      wlj
+angle        1  10   61    70.        120.     hept,                   copy from PHE(OL)       rcr HIVRT
+angle        1  10   58    70.        120.     hept,                   copy from PHE(OL)       rcr HIVRT
+angle        5  10   10    85.        120.7
+angle        5  10   30    35.        119.7
+angle        5  10   28    70.        119.7    hept,                   copy from C   10    1      rcr HIVRT
+angle        5  10   62    80.        121.5    wlj
+angle        7  10   10    85.        117.0
+angle        7  10   30    35.        123.3
+angle       10  10   28    70.        124.0    hept,                   copy from 10  10    1      rcr HIVRT
+angle       10  10   30    35.        120.0      wlj
+angle       10  10   42    35.        119.7
+angle       10  10   44    70.        123.     wlj
+angle       10  10   47    70.        123.     wlj
+angle       10  10   58    70.        121.2      copy from above for CytH+ (jtr 5-14-91 angle       30  10   61   ττττ  35.       119.1
+angle       10  10   61    70.        121.2
+angle       10  10   62    80.        121.5    wlj
+angle       10  10   63    75.        121.5               wlj
+angle       10  10   64    75.        120.0               wlj
+angle       10  10   69    85.        119.4    hept,                   copy from SY- 7- 7      rcr HIVRT
+angle       30  10   30    35.        117.0      wlj
+angle       30  10   47    35.        114.5
+angle       30  10   58    35.        119.1      copy from above for CytH+ (jtr 5-14-91)
+angle       30  10   62    50.        112.0    wlj
+angle       30  10   63    60.        114.0               wlj
+angle       30  10   64    60.        114.0               wlj
+angle       42  10   58    35.        119.1
+angle       47  10   58    70.        120.     hept,                   copy from  7- 7-47      rcr HIVRT
+angle       47  10   61    70.        120.     hept,                   copy from  7- 7-47      rcr HIVRT
+angle       58  10   69    85.        119.4    hept,                   copy from SY- 7- 7      rcr HIVRT
+angle       61  10   69    85.        119.4    hept,                   copy from SY- 7- 7      rcr HIVRT
+angle       62  10   62    80.        108.0    wlj
+angle        7  11   16    85.        122.7
+angle        7  11   58    70.        132.8
+angle       16  11   58    70.        104.4
+angle        1  12   13    70.        120.00    HIS(OL)
+angle        1  12   14    70.        120.00    HIS(OL)
+angle        1  12   58    70.        120.00    HIS(OL)
+angle        1  12   59    70.        120.00    HIS(OL)
+angle        7  12   16    85.        122.7      TRP
+angle        7  12   58    70.        132.8    TRP(OL)
+angle       13  12   42    35.        130.70    HIS(OL)
+angle       13  12   58    70.        120.00    HIS(OL)
+angle       14  12   58    70.        120.00    HIS(OL)
+angle       42  12   58    35.        121.00    HIS(OL)
+angle       14  12   59    70.        120.00    HIS(OL)
+angle       16  12   58    70.        104.4
+angle       17  12   58    70.        108.7     TRP(OL)
+angle        1  13   14    70.        130.7     jtr: HIE CB-CG-CD2
+angle        1  13   59    70.        124.5    wlj
+angle        7  13   59    70.        111.0    wlj
+angle       12  13   34    35.        128.0
+angle       12  13   42    35.        130.0
+angle       12  13   59    70.        120.00    HIS(OL)
+angle       14  13   42    35.        128.2    wlj
+angle       14  13   59    70.        111.0    wlj   "     "    "
+angle       17  13   42    35.        120.2    TRP
+angle       17  13   58    70.        107.70    TRP
+angle       34  13   59    35.        120.0
+angle       42  13   58    35.        121.6
+angle       42  13   59    35.        120.0
+angle        1  14   13     70.       130.7     jtr: HID CB-CG-CD2
+angle        1  14   14     70.       120.00
+angle        1  14   58     70.       121.6    wlj
+angle        1  14   22     70.       132.1     "
+angle        1  14   59     70.       118.9     "
+angle        5  14   22     85.       120.     bhap,                   copy from  5- 7- 7      rcr HIVRT
+angle        5  14   58     85.       120.     bhap,                   copy from  5- 7- 7      rcr HIVRT
+angle        7  14   22     70.       132.1     "
+angle        7  14   34     35.       130.7    wlj
+angle        7  14   47     70.       108.1     "
+angle        7  14   58     70.       121.6    wlj
+angle       12  14   34     35.       120.0
+angle       12  14   58     70.       120.00    HIS(OL)
+angle       13  14   34     35.       130.7    wlj - imidazole
+angle       13  14   47     70.       108.0     "
+angle       13  14   58     70.       106.3    wlj   "     "  imidazole
+angle       13  14   69     70.       111.0    wlj
+angle       14  14   58     70.       120.0
+angle       14  14   59     70.       120.00
+angle       17  14   34     35.       120.0
+angle       17  14   58     70.       108.7     TRP(OL)
+angle       22  14   34     35.       132.1     "
+angle       22  14   47     70.       110.6    wlj  
+angle       22  14   58     70.       107.7    wj/nm
+angle       22  14   59     70.       111.9     "
+angle       22  14   69     70.       111.0    wlj
+angle       34  14   47     35.       113.4    wlj  furan
+angle       34  14   58     35.       121.6    wlj
+angle       34  14   69     35.       113.4    wlj
+angle       42  14   58     35.       120.0
+angle        1  15   58    70.        125.0      wlj
+angle        1  15   59    70.        125.0      wlj
+angle       22  15   58    70.        106.2    wj
+angle       22  15   60    70.        127.7    wj
+angle       43  15   47    35.        117.0     "
+angle       43  15   58    35.        120.0
+angle       43  15   59    35.        120.0
+angle       43  15   69    35.        113.4    wlj
+angle       47  15   59    70.        115.0     "
+angle       55  15   59    70.        126.2    wj
+angle       58  15   58    70.        120.00    HISP(OL)
+angle       58  15   59    70.        120.00   HIS(OL)
+angle       58  15   60    70.        126.2    wj
+angle       59  15   69    70.        115.0     "
+angle        1  16    7    70.        120.     Added DSM (from  7- 7- 1)
+angle        1  16   16    70.        120.     Added DSM (from  7- 7- 1)
+angle        5  16   16    85.        119.2    GUA
+angle        5  16   14    70.        130.     wj
+angle        5  16   59    70.        130.     GUA
+angle        7  16    7    85.        134.9     TRP(OL)
+angle        7  16   11    85.        108.8     TRP(OL)
+angle        7  16   12    85.        108.8     TRP(OL)
+angle        7  16   16    85.        117.3    ADE
+angle        7  16   17    85.        134.9     TRP(OL)
+angle        7  16   22    85.        134.9     
+angle        7  16   59    70.        132.4    ADE
+angle       11  16   17    85.        108.8     TRP(OL)
+angle       11  16   22    85.        116.2     TRP(OL)
+angle       12  16   16    85.        120.     Added DSM (from  7- 7- 7)
+angle       12  16   17    85.        108.8     TRP(OL)
+angle       12  16   22    85.        108.8     
+angle       16  16   55    70.        127.7    wj
+angle       16  16   58    70.        106.2    wlj
+angle       16  16   59    70.        111.0    GUA,ADE
+angle       16  16   60    70.        127.7    GUA,ADE
+angle       16  16   61    70.        106.2    GUA,ADE
+angle       55  16   59    70.        126.2    wj
+angle       58  16   60    70.        126.2    wlj
+angle       60  16   61    70.        126.2    GUA,ADE
+angle        1  17   13    70.        125.       TRP(OL)
+angle        1  17   14    70.        125.       TRP(OL)
+angle        1  17   16    70.        128.6       TRP(OL)
+angle       13  17   16    85.        106.4       TRP(OL)
+angle       14  17   30    35.        126.8
+angle       16  17   30    35.        126.8
+angle       34  18   58    35.        120.0      wlj
+angle       34  18   59    35.        120.0      wlj
+angle       34  18   61    35.        120.0
+angle       43  18   58    35.        123.05
+angle       43  18   59    35.        123.05
+angle       43  18   61    35.        123.05
+angle       58  18   59    70.        113.9      wlj
+angle       59  18   61    70.        113.9
+angle        1  19  60     70.        115.5    wlj
+angle       34  19  60     35.        115.45
+angle       43  19  60     35.        115.45
+angle       55  19  57     70.        116.0    wlj
+angle       55  19  60     70.        123.3    wlj
+angle       57  19  60     70.        119.3    wlj    
+angle       60  19  60     70.        129.1
+angle        1  21   29    37.5       110.7        "            :   1- 1-29 - wd 6/95 Glucose
+angle        1  21   44    50.        109.5        "            :   1- 1-44 - wd 6/95 Glucose
+angle        1  21   48    50.        109.5       hexopyranoses :   1- 1-48 - wd 3/95 Glucose
+angle       29  21   29    33.        109.5        "            :  29- 1-29 - wd 6/95
+angle       29  21   44    35.0       109.5        "            :  29- 1-48 - wd 6/95 Glucose
+angle       29  21   48    35.0       109.5        "            :  29- 1-48 - wd 6/95 Glucose
+angle       44  21   48     92.6      111.55     Ha,CarbRes 180,217(88)Merz,JCC 15,1019 (94)
+angle       48  21   48     92.6      111.55     ACETAL - wlj 2/93
+angle        1  22   14     70.        125.       TRP(OL)
+angle        1  22   16     70.        128.6   
+angle        5  22   14     70.        130.     wj
+angle       14  22   14     70.        103.8     "
+angle       14  22   15     70.        110.4    wj
+angle       14  22   16     85.        106.4  
+angle       14  22   22     70.        107.3     "
+angle       14  22   23     70.        103.8     "
+angle       14  22   34     35.        125.7     "
+angle       14  22   30     35.        126.8
+angle       16  22   30     35.        126.8
+angle       16  22   34     35.        120.0    bhap,                   copy from 16-CA-34      rcr HIVRT
+angle       22  22   34     35.        127.5     "
+angle        1  23   59     70.       118.9     "
+angle        7  23   34     35.       128.6     "
+angle        7  23   59     70.       111.9     "
+angle       22  23   59     70.       111.9     "
+angle       34  23   59     35.       118.9     "
+
+angle        1  24   24   150.        180.     do 11/98 - JPOC, 9, 191(1996)
+angle        1  24   87   150.        180.     wlj
+angle        7  24   87   150.        180.     wlj
+angle       24  24   33   112.        180.     do 1/99  - JPOC, 9, 191(1996)
+angle       57  24   87   150.        180.     wlj
+angle       24  25   29    35.        108.0            "
+angle        1  25   24    58.35      112.7            "
+
+angle        1  28   28    37.5       117.2            "
+angle        1  28   29    35.        114.3            "
+angle3      28  28   28    30.0        60.0            "
+angle       28  28   29    37.5       117.2      cyclopropanes - wlj  10/97
+angle       29  28   29    35.        114.3            "
+angle       28  28   53    37.5       117.2    nev,                    copy from 28  28    1      rcr HIVRT
+angle       29  28   53    35.        114.3    nev,                    copy from 29  28    1      rcr HIVRT
+angle       28  28   55    37.5       126.0            "
+angle       29  28   55    35.        108.0            "
+angle       28  28   69    55.        128.0            "
+angle       29  28   69    37.5       108.0            "
+angle       10  28   28    63.        114.     hept,                   copy from CA- 1- 1      rcr HIVRT
+angle       10  28   29    35.        109.5    hept,                   copy from 10- 1-29      rcr HIVRT
+angle        1  44   36    55.        108.5      
+angle        7  44   36    35.        113.0
+angle       10  44   36    35.        109.0      wj
+angle       21  44   36    55.        108.5        "            :  CT  44   36 - wd 6/95 Glucose
+angle       36  44   55    49.        105.4      wlj
+angle       36  44   66    45.0       108.5      SUG(OL)
+angle        5  46   36    35.        113.0      TYR(PHENOL)     HARMONY MEOH
+angle       36  46   66    45.0       108.5      SUG(OL)
+angle        1  47    1     60.       109.5
+angle        1  47    5     83.        116.9       "
+angle        1  47    7     75.       111.0      wlj 9/97
+angle        1  47   10     75.       111.0      wlj
+angle        1  47   21     60.        109.5        "            :   1  47    1 - wd 6/95 Glucose
+angle        1  47   66    100.       120.5
+angle        5  47    7     83.        116.9      wlj
+angle        7  47   10     75.        111.0    hept,                   copy from  1-S - 1      rcr HIVRT
+angle        7  47   66    100.0      120.5      mll
+angle       14  47   14     70.       106.5    wlj  furan
+angle       14  47   15     70.       104.0     "
+angle       14  47   16     70.       106.5    wlj  furan
+angle       14  47   59     70.       108.9     "
+angle       15  47   16     70.       106.5    wlj  furan
+angle       66  47   66    100.       120.5
+angle        1  48   21    100.       113.0                 :   1  47    1 - wd 6/95 Glucose
+angle        1  48   66    100.       120.5
+angle        1  53    1    51.8       107.2     wlj - MM3 based JACS 112, 8314 (90)
+angle        1  53    5    63.0       111.1     bhap,                   copy from C - 1- 1      rcr HIVRT
+angle        1  53   38    35.0       109.5
+angle        1  53   69    50.0       108.6      bhap,                   copy from  1- 1-SY      rcr HIVRT
+angle       38  53   38    43.6       106.4      wlj MM3 based
+angle       38  53   69    35.0       115.0      bhap,                   adjusted from  1  53   H   rcr HIVRT
+angle        1  54    7    50.0       109.5        "
+angle        7  54   38    35.0       111.0     wlj/rr anilines
+angle        7  54    5    63.0       112.0     nev,                    copy from  7- 1-C       rcr HIVRT
+angle        7  54    7    40.0       109.5     nev,                    copy from  7- 1- 7      rcr HIVRT
+angle        7  54   28    50.        109.5     nev,                    copy from  7  53    1      rcr HIVRT
+angle        7  54   69    50.0       108.6     nev,                    copy from  1- 1-SY      rcr HIVRT
+angle       38  54   38    43.6       106.4      wlj MM3 based
+angle        1  55    1    50.        118.      PRO(OL)         DETAR JACS 99,1232
+angle        1  55    5    50.        121.9
+angle        1  55    7    50.        118.       wj
+angle        1  55   39    38.        118.4
+angle        1  55   69    50.        120.0
+angle        5  55    5    70.        126.4      wlj
+angle        5  55    7    50.        121.9      wlj
+angle        5  55   19    70.        125.2      wj
+angle        5  55   28     55.       128.0            "
+angle        5  55   38    35.        120.       GLN,ASN                 **
+angle        5  55   39    35.        119.8      AA(OL)
+angle        5  55   44    46.        115.7      wlj
+angle        7  55   39    35.        119.8    Added DSM (from  5  55   H)
+angle       19  55   39    35.        118.0      wlj
+angle       28  55   39    40.       113.0            "
+angle       39  55   39    35.        120.       ADE,28T,GUA,GLN,ASN     **
+angle       39  55   44    35.        110.2      wlj
+angle       39  55   69   100.0      111.0
+angle       40  55   40    35.        120.       ADE,28T,GUA,GLN,ASN     **
+angle        1  56    1    50.        113.0      proline j.phys chem 1979 p 2361
+angle        1  56   40    35.        109.5      LYS
+angle       40  56   40    35.        109.5      LYS
+angle        1  56   50    80.        117.5      wlj  nitro
+angle        7  56   50    80.        117.5      wlj  nitro
+angle       50  56   50    80.        125.0       wlj  nitro
+
+angle        1  57    1    50.        123.2       ARG(OL)
+angle        1  57    8    50.        123.2       ARG(OL)
+angle        1  57   38    35.        120.       ADE,CYT,GUA,ARG
+angle        1  57   39    35.        118.4
+angle        1  57   40    35.        118.4      ARG(OL)
+angle        7  57   38    35.        120.       ADE,CYT,GUA,ARG
+angle        8  57   39    35.        120.       wlj
+angle       19  57   39    35.        120.       wlj
+angle       38  57   38    35.        120.       ADE,CYT,GUA,GLN,ASN,ARG
+angle       39  57   39    35.        113.       wlj 
+angle       40  57   40    35.        120.       ADE,CYT,GUA,GLN,ASN,ARG
+
+angle        1  58    1    70.        125.8       keg
+angle        1  58   16    70.        125.8       wlj
+angle        1  58   18    70.        128.8       wlj
+angle        1  58   38    35.        116.0       keg
+angle        1  58   59    70.        118.4     "
+angle        5  58    5    70.        126.4      URA
+angle        5  58    7    70.        125.2      GUA
+angle        5  58   10    70.        121.6      copy from above for CytH+ (jtr 5-14-91)
+angle        5  58   38    35.        116.8      GUA,URA(2)
+angle        7  58    7    70.        125.2    Added DSM (from  5  58    7)
+angle        7  58   12    70.        111.6      TRP(OL)
+angle        7  58   18    70.        109.8    wlj
+angle        7  58   39    35.        118.0      GUA
+angle        7  58   59    70.        118.4     "
+angle       10  58   38    35.        119.2       copy from above for CytH+ (jtr 5-14-91)
+angle       11  58   13    70.        109.8      TRP(OL)
+angle       11  58   14    70.        111.6      TRP(OL)
+angle       11  58   38    35.        123.1      TRP(OL)
+angle       12  58   12    70.        111.6      TRP(OL)
+angle       12  58   15    70.        120.00      HIS(OL)
+angle       12  58   38    35.        120.00      HIS(OL)
+angle       13  58   38    35.        123.10      TRP
+angle       14  58   14    70.        109.8    wlj   "     "    "     "
+angle       14  58   15    70.        109.8    wlj   "     "    "
+angle       14  58   38    35.        120.00      HIS(OL)
+angle       14  58   59    56.        113.1     "
+angle       15  58   16    70.        109.8    wlj
+angle       15  58   38    35.        120.00      HIS(OL)
+angle       15  58   59    56.        113.1     "
+angle       16  58   18    70.        105.4       wlj
+angle       16  58   38    30.        125.8       wlj
+angle       16  58   59    56.       113.1     "
+angle       18  58   38    30.        128.8       wlj
+angle       39  58   59    56.       118.4     "
+angle        7  59    7    70.        125.2    Added DSM (from C -58- 7)
+angle       12  59   15    70.        117.0       HIS(OL)
+angle       13  59   15    70.        110.0      HIS(OL) wlj 1/97
+angle       14  59   15    70.        110.0
+angle       14  59   58    70.       104.1     "
+angle       15  59   16    70.        110.0      wlj
+angle       16  59   18    70.        103.8
+angle       23  59   47    70.       105.3     "
+angle       23  59   58    70.       104.1     "
+angle        1  60    7    50.        118.       wj
+angle        1  60   60    70.        117.0    wlj  azo
+angle        1  60   87    70.        120.0    wlj azide
+angle        5  60    7    70.        120.5      CYT
+angle        7  60    7    70.        117.0    wlj   "     "    "     "
+angle        7  60   16    70.        112.2      GUA
+angle        7  60   19    70.        118.6
+angle        7  60   60    70.        117.0    wlj  pyridazine
+angle       15  60   19    70.        111.0      wj
+angle       16  60   19    70.        111.0
+angle       19  60   19    70.        118.6      wlj 1,3,5-triazine
+angle        1  61    5     70.       117.6
+angle        1  61   10     70.       121.2
+angle        1  61   16    70.        125.8
+angle        1  61   18    70.        128.8
+angle        5  61   10    70.        121.6      
+angle        5  61   39    35.        119.2
+angle       10  61   39    35.        119.2
+angle       16  61   18    70.        105.4
+angle       16  61   39    30.        125.8
+angle       18  61   39    30.        128.8
+
+angle        1  66   47    45.0       109.5      wlj 11/95
+angle        1  66   49    45.0       109.5      wlj 11/95
+angle        1  66   50    45.0       109.5      wlj 11/95
+angle        7  66   44    45.0       109.5      wlj 11/95
+angle        7  66   47    45.0       109.5      wlj 11/95
+angle        7  66   49    45.0       109.5      wlj 11/95
+angle       44  66   44    45.0       102.6      SUG(OL)
+angle       44  66   47    45.0       102.6      SUG(OL)
+angle       46  66   46    45.0       102.6      SUG(OL)
+angle       46  66   48    45.0       102.6      SUG(OL)
+angle       44  66   49    100.0      108.23     SUG(OL)
+angle       46  66   49    100.0      108.23     SUG(OL)
+angle       47  66   47    45.0       102.6      SUG(OL)
+angle       47  66   48    45.0       102.6      SUG(OL)
+angle       47  66   49    100.0      108.23     SUG(OL)
+angle       44  66   50    45.0       108.23     SUG(OL)
+angle       46  66   50    45.0       108.23     SUG(OL)
+angle       47  66   50    100.0      108.23     SUG(OL)
+angle       48  66   50    100.0      108.23     SUG(OL)
+angle       48  66   48    45.0       102.6      SUG(OL)
+angle       50  66   50    140.0      119.9      SUG(OL)
+
+angle        1  67    1    45.        109.5      " AMBER 47-P-47
+angle        1  68   37    44.         96.0        28S(OL)
+angle        7  68   37    50.         96.0        wlj
+angle       37  68   37    35.         92.07
+angle        1  69    1    62.         98.9       MET(OL)
+angle        1  69    7    62.        104.2    thioanisole             adjusted from  1  69    1  rcr HIVRT
+angle        1  69   28    62.         94.0            "
+angle        1  69   69    68.        103.7       28X(OL)        SCHERAGA  JPC 79,1428
+angle        7  69   10    62.        104.2    hept,                   adjusted from  1  69    1  rcr HIVRT
+angle       14  69   14    74.         97.0       wlj
+angle       14  69   15    74.         90.0       wlj
+
+
+      ###############################
+      ##                           ##
+      ##  Urey-Bradley Parameters  ##
+      ##                           ##
+      ###############################
+
+
+ureybrad    29   21   29     38.25     1.5139
+
+
+      #####################################
+      ##                                 ##
+      ##  Improper Torsional Parameters  ##
+      ##                                 ##
+      #####################################
+
+
+imptors      7    7    7    1         0.000 0    2.200  -2   0.000  0
+imptors      7    7    7   34         0.000 0    2.200  -2   0.000  0
+imptors      7    7    7   44         0.000 0    2.200  -2   0.000  0
+imptors      7   11    7   34         0.000 0    2.200  -2   0.000  0
+imptors     16    7    7   34         0.000 0    2.200  -2   0.000  0
+imptors     58   17    7   34         0.000 0    2.200  -2   0.000  0
+imptors      1    1    5   49         0.000 0    21.00  -2   0.000  0
+imptors     55    1    5   49         0.000 0    21.00  -2   0.000  0
+imptors     55   32    5   49         0.000 0    21.00  -2   0.000  0
+imptors      1    5   55   39         0.000 0    2.000  -2   0.000  0
+imptors      1    5   55    1         0.000 0    2.000  -2   0.000  0
+imptors     46    1    5   49         0.000 0    21.00  -2   0.000  0
+imptors     39    5   55   39         0.000 0    2.000  -2   0.000  0
+imptors     50    1   6   50          0.000 0    21.00  -2   0.000  0
+imptors     16    7   17    1         0.000 0    2.200  -2   0.000  0
+imptors     17    7   16   11         0.000 0    2.200  -2   0.000  0
+imptors     58   16   11    7         0.000 0    2.200  -2   0.000  0
+imptors     11    7   58   39         0.000 0    2.000  -2   0.000  0
+imptors     14   12   58   39         0.000 0    2.000  -2   0.000  0
+imptors     58   58   12   34         0.000 0    2.200  -2   0.000  0
+imptors     12   59   12   34         0.000 0    2.200  -2   0.000  0
+imptors     40   59   13    1         0.000 0    2.200  -2   0.000  0
+imptors     40   59   13   34         0.000 0    2.200  -2   0.000  0
+imptors     58   13   14    1         0.000 0    2.200  -2   0.000  0
+imptors     58   13   14   34         0.000 0    2.200  -2   0.000  0
+imptors     58   14   14    1         0.000 0    2.200  -2   0.000  0
+imptors     58   14   14   34         0.000 0    2.200  -2   0.000  0
+
+
+      ############################
+      ##                        ##
+      ##  Torsional Parameters  ##
+      ##                        ##
+      ############################
+
+torsion    1    1    1    1       1.740 +1 -0.157 -2  0.279 +3
+torsion    1    1    1    29      0.000 +1  0.000 -2  0.366 +3
+torsion    29   1    1    29      0.000 +1  0.000 -2  0.318 +3
+torsion    10   1    1    29      0.000 +1  0.000 -2  0.366 +3
+torsion    10   10   1    29      0.000 +1  0.000 -2 -0.372 +3
+torsion    7    7    1    29      0.000 +1  0.000 -2  0.000 +3
+torsion    7    1    1    29      0.000 +1  0.000 -2  0.462 +3
+torsion    1    1    7    7       0.000 +1  0.000 -2  0.000 +3
+torsion    29   1    7    7       0.000 +1  0.000 -2  0.000 +3
+torsion    29   1    10   10      0.000 +1  0.000 -2 -0.480 +3
+// alkene
+torsion    1    1    10   10     -0.714 +1  0.000 -2  0.000 +3
+torsion    1    1    1    10      0.000 +1  0.000 -2  0.000 +3
+torsion    29   1    10   55      0.000 +1  0.000 -2  0.419 +3
+torsion    1    1    10   55      2.366 +1 -0.262 -2  0.505 +3
+// alcohols
+torsion    29   1     1   44      0.000 +1  0.000 -2  0.468 +3
+torsion    1    1     1   44      1.711 +1 -0.500 -2  0.663 +3
+torsion    1    1    44   36     -0.356 +1 -0.174 -2  0.492 +3
+torsion    29   1    44   36      0.000 +1  0.000 -2  0.450 +3
+torsion    29   1    21   44      0.000 +1  0.000 -2  0.468 +3
+torsion    7    7    44   36      0.000 +1  1.682 -2  0.000 +3
+torsion    44   1     1   44      9.508 +1  0.000 -2  0.000 +3
+// thiols
+torsion    29   1    1    68      0.000 +1  0.000 -2  0.452 +3
+torsion    1    1    1    68      1.876 +1  0.000 -2  0.000 +3
+torsion    29   1    68   37      0.000 +1  0.000 -2  0.451 +3
+torsion    1    1    68   37     -0.759 +1 -0.282 -2  0.603 +3
+// sulfides
+torsion    1    1    1    69      2.619 +1 -0.620 -2  0.258 +3
+torsion    1    1    69   1       0.925 +1 -0.576 -2  0.677 +3
+torsion    29   1    69   1       0.000 +1  0.000 -2  0.647 +3
+torsion    29   1    69   7       0.000 +1  0.000 -2  0.558 +3
+torsion    29   1    69   58      0.000 +1  0.000 -2  0.647 +3
+torsion    1    1    69   69      1.941 +1 -0.836 -2  0.935 +3
+torsion    29   1    69   69      0.000 +1  0.000 -2  0.558 +3
+// amines
+torsion    1    1    53   38     -0.190 +1 -0.417 -2  0.418 +3
+torsion    29   1    53   38      0.000 +1  0.000 -2  0.400 +3
+torsion    1    1    1    53      2.392 +1 -0.674 -2  0.550 +3
+torsion    29   1    1    53     -1.013 +1 -0.709 -2  0.473 +3
+torsion    1    1    1    58      2.392 +1 -0.674 -2  0.550 +3
+torsion    29   1    1    58     -1.013 +1 -0.709 -2  0.473 +3
+torsion    29   1    58    1      0.000 +1  0.000 -2  0.261 +3
+torsion    29   1    58   38      0.000 +1  0.000 -2  0.261 +3
+// ammonium
+torsion    29   1    56   40      0.000 +1  0.000 -2  0.261 +3
+torsion    1    1    56   40      0.000 +1  0.000 -2  0.347 +3
+torsion    29   1    1    56      0.000 +1  0.000 -2  0.384 +3
+torsion    1    1    1    56      2.732 +1 -0.229 -2  0.485 +3
+// ether
+torsion    29   1    47   1       0.000 +1  0.000 -2  0.760 +3
+torsion    1    1    47   1       0.650 +1 -0.250 -2  0.670 +3
+torsion    29   1     1   47      0.000 +1  0.000 -2  0.468 +3
+// acetal
+torsion    44   21   48   1      -0.521 +1 -2.018 -2  1.996 +3
+torsion    1    21   48   29      0.000 +1  0.000 -2  0.760 +3
+torsion    48   21   44   36     -0.521 +1 -2.018 -2  1.996 +3
+torsion    29   21   44   36     -0.356 +1 -0.174 -2  0.492 +3
+torsion    29   1    48   21      0.000 +1  0.000 -2  0.760 +3
+torsion    29   21   48   1       0.000 +1  0.000 -2  0.760 +3
+// carboxylate
+torsion    29   1    5    50      0.000 +1  0.000 -2  0.000 +3
+torsion    1    1    5    50      0.000 +1  0.820 -2  0.000 +3
+torsion    29   1    1    5       0.000 +1  0.000 -2 -0.225 +3
+torsion    1    1    1    5      -3.185 +1 -0.825 -2  0.493 +3
+// carboxylic acid
+torsion    49   5    46   36      0.000 +1  4.830 -2  0.000 +3
+torsion    1    5    46   36      0.000 +1  4.830 -2  0.000 +3
+// aldehyde & ketones
+torsion    29   1    5    49      0.000 +1  0.000 -2  0.000 +3
+torsion    29   1    5    32      0.000 +1  0.000 -2  0.360 +3
+torsion    29   1    5    1       0.000 +1  0.000 -2  0.275 +3
+torsion    1    1    5    49     -0.277 +1  1.228 -2 -0.694 +3
+torsion    1    1    5    32      0.000 +1  0.000 -2  0.000 +3
+torsion    1    1    5    1       1.454 +1 -0.144 -2 -0.775 +3
+torsion    5    1    1   29       0.000 +1  0.000 -2 -0.076 +3
+torsion    1    1    1    5      -1.697 +1 -0.456 -2  0.585 +3
+// amides
+torsion    29   1    55   5       0.000 +1  0.000 -2  0.000 +3
+torsion    1    1    55   5      -1.396 +1 -0.427 -2  0.000 +3
+torsion    29   1    55   39      0.000 +1  0.000 -2  0.000 +3
+torsion    1    1    55   39      0.000 +1  0.000 -2  0.000 +3
+torsion    29   1    1    55      0.000 +1  0.000 -2  0.464 +3
+torsion    1    1    1    55      1.964 +1  0.000 -2  0.659 +3
+torsion    29   1    5    57      0.000 +1  0.000 -2  0.000 +3
+torsion    29   1    5    49      0.000 +1  0.000 -2  0.000 +3
+torsion    1    1    5    55      3.250 +1 -0.402 -2 -0.136 +3
+torsion    1    1    5    49      0.000 +1  1.166 -2  0.000 +3
+torsion    29   1    1    5       0.000 +1  0.000 -2 -0.100 +3
+torsion    1    1    1    5      -2.060 +1 -0.313 -2  0.315 +3
+torsion    1    5    55   39      0.000 +1  4.900 -2  0.000 +3
+torsion    1    5    55   1       2.800 +1  6.089 -2  0.000 +3
+torsion    49   5    55   39      0.000 +1  4.900 -2  0.000 +3
+torsion    49   5    55   1       0.000 +1  6.089 -2  0.000 +3
+// peptides
+torsion    5    55   1    5      -2.365 +1  0.912 -2 -0.850 +3
+torsion    5    55   1    1       0.000 +1  0.462 -2  0.000 +3
+torsion    5    55   1   29       0.000 +1  0.000 -2  0.000 +3
+torsion    39   55   1    0       0.000 +1  0.000 -2  0.000 +3
+torsion    55   1    5   55       1.816 +1  1.222 -2  1.581 +3
+torsion    1    1    5   55       1.173 +1  0.189 -2 -1.200 +3
+torsion    29   1    5   55       0.000 +1  0.000 -2  0.000 +3
+torsion    0    1    5   49       0.000 +1  0.000 -2  0.000 +3
+torsion    55   1    1    1       0.845 +1 -0.962 -2  0.713 +3
+// ser & thr
+torsion    55   1    5   49       6.280 +1 -1.467 -2  2.030 +3
+torsion    5    1   44   36      -6.180 +1  0.000 -2  0.000 +3
+torsion    55   1    1   69       0.583 +1 -1.163 -2  0.141 +3
+torsion    5    1    1   69      -4.214 +1 -2.114 -2  0.969 +3
+// 5 ethylimidizole
+torsion    29   1    12   58      0.000 +1  0.000 -2  0.419 +3
+torsion    1    1    12   58      2.366 +1 -0.262 -2  0.505 +3
+torsion    5    1    1    57      0.000 +1  0.000 -2 -0.139 +3
+// guanadinium
+torsion    40   57   8    57      0.000 +1  3.900 -2  0.000 +3
+torsion    1    57   8    57      0.000 +1  7.936 -2  0.000 +3
+torsion    1    1    57   8       1.829 +1  0.243 -2 -0.498 +3
+torsion    29   1    1    57      0.000 +1  0.000 -2 -0.582 +3
+torsion    29   1    57   40      0.000 +1  0.000 -2  0.000 +3
+//
+torsion    29   1    1    5       0.000 +1  0.000 -2 -0.225 +3
+torsion    1    1    5    49      0.000 +1  0.820 -2  0.000 +3
+torsion    49   1    5    49      0.000 +1  4.830 -2  0.000 +3
+torsion    1    5    5    49      0.000 +1  4.830 -2  0.000 +3
+torsion    47   1    1    47     -0.550 +1  0.000 -2  0.000 +3
+torsion    1    47   7    7       0.000 +1  0.000 -2  0.000 +3
+torsion    1    1    47   5      -0.126 +1  0.422 -2  0.000 +3
+torsion    7    7    47   5       2.500 +1  0.000 -2  0.000 +3
+torsion    49   7    47   5       5.000 +1  0.000 -2  0.000 +3
+torsion    49   7    47   5       5.000 +1  0.000 -2  0.000 +3
+torsion    7    5    47   5       5.000 +1  0.000 -2  0.000 +3
+torsion    7    5    47   5       5.000 +1  0.000 -2  0.000 +3
+torsion    49   5    47   5       5.000 +1  0.000 -2  0.000 +3
+torsion    1    5    47   5       5.000 +1  0.000 -2  0.000 +3
+torsion    29   2    44   36      0.000 +1  0.000 -2  0.476 +3
+torsion    62   1    44   36      0.000 +1  0.000 -2  0.314 +3
+torsion    62   1    44   36      0.000 +1  0.000 -2  0.540 +3
+torsion    5    1    44   36     -0.550 +1  0.000 -2  1.000 +3
+torsion    49   1    44   36      0.000 +1  4.900 -2  0.000 +3
+torsion    1    5    44   36      3.000 +1  4.900 -2  0.000 +3
+torsion    5    5    44   36      0.000 +1  0.000 -2  0.074 +3
+torsion    1    1    1    44     -1.552 +1  0.000 -2  0.000 +3
+torsion    44   1    1    44      9.508 +1  0.000 -2  0.000 +3
+torsion    44   1    1    44     12.234 +1  0.000 -2  0.000 +3
+torsion    1    69   1    7       0.000 +1 -7.414 -2  1.705 +3
+torsion    1    1    57   40     -0.417 +1  0.418 -2  0.000 +3
+torsion    1    1    57   40     -0.417 +1  0.418 -2  0.000 +3
+torsion    39   1    5    7       0.000 +1  0.000 -2  0.000 +3
+torsion    0    1    5    7       0.000 +1  0.000 -2  0.000 +3
+torsion    0    1    5    7       0.000 +1  4.900 -2  0.000 +3
+torsion    49   1    5    7       0.000 +1  4.900 -2  0.000 +3
+torsion    49   1    5    7       0.000 +1  6.089 -2  0.000 +3
+torsion    1    55   5    7       0.000 +1  0.000 -2  0.000 +3
+torsion    42   13   12   58      0.000 +1  0.000 -2  0.420 +3
+torsion    1    12   14   58      2.349 +1 -0.312 -2  0.540 +3
+torsion    29   1    1    49      0.000 +1  0.000 -2  0.000 +3
+torsion    1    1    0    0      -0.750 +1 -0.550 -2 -0.250 +3
+torsion    1    1    0    39      0.000 +1  1.412 -2  0.000 +3
+torsion    29   1    5    39      0.000 +1  0.000 -2  0.275 +3
+torsion    29   1    5    39      0.000 +1  0.000 -2  0.000 +3
+torsion    1    1    5    5       0.000 +1  0.000 -2  0.000 +3
+torsion    29   1    1    63      0.000 +1  0.000 -2  0.400 +3
+torsion    1    1    1    63      0.000 +1  0.000 -2  0.400 +3
+torsion    63   1    1    63     -0.250 +1  0.000 -2  0.000 +3
+torsion    36   44  21    2       4.478 +1 -2.175 -2  0.000 +3
+torsion    29   1    5    36      0.000 +1  0.132 -2  0.000 +3
+torsion    1    5    5    36      5.124 +1  0.000 -2  0.000 +3
+torsion    29   5    5    36      5.124 +1  0.000 -2  0.000 +3
+torsion    49   5    5    36      5.124 +1  0.000 -2  0.000 +3
+torsion    5    5    5    36      0.000 +1  0.198 -2  0.000 +3
+torsion    1    1    5    36      0.000 +1 -0.553 -2  0.000 +3
+torsion    1    1    53   39      4.000 +1  0.000 -2  0.000 +3
+torsion    1    1    53   39      4.000 +1  0.000 -2  0.000 +3
+torsion    1    1    53   39     -0.417 +1  0.418 -2  0.000 +3
+torsion    1    1    53   39     -0.417 +1  0.418 -2  0.000 +3
+torsion    1    53   1    1      -0.128 +1  0.695 -2  0.000 +3
+torsion    1    53   1    1      -0.128 +1  0.695 -2  0.000 +3
+torsion    1    53   1    1      -0.128 +1  0.695 -2  0.000 +3
+torsion    1    53   1    1      -0.128 +1  0.695 -2  0.000 +3
+torsion    1    1    53   39     -0.417 +1  0.418 -2  0.000 +3
+torsion    1    1    53   39     -0.417 +1  0.418 -2  0.000 +3
+torsion    53   1    1    53     -0.968 +1  0.270 -2  0.000 +3
+torsion    1    53   1    1      -0.128 +1  0.695 -2  0.000 +3
+torsion    29   1    53   1       0.000 +1  0.560 -2  0.000 +3
+// aromatic
+torsion    7    7    7    7       0.000 +1  7.250 -2  0.000 +3
+torsion    7    7    7    34      0.000 +1  7.250 -2  0.000 +3
+torsion    7    7    7    54      0.000 +1  7.250 -2  0.000 +3
+torsion    34   7    7    34      0.000 +1  7.250 -2  0.000 +3
+torsion    34   7    7    44      0.000 +1  7.250 -2  0.000 +3
+torsion    34   7    7    54      0.000 +1  7.250 -2  0.000 +3
+torsion    7    7    54   38      0.000 +1  2.100 -2  0.000 +3
+torsion    1    7    7    7       0.000 +1  7.250 -2  0.000 +3
+torsion    1    7    7    34      0.000 +1  7.250 -2  0.000 +3
+torsion    7    7    5    1       0.200 +1  0.000 -2  0.000 +3
+torsion    7    7    5    1       0.200 +1  0.000 -2  0.000 +3
+torsion    7    7    55   1       2.100 +1  0.000 -2  0.000 +3
+torsion    7    7    55   1       2.100 +1  0.000 -2  0.000 +3
+torsion    7    7    55   1       2.100 +1  0.000 -2  0.000 +3
+torsion    7    7    55   1       2.100 +1  0.000 -2  0.000 +3
+torsion    7    7    5    1       2.100 +1  0.000 -2  0.000 +3
+torsion    7    7    5    1       2.100 +1  0.000 -2  0.000 +3
+torsion    7    7    5    1       2.100 +1  0.000 -2  0.000 +3
+torsion    7    7    5    5       1.100 +1  0.000 -2  0.000 +3
+torsion    1    1    10   1      -0.169 +1  0.543 -2  0.000 +3
+torsion    1    1    10   10      0.405 +1 -0.904 -2  0.000 +3
+torsion    1    1    10   0       0.405 +1 -0.904 -2  0.000 +3
+torsion    29   1    10   30      0.000 +1 -0.000 -2  0.520 +3
+torsion    10   10   7    7       3.353 +1 -0.286 -2  0.000 +3
+torsion    1    10   7    7      -0.531 +1  0.000 -2  0.000 +3
+torsion    0    10   7    7      0.000 +1  14.000 -2  0.000 +3
+//
+torsion    1    10   10   1      0.000 +1  14.000 -2  0.000 +3
+torsion    1    10   0    1      0.000 +1  14.000 -2  0.000 +3
+torsion    1    10   0    29     0.000 +1  14.000 -2  0.000 +3
+torsion    29   10   0    29     0.000 +1  14.000 -2  0.000 +3
+torsion    29   10   0    1      0.000 +1  14.000 -2  0.000 +3
+torsion    1    10   10   29     0.000 +1  14.000 -2  0.000 +3
+torsion    29   10   10   29     0.000 +1  14.000 -2  0.000 +3
+torsion    63   10   10   29     0.000 +1  14.000 -2  0.000 +3
+torsion    29   10   10   47     0.000 +1  14.000 -2  0.000 +3
+torsion    1    10   10   47     0.000 +1  14.000 -2  0.000 +3
+torsion    29   10   10   44     0.000 +1  14.000 -2  0.000 +3
+torsion    1    10   10   44     0.000 +1  14.000 -2  0.000 +3
+torsion    1    5    10   44     0.000 +1  14.000 -2  0.000 +3
+torsion    29   5    10   44     0.000 +1  14.000 -2  0.000 +3
+torsion    1    5    10   44     0.000 +1  14.000 -2  0.000 +3
+torsion    29   5    10   44     0.000 +1  14.000 -2  0.000 +3
+torsion    63   10   10   63     0.000 +1  14.000 -2  0.000 +3
+torsion    63   10   10   63     0.000 +1  14.000 -2  0.000 +3
+torsion    63   10   10   63     0.000 +1  14.000 -2  0.000 +3
+torsion    63   10   10   63     0.000 +1  14.000 -2  0.000 +3
+torsion    63   10   10   63     0.000 +1  14.000 -2  0.000 +3
+torsion    63   10   10   63     0.000 +1  14.000 -2  0.000 +3
+// histidine
+torsion    0    12   13   0       0.000 +1  2.40 -2  0.000 +3
+torsion    0    12   58   0       0.000 +1  2.40 -2  0.000 +3
+torsion    0    13   59   0       0.000 +1  2.40 -2  0.000 +3
+torsion    0    15   58   0       0.000 +1  2.40 -2  0.000 +3
+torsion    0    15   59   0       0.000 +1  2.40 -2  0.000 +3
+// isoxazole
+torsion    0     7   14   0       0.000 +1  2.40 -2  0.000 +3
+torsion    0     7   23   0       0.000 +1  2.40 -2  0.000 +3
+torsion    0    14   47   0       0.000 +1  2.40 -2  0.000 +3
+torsion    0    23   59   0       0.000 +1  2.40 -2  0.000 +3
+torsion    0    47   59   0       0.000 +1  2.40 -2  0.000 +3
+// furan
+torsion    22   14   22   34      0.000 +1 16.25 -2  0.000 +3
+torsion    34   14   22   22      0.350 +1  8.50 -2  0.000 +3
+torsion    34   14   22   34      0.350 +1  8.50 -2  0.000 +3
+torsion    47   14   22   22      0.350 +1 11.50 -2  0.000 +3
+torsion    47   14   22   34      0.000 +1 16.25 -2  0.000 +3
+
+torsion    22   14   47   14      0.450 +1 13.50 -2  0.000 +3
+torsion    34   14   47   14      0.000 +1  7.80 -2  0.000 +3
+torsion    14   22   22   14      0.990 +1  7.80 -2  0.000 +3
+torsion    14   22   22   34      0.250 +1  9.00 -2  0.550 +3
+torsion    34   22   22   34      0.250 +1  9.00 -2  0.550 +3
+
+      ########################################
+      ##                                    ##
+      ##  Atomic Partial Charge Parameters  ##
+      ##                                    ##
+      ########################################
+#           Type   oplschrg      Smiles String
+oplschrg       1 -.024          C                 methane
+oplschrg       1 -0.18          CC                CH3    all-atom C: alkanes
+oplschrg       1 -0.12          CCC               CH2    all-atom C: alkanes
+oplschrg       1 -0.06          CCCC              CH     all-atom C: alkanes
+oplschrg       1  0.00          CCCCC             C      all-atom C: alkanes
+oplschrg       1 -0.065         Cc                all-atom C: CH3, toluene
+oplschrg       1 -0.005         CCc               all-atom C: CH2, ethyl benzene
+oplschrg       1  0.145         CO                all-atom C: CH3 alcohols
+oplschrg       1  0.145         COC               all-atom C: CH2 alcohols
+oplschrg       1  0.205         COCC              all-atom C: CH, alcohols
+oplschrg       1  0.265         COCCC             all-atom C: C, alcohols
+oplschrg       1  0.1263        COC(FFF)          Trifluoroethanol
+oplschrg       1  0.110         CO(C)             C(H3OR): methyl ether
+oplschrg       1  0.140         CO(C)C            C(H2OR): ethyl  ether
+oplschrg       1  0.170         CO(C)CC           C(HOR):  i-Pr   ether
+oplschrg       1  0.200         CO(C)CCC          C(OR):   t-Bu   ether
+oplschrg       1  0.060         CSC               all-atom C: CH2, thiols
+oplschrg       1  0.120         CSCC              all-atom C: CH, thiols
+oplschrg       1  0.180         CSCCC             all-atom C: C, thiols
+oplschrg       1  0.0375        CS(C)             all-atom C: CH3, sulfides
+oplschrg       1  0.0975        CS(C)C            all-atom C: CH2, sulfides
+oplschrg       1  0.1575        CS(C)CC           all-atom C: CH, sulfides
+oplschrg       1  0.2175        CS(C)CCC          all-atom C: C, sulfides
+oplschrg       1  0.0375        CS(S)             all-atom C: CH3, disulfides
+oplschrg       1  0.0975        CS(S)C            all-atom C: CH2, disulfides
+oplschrg       1  0.1575        CS(S)CC           all-atom C: CH, disulfides
+oplschrg       1  0.2175        CS(S)CCC          all-atom C: C, disulfides
+oplschrg       1  0.020         CN                C in CH3NH2; H on C is type 140
+oplschrg       1  0.020         CN(C)             C in CH3NHR; H on C is type 140
+oplschrg       1  0.030         CN(CC)            C in CH3NR2; H on C is type 140
+oplschrg       1  0.080         CNC               C in RCH2NH2        
+oplschrg       1  0.080         CN(C)C            C in RCH2NHR         
+oplschrg       1  0.090         CN(CC)C           C in RCH2NR2 
+oplschrg       1  0.140         CNCC              C in R2CHNH2        
+oplschrg       1  0.140         CN(C)CC           C in R2CHNRH        
+oplschrg       1  0.140         CN(CC)CC          C in R2CHNR2      
+oplschrg       1  0.200         CNCCC             C in R3CNH2
+oplschrg       1  0.200         CN(C)CCC          C in R3CNRH
+oplschrg       1  0.200         CN(CC)CCC         C in R3CNR2
+     
+oplschrg       1  0.080         CNC(=OO)          C in Gly CA         
+oplschrg       1  0.080         CN(C)C(=ON)       C in Gly CA         
+oplschrg       1  0.140         CNC(=OO)C         C in Ala CA        
+oplschrg       1  0.140         CN(C)C(=ON)C      C in Ala CA        
+oplschrg       1  0.120         CNCC              CH     primary isopropyl amine
+oplschrg       1  0.180         CNCCC             C      primary t-butyl amine
+oplschrg       1  0.140         CN(C)CC           CH     secondary isopropyl amine
+oplschrg       1  0.150         CN(CC)CC          CH     tertiary  isopropyl amine
+oplschrg       1  0.020         CN(C(=O))               C on N: secondary N-Me amide
+oplschrg       1 -0.110         CN(C(=O)C)              C on N: tertiary  N-Me amide
+oplschrg       1  0.080         CN(C(=O))C              C on N: secondary N-CH2R amide
+oplschrg       1 -0.050         CN(C(=O)C)C             C on N: tertiary  N-CH2R amide (Pro Cdelta)
+oplschrg       1  0.010         CN(C(=O)C)CC            C on N: tertiary  N-CHR2 amide (Pro Calpha)
+oplschrg       1 -0.120         CN(C(=O)C(=O))          C in CH3  imide        
+oplschrg       1 -0.060         CN(C(=O)C(=O))C         C in RCH2 imide     
+oplschrg       1  0.000         CN(C(=O)C(=O))CC        C in R2CH imide
+oplschrg       1  0.060         CN(C(=O)C(=O))CCC       C in R3C  imide
+oplschrg       1 -0.280         CC(=OO-)           C: CH3, carboxylate ion
+oplschrg       1 -0.220         CC(=OO-)C          C: CH2, carboxylate ion
+oplschrg       1 -0.160         CC(=OO-)CC         C: CH,  carboxylate ion
+oplschrg       1 -0.100         CC(=OO-)CCC        C: C,   carboxylate ion
+oplschrg       1  0.130         CN+                C in  CH3NH3+      
+oplschrg       1  0.190         CN+C               C in  RCH2NH3+
+oplschrg       1  0.250         CN+CC              C in  R2CHNH3+     
+oplschrg       1  0.310         CN+CCC             C in  R3CNH3+     
+oplschrg       1  0.200         CN(C(NN))          C: CH3, methylguanidinium  
+oplschrg       1 -0.110         CC(N(C(NN)))       C: CH3, ethylguanidinium
+oplschrg       1  0.190         CN(C(NN))C         C: CH2(D), ARG, ethylguanidinium
+oplschrg       1 -0.050         CC(N)C             C: CH2(G), ARG
+oplschrg       1  0.160         CO(C(=O))          methoxy C in esters - see also 490-492
+oplschrg       1  0.19          CO(C(=O))C         C(H2OS) ethyl ester
+oplschrg       1  0.22          CO(C(=O))CC        C(HOS) i-pr ester
+oplschrg       1  0.25          CO(C(=O))CCC       C(OS) t-bu ester
+oplschrg       1 -0.005         CC(nc)C            CB in His
+//
+oplschrg       2     0.5323     CFFFC                 CF3 in trifluoroethanol
+oplschrg       3    -0.14       CC1=CNC(=O)NC1        Thymine C-C5
+oplschrg       3    -0.01       CC1N=CC=C1            9-Me A or G C-N9
+oplschrg       4     0.020      CO(P)                   C in CH3  DIMETHYLPHOSPHATE
+//
+oplschrg       5     0.500      C=ONC              C: C=O in amide.   Acyl R in amides
+oplschrg       5     0.142      C=ONN              C in O=C(NH2)2  Urea
+oplschrg       5     0.420      C=ON(C(=O))C       C(=O) in imide
+oplschrg       5     0.450      C=OC               AA C: aldehyde - for C-alpha use
+oplschrg       5     0.470      C=OCC              AA C: ketone - for C-alpha use
+oplschrg       5     0.50       C=O[NCC=CN]        Uracil C2
+oplschrg       5     0.45       C=O[NCNC=C]        Uracil C4
+oplschrg       5     0.55       c[ncccn]=o         Cytosine C2
+oplschrg       5     0.52       C=O[NcNC=C1]       Guanine C6
+oplschrg       5     0.65       C=O[N+cC=CN]       CytH+ C2      
+oplschrg       5     0.520      C=OOC              CO in CCOOH carboxylic acid 
+oplschrg       5     0.635      C=OOc              CO in benzoic acid
+oplschrg       5     0.700      C=OO-C             C in COO- carboxylate
+oplschrg       5     0.510      C=OO(C)C           AA C:   esters   - for R on C=O, use
+oplschrg       5     0.625      C=OO(c)C           CO in methyl benzoate, aryl ester
+#
+oplschrg       7    -0.115      c[ccccc]           Benzene C - 12 site JACS,112,4768-90
+oplschrg       7     0.000      c[ccccc][ccccc]    Naphthalene fusion C (C9)
+oplschrg       7     0.150      cO[ccccc]          C(OH)  phenol  Use with all
+oplschrg       7     0.100      cN[ccccc]          C(NH2) aniline    "
+oplschrg       7     0.200      cN(C)[ccccc]       C(NH2) N-methylaniline
+oplschrg       7     0.210      cN(CC)[ccccc]      C(NH2) N,N-dimethylaniline
+oplschrg       7     0.135      cC(=OO)[ccccc]     Cipso phenyl ester
+oplschrg       7    -0.115      c[n(H)ccc]         CD CH in Trp
+oplschrg       7    -0.055      c[cn(H)cc][ccccc]  CD C in Trp
+oplschrg       7     0.130      c[n(H)ccc][ccccc]  CE C in Trp
+oplschrg       7     0.295      c[nccn(H)]         CE1 in HID, HIE
+oplschrg       7    -0.015      c[cn(H)cn]         CD2 in HID
+oplschrg       7     0.015      c[nccn(H)]         CD2 in HIE
+oplschrg       7     0.385      c[n(H)ccn(H)]      CE1 in HIP
+oplschrg       7     0.215      c[cn(H)cn(H)]      CG, CD2 in HIP
+oplschrg       7     0.473      c[ncccc]           C1  in pyridine CHELPG
+oplschrg       7    -0.447      c[cnccc]           C2  in pyridine oplschrgs
+oplschrg       7     0.227      c[ccncc]           C3  in pyridine for
+oplschrg       7     0.192      c[nccnc]           C   in pyrazine
+oplschrg       7     0.653      c[ncncc]           C4  in pyrimidine
+oplschrg       7    -0.689      c[cncnc]           C5  in pyrimidine
+oplschrg       7     0.378      c[nnccc]           C3  in pyridazine
+oplschrg       7    -0.160      c[cnncc]           C4  in pyridazine
+oplschrg       7    -0.320      c[cnnc]            C4  in pyrazole
+oplschrg       7    -0.455      c[cnoc]            C4  in isoxazole
+//
+oplschrg       8     0.640      C=NNN              C: guanidinium C+
+oplschrg       9     0.36       c[ncccc]n          DAP C2   pyridine
+oplschrg       9    -0.15       c[c(n)nccc]        DAP C3
+oplschrg       9    -0.04       c[cc(n)ncc]        DAP C4
+oplschrg       9     0.46       c[ncncc]n          Cytosine C4     Nucleotide base
+oplschrg       9     0.44       c[ncncc]n          Adenine C6
+oplschrg       9     0.46       c[ncccn]n          Guanine C2
+oplschrg       9     0.66       c[ncncc]n          CytH+ C4
+//
+oplschrg       10    0.000     C=CCC              alkene C (R2-C=) all atom
+oplschrg       10   -0.115     C=CC               alkene C (RH-C=) all atom
+oplschrg       10   -0.230     C=C                alkene C (H2-C=) all atom
+oplschrg       10   -0.06      c[cncnc]           Cytosine C5     parameters:
+oplschrg       10    0.10      c[ncncc]           Cytosine C6     JACS,113,2810(1991)
+//
+oplschrg       11   -0.07      C1=CNCNC1(=O)      Uracil C5
+oplschrg       11    0.08      C1=CCNCN1          Uracil C6
+oplschrg       11   -0.06      C1=CNCN=C1         CytH+ C5
+oplschrg       11    0.10      C1=CC=NCN1         CytH+ C6
+//
+oplschrg       12   -0.015     c[=cnc=n]          CG in HIE
+oplschrg       12    0.015     c[=cn=cn]          CG in HID
+oplschrg       12    0.215     c[=cn+=cn]         CG in HIP
+#
+oplschrg       13    0.185     c[ncnc]            C4  in imidazole
+oplschrg       13    0.169     c[ncoc]            C4  in oxazole
+#
+oplschrg       14   -0.163     c[nccc]            C2  in pyrrole
+oplschrg       14   -0.034     c[nncc]            C5  in pyrazole
+oplschrg       14   -0.286     c[ncnc]            C5  in imidazole
+oplschrg       14   -0.019     c[occc]            C2  in furan
+oplschrg       14   -0.148     c[ocnc]            C5  in oxazole
+oplschrg       14    0.250     c[oncc]            C5  in isoxazole
+#
+oplschrg       15    0.275     C[NCCN]            C2  in imidazole
+oplschrg       15    0.511     C[NCCO]            C2  in oxazole
+#
+oplschrg       16    0.38      C[(N)=CC=NC=N]     Adenine C4
+oplschrg       16    0.15      C[(N)=CN=CN=C]     Adenine C5
+oplschrg       16    0.34      C[(N)=CCNC=N]      Guanine C4
+oplschrg       16    0.12      C[(N)=CN=CNC]      Guanine C5
+#
+oplschrg       17    0.075      c[(C)=cnc=c]      CG in Trp - c* in amber
+#
+oplschrg       18    0.20      C1=NC=CN1          Adenine C8 Guanine
+#
+oplschrg       19    0.22      c1=nc=cc=n1        Adenine C2
+oplschrg       20    0.874     c1=nc=cc=n1        C2  in pyrimidine
+#
+oplschrg       21    0.200     C(O)OC             C(H2O2): acetal OCH2O
+oplschrg       21    0.265     C(O)O              C(H2O2): hemiacetal OCH2OH
+oplschrg       21    0.300     C(O)(C)OC          C(HCO2): acetal OCHRO
+oplschrg       21    0.365     C(O)(C)O           C(HCO2): hemiacetal OCHROH
+oplschrg       21    0.400     C(O)(C)(C)OC       C(C2O2): acetal OCRRO
+oplschrg       21    0.465     C(O)(C)(C)O        C(C2O2): hemiacetal OCRROH
+#
+oplschrg       22   -0.149     c[cncc]            C3  in pyrrole
+oplschrg       22   -0.154     c[cocc]            C3  in furan
+#
+oplschrg       23    0.246     c[nncc]            C3  in pyrazole
+oplschrg       23    0.405     c[nocc]            C3  in isoxazole
+#
+oplschrg       24   -0.210      C#C               alkyne RC%CH terminal C
+oplschrg       25    0.010      C#CC              alkyne RC%CH C2 R-with 2 or 3 H
+oplschrg       26    0.010      C#CC(CC)          alkyne RC%CH C2 R-with 1 H
+oplschrg       27    0.010      C#CC(CCC)         alkyne RC%CH C2 R-with no H
+#
+oplschrg       28   -0.210      C[CC]             cyclopropane C
+oplschrg       28   -0.150      C[CC]C            cyclopropane C
+oplschrg       28   -0.090      C[CC]CC           cyclopropane C
+# Hydrogens
+oplschrg       29    0.06       HC                   all-atom H: alkanes
+oplschrg       29    0.040      HCO                  all-atom H(C): methanol
+oplschrg       29    0.030      HCOC                  H(COR): alpha H ether
+oplschrg       29    0.100      HC(OC)OC              H(CHO2): acetal OCH2O
+oplschrg       29    0.100      HC(OC)O               H(CHO2): hemiacetal OCH2OH
+oplschrg       29    0.100      HC(OC)(C)OC           H(CHO2): acetal OCHRO
+oplschrg       29    0.100      HC(OC)(C)O            H(C2O2): hemiacetal OCHROH
+oplschrg       29    0.060      HC(=N)C               H(C) in formimide
+oplschrg       30    0.115      HC=C                  alkene H (H-C=)  all atom
+oplschrg       31    0.000      HC(C)C(=O)            AA H-alpha in aldehyde & formamide
+oplschrg       31    0.060      HC(C)C(=O)C           AA H on C-alpha in ketone & aldehyde
+oplschrg       31    0.030      HCOC(=O)              methoxy H's in esters
+oplschrg       32    0.10       hc1c(N)nccc1          DAP H3
+oplschrg       32    0.10       hc1cc(N)ncc1          DAP H4
+oplschrg       32    0.10       HC1=CNCNC1            Uracil H-C5
+oplschrg       32    0.10       HC1=CCNCN1            Uracil H-C6
+oplschrg       32    0.08       HCC1=CNCNC1           Thymine H-CC5
+oplschrg       32    0.12       HCN1C=NC=C1           9-Me A or G H-CN9
+oplschrg       32    0.14       HCN1CNCC=C1           1-Me U or T H-CN1
+oplschrg       32    0.13       HCN1CN=CC=C1          1-Me Cytosine H-CN1
+oplschrg       32    0.16       HCN1CN=CC=C1          1-Me CytH+ H-CN1
+oplschrg       33    0.200      HC#C                  alkyne RC%CH terminal H
+oplschrg       33    0.06       HC#N                  H(C) for Carbons directly bonded to N in amines, diamines
+oplschrg       33    0.060      HCC#C                 alkyne RC%CH H on C3 (for C3 use 135-139)
+#
+oplschrg       34    0.115      Hc[ccccc]               Benzene H - 12 site        "
+oplschrg       34    0.012      Hc[ncccc]               H1  in pyridine 520-619
+oplschrg       34    0.155      Hc[cnccc]               H2  in pyridine
+oplschrg       34    0.065      Hc[ccncc]               H3  in pyridine
+oplschrg       34    0.042      Hc[ncccc]               H   in pyrazine
+oplschrg       34    0.155      Hc[nccc]                H2  in pyrrole
+oplschrg       34    0.118      Hc[cncc]               H3  in pyrrole
+oplschrg       34   -0.032      Hc[ncccn]               H2  in pyrimidine
+oplschrg       34    0.011      Hc[ncncc]               H4  in pyrimidine
+oplschrg       34    0.197      Hc[cncnc]               H5  in pyrimidine
+oplschrg       34   -0.009      Hc[nnccc]               H3  in pyridazine
+oplschrg       34    0.122      Hc[cnncc]               H4  in pyridazine
+oplschrg       34    0.072      Hc[=nnc=c]              H3  in pyrazole
+oplschrg       34    0.150      Hc[c=nnc]               H4  in pyrazole
+oplschrg       34    0.135      Hc1nn=cc=              H5  in pyrazole
+oplschrg       34    0.078      Hc1=nc=cn              H2  in imidazole
+oplschrg       34    0.075      Hc1n=cnc=              H4  in imidazole
+oplschrg       34    0.187      Hc1nc=nc=              H5  in imidazole
+oplschrg       34    0.142      Hc1oc=cc1=              H2  in furan
+oplschrg       34    0.126      Hc1=coc=c1              H3  in furan
+oplschrg       34    0.043      Hc1=nc=co1              H2  in oxazole
+oplschrg       34    0.091      Hc1n=coc1=              H4  in oxazole
+oplschrg       34    0.181      Hc1oc=nc1=              H5  in oxazole
+oplschrg       34    0.053      Hc1on=cc1=              H3  in isoxazole
+oplschrg       34    0.184      Hc1c=noc1=              H4  in isoxazole
+oplschrg       34    0.098      Hc1=noc=c1              H5  in isoxazole
+oplschrg       35    0.10       HC1=CNCN=C1             Cytosine H-C5
+oplschrg       35    0.14       HC1=CNCN=C1             CytH+ H-C5
+oplschrg       35    0.14       HC1=CC=NCN1             CytH+ H-C6
+#
+oplschrg       36    0.418      HOC                     all-atom H(O): mono alcohols
+oplschrg       36    0.4286     HOC                     HO            "
+oplschrg       36    0.435      HOc                     H      phenol  145 & 146
+oplschrg       36    0.435      HOCCO                   H(O): diols
+oplschrg       36    0.435      HOCO                    H(O): hemiacetal
+oplschrg       36    0.450      HOC(=O)C                H  in CCOOH
+oplschrg       36    0.300      HO                      H in OH-  JACS 108, 2517 (86)
+#
+oplschrg       37    0.255      HSC                     all-atom H(S): thiols
+oplschrg       37    0.235      HS                      H   IN H2S  JPC,90,6379 (1986)
+#
+oplschrg       38    0.350      HN(C)                   H  in RNH2 amine        "
+oplschrg       38    0.400      HN(c)                   H(N)   aniline    "
+oplschrg       38    0.380      HN(C)(C)                H(N)   secondary amines
+#
+oplschrg       39     0.380     HN(C(=OC))              H on N: primary amide   
+oplschrg       39     0.300     HN(C(=OC))(C)           H on N: secondary amide
+oplschrg       39     0.333     HN(C(=ON))              H in O=C(NH2)2  Urea
+oplschrg       39     0.370     HN(C(=0))(C(=O))        H(N) in imide
+oplschrg       39     0.37      HNc1ncccc1              DAP H-amine
+oplschrg       39     0.41      HN1CNCC=C1              Uracil H-N1
+oplschrg       39     0.36      HN1CNC=CC1              Uracil H-N3
+oplschrg       39     0.38      HN1CN=CC=C1             Cytosine H-N1
+oplschrg       39     0.385     HNC1=NCNC=C1            Cytosine H-NC4/N3
+oplschrg       39     0.355     HNC1=NCNC=C1            Cytosine H-NC4/C5
+oplschrg       39     0.385     HNC1=NC=NC=C1           Adenine H-NC6/N1
+oplschrg       39     0.355     HNC1=NC=NC=C1           Adenine H-NC6/C5
+oplschrg       39     0.35      HN1C=NC=C1              Adenine H-N9 Guanine
+oplschrg       39     0.38      HN1C=NC=CC1             Guanine H-N1
+oplschrg       39     0.40      HNC1=NC=CCN1            Guanine H-NC2
+oplschrg       39     0.49      HN1CN=CC=C1             CytH+ H-N1
+oplschrg       39     0.48      HN1=CC=CNC1             CytH+ H-N3
+oplschrg       39     0.46      HNC1=NCNC=C1            CytH+ H-NC4/N3
+oplschrg       39     0.43      HNC1=NCNC=C1            CytH+ H-NC4/C5
+oplschrg       39     0.420     Hn1c=cc=c1              H on NE in Trp
+oplschrg       39     0.460     Hn1c=n+c=c1              H on N in HIP
+oplschrg       39     0.317     hn1c=cc=c1               H1  in pyrrole
+oplschrg       39     0.301     hn1n=cc=c1               H1  in pyrazole
+oplschrg       39     0.306     hn1c=nc=c1               H1  in imidazole
+#
+oplschrg       40    0.35       HN+                  H (NH4+)        "  
+oplschrg       40    0.33       HN+C                 H (RNH3+)       "
+oplschrg       40    0.460      HN+=C                H: guanidinium NH2
+oplschrg       40    0.440      HN+(C)=C             H: guanidinium NHR
+#
+oplschrg       41    0.417      HO                   H TIP3P Water      "
+oplschrg       41    0.520      HO                   H TIP4P Water      "
+oplschrg       41    0.410      HO                   H  SPC  Water       
+#
+oplschrg       42    0.10       HC1=CC=NCN1          Cytosine H-C6
+#
+oplschrg       43    0.20       HC1=NC=CC=N1         Adenine H-C2        nucleoside
+oplschrg       43    0.20       HC1=NC=CN1           Adenine H-C8 Guanine
+# Oxygen
+oplschrg       44   -0.683      OC                  all-atom O: mono alcohols
+oplschrg       44   -0.585      Oc                  O      phenol  atom C, H
+oplschrg       44   -0.700      OCCO                O:    diols 
+oplschrg       44   -0.700      OCOC                O(H): hemiacetal
+oplschrg       46   -0.530      OC(=O)(C)           OH in CCOOH R in RCOOH is
+#
+oplschrg       47   -0.400      OCC                 O: ether
+oplschrg       47   -0.190      o[cccc]             O   in furan
+oplschrg       47   -0.257      o[cncc]             O   in oxazole
+oplschrg       47   -0.122      o[nccc]             O   in isoxazole
+oplschrg       48   -0.400      OC(O)C              O: acetal
+oplschrg       48   -0.430      OP                  O(-)          "  see 440
+oplschrg       48   -0.330      OCC(=O)             AA -OR: ester -
+oplschrg       48   -0.215      OcC(=O)             AA -OR phenyl ester
+#
+oplschrg       49   -0.500      O=C(N)(C)            O: C=O in amide.   is neutral - use
+oplschrg       49   -0.390      O=C(N)(N)            O in O=C(NH2)2  Urea Isr. J. Chem
+oplschrg       49   -0.420      O=C(N)(C(=0))        O   in imide
+oplschrg       49   -0.440      O=C(O)(C)            Oc in CCOOH neutral; use 135-140
+oplschrg       49   -0.450      O=C(C)               AA O: aldehyde - 135-139
+oplschrg       49   -0.470      O=C(C)(C)            AA O: ketone - 135-139
+oplschrg       49   -0.40       O=C[NC=CCN]          Uracil O-C2
+oplschrg       49   -0.42       O=C[NCNC=C]          Uracil O-C4
+oplschrg       49   -0.48       O=C[N=CC=CN]         Cytosine O-C2
+oplschrg       49   -0.51       O=C[NC=NC=C]         Guanine O-C6
+oplschrg       49   -0.30       O=C[N=CC=CN]         CytH+ O-C2
+oplschrg       49   -0.430      O=C(C)(O(C))         AA =O:  esters   ketone params (see 280-282)
+#
+oplschrg       50   -0.800      O=C(C)(O-)           O: O in COO- carboxylate
+#
+oplschrg       51   -0.834     OH                    O TIP3P Water JCP,79,926 (1983)
+#oplschrg       51    0.0       OH                    O TIP4P Water      "
+#oplschrg       51   -0.820     OH                    O  SPC  Water
+oplschrg       52   -1.300     O-                    O in OH-  Hyroxide O-H = 0.953 A
+#oplschrg      Lp   -1.040     0.0       0.0       M TIP4P Water      "
+# Nitrogen
+oplschrg       53   -0.900     NC                  N  in RNH2 amine JPC,94,1683(1990)
+oplschrg       53   -0.780     N(C)C               N      secondary amines
+oplschrg       53   -0.630     N(C)(C)C            N      tertiary  amines
+oplschrg       54   -0.900     Nc                  N      aniline    "
+#
+oplschrg       55   -0.760     NC(=OC)             N: primary amide.  alkane parameters.
+oplschrg       55   -0.500     NC(=OC)C            N: secondary amide  279 for formyl H.
+oplschrg       55   -0.500     NC(=OC)C(C)         N: secondary amide  279 for formyl H.
+oplschrg       55   -0.500     NC(=OC)C(CC)        N: secondary amide  279 for formyl H.
+oplschrg       55   -0.140     NC(=OC)CC           N: tertiary amide
+oplschrg       55   -0.542     NC(=ON)             N in O=C(NH2)2  Urea 33, 323 (93)
+oplschrg       55   -0.490     NC(=OC)C(=OC)       N   in imide
+#
+oplschrg       56   -0.40      N+                  N (NH4+) JPC,90,2174 (1986)
+oplschrg       56   -0.30      N+C                 N (RNH3+)       "
+oplschrg       56    0.00      N+(C)(C)C           N (R4N+)        "  
+#
+oplschrg       57   -0.800     NC+                 N: guanidinium NH2
+oplschrg       57   -0.700     N(C)C+              N: guanidinium NHR
+oplschrg       57   -0.85      Nc1ncccc1           DAP N-amine
+oplschrg       57   -0.79      NC1=NCNC=C1         Cytosine N-C4
+oplschrg       57   -0.81      NC1=NC=NC=C1        Adenine N-C6
+oplschrg       57   -0.80      NC1=NC=CCN1         Guanine N-C2
+oplschrg       57   -0.81      NC1=NCNC=C1         CytH+ N-C4
+#
+oplschrg       58   -0.46      n1c(N)cccc1         DAP N1   Diamino-
+oplschrg       58   -0.60      N1CNCC=C1           Uracil N1 -use AT=N* for nucleoside
+oplschrg       58   -0.51      N1CNC=CC1           Uracil N3
+oplschrg       58   -0.56      N1CN=CC=C1          Cytosine N1 -use AT=N* for nucleoside
+oplschrg       58   -0.50      N1C=NC=C1           Adenine N9 Guanine -use AT=N* for
+oplschrg       58   -0.56      N1C=NC=CC1          Guanine N1
+oplschrg       58   -0.64      N1CN=CC=C1          CytH+ N1 Use AT = N* for nucleoside.
+oplschrg       58   -0.74      N1=CC=CNC1          CytH+ N3    Protonated cytosine.
+oplschrg       58   -0.570     n1c=cc=c1           NE in Trp
+oplschrg       58   -0.540     n1c=n+c=c1          N in HIP
+oplschrg       58   -0.239     n1c=cc=c1           N   in pyrrole
+oplschrg       58   -0.059     n1n=cc=c1           N1  in pyrazole
+oplschrg       58   -0.257     n1c=nc=c1           N1  in imidazole
+#
+oplschrg       59   -0.49      N1=CNC=C1           Adenine N7 Guanine
+oplschrg       59   -0.490     n1=cnc(C)=c1        NE in HID
+oplschrg       59   -0.490     n1=cnc=c1(C)        NE in HIE
+oplschrg       59   -0.563     n1=cnc=c1           N3  in imidazole
+oplschrg       59   -0.491     n1=cc=cn1           N2  in pyrazole
+oplschrg       59   -0.590     n1=coc=c1           N   in oxazole
+oplschrg       59   -0.413     n1=cc=co1           N   in isoxazole
+#
+oplschrg       60   -0.54      n[=cc=cnc]          Cytosine N3
+oplschrg       60   -0.53      n[=cc=cn=c]         Adenine N1
+oplschrg       60   -0.55      n[=cn=c=c]          Adenine N3
+oplschrg       60   -0.51      n[=cncc=c]          Guanine N3
+oplschrg       60   -0.678     n[ccccc]            N   in pyridine 6-31G*
+oplschrg       60   -0.468     n[ncccc]            N   in pyrazine
+oplschrg       60   -0.839     n[cnccc]            N   in pyrimidine
+oplschrg       60   -0.331     n[ccncc]            N   in pyridazine
+#
+oplschrg       62   -0.2057    FC(F)(F)(C)         F   Trifluoroethanol
+oplschrg       63   -0.250     ClC(Cl)             Cl  Methylenechloride  ClCCl = 111.8
+oplschrg       63   -0.140     ClC(Cl)(Cl)         Cl  Chloroform C-Cl=1.758 ClCCl = 111.3
+oplschrg       63   -0.062     ClC(Cl)(Cl)(Cl)     Cl  CCl4
+oplschrg       66    0.780     P(O)(O)(O)(O)       P    dimethylphosphate anion
+#Sulfur
+
+oplschrg       68   -0.435     SC                  all-atom S: thiols
+oplschrg       68   -0.470     S                   S   IN H2S  JPC,90,6379 (1986)
+oplschrg       69   -0.435     S(C)(C)             all-atom S: sulfides
+oplschrg       69   -0.2175    S(C)(SC)            all-atom S: disulfides
+#
+# Misc
+#
+oplschrg       70     1.0      NONE                Li+ JACS 106, 903 (1984)
+oplschrg       71     1.0      NONE                Na+ JACS 106, 903 (1984)
+oplschrg       72     1.00     NONE                K+     parameters:
+oplschrg       73     1.00     NONE                Rb+    JPC,94, 8021 (90)
+oplschrg       74     1.00     NONE                Cs+
+oplschrg       75     2.00     NONE                Mg++
+oplschrg       76     2.00     NONE                Ca++
+oplschrg       77     2.00     NONE                Sr++
+oplschrg       78     2.00     NONE                Ba++
+oplschrg       79    -1.0      NONE                F-  JACS 106, 903 (1984)
+oplschrg       80    -1.0      NONE                Cl- JACS 106, 903 (1984)
+oplschrg       81    -1.0      NONE                Br- JACS 107, 7793(1985)
+#
+#
+charge       1       -0.2400
+charge       2        0.5323
+charge       3       -0.14
+charge       4       -0.020
+charge       5        0.500
+charge       6        0.700
+charge       7       -0.115
+charge       8        0.640
+charge       9        0.46
+charge      10       -0.230
+charge      11       -0.07
+charge      12        0.187
+charge      13       -0.163
+charge      14       -0.0650
+charge      15        0.275
+charge      16        0.38
+charge      17       -0.1415 
+charge      18        0.20 
+charge      19        0.22
+charge      20        0.874
+charge      21        0.200 
+charge      22       -0.149
+charge      23        0.246
+charge      24       -0.210
+charge      25        0.010
+charge      26        0.010
+charge      27        0.010
+charge      28       -0.12
+charge      29        0.06
+charge      30        0.115
+charge      31        0.000
+charge      32        0.10
+charge      33        0.06
+charge      34        0.1150
+charge      35        0.1000
+charge      36        0.418
+charge      37        0.255
+charge      38        0.350
+charge      39        0.380
+charge      40        0.35
+charge      41        0.4350
+charge      42        0.1000
+charge      43        0.2000
+charge      44       -0.683
+charge      45       -0.6351
+charge      46       -0.530
+charge      47       -0.400
+charge      48       -0.400
+charge      49       -0.500
+charge      50       -0.800
+charge      51        0.4650
+charge      52       -1.300
+charge      53       -0.900
+charge      54       -0.900
+charge      55       -0.760
+charge      56       -0.40
+charge      57       -0.800 
+charge      58       -0.46
+charge      59       -0.49 
+charge      60       -0.54
+charge      61        0.02
+charge      62       -0.2057
+charge      63        0.0975
+charge      64        0.1575
+charge      65        0.2175
+charge      66        0.780
+charge      67        0.0975
+charge      68        0.1575
+charge      69        0.2175
+charge      70        1.000
+charge      71        1.000
+charge      72        1.000
+charge      73        1.000
+charge      74        1.000
+charge      75        2.000
+charge      76        2.000
+charge      77        2.000
+charge      78        2.000
+charge      79       -1.000
+charge      80       -1.000
+charge      81       -1.000
+charge      82        0.000
+charge      83        0.000 
+charge      84        0.000
+charge      85        0.000
+charge      86        0.000
+charge      87        0.3800
+
+
+      ########################################
+      ##                                    ##
+      ##  Biopolymer Atom Type 21nversions  ##
+      ##                                    ##
+      ########################################
+
+
+biotype      1    N       "Glycine"                  85
+biotype      2    CA      "Glycine"                  73
+biotype      3    C       "Glycine"                  82
+biotype      4    HN      "Glycine"                  88
+biotype      5    O       "Glycine"                  83
+biotype      6    HA      "Glycine"                   6
+biotype      7    N       "Alanine"                  85
+biotype      8    CA      "Alanine"                  74
+biotype      9    C       "Alanine"                  82
+biotype     10    HN      "Alanine"                  88
+biotype     11    O       "Alanine"                  83
+biotype     12    HA      "Alanine"                   6
+biotype     13    CB      "Alanine"                   1
+biotype     14    HB      "Alanine"                   6
+biotype     15    N       "Valine"                   85
+biotype     16    CA      "Valine"                   74
+biotype     17    C       "Valine"                   82
+biotype     18    HN      "Valine"                   88
+biotype     19    O       "Valine"                   83
+biotype     20    HA      "Valine"                    6
+biotype     21    CB      "Valine"                    3
+biotype     22    HB      "Valine"                    6
+biotype     23    CG1     "Valine"                    1
+biotype     24    HG1     "Valine"                    6
+biotype     25    CG2     "Valine"                    1
+biotype     26    HG2     "Valine"                    6
+biotype     27    N       "Leucine"                  85
+biotype     28    CA      "Leucine"                  74
+biotype     29    C       "Leucine"                  82
+biotype     30    HN      "Leucine"                  88
+biotype     31    O       "Leucine"                  83
+biotype     32    HA      "Leucine"                   6
+biotype     33    CB      "Leucine"                   2
+biotype     34    HB      "Leucine"                   6
+biotype     35    CG      "Leucine"                   3
+biotype     36    HG      "Leucine"                   6
+biotype     37    CD1     "Leucine"                   1
+biotype     38    HD1     "Leucine"                   6
+biotype     39    CD2     "Leucine"                   1
+biotype     40    HD2     "Leucine"                   6
+biotype     41    N       "Isoleucine"               85
+biotype     42    CA      "Isoleucine"               74
+biotype     43    C       "Isoleucine"               82
+biotype     44    HN      "Isoleucine"               88
+biotype     45    O       "Isoleucine"               83
+biotype     46    HA      "Isoleucine"                6
+biotype     47    CB      "Isoleucine"                3
+biotype     48    HB      "Isoleucine"                6
+biotype     49    CG1     "Isoleucine"                2
+biotype     50    HG1     "Isoleucine"                6
+biotype     51    CG2     "Isoleucine"                1
+biotype     52    HG2     "Isoleucine"                6
+biotype     53    CD      "Isoleucine"                1
+biotype     54    HD      "Isoleucine"                6
+biotype     55    N       "Serine"                   85
+biotype     56    CA      "Serine"                   74
+biotype     57    C       "Serine"                   82
+biotype     58    HN      "Serine"                   88
+biotype     59    O       "Serine"                   83
+biotype     60    HA      "Serine"                    6
+biotype     61    CB      "Serine"                   19
+biotype     62    HB      "Serine"                    6
+biotype     63    OG      "Serine"                   16
+biotype     64    HG      "Serine"                   17
+biotype     65    N       "Threonine"                85
+biotype     66    CA      "Threonine"                74
+biotype     67    C       "Threonine"                82
+biotype     68    HN      "Threonine"                88
+biotype     69    O       "Threonine"                83
+biotype     70    HA      "Threonine"                 6
+biotype     71    CB      "Threonine"                20
+biotype     72    HB      "Threonine"                 6
+biotype     73    OG1     "Threonine"                16
+biotype     74    HG1     "Threonine"                17
+biotype     75    CG2     "Threonine"                 1
+biotype     76    HG2     "Threonine"                 6
+biotype     77    N       "Cysteine (-SH)"           85
+biotype     78    CA      "Cysteine (-SH)"           74
+biotype     79    C       "Cysteine (-SH)"           82
+biotype     80    HN      "Cysteine (-SH)"           88
+biotype     81    O       "Cysteine (-SH)"           83
+biotype     82    HA      "Cysteine (-SH)"            6
+biotype     83    CB      "Cysteine (-SH)"           59
+biotype     84    HB      "Cysteine (-SH)"            6
+biotype     85    SG      "Cysteine (-SH)"           52
+biotype     86    HG      "Cysteine (-SH)"           56
+biotype     87    N       "Cystine (-SS-)"           85
+biotype     88    CA      "Cystine (-SS-)"           74
+biotype     89    C       "Cystine (-SS-)"           82
+biotype     90    HN      "Cystine (-SS-)"           88
+biotype     91    O       "Cystine (-SS-)"           83
+biotype     92    HA      "Cystine (-SS-)"            6
+biotype     93    CB      "Cystine (-SS-)"           67
+biotype     94    HB      "Cystine (-SS-)"            6
+biotype     95    SG      "Cystine (-SS-)"           55
+biotype     96    N       "Proline"                  86
+biotype     97    CA      "Proline"                  93
+biotype     98    C       "Proline"                  82
+biotype     99    O       "Proline"                  83
+biotype    100    HA      "Proline"                   6
+biotype    101    CB      "Proline"                   2
+biotype    102    HB      "Proline"                   6
+biotype    103    CG      "Proline"                   2
+biotype    104    HG      "Proline"                   6
+biotype    105    CD      "Proline"                 159
+biotype    106    HD      "Proline"                   6
+biotype    107    N       "Phenylalanine"            85
+biotype    108    CA      "Phenylalanine"            74
+biotype    109    C       "Phenylalanine"            82
+biotype    110    HN      "Phenylalanine"            88
+biotype    111    O       "Phenylalanine"            83
+biotype    112    HA      "Phenylalanine"             6
+biotype    113    CB      "Phenylalanine"            15
+biotype    114    HB      "Phenylalanine"             6
+biotype    115    CG      "Phenylalanine"            11
+biotype    116    CD      "Phenylalanine"            11
+biotype    117    HD      "Phenylalanine"            12
+biotype    118    CE      "Phenylalanine"            11
+biotype    119    HE      "Phenylalanine"            12
+biotype    120    CZ      "Phenylalanine"            11
+biotype    121    HZ      "Phenylalanine"            12
+biotype    122    N       "Tyrosine"                 85
+biotype    123    CA      "Tyrosine"                 74
+biotype    124    C       "Tyrosine"                 82
+biotype    125    HN      "Tyrosine"                 88
+biotype    126    O       "Tyrosine"                 83
+biotype    127    HA      "Tyrosine"                  6
+biotype    128    CB      "Tyrosine"                 15
+biotype    129    HB      "Tyrosine"                  6
+biotype    130    CG      "Tyrosine"                 11
+biotype    131    CD      "Tyrosine"                 11
+biotype    132    HD      "Tyrosine"                 12
+biotype    133    CE      "Tyrosine"                 11
+biotype    134    HE      "Tyrosine"                 12
+biotype    135    CZ      "Tyrosine"                 28
+biotype    136    OH      "Tyrosine"                 29
+biotype    137    HH      "Tyrosine"                 30
+biotype    138    N       "Tryptophan"               85
+biotype    139    CA      "Tryptophan"               74
+biotype    140    C       "Tryptophan"               82
+biotype    141    HN      "Tryptophan"               88
+biotype    142    O       "Tryptophan"               83
+biotype    143    HA      "Tryptophan"                6
+biotype    144    CB      "Tryptophan"                2
+biotype    145    HB      "Tryptophan"                6
+biotype    146    CG      "Tryptophan"              145
+biotype    147    CD1     "Tryptophan"               11
+biotype    148    HD1     "Tryptophan"               12
+biotype    149    CD2     "Tryptophan"              146
+biotype    150    NE1     "Tryptophan"              148
+biotype    151    HE1     "Tryptophan"              149
+biotype    152    CE2     "Tryptophan"              147
+biotype    153    CE3     "Tryptophan"               11
+biotype    154    HE3     "Tryptophan"               12
+biotype    155    CZ2     "Tryptophan"               11
+biotype    156    HZ2     "Tryptophan"               12
+biotype    157    CZ3     "Tryptophan"               11
+biotype    158    HZ3     "Tryptophan"               12
+biotype    159    CH2     "Tryptophan"               11
+biotype    160    HH2     "Tryptophan"               12
+biotype    161    N       "Histidine (+)"            85
+biotype    162    CA      "Histidine (+)"            74
+biotype    163    C       "Histidine (+)"            82
+biotype    164    HN      "Histidine (+)"            88
+biotype    165    O       "Histidine (+)"            83
+biotype    166    HA      "Histidine (+)"             6
+biotype    167    CB      "Histidine (+)"           150
+biotype    168    HB      "Histidine (+)"             6
+biotype    169    CG      "Histidine (+)"           155
+biotype    170    ND1     "Histidine (+)"           157
+biotype    171    HD1     "Histidine (+)"           158
+biotype    172    CD2     "Histidine (+)"           155
+biotype    173    HD2     "Histidine (+)"            12
+biotype    174    CE1     "Histidine (+)"           154
+biotype    175    HE1     "Histidine (+)"            12
+biotype    176    NE2     "Histidine (+)"           157
+biotype    177    HE2     "Histidine (+)"           158
+biotype    178    N       "Histidine (HD)"           85
+biotype    179    CA      "Histidine (HD)"           74
+biotype    180    C       "Histidine (HD)"           82
+biotype    181    HN      "Histidine (HD)"           88
+biotype    182    O       "Histidine (HD)"           83
+biotype    183    HA      "Histidine (HD)"            6
+biotype    184    CB      "Histidine (HD)"          150
+biotype    185    HB      "Histidine (HD)"            6
+biotype    186    CG      "Histidine (HD)"          153
+biotype    187    ND1     "Histidine (HD)"          148
+biotype    188    HD1     "Histidine (HD)"          149
+biotype    189    CD2     "Histidine (HD)"          152
+biotype    190    HD2     "Histidine (HD)"           12
+biotype    191    CE1     "Histidine (HD)"          151
+biotype    192    HE1     "Histidine (HD)"           12
+biotype    193    NE2     "Histidine (HD)"          156
+biotype    194    N       "Histidine (HE)"           85
+biotype    195    CA      "Histidine (HE)"           74
+biotype    196    C       "Histidine (HE)"           82
+biotype    197    HN      "Histidine (HE)"           88
+biotype    198    O       "Histidine (HE)"           83
+biotype    199    HA      "Histidine (HE)"            6
+biotype    200    CB      "Histidine (HE)"          150
+biotype    201    HB      "Histidine (HE)"            6
+biotype    202    CG      "Histidine (HE)"          152
+biotype    203    ND1     "Histidine (HE)"          156
+biotype    204    CD2     "Histidine (HE)"          153
+biotype    205    HD2     "Histidine (HE)"           12
+biotype    206    CE1     "Histidine (HE)"          151
+biotype    207    HE1     "Histidine (HE)"           12
+biotype    208    NE2     "Histidine (HE)"          148
+biotype    209    HE2     "Histidine (HE)"          149
+biotype    210    N       "Aspartic Acid"            85
+biotype    211    CA      "Aspartic Acid"            74
+biotype    212    C       "Aspartic Acid"            82
+biotype    213    HN      "Aspartic Acid"            88
+biotype    214    O       "Aspartic Acid"            83
+biotype    215    HA      "Aspartic Acid"             6
+biotype    216    CB      "Aspartic Acid"           114
+biotype    217    HB      "Aspartic Acid"             6
+biotype    218    CG      "Aspartic Acid"           111
+biotype    219    OD      "Aspartic Acid"           112
+biotype    220    N       "Asparagine"               85
+biotype    221    CA      "Asparagine"               74
+biotype    222    C       "Asparagine"               82
+biotype    223    HN      "Asparagine"               88
+biotype    224    O       "Asparagine"               83
+biotype    225    HA      "Asparagine"                6
+biotype    226    CB      "Asparagine"                2
+biotype    227    HB      "Asparagine"                6
+biotype    228    CG      "Asparagine"               82
+biotype    229    OD1     "Asparagine"               83
+biotype    230    ND2     "Asparagine"               84
+biotype    231    HD2     "Asparagine"               87
+biotype    232    N       "Glutamic Acid"            85
+biotype    233    CA      "Glutamic Acid"            74
+biotype    234    C       "Glutamic Acid"            82
+biotype    235    HN      "Glutamic Acid"            88
+biotype    236    O       "Glutamic Acid"            83
+biotype    237    HA      "Glutamic Acid"             6
+biotype    238    CB      "Glutamic Acid"             2
+biotype    239    HB      "Glutamic Acid"             6
+biotype    240    CG      "Glutamic Acid"           114
+biotype    241    HG      "Glutamic Acid"             6
+biotype    242    CD      "Glutamic Acid"           111
+biotype    243    OE      "Glutamic Acid"           112
+biotype    244    N       "Glutamine"                85
+biotype    245    CA      "Glutamine"                74
+biotype    246    C       "Glutamine"                82
+biotype    247    HN      "Glutamine"                88
+biotype    248    O       "Glutamine"                83
+biotype    249    HA      "Glutamine"                 6
+biotype    250    CB      "Glutamine"                 2
+biotype    251    HB      "Glutamine"                 6
+biotype    252    CG      "Glutamine"                 2
+biotype    253    HG      "Glutamine"                 6
+biotype    254    CD      "Glutamine"                82
+biotype    255    OE1     "Glutamine"                83
+biotype    256    NE2     "Glutamine"                84
+biotype    257    HE2     "Glutamine"                87
+biotype    258    N       "Methionine"               85
+biotype    259    CA      "Methionine"               74
+biotype    260    C       "Methionine"               82
+biotype    261    HN      "Methionine"               88
+biotype    262    O       "Methionine"               83
+biotype    263    HA      "Methionine"                6
+biotype    264    CB      "Methionine"                2
+biotype    265    HB      "Methionine"                6
+biotype    266    CG      "Methionine"               63
+biotype    267    HG      "Methionine"                6
+biotype    268    SD      "Methionine"               54
+biotype    269    CE      "Methionine"               62
+biotype    270    HE      "Methionine"                6
+biotype    271    N       "Lysine"                   85
+biotype    272    CA      "Lysine"                   74
+biotype    273    C       "Lysine"                   82
+biotype    274    HN      "Lysine"                   88
+biotype    275    O       "Lysine"                   83
+biotype    276    HA      "Lysine"                    6
+biotype    277    CB      "Lysine"                    2
+biotype    278    HB      "Lysine"                    6
+biotype    279    CG      "Lysine"                    2
+biotype    280    HG      "Lysine"                    6
+biotype    281    CD      "Lysine"                    2
+biotype    282    HD      "Lysine"                    6
+biotype    283    CE      "Lysine"                  133
+biotype    284    HE      "Lysine"                    6
+biotype    285    NZ      "Lysine"                  124
+biotype    286    HZ      "Lysine"                  129
+biotype    287    N       "Arginine"                 85
+biotype    288    CA      "Arginine"                 74
+biotype    289    C       "Arginine"                 82
+biotype    290    HN      "Arginine"                 88
+biotype    291    O       "Arginine"                 83
+biotype    292    HA      "Arginine"                  6
+biotype    293    CB      "Arginine"                  2
+biotype    294    HB      "Arginine"                  6
+biotype    295    CG      "Arginine"                144
+biotype    296    HG      "Arginine"                  6
+biotype    297    CD      "Arginine"                143
+biotype    298    HD      "Arginine"                  6
+biotype    299    NE      "Arginine"                137
+biotype    300    HE      "Arginine"                139
+biotype    301    CZ      "Arginine"                140
+biotype    302    NH      "Arginine"                136
+biotype    303    HH      "Arginine"                138
+biotype    304    N       "Ornithine"                85
+biotype    305    CA      "Ornithine"                74
+biotype    306    C       "Ornithine"                82
+biotype    307    HN      "Ornithine"                88
+biotype    308    O       "Ornithine"                83
+biotype    309    HA      "Ornithine"                 6
+biotype    310    CB      "Ornithine"                 2
+biotype    311    HB      "Ornithine"                 6
+biotype    312    CG      "Ornithine"                 2
+biotype    313    HG      "Ornithine"                 6
+biotype    314    CD      "Ornithine"               133
+biotype    315    HD      "Ornithine"                 6
+biotype    316    NE      "Ornithine"               124
+biotype    317    HE      "Ornithine"               129
+biotype    318    N       "MethylAlanine (AIB)"      85
+biotype    319    CA      "MethylAlanine (AIB)"      75
+biotype    320    C       "MethylAlanine (AIB)"      82
+biotype    321    HN      "MethylAlanine (AIB)"      88
+biotype    322    O       "MethylAlanine (AIB)"      83
+biotype    323    CB      "MethylAlanine (AIB)"       1
+biotype    324    HB      "MethylAlanine (AIB)"       6
+biotype    325    N       "Pyroglutamic Acid"        85
+biotype    326    CA      "Pyroglutamic Acid"        74
+biotype    327    C       "Pyroglutamic Acid"        82
+biotype    328    HN      "Pyroglutamic Acid"        88
+biotype    329    O       "Pyroglutamic Acid"        83
+biotype    330    HA      "Pyroglutamic Acid"         6
+biotype    331    CB      "Pyroglutamic Acid"         2
+biotype    332    HB      "Pyroglutamic Acid"         6
+biotype    333    CG      "Pyroglutamic Acid"         2
+biotype    334    HG      "Pyroglutamic Acid"         6
+biotype    335    CD      "Pyroglutamic Acid"        82
+biotype    336    OE      "Pyroglutamic Acid"        83
+biotype    337    C       "Formyl N-Terminus"        82
+biotype    338    H       "Formyl N-Terminus"       119
+biotype    339    O       "Formyl N-Terminus"        83
+biotype    340    CH3     "Acetyl N-Terminus"         1
+biotype    341    H       "Acetyl N-Terminus"         6
+biotype    342    C       "Acetyl N-Terminus"        82
+biotype    343    O       "Acetyl N-Terminus"        83
+biotype    344    N       "Amide C-Terminus"         84
+biotype    345    HN      "Amide C-Terminus"         87
+biotype    346    N       "N-MeAmide C-Terminus"     85
+biotype    347    HN      "N-MeAmide C-Terminus"     88
+biotype    348    CH3     "N-MeAmide C-Terminus"     89
+biotype    349    H       "N-MeAmide C-Terminus"      6
+biotype    350    N       "N-Terminal GLY"          124
+biotype    351    CA      "N-Terminal GLY"          133
+biotype    352    C       "N-Terminal GLY"           82
+biotype    353    HN      "N-Terminal GLY"          129
+biotype    354    O       "N-Terminal GLY"           83
+biotype    355    HA      "N-Terminal GLY"            6
+biotype    356    N       "N-Terminal ALA"          124
+biotype    357    CA      "N-Terminal ALA"          134
+biotype    358    C       "N-Terminal ALA"           82
+biotype    359    HN      "N-Terminal ALA"          129
+biotype    360    O       "N-Terminal ALA"           83
+biotype    361    HA      "N-Terminal ALA"            6
+biotype    362    N       "N-Terminal VAL"          124
+biotype    363    CA      "N-Terminal VAL"          134
+biotype    364    C       "N-Terminal VAL"           82
+biotype    365    HN      "N-Terminal VAL"          129
+biotype    366    O       "N-Terminal VAL"           83
+biotype    367    HA      "N-Terminal VAL"            6
+biotype    368    N       "N-Terminal LEU"          124
+biotype    369    CA      "N-Terminal LEU"          134
+biotype    370    C       "N-Terminal LEU"           82
+biotype    371    HN      "N-Terminal LEU"          129
+biotype    372    O       "N-Terminal LEU"           83
+biotype    373    HA      "N-Terminal LEU"            6
+biotype    374    N       "N-Terminal ILE"          124
+biotype    375    CA      "N-Terminal ILE"          134
+biotype    376    C       "N-Terminal ILE"           82
+biotype    377    HN      "N-Terminal ILE"          129
+biotype    378    O       "N-Terminal ILE"           83
+biotype    379    HA      "N-Terminal ILE"            6
+biotype    380    N       "N-Terminal SER"          124
+biotype    381    CA      "N-Terminal SER"          134
+biotype    382    C       "N-Terminal SER"           82
+biotype    383    HN      "N-Terminal SER"          129
+biotype    384    O       "N-Terminal SER"           83
+biotype    385    HA      "N-Terminal SER"            6
+biotype    386    N       "N-Terminal THR"          124
+biotype    387    CA      "N-Terminal THR"          134
+biotype    388    C       "N-Terminal THR"           82
+biotype    389    HN      "N-Terminal THR"          129
+biotype    390    O       "N-Terminal THR"           83
+biotype    391    HA      "N-Terminal THR"            6
+biotype    392    N       "N-Terminal CYs (-SH)"    124
+biotype    393    CA      "N-Terminal CYs (-SH)"    134
+biotype    394    C       "N-Terminal CYs (-SH)"     82
+biotype    395    HN      "N-Terminal CYs (-SH)"    129
+biotype    396    O       "N-Terminal CYs (-SH)"     83
+biotype    397    HA      "N-Terminal CYs (-SH)"      6
+biotype    398    N       "N-Terminal CYs (-SS)"    124
+biotype    399    CA      "N-Terminal CYs (-SS)"    134
+biotype    400    C       "N-Terminal CYs (-SS)"     82
+biotype    401    HN      "N-Terminal CYs (-SS)"    129
+biotype    402    O       "N-Terminal CYs (-SS)"     83
+biotype    403    HA      "N-Terminal CYs (-SS)"      6
+biotype    404    N       "N-Terminal PRO"          125
+biotype    405    CA      "N-Terminal PRO"          134
+biotype    406    C       "N-Terminal PRO"           82
+biotype    407    HN      "N-Terminal PRO"          130
+biotype    408    O       "N-Terminal PRO"           83
+biotype    409    HA      "N-Terminal PRO"            6
+biotype    410    CD      "N-Terminal PRO"          133
+biotype    411    HD      "N-Terminal PRO"            6
+biotype    412    N       "N-Terminal PHE"          124
+biotype    413    CA      "N-Terminal PHE"          134
+biotype    414    C       "N-Terminal PHE"           82
+biotype    415    HN      "N-Terminal PHE"          129
+biotype    416    O       "N-Terminal PHE"           83
+biotype    417    HA      "N-Terminal PHE"            6
+biotype    418    N       "N-Terminal TYR"          124
+biotype    419    CA      "N-Terminal TYR"          134
+biotype    420    C       "N-Terminal TYR"           82
+biotype    421    HN      "N-Terminal TYR"          129
+biotype    422    O       "N-Terminal TYR"           83
+biotype    423    HA      "N-Terminal TYR"            6
+biotype    424    N       "N-Terminal TRP"          124
+biotype    425    CA      "N-Terminal TRP"          134
+biotype    426    C       "N-Terminal TRP"           82
+biotype    427    HN      "N-Terminal TRP"          129
+biotype    428    O       "N-Terminal TRP"           83
+biotype    429    HA      "N-Terminal TRP"            6
+biotype    430    N       "N-Terminal HIs (+)"      124
+biotype    431    CA      "N-Terminal HIs (+)"      134
+biotype    432    C       "N-Terminal HIs (+)"       82
+biotype    433    HN      "N-Terminal HIs (+)"      129
+biotype    434    O       "N-Terminal HIs (+)"       83
+biotype    435    HA      "N-Terminal HIs (+)"        6
+biotype    436    N       "N-Terminal HIs (HD)"     124
+biotype    437    CA      "N-Terminal HIs (HD)"     134
+biotype    438    C       "N-Terminal HIs (HD)"      82
+biotype    439    HN      "N-Terminal HIs (HD)"     129
+biotype    440    O       "N-Terminal HIs (HD)"      83
+biotype    441    HA      "N-Terminal HIs (HD)"       6
+biotype    442    N       "N-Terminal HIs (HE)"     124
+biotype    443    CA      "N-Terminal HIs (HE)"     134
+biotype    444    C       "N-Terminal HIs (HE)"      82
+biotype    445    HN      "N-Terminal HIs (HE)"     129
+biotype    446    O       "N-Terminal HIs (HE)"      83
+biotype    447    HA      "N-Terminal HIs (HE)"       6
+biotype    448    N       "N-Terminal ASP"          124
+biotype    449    CA      "N-Terminal ASP"          134
+biotype    450    C       "N-Terminal ASP"           82
+biotype    451    HN      "N-Terminal ASP"          129
+biotype    452    O       "N-Terminal ASP"           83
+biotype    453    HA      "N-Terminal ASP"            6
+biotype    454    N       "N-Terminal ASN"          124
+biotype    455    CA      "N-Terminal ASN"          134
+biotype    456    C       "N-Terminal ASN"           82
+biotype    457    HN      "N-Terminal ASN"          129
+biotype    458    O       "N-Terminal ASN"           83
+biotype    459    HA      "N-Terminal ASN"            6
+biotype    460    N       "N-Terminal GLU"          124
+biotype    461    CA      "N-Terminal GLU"          134
+biotype    462    C       "N-Terminal GLU"           82
+biotype    463    HN      "N-Terminal GLU"          129
+biotype    464    O       "N-Terminal GLU"           83
+biotype    465    HA      "N-Terminal GLU"            6
+biotype    466    N       "N-Terminal GLN"          124
+biotype    467    CA      "N-Terminal GLN"          134
+biotype    468    C       "N-Terminal GLN"           82
+biotype    469    HN      "N-Terminal GLN"          129
+biotype    470    O       "N-Terminal GLN"           83
+biotype    471    HA      "N-Terminal GLN"            6
+biotype    472    N       "N-Terminal MET"          124
+biotype    473    CA      "N-Terminal MET"          134
+biotype    474    C       "N-Terminal MET"           82
+biotype    475    HN      "N-Terminal MET"          129
+biotype    476    O       "N-Terminal MET"           83
+biotype    477    HA      "N-Terminal MET"            6
+biotype    478    N       "N-Terminal LYS"          124
+biotype    479    CA      "N-Terminal LYS"          134
+biotype    480    C       "N-Terminal LYS"           82
+biotype    481    HN      "N-Terminal LYS"          129
+biotype    482    O       "N-Terminal LYS"           83
+biotype    483    HA      "N-Terminal LYS"            6
+biotype    484    N       "N-Terminal ARG"          124
+biotype    485    CA      "N-Terminal ARG"          134
+biotype    486    C       "N-Terminal ARG"           82
+biotype    487    HN      "N-Terminal ARG"          129
+biotype    488    O       "N-Terminal ARG"           83
+biotype    489    HA      "N-Terminal ARG"            6
+biotype    490    N       "N-Terminal ORN"          124
+biotype    491    CA      "N-Terminal ORN"          134
+biotype    492    C       "N-Terminal ORN"           82
+biotype    493    HN      "N-Terminal ORN"          129
+biotype    494    O       "N-Terminal ORN"           83
+biotype    495    HA      "N-Terminal ORN"            6
+biotype    496    N       "N-Terminal AIB"          124
+biotype    497    CA      "N-Terminal AIB"          135
+biotype    498    C       "N-Terminal AIB"           82
+biotype    499    HN      "N-Terminal AIB"          129
+biotype    500    O       "N-Terminal AIB"           83
+biotype    501    N       "C-Terminal GLY"           85
+biotype    502    CA      "C-Terminal GLY"          160
+biotype    503    C       "C-Terminal GLY"          111
+biotype    504    HN      "C-Terminal GLY"           88
+biotype    505    OXT     "C-Terminal GLY"          112
+biotype    506    HA      "C-Terminal GLY"            6
+biotype    507    N       "C-Terminal ALA"           85
+biotype    508    CA      "C-Terminal ALA"          161
+biotype    509    C       "C-Terminal ALA"          111
+biotype    510    HN      "C-Terminal ALA"           88
+biotype    511    OXT     "C-Terminal ALA"          112
+biotype    512    HA      "C-Terminal ALA"            6
+biotype    513    N       "C-Terminal VAL"           85
+biotype    514    CA      "C-Terminal VAL"          161
+biotype    515    C       "C-Terminal VAL"          111
+biotype    516    HN      "C-Terminal VAL"           88
+biotype    517    OXT     "C-Terminal VAL"          112
+biotype    518    HA      "C-Terminal VAL"            6
+biotype    519    N       "C-Terminal LEU"           85
+biotype    520    CA      "C-Terminal LEU"          161
+biotype    521    C       "C-Terminal LEU"          111
+biotype    522    HN      "C-Terminal LEU"           88
+biotype    523    OXT     "C-Terminal LEU"          112
+biotype    524    HA      "C-Terminal LEU"            6
+biotype    525    N       "C-Terminal ILE"           85
+biotype    526    CA      "C-Terminal ILE"          161
+biotype    527    C       "C-Terminal ILE"          111
+biotype    528    HN      "C-Terminal ILE"           88
+biotype    529    OXT     "C-Terminal ILE"          112
+biotype    530    HA      "C-Terminal ILE"            6
+biotype    531    N       "C-Terminal SER"           85
+biotype    532    CA      "C-Terminal SER"          161
+biotype    533    C       "C-Terminal SER"          111
+biotype    534    HN      "C-Terminal SER"           88
+biotype    535    OXT     "C-Terminal SER"          112
+biotype    536    HA      "C-Terminal SER"            6
+biotype    537    N       "C-Terminal THR"           85
+biotype    538    CA      "C-Terminal THR"          161
+biotype    539    C       "C-Terminal THR"          111
+biotype    540    HN      "C-Terminal THR"           88
+biotype    541    OXT     "C-Terminal THR"          112
+biotype    542    HA      "C-Terminal THR"            6
+biotype    543    N       "C-Terminal CYs (-SH)"     85
+biotype    544    CA      "C-Terminal CYs (-SH)"    161
+biotype    545    C       "C-Terminal CYs (-SH)"    111
+biotype    546    HN      "C-Terminal CYs (-SH)"     88
+biotype    547    OXT     "C-Terminal CYs (-SH)"    112
+biotype    548    HA      "C-Terminal CYs (-SH)"      6
+biotype    549    N       "C-Terminal CYs (-SS)"     85
+biotype    550    CA      "C-Terminal CYs (-SS)"    161
+biotype    551    C       "C-Terminal CYs (-SS)"    111
+biotype    552    HN      "C-Terminal CYs (-SS)"     88
+biotype    553    OXT     "C-Terminal CYs (-SS)"    112
+biotype    554    HA      "C-Terminal CYs (-SS)"      6
+biotype    555    N       "C-Terminal PRO"           86
+biotype    556    CA      "C-Terminal PRO"          163
+biotype    557    C       "C-Terminal PRO"          111
+biotype    558    OXT     "C-Terminal PRO"          112
+biotype    559    HA      "C-Terminal PRO"            6
+biotype    560    N       "C-Terminal PHE"           85
+biotype    561    CA      "C-Terminal PHE"          161
+biotype    562    C       "C-Terminal PHE"          111
+biotype    563    HN      "C-Terminal PHE"           88
+biotype    564    OXT     "C-Terminal PHE"          112
+biotype    565    HA      "C-Terminal PHE"            6
+biotype    566    N       "C-Terminal TYR"           85
+biotype    567    CA      "C-Terminal TYR"          161
+biotype    568    C       "C-Terminal TYR"          111
+biotype    569    HN      "C-Terminal TYR"           88
+biotype    570    OXT     "C-Terminal TYR"          112
+biotype    571    HA      "C-Terminal TYR"            6
+biotype    572    N       "C-Terminal TRP"           85
+biotype    573    CA      "C-Terminal TRP"          161
+biotype    574    C       "C-Terminal TRP"          111
+biotype    575    HN      "C-Terminal TRP"           88
+biotype    576    OXT     "C-Terminal TRP"          112
+biotype    577    HA      "C-Terminal TRP"            6
+biotype    578    N       "C-Terminal HIs (+)"       85
+biotype    579    CA      "C-Terminal HIs (+)"      161
+biotype    580    C       "C-Terminal HIs (+)"      111
+biotype    581    HN      "C-Terminal HIs (+)"       88
+biotype    582    OXT     "C-Terminal HIs (+)"      112
+biotype    583    HA      "C-Terminal HIs (+)"        6
+biotype    584    N       "C-Terminal HIs (HD)"      85
+biotype    585    CA      "C-Terminal HIs (HD)"     161
+biotype    586    C       "C-Terminal HIs (HD)"     111
+biotype    587    HN      "C-Terminal HIs (HD)"      88
+biotype    588    OXT     "C-Terminal HIs (HD)"     112
+biotype    589    HA      "C-Terminal HIs (HD)"       6
+biotype    590    N       "C-Terminal HIs (HE)"      85
+biotype    591    CA      "C-Terminal HIs (HE)"     161
+biotype    592    C       "C-Terminal HIs (HE)"     111
+biotype    593    HN      "C-Terminal HIs (HE)"      88
+biotype    594    OXT     "C-Terminal HIs (HE)"     112
+biotype    595    HA      "C-Terminal HIs (HE)"       6
+biotype    596    N       "C-Terminal ASP"           85
+biotype    597    CA      "C-Terminal ASP"          161
+biotype    598    C       "C-Terminal ASP"          111
+biotype    599    HN      "C-Terminal ASP"           88
+biotype    600    OXT     "C-Terminal ASP"          112
+biotype    601    HA      "C-Terminal ASP"            6
+biotype    602    N       "C-Terminal ASN"           85
+biotype    603    CA      "C-Terminal ASN"          161
+biotype    604    C       "C-Terminal ASN"          111
+biotype    605    HN      "C-Terminal ASN"           88
+biotype    606    OXT     "C-Terminal ASN"          112
+biotype    607    HA      "C-Terminal ASN"            6
+biotype    608    N       "C-Terminal GLU"           85
+biotype    609    CA      "C-Terminal GLU"          161
+biotype    610    C       "C-Terminal GLU"          111
+biotype    611    HN      "C-Terminal GLU"           88
+biotype    612    OXT     "C-Terminal GLU"          112
+biotype    613    HA      "C-Terminal GLU"            6
+biotype    614    N       "C-Terminal GLN"           85
+biotype    615    CA      "C-Terminal GLN"          161
+biotype    616    C       "C-Terminal GLN"          111
+biotype    617    HN      "C-Terminal GLN"           88
+biotype    618    OXT     "C-Terminal GLN"          112
+biotype    619    HA      "C-Terminal GLN"            6
+biotype    620    N       "C-Terminal MET"           85
+biotype    621    CA      "C-Terminal MET"          161
+biotype    622    C       "C-Terminal MET"          111
+biotype    623    HN      "C-Terminal MET"           88
+biotype    624    OXT     "C-Terminal MET"          112
+biotype    625    HA      "C-Terminal MET"            6
+biotype    626    N       "C-Terminal LYS"           85
+biotype    627    CA      "C-Terminal LYS"          161
+biotype    628    C       "C-Terminal LYS"          111
+biotype    629    HN      "C-Terminal LYS"           88
+biotype    630    OXT     "C-Terminal LYS"          112
+biotype    631    HA      "C-Terminal LYS"            6
+biotype    632    N       "C-Terminal ARG"           85
+biotype    633    CA      "C-Terminal ARG"          161
+biotype    634    C       "C-Terminal ARG"          111
+biotype    635    HN      "C-Terminal ARG"           88
+biotype    636    OXT     "C-Terminal ARG"          112
+biotype    637    HA      "C-Terminal ARG"            6
+biotype    638    N       "C-Terminal ORN"           85
+biotype    639    CA      "C-Terminal ORN"          161
+biotype    640    C       "C-Terminal ORN"          111
+biotype    641    HN      "C-Terminal ORN"           88
+biotype    642    OXT     "C-Terminal ORN"          112
+biotype    643    HA      "C-Terminal ORN"            6
+biotype    644    N       "C-Terminal AIB"           85
+biotype    645    CA      "C-Terminal AIB"          162
+biotype    646    C       "C-Terminal AIB"          111
+biotype    647    HN      "C-Terminal AIB"           88
+biotype    648    OXT     "C-Terminal AIB"          112

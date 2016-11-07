@@ -1,0 +1,1993 @@
+
+      ##############################
+      ##                          ##
+      ##  Force Field Definition  ##
+      ##                          ##
+      ##############################
+
+
+forcefield              AMBER95
+
+bondunit                1.00
+bond-cubic              0.00
+bond-quartic            0.00 
+angleunit               0.000305
+angle-cubic             0.00
+angle-quartic           0.00
+angle-pentic            0.00
+angle-sextic            0.00
+str-bndunit             0.00
+ang-angunit             0.00
+torsionunit             1.00
+str-torunit             0.00
+
+vdwtype                 LENNARD-JONES
+radiusrule              ARITHMETIC
+radiustype              R-MIN
+radiussize              RADIUS
+epsilonrule             GEOMETRIC
+vdw-14-scale            2.0
+chg-14-scale            1.2
+dielectric              1.0
+
+
+      #############################
+      ##                         ##
+      ##  Literature References  ##
+      ##                         ##
+      #############################
+
+
+W. D. Cornell, P. Cieplak, C. I. Bayly, I. R. Gould, K. M. Merz, Jr.,
+D. M. Ferguson, D. C. Spellmeyer, T. Fox, J. W. Caldwell and P. A. Kollman,
+ A Second Generation Force Field for the Simulation of Proteins, Nucleic
+Acids, and Organic Molecules , J. Am. Chem. Soc., 117, 5179-5197 (1995)
+[PARM94]
+
+P. Kollman, R. Dixon, W. Cornell, T. Fox, C. Chipot and A. Pohorille,
+ The Development/Application of a 'Minimalist' Organic/Biochemical
+Molecular Mechanic Force Field using a Combination of ab Initio
+Calculations and Experimental Data , in Computer Simulation of
+Biomolecular Systems, W. F. van Gunsteren, P. K. Weiner, A. J. Wilkinson,
+eds., Volume 3, 83-96 (1997)  [PARM96]
+
+G. Moyna, H. J. Williams, R. J. Nachman and A. I. Scott,  Conformation in
+Solution and Dynamics of a Structurally Constrained Linear Insect Kinin
+Pentapeptide Analogue , Biopolymers, 49, 403-413 (1999)  [AIB charges]
+
+Current parameter values are available from the AMBER site in Peter
+Kollman's lab at UCSF, http://www.amber.ucsf.edu/amber/amber.html/
+
+
+      #############################
+      ##                         ##
+      ##  Atom Type Definitions  ##
+      ##                         ##
+      #############################
+
+
+   ########################################################
+   ##                                                    ##
+   ##  MMX Atom Class Numbers to Amber-95 Atom Names    ##
+   ##                                                    ##
+   ##      1  CT      11  CN      21  OW      31  HO     ##
+   ##      3  C       12  CK      22  OH      32  HS     ##
+   ##      2  CA      13  CQ      23  OS      33  HA     ##
+   ##      4  CM      14  N       24  O       34  HC     ##
+   ##      5  CC      15  NA      25  O2      35  H1     ##
+   ##      6  CV      16  NB      26  S       36  H2     ##
+   ##      7  CW      17  NC      27  SH      37  H3     ##
+   ##      8  CR      18  N*      28  P       38  HP     ##
+   ##      9  CB      19  N2      29  H       39  H4     ##
+   ##     10  C*      20  N3      30  HW      40  H5     ##
+   ##                                                    ##
+   ########################################################
+
+atom      1     CT       CSP3                        6     12.000     4     4     1
+atom      2     C        CSP2 CARBONYL               6     12.000     3     4     2
+atom      3     CA       CSP2 Aromatic               6     12.000     3     4     3 
+atom      4     CM       CSP2 ALKENE                 6     12.000     3     4     4
+atom      5     CC       CSP2 C5 w1 Sub              6     12.000     3     4     5
+atom      6     CV       CSP2 C5 alpha N:            6     12.000     3     4     6
+atom      7     CW       CSP2 C5 alpha NH            6     12.000     3     4     7
+atom      8     CR       CSP2 C5 bet 2N              6     12.000     3     4     8
+atom      9     CB       CSP2 C5/6 junc              6     12.000     3     4     9
+atom     10     C*       CSP2 C5 next 2C             6     12.000     3     4     10
+atom     11     CN       CSP2 C5/6 junc a NH         6     12.000     3     4     11
+atom     12     CK       CSP2 C8 in purine           6     12.000     3     4     12 
+atom     13     CQ       CSP2 C2 in purine           6     12.000     3     4     13
+atom     14     N        NSP2 Amide                  7     14.003     3     3     14
+atom     15     NA       NSP2 Aromatic NH            7     14.003     3     3     15
+atom     16     NB       NSP2 C5 N:                  7     14.003     3     3     16
+atom     17     NC       NSP2 C6 N:                  7     14.003     3     3     17
+atom     18     N*       NSP2 C5 w sub               7     14.003     3     3     18
+atom     19     N2       NSP2 Arom & Guanidin        7     14.003     3     3     19
+atom     20     N3       N SP3                       7     14.003     4     3     20
+atom     21     OW       OSP3 in Water               8     15.995     2     2     21
+atom     22     OH       OSP3 in ROH,RCOOH           8     15.995     2     2     22
+atom     23     OS       OSP3 in Ethers              8     15.995     3     2     22
+atom     24     O        OSP2 in Amides              8     15.995     1     1     24
+atom     25     O2       OSP2 in anionic Acids       8     15.995     1     1     25
+atom     26     S        S in Met & Cys             16     32.066     2     2     26
+atom     27     SH       S in Cysteine              16     32.066     2     2     27
+atom     28     P        Phosphate P                15     30.994     4     4     28 
+atom     29     H        H attached N                1      1.008     1     1     29
+atom     30     HW       H in Water                  1      1.008     1     1     30
+atom     31     HO       H in ROH & RCOOH            1      1.008     1     1     31
+atom     32     HS       H on Sulfur                 1      1.008     1     1     32
+atom     33     HA       H on Aromatic C             1      1.008     1     1     33
+atom     34     HC       H on C w 0 Elec With        1      1.008     1     1     34
+atom     35     H1       H on C w 1 Elec With        1      1.008     1     1     35
+atom     36     H2       H on C w 2 Elec With        1      1.008     1     1     36
+atom     37     H3       H on C w 3 Elec With        1      1.008     1     1     37
+atom     38     HP       H on C next to +chrg        1      1.008     1     1     38
+atom     39     H4       H on ArC next 1 ElecW       1      1.008     1     1     39
+atom     40     H5       H on ArC next 1 ElecW       1      1.008     1     1     40
+atom     41     OT       TIPS4P Water Oxygen         8     15.995     2     3     41
+atom     42     HT       TIPS4P Water Hydrogen       1      1.008     1     1     42
+atom     43     LT       TIPS4P Water Lp             1      0.010     1     1     42
+
+// pos metal atoms
+atom    301      Li    Lithium                3       6.941    10       0    301
+atom    302      Be    Berylium               4       9.0121   10       0    302
+atom    303      Na    Sodium                11      22.989    10       0    303
+atom    304      Mg    Magnesium             12      24.305    10       0    304
+atom    305      K     Potassium             19      39.098    10       0    305
+atom    306      Ca    Calcium               20      40.080    10       0    306
+atom    307      Sc    Scandium              21      44.956    10       0    307
+atom    308      Ti    Titanium              22      47.900    10       0    308
+atom    309      V     Vanadium              23      50.941    10       0    309
+atom    310      Cr    Chromium              24      51.996    10       0    310
+atom    311      Mn    Manganese             25      54.938    10       0    311
+atom    312      Fe    Iron                  26      55.84     10       0    312
+atom    313      Co    Cobalt                27      58.93     10       0    313
+atom    314      Ni    Nickel                28      58.7      10       0    314
+atom    315      Cu    Copper                29      63.54     10       0    315
+atom    316      Zn    Zinc                  30      65.38     10       0    316
+atom    317      Ga    Galium                31      69.72     10       0    317
+atom    318      Ge    Germanium             32      72.5      10       0    318
+atom    319      As    Arsenic               33      74.92     10       0    319
+atom    320      Rb    Rubidium              37      85.46     10       0    320
+atom    321      Sr    Strontium             38      87.62     10       0    321
+atom    322      Y     Ytrium                39      88.9      10       0    322
+atom    323      Zr    Zirconium             40      91.22     10       0    323
+atom    324      Nb    Niobium               41      92.90     10       0    324
+atom    325      Mo    Molybdenum            42      95.9      10       0    325
+atom    326      Tc    Technetium            43      98.90     10       0    326
+atom    327      Ru    Ruthenium             44      101.0     10       0    327
+atom    328      Rh    Rhodium               45      102.9     10       0    328
+atom    329      Pd    Palladium             46      106.4     10       0    329
+atom    330      Ag    Silver                47      107.87    10       0    330
+atom    331      Cd    Cadmium               48      112.4     10       0    331
+atom    332      In    Indium                49      114.82    10       0    332
+atom    333      Sn    Tin                   50      118.6     10       0    333
+atom    334      Sb    Antimony              51      121.7     10       0    334
+atom    335      Te    Tellurium             52      127.6     10       0    335
+atom    336      Cs    Cesium                55      132.9     10       0    336
+atom    337      Ba    Barium                56      137.3     10       0    337
+atom    338      La    Lanthanum             57      138.9     10       0    338
+atom    339      Ce    Cerium                58      140.12    10       0    339
+atom    340      Pr    Prasedodymium         59      140.91    10       0    340
+atom    341      Nd    Neodymium             60      144.24    10       0    341
+atom    342      Pm    Promethium            61      147.0     10       0    342
+atom    343      Sm    Samarium              62      150.35    10       0    343
+atom    344      Eu    Europium              63      151.36    10       0    344
+atom    345      Gd    Gadolinium            64      157.25    10       0    345
+atom    346      Tb    Terbium               65      158.92    10       0    346
+atom    347      Dy    Dysprosium            66      162.50    10       0    347
+atom    348      Ho    Holmium               67      164.93    10       0    348
+atom    349      Er    Erbium                68      167.26    10       0    349
+atom    350      Tm    Thulium               69      168.93    10       0    350
+atom    351      Yb    Ytterbium             70      173.04    10       0    351
+atom    352      Lu    Lutetium              71      174.97    10       0    352
+atom    353      Hf    Hafnium               72      178.4     10       0    353
+atom    354      Ta    Tantalum              73      180.95    10       0    354
+atom    355      W     Tungstun              74      183.8     10       0    355
+atom    356      Re    Rhenium               75      186.2     10       0    356
+atom    357      Os    Osmium                76      190.2     10       0    357
+atom    358      Ir    Iridium               77      192.2     10       0    358
+atom    359      Pt    Platinum              78      195.0     10       0    359
+atom    360      Au    Gold                  79      196.97    10       0    360
+atom    361      Hg    Mercury               80      200.5     10       0    361
+atom    362      Tl    Thallium              81      204.3     10       0    362
+atom    363      Pb    Lead                  82      207.2     10       0    363
+atom    364      Bi    Bismuth               83      208.98    10       0    364
+atom    365      Po    Polonium              84      210.0     10       0    365
+atom    366      At    Astatine              85      210.0     10       0    366
+atom    367      Fr    Francium              87      223.0     10       0    367
+atom    368      Ra    Radium                88      226.0     10       0    368
+atom    369      Ac    Actinium              89      227.0     10       0    369
+atom    370      Th    Thorium               90      232.04    10       0    370
+atom    371      Pa    Protactinium          91      231.0     10       0    371
+atom    372      U     Uranium               92      238.03    10       0    372
+atom    373      Np    Neptunium             93      237.0     10       0    373
+atom    374      Pu    Plutonium             94      242.0     10       0    374
+atom    375      Am    Americium             95      243.0     10       0    375
+atom    376      Cm    Curium                96      247.0     10       0    376
+atom    377      Bk    Berkelium             97      249.0     10       0    377
+atom    378      Cf    Californium           98      251.0     10       0    378
+atom    379      Es    Einsteinium           99      254.0     10       0    379
+atom    380      Fm    Fermium              100      253.0     10       0    380
+atom    381      Md    Mendelevium          101      256.0     10       0    381
+atom    382      No    Nobelium             102      253.0     10       0    382
+      ################################
+      ##                            ##
+      ##  Van der Waals Parameters  ##
+      ##                            ##
+      ################################
+
+
+vdw          1              1.9080     0.1094
+vdw          2              1.9080     0.0860
+vdw          3              1.9080     0.0860
+vdw          4              1.9080     0.0860
+vdw          5              1.9080     0.0860
+vdw          6              1.9080     0.0860
+vdw          7              1.9080     0.0860
+vdw          8              1.9080     0.0860
+vdw          9              1.9080     0.0860
+vdw         10              1.9080     0.0860
+vdw         11              1.9080     0.0860
+vdw         12              1.9080     0.0860
+vdw         13              1.9080     0.0860
+vdw         14              1.8240     0.1700
+vdw         15              1.8240     0.1700
+vdw         16              1.8240     0.1700
+vdw         17              1.8240     0.1700
+vdw         18              1.8240     0.1700
+vdw         19              1.8240     0.1700
+vdw         20              1.8750     0.1700
+vdw         21              1.7683     0.1520
+vdw         22              1.7210     0.2104
+vdw         23              1.6837     0.1700
+vdw         24              1.6612     0.2100
+vdw         25              1.6612     0.2100
+vdw         26              2.0000     0.2500
+vdw         27              2.0000     0.2500
+vdw         28              2.1000     0.2000
+vdw         29              0.6000     0.0157
+vdw         30              0.6000     0.0157
+vdw         31              0.6000     0.0157
+vdw         32              0.6000     0.0157
+vdw         33              1.4590     0.0150
+vdw         34              1.4870     0.0157
+vdw         35              1.3870     0.0157
+vdw         36              1.2870     0.0157
+vdw         37              1.1870     0.0157
+vdw         38              1.1000     0.0157
+vdw         39              1.4090     0.0150
+vdw         40              1.3590     0.0150
+vdw         41              3.1506     0.1521  // type 21 water
+vdw         42              0.0000     0.0000  // type 30 water
+vdw         43              0.0000     0.0000  // type 30 water
+
+// pos metals
+vdw       300    2.31      4.0       0       0       0
+vdw       301    1.52      4.0       0       0       0
+vdw       302    1.11      4.0       0       0       0
+vdw       303    1.86      4.0       0       0       0
+vdw       304    1.60      4.0       0       0       0
+vdw       305    2.31      4.0       0       0       0
+vdw       306    1.97      4.0       0       0       0
+vdw       307    1.60      4.0       0       0       0
+vdw       308    1.46      4.0       0       0       0
+vdw       309    1.31      4.0       0       0       0
+vdw       310    1.25      4.0       0       0       0
+vdw       311    1.29      4.0       0       0       0 
+vdw       312    1.26      3.0       0       0       0
+vdw       313    1.26      4.0       0       0       0
+vdw       314    1.26      0.4       0       0       0
+vdw       315    1.26      4.0       0       0       0
+vdw       316    1.355     4.0       0       0       0 
+vdw       317    1.26      4.0       0       0       0
+vdw       318    1.22      4.0       0       0       0
+vdw       319    1.21      4.0       0       0       0
+vdw       320    2.44      4.0       0       0       0
+vdw       321    2.15      4.0       0       0       0
+vdw       322    1.85      4.0       0       0       0
+vdw       323    1.50      4.0       0       0       0
+vdw       324    1.455     4.0       0       0       0
+vdw       325    1.39      4.0       0       0       0
+vdw       326    1.355     4.0       0       0       0
+vdw       327    1.355     4.0       0       0       0
+vdw       328    1.355     4.0       0       0       0
+vdw       329    1.355     4.0       0       0       0
+vdw       330    1.455     4.0       0       0       0
+vdw       331    1.51      4.0       0       0       0
+vdw       332    1.45      4.0       0       0       0
+vdw       333    1.40      4.0       0       0       0
+vdw       334    1.41      4.0       0       0       0
+vdw       335    1.37      4.0       0       0       0
+vdw       336    2.62      4.0       0       0       0
+vdw       337    2.15      4.0       0       0       0
+vdw       338    1.85      4.0       0       0       0
+vdw       339    1.85      4.0       0       0       0
+vdw       340    1.85      4.0       0       0       0
+vdw       341    1.85      4.0       0       0       0
+vdw       342    1.85      4.0       0       0       0
+vdw       343    1.85      4.0       0       0       0
+vdw       344    1.85      4.0       0       0       0
+vdw       345    1.85      4.0       0       0       0
+vdw       346    1.85      4.0       0       0       0
+vdw       347    1.85      4.0       0       0       0
+vdw       348    1.85      4.0       0       0       0
+vdw       349    1.85      4.0       0       0       0
+vdw       350    1.85      4.0       0       0       0
+vdw       351    1.85      4.0       0       0       0
+vdw       352    1.85      4.0       0       0       0
+vdw       353    1.6       4.0       0       0       0
+vdw       354    1.455     4.0       0       0       0
+vdw       355    1.39      4.0       0       0       0
+vdw       356    1.355     4.0       0       0       0
+vdw       357    1.355     4.0       0       0       0
+vdw       358    1.39      4.0       0       0       0
+vdw       359    1.455     4.0       0       0       0
+vdw       360    1.51      4.0       0       0       0
+vdw       361    1.70      4.0       0       0       0
+vdw       362    1.50      4.0       0       0       0
+vdw       363    1.51      4.0       0       0       0
+vdw       364    1.51      4.0       0       0       0
+vdw       365    1.51      4.0       0       0       0
+vdw       366    1.51      4.0       0       0       0
+vdw       367    1.51      4.0       0       0       0
+vdw       368    1.51      4.0       0       0       0
+vdw       369    1.51      4.0       0       0       0
+vdw       370    1.51      4.0       0       0       0
+vdw       371    1.51      4.0       0       0       0
+vdw       372    1.51      4.0       0       0       0
+vdw       373    1.51      4.0       0       0       0
+vdw       374    1.51      4.0       0       0       0
+vdw       375    1.51      4.0       0       0       0
+vdw       376    1.51      4.0       0       0       0
+vdw       377    1.51      4.0       0       0       0
+vdw       378    1.51      4.0       0       0       0
+vdw       379    1.51      4.0       0       0       0
+vdw       380    1.51      4.0       0       0       0
+vdw       381    1.51      4.0       0       0       0
+vdw       382    1.51      4.0       0       0       0
+
+      ##################################
+      ##                              ##
+      ##  Bond Stretching Parameters  ##
+      ##                              ##
+      ##################################
+
+
+bond         1    1          310.0     1.5260
+bond         1    2          317.0     1.5220
+bond         1    3          317.0     1.5100
+bond         1    4          317.0     1.5100
+bond         1    5          317.0     1.5040
+bond         1   10          317.0     1.4950
+bond         1   14          337.0     1.4490
+bond         1   18          337.0     1.4750
+bond         1   19          337.0     1.4630
+bond         1   20          367.0     1.4710
+bond         1   22          320.0     1.4100
+bond         1   23          320.0     1.4100
+bond         1   26          227.0     1.8100
+bond         1   27          237.0     1.8100
+bond         1   34          340.0     1.0900
+bond         1   35          340.0     1.0900
+bond         1   36          340.0     1.0900
+bond         1   37          340.0     1.0900
+bond         1   38          340.0     1.0900
+bond         2    3          469.0     1.4090
+bond         2    4          410.0     1.4440
+bond         2    9          447.0     1.4190
+bond         2   14          490.0     1.3350
+bond         2   15          418.0     1.3880
+bond         2   17          457.0     1.3580
+bond         2   18          424.0     1.3830
+bond         2   22          450.0     1.3640
+bond         2   23          450.0     1.3380
+bond         2   24          570.0     1.2290
+bond         2   25          656.0     1.2500
+bond         3    3          469.0     1.4000
+bond         3    4          427.0     1.4330
+bond         3    9          469.0     1.4040
+bond         3   11          469.0     1.4000
+bond         3   15          427.0     1.3810
+bond         3   17          483.0     1.3390
+bond         3   19          481.0     1.3400
+bond         3   33          367.0     1.0800
+bond         3   39          367.0     1.0800
+bond         4    4          549.0     1.3500
+bond         4   18          448.0     1.3650
+bond         4   33          367.0     1.0800
+bond         4   39          367.0     1.0800
+bond         4   40          367.0     1.0800
+bond         5    6          512.0     1.3750
+bond         5    7          518.0     1.3710
+bond         5   15          422.0     1.3850
+bond         5   16          410.0     1.3940
+bond         6   16          410.0     1.3940
+bond         6   39          367.0     1.0800
+bond         7   10          546.0     1.3520
+bond         7   15          427.0     1.3810
+bond         7   39          367.0     1.0800
+bond         8   15          477.0     1.3430
+bond         8   16          488.0     1.3350
+bond         8   40          367.0     1.0800
+bond         9    9          520.0     1.3700
+bond         9   10          388.0     1.4590
+bond         9   11          447.0     1.4190
+bond         9   16          414.0     1.3910
+bond         9   17          461.0     1.3540
+bond         9   18          436.0     1.3740
+bond        10   34          367.0     1.0800
+bond        11   15          428.0     1.3800
+bond        12   16          529.0     1.3040
+bond        12   18          440.0     1.3710
+bond        12   40          367.0     1.0800
+bond        13   17          502.0     1.3240
+bond        13   40          367.0     1.0800
+bond        14   29          434.0     1.0100
+bond        15   29          434.0     1.0100
+bond        18   29          434.0     1.0100
+bond        19   29          434.0     1.0100
+bond        20   29          434.0     1.0100
+bond        21   30          553.0     0.9572
+bond        22   28          230.0     1.6100
+bond        22   31          553.0     0.9600
+bond        23   28          230.0     1.6100
+bond        23   31          553.0     0.9600
+bond        25   28          525.0     1.4800
+bond        26   26          166.0     2.0380
+bond        27   32          274.0     1.3360
+bond        30   30          553.0     1.5136
+bond        41   42          553.0     0.9572
+bond        41   43          553.0     0.1500
+
+
+      ################################
+      ##                            ##
+      ##  Angle Bending Parameters  ##
+      ##                            ##
+      ################################
+
+
+angle        1    1    1     40.00     109.50
+angle        1    1    2     63.00     111.10
+angle        1    1    3     63.00     114.00
+angle        1    1    5     63.00     113.10
+angle        1    1   10     63.00     115.60
+angle        1    1   14     80.00     109.70
+angle        1    1   18     50.00     109.50
+angle        1    1   19     80.00     111.20
+angle        1    1   20     80.00     111.20
+angle        1    1   22     50.00     109.50
+angle        1    1   23     50.00     109.50
+angle        1    1   26     50.00     114.70
+angle        1    1   27     50.00     108.60
+angle        1    1   34     50.00     109.50
+angle        1    1   35     50.00     109.50
+angle        1    1   36     50.00     109.50
+angle        1    1   38     50.00     109.50
+angle        2    1   14     63.00     110.10
+angle        2    1   20     80.00     111.20
+angle        2    1   34     50.00     109.50
+angle        2    1   35     50.00     109.50
+angle        2    1   38     50.00     109.50
+angle        3    1   34     50.00     109.50
+angle        4    1   34     50.00     109.50
+angle        5    1   34     50.00     109.50
+angle       10    1   34     50.00     109.50
+angle       14    1   35     50.00     109.50
+angle       18    1   23     50.00     109.50
+angle       18    1   35     50.00     109.50
+angle       18    1   36     50.00     109.50
+angle       19    1   35     50.00     109.50
+angle       20    1   35     50.00     109.50
+angle       20    1   38     50.00     109.50
+angle       22    1   35     50.00     109.50
+angle       23    1   35     50.00     109.50
+angle       23    1   36     50.00     109.50
+angle       26    1   35     50.00     109.50
+angle       27    1   35     50.00     109.50
+angle       34    1   34     35.00     109.50
+angle       35    1   35     35.00     109.50
+angle       36    1   36     35.00     109.50
+angle       38    1   38     35.00     109.50
+angle        1    2    1     70.00     116.60
+angle        1    2   14     70.00     116.60
+angle        1    2   24     80.00     120.40
+angle        1    2   25     70.00     117.00
+angle        3    2    3     63.00     120.00
+angle        3    2   22     70.00     120.00
+angle        4    2   15     70.00     114.10
+angle        4    2   24     80.00     125.30
+angle        9    2   15     70.00     111.30
+angle        9    2   24     80.00     128.80
+angle       14    2   24     80.00     122.90
+angle       15    2   18     70.00     115.40
+angle       15    2   24     80.00     120.60
+angle       17    2   18     70.00     118.60
+angle       17    2   24     80.00     122.50
+angle       18    2   24     80.00     120.90
+angle       24    2   24     80.00     126.00
+angle       25    2   25     80.00     126.00
+angle        1    3    3     70.00     120.00
+angle        2    3    3     63.00     120.00
+angle        2    3   33     35.00     120.00
+angle        3    3    3     63.00     120.00
+angle        3    3    9     63.00     120.00
+angle        3    3   11     63.00     120.00
+angle        3    3   33     35.00     120.00
+angle        3    3   39     35.00     120.00
+angle        4    3   17     70.00     121.50
+angle        4    3   19     70.00     120.10
+angle        9    3   17     70.00     117.30
+angle        9    3   19     70.00     123.50
+angle        9    3   33     35.00     120.00
+angle        9    3   39     35.00     120.00
+angle       11    3   33     35.00     120.00
+angle       15    3   17     70.00     123.30
+angle       15    3   19     70.00     116.00
+angle       17    3   19     70.00     119.30
+angle       19    3   19     70.00     120.00
+angle        1    4    2     70.00     119.70
+angle        1    4    4     70.00     119.70
+angle        2    4    4     63.00     120.70
+angle        2    4   33     35.00     119.70
+angle        2    4   39     35.00     119.70
+angle        3    4    4     63.00     117.00
+angle        3    4   33     35.00     123.30
+angle        3    4   39     35.00     123.30
+angle        4    4   18     70.00     121.20
+angle        4    4   33     35.00     119.70
+angle        4    4   39     35.00     119.70
+angle       18    4   39     35.00     119.10
+angle        1    5    6     70.00     120.00
+angle        1    5    7     70.00     120.00
+angle        1    5   15     70.00     120.00
+angle        1    5   16     70.00     120.00
+angle        6    5   15     70.00     120.00
+angle        7    5   15     70.00     120.00
+angle        7    5   16     70.00     120.00
+angle        5    6   16     70.00     120.00
+angle        5    6   39     35.00     120.00
+angle       16    6   39     35.00     120.00
+angle        5    7   15     70.00     120.00
+angle        5    7   39     35.00     120.00
+angle       10    7   15     70.00     108.70
+angle       10    7   39     35.00     120.00
+angle       15    7   39     35.00     120.00
+angle       15    8   15     70.00     120.00
+angle       15    8   16     70.00     120.00
+angle       15    8   40     35.00     120.00
+angle       16    8   40     35.00     120.00
+angle        2    9    9     63.00     119.20
+angle        2    9   16     70.00     130.00
+angle        3    9    9     63.00     117.30
+angle        3    9   10     63.00     134.90
+angle        3    9   11     63.00     116.20
+angle        3    9   16     70.00     132.40
+angle        9    9   16     70.00     110.40
+angle        9    9   17     70.00     127.70
+angle        9    9   18     70.00     106.20
+angle       10    9   11     63.00     108.80
+angle       17    9   18     70.00     126.20
+angle        1   10    7     70.00     125.00
+angle        1   10    9     70.00     128.60
+angle        7   10    9     63.00     106.40
+angle        3   11    9     63.00     122.70
+angle        3   11   15     70.00     132.80
+angle        9   11   15     70.00     104.40
+angle       16   12   18     70.00     113.90
+angle       16   12   40     35.00     123.05
+angle       18   12   40     35.00     123.05
+angle       17   13   17     70.00     129.10
+angle       17   13   40     35.00     115.45
+angle        1   14    1     50.00     118.00
+angle        1   14    2     50.00     121.90
+angle        1   14   29     30.00     118.04
+angle        2   14   29     30.00     120.00
+angle       29   14   29     35.00     120.00
+angle        2   15    2     70.00     126.40
+angle        2   15    3     70.00     125.20
+angle        2   15   29     30.00     116.80
+angle        3   15   29     30.00     118.00
+angle        5   15    8     70.00     120.00
+angle        5   15   29     30.00     120.00
+angle        7   15    8     70.00     120.00
+angle        7   15   11     70.00     111.60
+angle        7   15   29     30.00     120.00
+angle        8   15   29     30.00     120.00
+angle       11   15   29     30.00     123.10
+angle        5   16    8     70.00     117.00
+angle        6   16    8     70.00     117.00
+angle        9   16   12     70.00     103.80
+angle        2   17    3     70.00     120.50
+angle        3   17    9     70.00     112.20
+angle        3   17   13     70.00     118.60
+angle        9   17   13     70.00     111.00
+angle        1   18    2     70.00     117.60
+angle        1   18    4     70.00     121.20
+angle        1   18    9     70.00     125.80
+angle        1   18   12     70.00     128.80
+angle        2   18    4     70.00     121.60
+angle        2   18   29     30.00     119.20
+angle        4   18   29     30.00     121.20
+angle        9   18   12     70.00     105.40
+angle        9   18   29     30.00     125.80
+angle       12   18   29     30.00     128.80
+angle        1   19    3     50.00     123.20
+angle        1   19   29     35.00     118.40
+angle        3   19   29     35.00     120.00
+angle       29   19   29     35.00     120.00
+angle        1   20    1     50.00     109.50
+angle        1   20   29     50.00     109.50
+angle       29   20   29     35.00     109.50
+angle       30   21   30    100.00     104.52
+angle        1   22   31     55.00     108.50
+angle        2   22   31     35.00     113.00
+angle       28   22   31     45.00     108.50
+angle        1   23    1     60.00     109.50
+angle        1   23   28    100.00     120.50
+angle       28   23   28    100.00     120.50
+angle        1   26    1     62.00      98.90
+angle        1   26   26     68.00     103.70
+angle        1   27   32     43.00      96.00
+angle       32   27   32     35.00      92.07
+angle       22   28   23     45.00     102.60
+angle       22   28   25     45.00     108.23
+angle       23   28   23     45.00     102.60
+angle       23   28   25    100.00     108.23
+angle       25   28   25    140.00     119.90
+angle       21   30   30      0.00     127.74
+angle       42   41   42     34.00     104.52
+angle       42   41   43     34.00      52.16
+
+
+      #####################################
+      ##                                 ##
+      ##  Improper Torsional Parameters  ##
+      ##                                 ##
+      #####################################
+
+imptors      1    3   19   29          0.000 0    1.000   -2   0.000  0
+imptors      1   14    2   24          0.000 0   10.500   -2   0.000  0
+imptors      1   25    2   25          0.000 0   10.500   -2   0.000  0
+imptors      2    1   14    1          0.000 0    1.000   -2   0.000  0
+imptors      2    1   14   29          0.000 0    1.000   -2   0.000  0
+imptors      2    2   15   29          0.000 0    1.000   -2   0.000  0
+imptors      2    3   15   29          0.000 0    1.000   -2   0.000  0
+imptors      2    4    4    1          0.000 0    1.100   -2   0.000  0
+imptors      2    4    4   33          0.000 0    1.100   -2   0.000  0
+imptors      2   29   14   29          0.000 0    1.000   -2   0.000  0
+imptors      3    2    3   33          0.000 0    1.100   -2   0.000  0
+imptors      3    3    2   22          0.000 0    1.100   -2   0.000  0
+imptors      3    3    3    1          0.000 0    1.100   -2   0.000  0
+imptors      3    3    3   33          0.000 0    1.100   -2   0.000  0
+imptors      3    9    3   33          0.000 0    1.100   -2   0.000  0
+imptors      3   29   19   29          0.000 0    1.000   -2   0.000  0
+imptors      4    2   18    1          0.000 0    1.000   -2   0.000  0
+imptors      4   15    2   24          0.000 0   10.500   -2   0.000  0
+imptors      5    8   15   29          0.000 0    1.000   -2   0.000  0
+imptors      5   15    7   39          0.000 0    1.100   -2   0.000  0
+imptors      5   16    6   39          0.000 0    1.100   -2   0.000  0
+imptors      7    9   10    1          0.000 0    1.100   -2   0.000  0
+imptors      7   11   15   29          0.000 0    1.000   -2   0.000  0
+imptors      8    7   15   29          0.000 0    1.000   -2   0.000  0
+imptors      9   15    2   24          0.000 0   10.500   -2   0.000  0
+imptors      9   17    3   19          0.000 0    1.100   -2   0.000  0
+imptors     10   15    7   39          0.000 0    1.100   -2   0.000  0
+imptors     11    3    3   33          0.000 0    1.100   -2   0.000  0
+imptors     19   19    3   19          0.000 0   10.500   -2   0.000  0
+imptors     15    6    5    1          0.000 0    1.100   -2   0.000  0
+imptors     15    7    5    1          0.000 0    1.100   -2   0.000  0
+imptors     15   15    8   40          0.000 0    1.100   -2   0.000  0
+imptors     15   16    8   40          0.000 0    1.100   -2   0.000  0
+imptors     15   17    3   19          0.000 0    1.100   -2   0.000  0
+imptors     16    7    5    1          0.000 0    1.100   -2   0.000  0
+imptors     16   15    8   40          0.000 0    1.100   -2   0.000  0
+imptors     16   18   12   40          0.000 0    1.100   -2   0.000  0
+imptors     17    4    3   19          0.000 0    1.100   -2   0.000  0
+imptors     17   17   13   40          0.000 0    1.100   -2   0.000  0
+imptors     18    4    4   39          0.000 0    1.100   -2   0.000  0
+imptors     18   15    2   24          0.000 0   10.500   -2   0.000  0
+
+
+      ############################
+      ##                        ##
+      ##  Torsional Parameters  ##
+      ##                        ##
+      ############################
+
+
+   ###############################################################
+   ##                                                           ##
+   ##  There are two AMBER95 parameterizations for the Cornell  ##
+   ##  force field, PARM94 and PARM96. They differ only in the  ##
+   ##  torsional parameters for peptide phi and psi rotations.  ##
+   ##                                                           ##
+   ##  PARM94                                                   ##
+   ##                                                           ##
+   ##   14  1  2 14     0.75 180 1    1.35 180 2    0.40 180 4  ##
+   ##    2  1 14  2                   0.20 180 2                ##
+   ##                                                           ##
+   ##  PARM96                                                   ##
+   ##                                                           ##
+   ##   14  1  2 14     0.85   0 1    0.30 180 2                ##
+   ##    2  1 14  2     0.85   0 1    0.30 180 2                ##
+   ##                                                           ##
+   ###############################################################
+
+torsion   1    1    1    1      0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   1    1    1    2      0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   1    1    1    14     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   1    1    1    18     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0
+torsion   1    1    1    19     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   1    1    1    20     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   1    1    1    22     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0
+torsion   1    1    1    23     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0
+torsion   1    1    1    26     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   1    1    1    34     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   1    1    1    35     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   1    1    1    36     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0
+torsion   1    1    1    38     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   2    1    1    2      0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   2    1    1    3      0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   2    1    1    5      0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   2    1    1    10     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   2    1    1    14     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   2    1    1    22     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   2    1    1    26     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0
+torsion   2    1    1    27     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   2    1    1    34     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   2    1    1    35     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   3    1    1    14     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   3    1    1    35     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   5    1    1    14     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   5    1    1    35     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   10   1    1    14     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   10   1    1    35     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   14   1    1    22     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   14   1    1    26     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0
+torsion   14   1    1    27     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   14   1    1    34     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   14   1    1    35     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   18   1    1    22     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0
+torsion   18   1    1    34     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0
+torsion   18   1    1    35     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0
+torsion   19   1    1    34     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   20   1    1    34     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   22   1    1    18     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0
+torsion   22   1    1    22     0.000 0    0.000  0   0.140  3   1.000  2   0.000  0   0.000  0
+torsion   22   1    1    23     0.000 0    0.000  0   0.140  3   1.000  2   0.000  0   0.000  0
+torsion   22   1    1    34     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   22   1    1    35     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   22   1    1    36     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0
+torsion   23   1    1    23     0.000 0    0.000  0   0.140  3   1.000  2   0.000  0   0.000  0
+torsion   23   1    1    34     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0
+torsion   23   1    1    35     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0
+torsion   26   1    1    34     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   26   1    1    35     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0
+torsion   27   1    1    35     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   34   1    1    34     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   34   1    1    35     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   34   1    1    36     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0
+torsion   34   1    1    38     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   35   1    1    35     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   35   1    1    36     0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0
+torsion   1    1    2    14     0.000 0    0.070  2   0.000  0   0.100  4   0.000  0   0.000  0 
+torsion   1    1    2    24     0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   1    1    2    25     0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   14   1    2    14     0.750 -1   1.350  -2  0.000  0   0.400  -4  0.000  0   0.000  0 
+torsion   14   1    2    24     0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   14   1    2    25     0.000 0    0.000  0   0.000  2   0.000  0   0.000  0   0.000  0
+torsion   34   1    2    14     0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   34   1    2    24     0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   34   1    2    25     0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   35   1    2    14     0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   35   1    2    24     0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   35   1    2    25     0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   1    1    3    3      0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   34   1    3    3      0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   34   1    4    2      0.000 0    0.000  2   0.000  3   0.000  0   0.000  0   0.000  0 
+torsion   34   1    4    4      0.000 0    0.000  2   0.000  3   0.000  0   0.000  0   0.000  0 
+torsion   1    1    5    6      0.000 0    0.000  2   0.000  2   0.000  0   0.000  0   0.000  0 
+torsion   1    1    5    7      0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   1    1    5    15     0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   1    1    5    16     0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0
+torsion   34   1    5    6      0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0
+torsion   34   1    5    7      0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   34   1    5    15     0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   34   1    5    16     0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0
+torsion   1    1    10   7      0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   1    1    10   9      0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   34   1    10   7      0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   34   1    10   9      0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   1    1    14   1      0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   1    1    14   2      0.530 1    0.000  0   0.150  -3  0.500  -4  0.000  0   0.000  0 
+torsion   1    1    14   29     0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   2    1    14   1      0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   2    1    14   2      0.000 0    0.200  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   2    1    14   29     0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   35   1    14   1      0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   35   1    14   2      0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   35   1    14   29     0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   1    1   18    2      0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0
+torsion   1    1   18    4      0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0
+torsion   1    1   18    9      0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0
+torsion   1    1   18   12      0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0
+torsion   23   1   18    2      0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0
+torsion   23   1   18    4      2.500 1    0.500  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   23   1   18    9      0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0
+torsion   23   1   18   12      2.500 1    0.500  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   36   1   18    2      0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0
+torsion   36   1   18    4      0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0
+torsion   36   1   18    9      0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0
+torsion   36   1   18   12      0.000 0    0.000  2   0.000  0   0.000  0   0.000  0   0.000  0
+torsion   1    1   19    3      0.000 0    0.000  0   0.000  3   0.000  0   0.000  0   0.000  0 
+torsion   1    1   19   29      0.000 0    0.000  0   0.000  3   0.000  0   0.000  0   0.000  0 
+torsion   35   1   19    3      0.000 0    0.000  0   0.000  3   0.000  0   0.000  0   0.000  0 
+torsion   35   1   19   29      0.000 0    0.000  0   0.000  3   0.000  0   0.000  0   0.000  0 
+torsion   1    1   20   29      0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   38   1   20   29      0.000 0    0.000  0   0.156  3   0.000  0   0.000  0   0.000  0 
+torsion   1    1   22   31      0.000 0    0.000  0   0.167  3   0.000  0   0.000  0   0.000  0 
+torsion   35   1   22   31      0.000 0    0.000  0   0.167  3   0.000  0   0.000  0   0.000  0 
+torsion   1    1   23    1      0.000 0    0.100  -2  0.380  3   0.000  0   0.000  0   0.000  0
+torsion   1    1   23   28      0.000 0    0.000  0   0.383  3   0.000  0   0.000  0   0.000  0
+torsion   18   1   23    1      0.000 0    0.000  0   0.383  3   0.000  0   0.000  0   0.000  0
+torsion   35   1   23    1      0.000 0    0.000  0   0.383  3   0.000  0   0.000  0   0.000  0
+torsion   36   1   23    1      0.000 0    0.000  0   0.383  3   0.000  0   0.000  0   0.000  0
+torsion   35   1   23   28      0.000 0    0.000  0   0.383  3   0.000  0   0.000  0   0.000  0
+torsion   1    1   26    1      0.000 0    0.000  0   0.333  3   0.000  0   0.000  0   0.000  0 
+torsion   1    1   26   26      0.000 0    0.000  0   0.333  3   0.000  0   0.000  0   0.000  0
+torsion   35   1   26    1      0.000 0    0.000  0   0.333  3   0.000  0   0.000  0   0.000  0 
+torsion   35   1   26   26      0.000 0    0.000  0   0.333  3   0.000  0   0.000  0   0.000  0
+torsion   1    1   27   32      0.000 0    0.000  0   0.250  3   0.000  0   0.000  0   0.000  0
+torsion   35   1   27   32      0.000 0    0.000  0   0.250  3   0.000  0   0.000  0   0.000  0 
+torsion   1    2    1   34      0.000 0    0.000  0   0.130  3   0.000  0   0.000  0   0.000  0 
+torsion   3    2    3    3      0.000 0    3.625  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   3    2    3    33     0.000 0    3.625  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   22   2    3    3      0.000 0    3.625  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   22   2    3    33     0.000 0    3.625  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   15   2    4    1      0.000 0    2.175  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   15   2    4    4      0.000 0    2.175  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   15   2    4   33      0.000 0    2.175  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   24   2    4    1      0.000 0    2.175  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   24   2    4    4      0.000 0    2.175  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   24   2    4   33      0.000 0    2.175  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   15   2    9    9      0.000 0    3.000  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   15   2    9   16      0.000 0    3.000  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   24   2    9    9      0.000 0    3.000  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   24   2    9   16      0.000 0    3.000  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   1    2    14   1      0.000 0    2.500  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   1    2    14  29      0.000 0    2.500  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   24   2    14   1      0.000 0    2.500  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   24   2    14  29      2.000 1    2.500  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   4    2    15   2      0.000 0    1.350  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   4    2    15  29      0.000 0    1.350  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   9    2    15   3      0.000 0    1.350  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   9    2    15  29      0.000 0    1.350  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   18   2    15   2      0.000 0    1.350  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   18   2    15  29      0.000 0    1.350  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   24   2    15   2      0.000 0    1.350  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   24   2    15   3      0.000 0    1.350  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   24   2    15  29      0.000 0    1.350  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   18   2    17   3      0.000 0    4.000  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   24   2    17   3      0.000 0    4.000  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   15   2    18   1      0.000 0    1.450  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   15   2    18   4      0.000 0    1.450  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   17   2    18   1      0.000 0    1.450  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   17   2    18   4      0.000 0    1.450  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   24   2    18   1      0.000 0    1.450  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   24   2    18   4      0.000 0    1.450  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   3    2    22   31     0.000 0    0.900  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   1    3    3    3      0.000 0    3.625  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   1    3    3    33     0.000 0    3.625  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   2    3    3    3      0.000 0    3.625  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   2    3    3    33     0.000 0    3.625  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   3    3    3    3      0.000 0    3.625  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   3    3    3    9      0.000 0    3.625  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   3    3    3    11     0.000 0    3.625  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   3    3    3    33     0.000 0    3.625  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   9    3    3    33     0.000 0    3.625  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   11   3    3    33     0.000 0    3.625  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   33   3    3    33     0.000 0    3.625  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   17   3    4    4      0.000 0    2.550  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   19   3    4    4      0.000 0    2.550  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   17   3    4    33     0.000 0    2.550  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   19   3    4    33     0.000 0    2.550  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   3    3    9    10     0.000 0    3.500  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   3    3    9    11     0.000 0    3.500  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   17   3    9    9      0.000 0    3.500  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   17   3    9    16     0.000 0    3.500  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   19   3    9    9      0.000 0    3.500  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   19   3    9    16     0.000 0    3.500  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   33   3    9    10     0.000 0    3.500  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   33   3    9    11     0.000 0    3.500  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   3    3   11    9      0.000 0    3.625  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   3    3   11    15     0.000 0    3.625  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   33   3   11    9      0.000 0    3.625  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   33   3   11    15     0.000 0    3.625  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   17   3   15    2      0.000 0    1.500  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   17   3   15    29     0.000 0    1.500  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   19   3   15    2      0.000 0    1.500  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   19   3   15    29     0.000 0    1.500  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion    4   3   17    2      0.000 0    4.800  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion    9   3   17    13     0.000 0    4.800  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   15   3   17    9      0.000 0    4.800  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   19   3   17    2      0.000 0    4.800  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   19   3   17    9      0.000 0    4.800  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   19   3   17    13     0.000 0    4.800  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion    4   3   19    29     0.000 0    2.400  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion    9   3   19    29     0.000 0    2.400  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   15   3   19    29     0.000 0    2.400  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   17   3   19    29     0.000 0    2.400  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   19   3   19    1      0.000 0    2.400  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   19   3   19    29     0.000 0    2.400  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion    1   4    4   18      0.000 0    6.650  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion    1   4    4   39      0.000 0    6.650  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion    2   4    4   18      0.000 0    6.650  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion    2   4    4   39      0.000 0    6.650  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion    3   4    4   18      0.000 0    6.650  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion    3   4    4   39      0.000 0    6.650  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   33   4    4   18      0.000 0    6.650  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   33   4    4   39      0.000 0    6.650  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion    4   4   18    1      0.000 0    1.850  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   39   4   18    1      0.000 0    1.850  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion    4   4   18    2      0.000 0    1.850  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   39   4   18    2      0.000 0    1.850  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion    1   5    6   16      0.000 0    5.150  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion    1   5    6   39      0.000 0    5.150  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   15   5    6   16      0.000 0    5.150  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   15   5    6   39      0.000 0    5.150  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   1    5    7   15      0.000 0    5.375  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   1    5    7   39      0.000 0    5.375  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   15   5    7   15      0.000 0    5.375  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   15   5    7   39      0.000 0    5.375  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   16   5    7   15      0.000 0    5.375  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   16   5    7   39      0.000 0    5.375  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   1    5   15    8      0.000 0    1.400  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   1    5   15   29      0.000 0    1.400  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   6    5   15    8      0.000 0    1.400  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   6    5   15   29      0.000 0    1.400  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   7    5   15    8      0.000 0    1.400  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   7    5   15   29      0.000 0    1.400  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   1    5   16    8      0.000 0    2.400  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   7    5   16    8      0.000 0    2.400  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   5    6   16    8      0.000 0    2.400  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   39   6   16    8      0.000 0    2.400  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   15   7   10    1      0.000 0    6.525  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   15   7   10    9      0.000 0    6.525  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   39   7   10    1      0.000 0    6.525  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   39   7   10    9      0.000 0    6.525  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   5    7   15    8      0.000 0    1.500  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   5    7   15   29      0.000 0    1.500  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   10   7    15   11     0.000 0    1.500  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   10   7    15   29     0.000 0    1.500  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   39   7    15   8      0.000 0    1.500  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   39   7    15   11     0.000 0    1.500  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   39   7    15   29     0.000 0    1.500  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   15   8    15   5      0.000 0    2.325  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   15   8    15   7      0.000 0    2.325  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   15   8    15   29     0.000 0    2.325  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   16   8    15   5      0.000 0    2.325  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   16   8    15   7      0.000 0    2.325  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   16   8    15   29     0.000 0    2.325  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   40   8    15   5      0.000 0    2.325  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   40   8    15   7      0.000 0    2.325  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   40   8    15   29     0.000 0    2.325  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   15   8    16   5      0.000 0    5.000  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   40   8    16   5      0.000 0    5.000  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   15   8    16   6      0.000 0    5.000  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   40   8    16   6      0.000 0    5.000  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion    2   9     9   17     0.000 0    5.450  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion    2   9     9   18     0.000 0    5.450  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion    3   9     9   17     0.000 0    5.450  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion    3   9     9   18     0.000 0    5.450  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   16   9     9   17     0.000 0    5.450  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   16   9     9   18     0.000 0    5.450  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion    3   9    10   1      0.000 0    1.675  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion    3   9    10   7      0.000 0    1.675  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   11   9    10   1      0.000 0    1.675  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   11   9    10   7      0.000 0    1.675  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion    3   9    11   3      0.000 0    3.000  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion    3   9    11   15     0.000 0    3.000  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   10   9    11   3      0.000 0    3.000  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   10   9    11   15     0.000 0    3.000  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion    2   9    16   12     0.000 0    2.550  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion    3   9    16   12     0.000 0    2.550  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion    9   9    16   12     0.000 0    2.550  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion    9   9    17   3      0.000 0    4.150  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion    9   9    17   13     0.000 0    4.150  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   18   9    17    3      0.000 0    4.150  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   18   9    17   13      0.000 0    4.150  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion    9   9    18    1      0.000 0    1.650  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion    9   9    18   12      0.000 0    1.650  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   17   9    18    1      0.000 0    1.650  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   17   9    18   12      0.000 0    1.650  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion    3   11   15    7      0.000 0    1.525  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion    3   11   15   29      0.000 0    1.525  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion    9   11   15    7      0.000 0    1.525  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion    9   11   15   29      0.000 0    1.525  -2  0.000  0   0.000  0   0.000  0   0.000  0 
+torsion   18   12   16    9      0.000 0   10.000  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   40   12   16    9      0.000 0   10.000  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   16   12   18    1      0.000 0    1.700  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   16   12   18    9      0.000 0    1.700  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   40   12   18    1      0.000 0    1.700  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   40   12   18    9      0.000 0    1.700  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   17   13   17    3      0.000 0    6.800  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   17   13   17    9      0.000 0    6.800  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   40   13   17    3      0.000 0    6.800  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   40   13   17    9      0.000 0    6.800  -2  0.000  0   0.000  0   0.000  0   0.000  0
+torsion   31   22   28   23      0.000 0    0.000   0  0.250  3   0.000  0   0.000  0   0.000  0
+torsion   31   22   28   25      0.000 0    0.000   0  0.250  3   0.000  0   0.000  0   0.000  0
+torsion    1   23   28   22      0.000 0    1.200   2  0.250  3   0.000  0   0.000  0   0.000  0
+torsion    1   23   28   23      0.000 0    1.200   2  0.250  3   0.000  0   0.000  0   0.000  0
+torsion    1   23   28   25      0.000 0    0.000   0  0.250  3   0.000  0   0.000  0   0.000  0
+torsion    1   26   26    1      0.000 0    3.500   2  0.600  3   0.000  0   0.000  0   0.000  0
+
+
+      ########################################
+      ##                                    ##
+      ##  Atomic Partial Charge Parameters  ##
+      ##                                    ##
+      ########################################
+
+
+mmffchrg      1      0.0000   0.0000     0.0000      E94 
+mmffchrg      2     -0.0950   0.0000     0.0000      E94 
+mmffchrg      3     -0.1270   0.0000     0.0000      E94 
+mmffchrg      4     -0.1350   0.0000     0.0000      E94 
+mmffchrg      5     -0.1800   0.0000     0.0000      E94 
+mmffchrg      6     -0.1810   0.0000     0.0000      E94 
+mmffchrg      7     -0.1800   0.0000     0.0000      E94 
+mmffchrg      8     -0.1800   0.0000     0.0000      E94 
+mmffchrg      9     -0.1810   0.0000     0.0000      E94 
+mmffchrg     10     -0.1810   0.0000     0.0000      E94 
+mmffchrg     11     -0.1800   0.0000     0.0000      E94 
+mmffchrg     12     -0.1800   0.0000     0.0000      E94 
+mmffchrg     13     -0.1270   0.0000     0.0000      E94 
+mmffchrg     14     -0.2440   0.0000     0.0000      E94 
+mmffchrg     15     -0.1040   0.0000     0.0000      E94 
+mmffchrg     16     -0.4670   0.0000     0.0000      E94 
+mmffchrg     17     -0.4370   0.0000     0.0000      E94 
+mmffchrg     18     -0.2440   0.0000     0.0000      E94 
+mmffchrg     19     -0.4380   0.0000     0.3330      E94 
+mmffchrg     20     -0.2530   0.0000     0.0000      E94 
+mmffchrg     21     -0.8340   0.0000     0.0000      E94 
+mmffchrg     22     -0.2430   0.0000     0.0000      E94 
+mmffchrg     23     -0.2430   0.0000     0.0000      E94 
+mmffchrg     24     -0.6870   0.0000     0.0000      E94 
+mmffchrg     25     -0.6870   0.0000     0.0000      E94 
+mmffchrg     26     -0.2360   0.0000     0.0000      E94 
+mmffchrg     27     -0.2360   0.0000     0.0000      E94 
+mmffchrg     28      0.0120   0.0000     0.0000      E94 
+mmffchrg     29     -0.0310   0.0000     0.0000      E94 
+mmffchrg     30      0.4170   0.0000     0.0000      E94 
+mmffchrg     31      0.1570   0.0000     0.0000      E94 
+mmffchrg     32     -0.0710   0.0000     0.0000      E94 
+mmffchrg     33     -0.0230   0.0000     0.0000      E94 
+mmffchrg     34     -0.0230   0.0000     0.0000      E94 
+mmffchrg     35     -0.0230   0.0000     0.0000      E94 
+mmffchrg     36     -0.0230   0.0000     0.0000      E94 
+mmffchrg     37     -0.0230   0.0000     0.0000      E94 
+mmffchrg     38     -0.0310   0.0000     0.0000      E94 
+mmffchrg     39     -0.0230   0.0000     0.0000      E94 
+mmffchrg     40     -0.0230   0.0000     0.0000      E94 
+mmffchrg     41      0.0000   0.0000     0.0000      E94 
+mmffchrg     42      0.5200   0.0000     0.0000      E94 
+mmffchrg     43     -1.0400   0.0000     0.0000      E94 
+
+      ########################################
+      ##                                    ##
+      ##  Bond  mmffchrg Parameters         ##
+      ##                                    ##
+      ########################################
+
+bndchrg         1    1      0.0000    #C94 
+bndchrg         1    2     -0.0610    #C94 
+bndchrg         1    3     -0.1435    C94 
+bndchrg         1    4     -0.1382    C94 
+bndchrg         1    5     -0.1800    E94 
+bndchrg         1   14     -0.3001    C94 
+bndchrg         1   18     -0.3001    C94 
+bndchrg         1   19     -0.3276    C94 
+bndchrg         1   20     -0.2700    #C94 
+bndchrg         1   22     -0.2800    #C94
+bndchrg         1   23     -0.2800    #C94
+bndchrg         1   26     -0.2300    #C94 
+bndchrg         1   27     -0.2300    #C94 
+bndchrg         1   33      0.0000    #C94 
+bndchrg         1   34      0.0000    #C94 
+bndchrg         1   35      0.0000    #C94 
+bndchrg         1   36      0.0000    #C94 
+bndchrg         1   37      0.0000    #C94 
+bndchrg         1   38      0.0000    #C94 
+bndchrg         1   39      0.0000    #C94 
+bndchrg         1   40      0.0000    #C94 
+bndchrg         2    4     -0.0144    C94 
+bndchrg         2    3      0.0862    C94 
+bndchrg         2    9     -0.0860    E94 
+bndchrg         2   14     -0.0600    C94 
+bndchrg         2   18     -0.0600    C94 
+bndchrg         2   15     -0.0090    E94 
+bndchrg         2   17     -0.0090    E94 
+bndchrg         2   22     -0.1500    #C94 
+bndchrg         2   24     -0.5700    #C94 
+bndchrg         2   25     -0.5700    #C94 
+bndchrg         3    3      0.0000    #C94 
+bndchrg         3    4     -0.0284    C94 
+bndchrg         3    9     -0.0540    E94 
+bndchrg         3   11     -0.0530    E94 
+bndchrg         3   15      0.0230    E94 
+bndchrg         3   17     -0.3100    #C94 
+bndchrg         3   19     -0.3110    E94 
+bndchrg         3   33      0.1500    #C94 
+bndchrg         3   39      0.1500    #C94 
+bndchrg         4    4      0.0000    #C94 
+bndchrg         4   18     -0.1090    E94 
+bndchrg         4   33      0.1500    #C94 
+bndchrg         4   39      0.1500    #C94 
+bndchrg         4   40      0.1500    #C94 
+bndchrg         5    6      0.0000    #C94 
+bndchrg         5    7      0.0000    #C94 
+bndchrg         5   15      0.0760    E94 
+bndchrg         5   16      0.0760    E94 
+bndchrg         6   15      0.0760    E94 
+bndchrg         6   39      0.1500    #C94 
+bndchrg         7   10      0.0000    #C94 
+bndchrg         7   15      0.0760    E94 
+bndchrg         7   39      0.1500    #C94 
+bndchrg         8   15      0.0760    E94 
+bndchrg         8   16      0.0760    E94 
+bndchrg         8   40      0.1500    #C94 
+bndchrg         9    9      0.0000    #C94 
+bndchrg         9   10      0.0000    #C94 
+bndchrg         9   11      0.0000    #C94 
+bndchrg         9   16      0.0770    E94 
+bndchrg         9   17     -0.2560    E94 
+bndchrg         9   18     -0.0630    E94 
+bndchrg        10   34      0.1500    #C94 
+bndchrg        11   15      0.0760    E94 
+bndchrg        12   16      0.0760    E94 
+bndchrg        12   18     -0.0640    E94 
+bndchrg        12   40      0.1500    #C94 
+bndchrg        13   17     -0.3100    #C94 
+bndchrg        13   40      0.1500    #C94 
+bndchrg        14   29      0.3700    #C94 
+bndchrg        18   29      0.3700    #C94 
+bndchrg        19   29      0.4500    #C94 
+bndchrg        20   29      0.3600    #C94 
+bndchrg        22   31      0.4000    #C94 
+bndchrg        23   31      0.4000    #C94 
+bndchrg        27   32      0.1800    #C94 
+bndchrg        25   28      0.7000    #X94 
+bndchrg        22   28      0.2712    X94 
+bndchrg        23   28      0.2712    X94 
+bndchrg        21   30      0.4170    #C94 
+bndchrg        26   26      0.0000    #C94 
+
+amberchrg    1       -0.416    N     Glycine 
+amberchrg    2       -0.025    CA    Glycine 
+amberchrg    3        0.597    C     Glycine 
+amberchrg    4        0.272    HN    Glycine 
+amberchrg    5       -0.568    O     Glycine 
+amberchrg    6        0.070    HA    Glycine 
+amberchrg    7       -0.416    N     Alanine 
+amberchrg    8        0.034    CA    Alanine 
+amberchrg    9        0.597    C     Alanine 
+amberchrg    10       0.272    HN    Alanine 
+amberchrg    11      -0.568    O     Alanine 
+amberchrg    12       0.082    HA    Alanine 
+amberchrg    13      -0.183    CB    Alanine 
+amberchrg    14       0.060    HB    Alanine 
+amberchrg    15      -0.416    N     Valine 
+amberchrg    16      -0.087    CA    Valine 
+amberchrg    17       0.597    C     Valine 
+amberchrg    18       0.272    HN    Valine 
+amberchrg    19      -0.568    O     Valine 
+amberchrg    20       0.097    HA    Valine 
+amberchrg    21       0.299    CB    Valine 
+amberchrg    22      -0.030    HB    Valine 
+amberchrg    23      -0.319    CG    Valine 
+amberchrg    24       0.079    HG    Valine 
+amberchrg    25      -0.416    N     Leucine 
+amberchrg    26      -0.052    CA    Leucine 
+amberchrg    27       0.597    C     Leucine 
+amberchrg    28       0.272    HN    Leucine 
+amberchrg    29      -0.568    O     Leucine 
+amberchrg    30       0.092    HA    Leucine 
+amberchrg    31      -0.110    CB    Leucine 
+amberchrg    32       0.046    HB    Leucine 
+amberchrg    33       0.353    CG    Leucine 
+amberchrg    34      -0.036    HG    Leucine 
+amberchrg    35      -0.412    CD    Leucine 
+amberchrg    36       0.100    HD    Leucine 
+amberchrg    37      -0.416    N     Isoleucine 
+amberchrg    38      -0.060    CA    Isoleucine 
+amberchrg    39       0.597    C     Isoleucine 
+amberchrg    40       0.272    HN    Isoleucine 
+amberchrg    41      -0.568    O     Isoleucine 
+amberchrg    42       0.087    HA    Isoleucine 
+amberchrg    43       0.130    CB    Isoleucine 
+amberchrg    44       0.019    HB    Isoleucine 
+amberchrg    45      -0.043    CG1   Isoleucine 
+amberchrg    46       0.024    HG1   Isoleucine 
+amberchrg    47      -0.320    CG2   Isoleucine 
+amberchrg    48       0.088    HG2   Isoleucine 
+amberchrg    49      -0.066    CD    Isoleucine 
+amberchrg    50       0.019    HD    Isoleucine 
+amberchrg    51      -0.416    N     Serine 
+amberchrg    52      -0.025    CA    Serine 
+amberchrg    53       0.597    C     Serine 
+amberchrg    54       0.272    HN    Serine 
+amberchrg    55      -0.568    O     Serine 
+amberchrg    56       0.084    HA    Serine 
+amberchrg    57       0.212    CB    Serine 
+amberchrg    58       0.035    HB    Serine 
+amberchrg    59      -0.655    OG    Serine 
+amberchrg    60       0.428    HG    Serine 
+amberchrg    61      -0.416    N     Threonine 
+amberchrg    62      -0.039    CA    Threonine 
+amberchrg    63       0.597    C     Threonine 
+amberchrg    64       0.272    HN    Threonine 
+amberchrg    65      -0.568    O     Threonine 
+amberchrg    66       0.101    HA    Threonine 
+amberchrg    67       0.365    CB    Threonine 
+amberchrg    68       0.004    HB    Threonine 
+amberchrg    69      -0.676    OG1   Threonine 
+amberchrg    70       0.410    HG1   Threonine 
+amberchrg    71      -0.244    CG2   Threonine 
+amberchrg    72       0.064    HG2   Threonine 
+amberchrg    73      -0.416    N     Cysteine (-SH) 
+amberchrg    74       0.021    CA    Cysteine (-SH) 
+amberchrg    75       0.597    C     Cysteine (-SH) 
+amberchrg    76       0.272    HN    Cysteine (-SH) 
+amberchrg    77      -0.568    O     Cysteine (-SH) 
+amberchrg    78       0.112    HA    Cysteine (-SH) 
+amberchrg    79      -0.123    CB    Cysteine (-SH) 
+amberchrg    80       0.111    HB    Cysteine (-SH) 
+amberchrg    81      -0.312    SG    Cysteine (-SH) 
+amberchrg    82       0.193    HG    Cysteine (-SH) 
+amberchrg    83      -0.416    N     Cystine (-SS-) 
+amberchrg    84       0.043    CA    Cystine (-SS-) 
+amberchrg    85       0.597    C     Cystine (-SS-) 
+amberchrg    86       0.272    HN    Cystine (-SS-) 
+amberchrg    87      -0.568    O     Cystine (-SS-) 
+amberchrg    88       0.077    HA    Cystine (-SS-) 
+amberchrg    89      -0.079    CB    Cystine (-SS-) 
+amberchrg    90       0.091    HB    Cystine (-SS-) 
+amberchrg    91      -0.108    SG    Cystine (-SS-) 
+amberchrg    92      -0.255    N     Proline 
+amberchrg    93      -0.027    CA    Proline 
+amberchrg    94       0.590    C     Proline 
+amberchrg    95      -0.575    O     Proline 
+amberchrg    96       0.064    HA    Proline 
+amberchrg    97      -0.007    CB    Proline 
+amberchrg    98       0.025    HB    Proline 
+amberchrg    99       0.019    CG    Proline 
+amberchrg    100      0.021    HG    Proline 
+amberchrg    101      0.019    CD    Proline 
+amberchrg    102      0.039    HD    Proline 
+amberchrg    103     -0.416    N     Phenylalanine 
+amberchrg    104     -0.002    CA    Phenylalanine 
+amberchrg    105      0.597    C     Phenylalanine 
+amberchrg    106      0.272    HN    Phenylalanine 
+amberchrg    107     -0.568    O     Phenylalanine 
+amberchrg    108      0.098    HA    Phenylalanine 
+amberchrg    109     -0.034    CB    Phenylalanine 
+amberchrg    110      0.030    HB    Phenylalanine 
+amberchrg    111      0.012    CG    Phenylalanine 
+amberchrg    112     -0.126    CD    Phenylalanine 
+amberchrg    113      0.133    HD    Phenylalanine 
+amberchrg    114     -0.170    CE    Phenylalanine 
+amberchrg    115      0.143    HE    Phenylalanine 
+amberchrg    116     -0.107    CZ    Phenylalanine 
+amberchrg    117      0.130    HZ    Phenylalanine 
+amberchrg    118     -0.416    N     Tyrosine 
+amberchrg    119     -0.001    CA    Tyrosine 
+amberchrg    120      0.597    C     Tyrosine 
+amberchrg    121      0.272    HN    Tyrosine 
+amberchrg    122     -0.568    O     Tyrosine 
+amberchrg    123      0.088    HA    Tyrosine 
+amberchrg    124     -0.015    CB    Tyrosine 
+amberchrg    125      0.030    HB    Tyrosine 
+amberchrg    126     -0.001    CG    Tyrosine 
+amberchrg    127     -0.191    CD    Tyrosine 
+amberchrg    128      0.170    HD    Tyrosine 
+amberchrg    129     -0.234    CE    Tyrosine 
+amberchrg    130      0.166    HE    Tyrosine 
+amberchrg    131      0.323    CZ    Tyrosine 
+amberchrg    132     -0.558    OH    Tyrosine 
+amberchrg    133      0.399    HH    Tyrosine 
+amberchrg    134     -0.416    N     Tryptophan 
+amberchrg    135     -0.027    CA    Tryptophan 
+amberchrg    136      0.597    C     Tryptophan 
+amberchrg    137      0.272    HN    Tryptophan 
+amberchrg    138     -0.568    O     Tryptophan 
+amberchrg    139      0.112    HA    Tryptophan 
+amberchrg    140     -0.005    CB    Tryptophan 
+amberchrg    141      0.034    HB    Tryptophan 
+amberchrg    142     -0.141    CG    Tryptophan 
+amberchrg    143     -0.164    CD1   Tryptophan 
+amberchrg    144      0.206    HD1   Tryptophan 
+amberchrg    145      0.124    CD2   Tryptophan 
+amberchrg    146     -0.342    NE1   Tryptophan 
+amberchrg    147      0.341    HE1   Tryptophan 
+amberchrg    148      0.138    CE2   Tryptophan 
+amberchrg    149     -0.239    CE3   Tryptophan 
+amberchrg    150      0.170    HE3   Tryptophan 
+amberchrg    151     -0.260    CZ2   Tryptophan 
+amberchrg    152      0.157    HZ2   Tryptophan 
+amberchrg    153     -0.197    CZ3   Tryptophan 
+amberchrg    154      0.145    HZ3   Tryptophan 
+amberchrg    155     -0.113    CH2   Tryptophan 
+amberchrg    156      0.142    HH2   Tryptophan 
+amberchrg    157     -0.348    N     Histidine (+) 
+amberchrg    158     -0.135    CA    Histidine (+) 
+amberchrg    159      0.734    C     Histidine (+) 
+amberchrg    160      0.275    HN    Histidine (+) 
+amberchrg    161     -0.589    O     Histidine (+) 
+amberchrg    162      0.121    HA    Histidine (+) 
+amberchrg    163     -0.041    CB    Histidine (+) 
+amberchrg    164      0.081    HB    Histidine (+) 
+amberchrg    165     -0.001    CG    Histidine (+) 
+amberchrg    166     -0.151    ND1   Histidine (+) 
+amberchrg    167      0.387    HD1   Histidine (+) 
+amberchrg    168     -0.114    CD2   Histidine (+) 
+amberchrg    169      0.232    HD2   Histidine (+) 
+amberchrg    170     -0.017    CE1   Histidine (+) 
+amberchrg    171      0.268    HE1   Histidine (+) 
+amberchrg    172     -0.172    NE2   Histidine (+) 
+amberchrg    173      0.391    HE2   Histidine (+) 
+amberchrg    174     -0.416    N     Histidine (HD) 
+amberchrg    175      0.019    CA    Histidine (HD) 
+amberchrg    176      0.597    C     Histidine (HD) 
+amberchrg    177      0.272    HN    Histidine (HD) 
+amberchrg    178     -0.568    O     Histidine (HD) 
+amberchrg    179      0.088    HA    Histidine (HD) 
+amberchrg    180     -0.046    CB    Histidine (HD) 
+amberchrg    181      0.040    HB    Histidine (HD) 
+amberchrg    182     -0.027    CG    Histidine (HD) 
+amberchrg    183     -0.381    ND1   Histidine (HD) 
+amberchrg    184      0.365    HD1   Histidine (HD) 
+amberchrg    185      0.129    CD2   Histidine (HD) 
+amberchrg    186      0.115    HD2   Histidine (HD) 
+amberchrg    187      0.206    CE1   Histidine (HD) 
+amberchrg    188      0.139    HE1   Histidine (HD) 
+amberchrg    189     -0.573    NE2   Histidine (HD) 
+amberchrg    190     -0.416    N     Histidine (HE) 
+amberchrg    191     -0.058    CA    Histidine (HE) 
+amberchrg    192      0.597    C     Histidine (HE) 
+amberchrg    193      0.272    HN    Histidine (HE) 
+amberchrg    194     -0.568    O     Histidine (HE) 
+amberchrg    195      0.136    HA    Histidine (HE) 
+amberchrg    196     -0.007    CB    Histidine (HE) 
+amberchrg    197      0.037    HB    Histidine (HE) 
+amberchrg    198      0.187    CG    Histidine (HE) 
+amberchrg    199     -0.543    ND1   Histidine (HE) 
+amberchrg    200     -0.221    CD2   Histidine (HE) 
+amberchrg    201      0.186    HD2   Histidine (HE) 
+amberchrg    202      0.163    CE1   Histidine (HE) 
+amberchrg    203      0.144    HE1   Histidine (HE) 
+amberchrg    204     -0.280    NE2   Histidine (HE) 
+amberchrg    205      0.334    HE2   Histidine (HE) 
+amberchrg    206     -0.516    N     Aspartic Acid 
+amberchrg    207      0.038    CA    Aspartic Acid 
+amberchrg    208      0.537    C     Aspartic Acid 
+amberchrg    209      0.294    HN    Aspartic Acid 
+amberchrg    210     -0.582    O     Aspartic Acid 
+amberchrg    211      0.088    HA    Aspartic Acid 
+amberchrg    212     -0.030    CB    Aspartic Acid 
+amberchrg    213     -0.012    HB    Aspartic Acid 
+amberchrg    214      0.799    CG    Aspartic Acid 
+amberchrg    215     -0.801    OD    Aspartic Acid 
+amberchrg    216     -0.416    N     Asparagine 
+amberchrg    217      0.014    CA    Asparagine 
+amberchrg    218      0.597    C     Asparagine 
+amberchrg    219      0.272    HN    Asparagine 
+amberchrg    220     -0.568    O     Asparagine 
+amberchrg    221      0.105    HA    Asparagine 
+amberchrg    222     -0.204    CB    Asparagine 
+amberchrg    223      0.080    HB    Asparagine 
+amberchrg    224      0.713    CG    Asparagine 
+amberchrg    225     -0.593    OD1   Asparagine 
+amberchrg    226     -0.919    ND2   Asparagine 
+amberchrg    227      0.420    HD2   Asparagine 
+amberchrg    228     -0.516    N     Glutamic Acid 
+amberchrg    229      0.040    CA    Glutamic Acid 
+amberchrg    230      0.537    C     Glutamic Acid 
+amberchrg    231      0.294    HN    Glutamic Acid 
+amberchrg    232     -0.582    O     Glutamic Acid 
+amberchrg    233      0.111    HA    Glutamic Acid 
+amberchrg    234      0.056    CB    Glutamic Acid 
+amberchrg    235     -0.017    HB    Glutamic Acid 
+amberchrg    236      0.014    CG    Glutamic Acid 
+amberchrg    237     -0.043    HG    Glutamic Acid 
+amberchrg    238      0.805    CD    Glutamic Acid 
+amberchrg    239     -0.819    OE    Glutamic Acid 
+amberchrg    240     -0.416    N     Glutamine 
+amberchrg    241     -0.003    CA    Glutamine 
+amberchrg    242      0.597    C     Glutamine 
+amberchrg    243      0.272    HN    Glutamine 
+amberchrg    244     -0.568    O     Glutamine 
+amberchrg    245      0.085    HA    Glutamine 
+amberchrg    246     -0.004    CB    Glutamine 
+amberchrg    247      0.017    HB    Glutamine 
+amberchrg    248     -0.064    CG    Glutamine 
+amberchrg    249      0.035    HG    Glutamine 
+amberchrg    250      0.695    CD    Glutamine 
+amberchrg    251     -0.609    OE1   Glutamine 
+amberchrg    252     -0.941    NE2   Glutamine 
+amberchrg    253      0.425    HE2   Glutamine 
+amberchrg    254     -0.416    N     Methionine 
+amberchrg    255     -0.024    CA    Methionine 
+amberchrg    256      0.597    C     Methionine 
+amberchrg    257      0.272    HN    Methionine 
+amberchrg    258     -0.568    O     Methionine 
+amberchrg    259      0.088    HA    Methionine 
+amberchrg    260      0.034    CB    Methionine 
+amberchrg    261      0.024    HB    Methionine 
+amberchrg    262      0.002    CG    Methionine 
+amberchrg    263      0.044    HG    Methionine 
+amberchrg    264     -0.274    SD    Methionine 
+amberchrg    265     -0.054    CE    Methionine 
+amberchrg    266      0.068    HE    Methionine 
+amberchrg    267     -0.348    N     Lysine 
+amberchrg    268     -0.240    CA    Lysine 
+amberchrg    269      0.734    C     Lysine 
+amberchrg    270      0.275    HN    Lysine 
+amberchrg    271     -0.589    O     Lysine 
+amberchrg    272      0.143    HA    Lysine 
+amberchrg    273     -0.009    CB    Lysine 
+amberchrg    274      0.036    HB    Lysine 
+amberchrg    275      0.019    CG    Lysine 
+amberchrg    276      0.010    HG    Lysine 
+amberchrg    277     -0.048    CD    Lysine 
+amberchrg    278      0.062    HD    Lysine 
+amberchrg    279     -0.014    CE    Lysine 
+amberchrg    280      0.113    HE    Lysine 
+amberchrg    281     -0.385    NZ    Lysine 
+amberchrg    282      0.340    HZ    Lysine 
+amberchrg    283     -0.348    N     Arginine 
+amberchrg    284     -0.264    CA    Arginine 
+amberchrg    285      0.734    C     Arginine 
+amberchrg    286      0.275    HN    Arginine 
+amberchrg    287     -0.589    O     Arginine 
+amberchrg    288      0.156    HA    Arginine 
+amberchrg    289     -0.001    CB    Arginine 
+amberchrg    290      0.033    HB    Arginine 
+amberchrg    291      0.039    CG    Arginine 
+amberchrg    292      0.029    HG    Arginine 
+amberchrg    293      0.049    CD    Arginine 
+amberchrg    294      0.069    HD    Arginine 
+amberchrg    295     -0.530    NE    Arginine 
+amberchrg    296      0.346    HE    Arginine 
+amberchrg    297      0.808    CZ    Arginine 
+amberchrg    298     -0.863    NH    Arginine 
+amberchrg    299      0.448    HH    Arginine 
+amberchrg    300      0.000    N     Ornithine 
+amberchrg    301      0.000    CA    Ornithine 
+amberchrg    302      0.000    C     Ornithine 
+amberchrg    303      0.000    HN    Ornithine 
+amberchrg    304      0.000    O     Ornithine 
+amberchrg    305      0.000    HA    Ornithine 
+amberchrg    306      0.000    CB    Ornithine 
+amberchrg    307      0.000    HB    Ornithine 
+amberchrg    308      0.000    CG    Ornithine 
+amberchrg    309      0.000    HG    Ornithine 
+amberchrg    310      0.000    CD    Ornithine 
+amberchrg    311      0.000    HD    Ornithine 
+amberchrg    312      0.000    NE    Ornithine 
+amberchrg    313      0.000    HE    Ornithine 
+amberchrg    314      0.000    N     MethylAlanine (AIB) 
+amberchrg    315      0.000    CA    MethylAlanine (AIB) 
+amberchrg    316      0.000    C     MethylAlanine (AIB) 
+amberchrg    317      0.000    HN    MethylAlanine (AIB) 
+amberchrg    318      0.000    O     MethylAlanine (AIB) 
+amberchrg    319      0.000    CB    MethylAlanine (AIB) 
+amberchrg    320      0.000    HB    MethylAlanine (AIB) 
+amberchrg    321      0.000    N     Pyroglutamic Acid 
+amberchrg    322      0.000    CA    Pyroglutamic Acid 
+amberchrg    323      0.000    C     Pyroglutamic Acid 
+amberchrg    324      0.000    HN    Pyroglutamic Acid 
+amberchrg    325      0.000    O     Pyroglutamic Acid 
+amberchrg    326      0.000    HA    Pyroglutamic Acid 
+amberchrg    327      0.000    CB    Pyroglutamic Acid 
+amberchrg    328      0.000    HB    Pyroglutamic Acid 
+amberchrg    329      0.000    CG    Pyroglutamic Acid 
+amberchrg    330      0.000    HG    Pyroglutamic Acid 
+amberchrg    331      0.000    CD    Pyroglutamic Acid 
+amberchrg    332      0.000    OE    Pyroglutamic Acid 
+amberchrg    333      0.000    N     N-Terminal Residue 
+amberchrg    334      0.000    HN    N-Terminal Residue 
+amberchrg    335      0.000    CA    N-Terminal Residue 
+amberchrg    336      0.000    HA    N-Terminal Residue 
+amberchrg    337      0.000    C     N-Terminal Residue 
+amberchrg    338      0.000    O     N-Terminal Residue 
+amberchrg    339      0.000    N     N-Terminal Glycine 
+amberchrg    340      0.000    HN    N-Terminal Glycine 
+amberchrg    341      0.000    CA    N-Terminal Glycine 
+amberchrg    342      0.000    HA    N-Terminal Glycine 
+amberchrg    343      0.000    N     N-Terminal Proline 
+amberchrg    344      0.000    HN    N-Terminal Proline 
+amberchrg    345      0.000    CA    N-Terminal Proline 
+amberchrg    346      0.000    HA    N-Terminal Proline 
+amberchrg    347      0.000    CD    N-Terminal Proline 
+amberchrg    348      0.000    HD    N-Terminal Proline 
+amberchrg    349      0.000    N     C-Terminal Residue 
+amberchrg    350      0.000    HN    C-Terminal Residue 
+amberchrg    351      0.000    CA    C-Terminal Residue 
+amberchrg    352      0.000    HA    C-Terminal Residue 
+amberchrg    353      0.000    C     C-Terminal Residue 
+amberchrg    354      0.000    OXT   C-Terminal Residue 
+amberchrg    355      0.000    CA    C-Terminal Glycine 
+amberchrg    356      0.000    HA    C-Terminal Glycine 
+amberchrg    357      0.000    C     C-Terminal Glycine 
+amberchrg    358      0.000    OXT   C-Terminal Glycine 
+amberchrg    359      0.000    CA    C-Terminal Proline 
+amberchrg    360      0.000    HA    C-Terminal Proline 
+amberchrg    361      0.000    C     C-Terminal Proline 
+amberchrg    362      0.000    OXT   C-Terminal Proline 
+amberchrg    363     -0.366    CA    Acetyl N-Terminus 
+amberchrg    364      0.112    HA    Acetyl N-Terminus 
+amberchrg    365      0.597    C     Acetyl N-Terminus 
+amberchrg    366     -0.568    O     Acetyl N-Terminus 
+amberchrg    367      0.000    C     Formyl N-Terminus 
+amberchrg    368      0.000    H     Formyl N-Terminus 
+amberchrg    369      0.000    O     Formyl N-Terminus 
+amberchrg    370     -0.416    N     N-MeAmide C-Terminus 
+amberchrg    371      0.272    HN    N-MeAmide C-Terminus 
+amberchrg    372     -0.149    C     N-MeAmide C-Terminus 
+amberchrg    373      0.098    HC    N-MeAmide C-Terminus 
+amberchrg    374      0.000    N     Amide C-Terminus 
+amberchrg    375      0.000    HN    Amide C-Terminus 
+amberchrg    375      0.000    HN    Amide C-Terminus 
+amberchrg    375      0.000    HN    Amide C-Terminus 
+amberchrg    376     -0.834    OT    TIP3P Water Oxygen     
+amberchrg    377      0.417    HT    TIP3P Hydrogen    
+amberchrg    378      1.000    Li+   Li+ Lithium Ion    
+amberchrg    379      1.000    Na+   Na+ Sodium Ion          
+amberchrg    380      1.000    K+    K+ Potassium Ion 
+amberchrg    381      1.000    Rb+   Rb+ Rubidium Ion   
+amberchrg    382      1.000    Cs+   Cs+ Cesium Ion           
+amberchrg    383      2.000    Mg+   Mg+2 Magnesium Ion  
+amberchrg    384      2.000    Ca+   Ca+2 Calcium Ion 
+amberchrg    385      2.000    Sr+   Sr+2 Strontium Ion 
+amberchrg    386      2.000    Ba+   Ba+2 Barium Ion  
+
+
+      ########################################
+      ##                                    ##
+      ##  Biopolymer Atom Type Conversions  ##
+      ##                                    ##
+      ########################################
+
+
+biotype      1    N        Glycine                    1
+biotype      2    CA       Glycine                    2
+biotype      3    C        Glycine                    3
+biotype      4    HN       Glycine                    4
+biotype      5    O        Glycine                    5
+biotype      6    HA       Glycine                    6
+biotype      7    N        Alanine                    7
+biotype      8    CA       Alanine                    8
+biotype      9    C        Alanine                    9
+biotype     10    HN       Alanine                   10
+biotype     11    O        Alanine                   11
+biotype     12    HA       Alanine                   12
+biotype     13    CB       Alanine                   13
+biotype     14    HB       Alanine                   14
+biotype     15    N        Valine                    15
+biotype     16    CA       Valine                    16
+biotype     17    C        Valine                    17
+biotype     18    HN       Valine                    18
+biotype     19    O        Valine                    19
+biotype     20    HA       Valine                    20
+biotype     21    CB       Valine                    21
+biotype     22    HB       Valine                    22
+biotype     23    CG       Valine                    23
+biotype     24    HG       Valine                    24
+biotype     25    N        Leucine                   25
+biotype     26    CA       Leucine                   26
+biotype     27    C        Leucine                   27
+biotype     28    HN       Leucine                   28
+biotype     29    O        Leucine                   29
+biotype     30    HA       Leucine                   30
+biotype     31    CB       Leucine                   31
+biotype     32    HB       Leucine                   32
+biotype     33    CG       Leucine                   33
+biotype     34    HG       Leucine                   34
+biotype     35    CD       Leucine                   35
+biotype     36    HD       Leucine                   36
+biotype     37    N        Isoleucine                37
+biotype     38    CA       Isoleucine                38
+biotype     39    C        Isoleucine                39
+biotype     40    HN       Isoleucine                40
+biotype     41    O        Isoleucine                41
+biotype     42    HA       Isoleucine                42
+biotype     43    CB       Isoleucine                43
+biotype     44    HB       Isoleucine                44
+biotype     45    CG1      Isoleucine                45
+biotype     46    HG1      Isoleucine                46
+biotype     47    CG2      Isoleucine                47
+biotype     48    HG2      Isoleucine                48
+biotype     49    CD       Isoleucine                49
+biotype     50    HD       Isoleucine                50
+biotype     51    N        Serine                    51
+biotype     52    CA       Serine                    52
+biotype     53    C        Serine                    53
+biotype     54    HN       Serine                    54
+biotype     55    O        Serine                    55
+biotype     56    HA       Serine                    56
+biotype     57    CB       Serine                    57
+biotype     58    HB       Serine                    58
+biotype     59    OG       Serine                    59
+biotype     60    HG       Serine                    60
+biotype     61    N        Threonine                 61
+biotype     62    CA       Threonine                 62
+biotype     63    C        Threonine                 63
+biotype     64    HN       Threonine                 64
+biotype     65    O        Threonine                 65
+biotype     66    HA       Threonine                 66
+biotype     67    CB       Threonine                 67
+biotype     68    HB       Threonine                 68
+biotype     69    OG1      Threonine                 69
+biotype     70    HG1      Threonine                 70
+biotype     71    CG2      Threonine                 71
+biotype     72    HG2      Threonine                 72
+biotype     73    N        Cysteine (-SH)            73
+biotype     74    CA       Cysteine (-SH)            74
+biotype     75    C        Cysteine (-SH)            75
+biotype     76    HN       Cysteine (-SH)            76
+biotype     77    O        Cysteine (-SH)            77
+biotype     78    HA       Cysteine (-SH)            78
+biotype     79    CB       Cysteine (-SH)            79
+biotype     80    HB       Cysteine (-SH)            80
+biotype     81    SG       Cysteine (-SH)            81
+biotype     82    HG       Cysteine (-SH)            82
+biotype     83    N        Cystine (-SS-)            83
+biotype     84    CA       Cystine (-SS-)            84
+biotype     85    C        Cystine (-SS-)            85
+biotype     86    HN       Cystine (-SS-)            86
+biotype     87    O        Cystine (-SS-)            87
+biotype     88    HA       Cystine (-SS-)            88
+biotype     89    CB       Cystine (-SS-)            89
+biotype     90    HB       Cystine (-SS-)            90
+biotype     91    SG       Cystine (-SS-)            91
+biotype     92    N        Proline                   92
+biotype     93    CA       Proline                   93
+biotype     94    C        Proline                   94
+biotype     95    O        Proline                   95
+biotype     96    HA       Proline                   96
+biotype     97    CB       Proline                   97
+biotype     98    HB       Proline                   98
+biotype     99    CG       Proline                   99
+biotype    100    HG       Proline                  100
+biotype    101    CD       Proline                  101
+biotype    102    HD       Proline                  102
+biotype    103    N        Phenylalanine            103
+biotype    104    CA       Phenylalanine            104
+biotype    105    C        Phenylalanine            105
+biotype    106    HN       Phenylalanine            106
+biotype    107    O        Phenylalanine            107
+biotype    108    HA       Phenylalanine            108
+biotype    109    CB       Phenylalanine            109
+biotype    110    HB       Phenylalanine            110
+biotype    111    CG       Phenylalanine            111
+biotype    112    CD       Phenylalanine            112
+biotype    113    HD       Phenylalanine            113
+biotype    114    CE       Phenylalanine            114
+biotype    115    HE       Phenylalanine            115
+biotype    116    CZ       Phenylalanine            116
+biotype    117    HZ       Phenylalanine            117
+biotype    118    N        Tyrosine                 118
+biotype    119    CA       Tyrosine                 119
+biotype    120    C        Tyrosine                 120
+biotype    121    HN       Tyrosine                 121
+biotype    122    O        Tyrosine                 122
+biotype    123    HA       Tyrosine                 123
+biotype    124    CB       Tyrosine                 124
+biotype    125    HB       Tyrosine                 125
+biotype    126    CG       Tyrosine                 126
+biotype    127    CD       Tyrosine                 127
+biotype    128    HD       Tyrosine                 128
+biotype    129    CE       Tyrosine                 129
+biotype    130    HE       Tyrosine                 130
+biotype    131    CZ       Tyrosine                 131
+biotype    132    OH       Tyrosine                 132
+biotype    133    HH       Tyrosine                 133
+biotype    134    N        Tryptophan               134
+biotype    135    CA       Tryptophan               135
+biotype    136    C        Tryptophan               136
+biotype    137    HN       Tryptophan               137
+biotype    138    O        Tryptophan               138
+biotype    139    HA       Tryptophan               139
+biotype    140    CB       Tryptophan               140
+biotype    141    HB       Tryptophan               141
+biotype    142    CG       Tryptophan               142
+biotype    143    CD1      Tryptophan               143
+biotype    144    HD1      Tryptophan               144
+biotype    145    CD2      Tryptophan               145
+biotype    146    NE1      Tryptophan               146
+biotype    147    HE1      Tryptophan               147
+biotype    148    CE2      Tryptophan               148
+biotype    149    CE3      Tryptophan               149
+biotype    150    HE3      Tryptophan               150
+biotype    151    CZ2      Tryptophan               151
+biotype    152    HZ2      Tryptophan               152
+biotype    153    CZ3      Tryptophan               153
+biotype    154    HZ3      Tryptophan               154
+biotype    155    CH2      Tryptophan               155
+biotype    156    HH2      Tryptophan               156
+biotype    157    N        Histidine (+)            157
+biotype    158    CA       Histidine (+)            158
+biotype    159    C        Histidine (+)            159
+biotype    160    HN       Histidine (+)            160
+biotype    161    O        Histidine (+)            161
+biotype    162    HA       Histidine (+)            162
+biotype    163    CB       Histidine (+)            163
+biotype    164    HB       Histidine (+)            164
+biotype    165    CG       Histidine (+)            165
+biotype    166    ND1      Histidine (+)            166
+biotype    167    HD1      Histidine (+)            167
+biotype    168    CD2      Histidine (+)            168
+biotype    169    HD2      Histidine (+)            169
+biotype    170    CE1      Histidine (+)            170
+biotype    171    HE1      Histidine (+)            171
+biotype    172    NE2      Histidine (+)            172
+biotype    173    HE2      Histidine (+)            173
+biotype    174    N        Histidine (HD)           174
+biotype    175    CA       Histidine (HD)           175
+biotype    176    C        Histidine (HD)           176
+biotype    177    HN       Histidine (HD)           177
+biotype    178    O        Histidine (HD)           178
+biotype    179    HA       Histidine (HD)           179
+biotype    180    CB       Histidine (HD)           180
+biotype    181    HB       Histidine (HD)           181
+biotype    182    CG       Histidine (HD)           182
+biotype    183    ND1      Histidine (HD)           183
+biotype    184    HD1      Histidine (HD)           184
+biotype    185    CD2      Histidine (HD)           185
+biotype    186    HD2      Histidine (HD)           186
+biotype    187    CE1      Histidine (HD)           187
+biotype    188    HE1      Histidine (HD)           188
+biotype    189    NE2      Histidine (HD)           189
+biotype    190    N        Histidine (HE)           190
+biotype    191    CA       Histidine (HE)           191
+biotype    192    C        Histidine (HE)           192
+biotype    193    HN       Histidine (HE)           193
+biotype    194    O        Histidine (HE)           194
+biotype    195    HA       Histidine (HE)           195
+biotype    196    CB       Histidine (HE)           196
+biotype    197    HB       Histidine (HE)           197
+biotype    198    CG       Histidine (HE)           198
+biotype    199    ND1      Histidine (HE)           199
+biotype    200    CD2      Histidine (HE)           200
+biotype    201    HD2      Histidine (HE)           201
+biotype    202    CE1      Histidine (HE)           202
+biotype    203    HE1      Histidine (HE)           203
+biotype    204    NE2      Histidine (HE)           204
+biotype    205    HE2      Histidine (HE)           205
+biotype    206    N        Aspartic Acid            206
+biotype    207    CA       Aspartic Acid            207
+biotype    208    C        Aspartic Acid            208
+biotype    209    HN       Aspartic Acid            209
+biotype    210    O        Aspartic Acid            210
+biotype    211    HA       Aspartic Acid            211
+biotype    212    CB       Aspartic Acid            212
+biotype    213    HB       Aspartic Acid            213
+biotype    214    CG       Aspartic Acid            214
+biotype    215    OD       Aspartic Acid            215
+biotype    216    N        Asparagine               216
+biotype    217    CA       Asparagine               217
+biotype    218    C        Asparagine               218
+biotype    219    HN       Asparagine               219
+biotype    220    O        Asparagine               220
+biotype    221    HA       Asparagine               221
+biotype    222    CB       Asparagine               222
+biotype    223    HB       Asparagine               223
+biotype    224    CG       Asparagine               224
+biotype    225    OD1      Asparagine               225
+biotype    226    ND2      Asparagine               226
+biotype    227    HD2      Asparagine               227
+biotype    228    N        Glutamic Acid            228
+biotype    229    CA       Glutamic Acid            229
+biotype    230    C        Glutamic Acid            230
+biotype    231    HN       Glutamic Acid            231
+biotype    232    O        Glutamic Acid            232
+biotype    233    HA       Glutamic Acid            233
+biotype    234    CB       Glutamic Acid            234
+biotype    235    HB       Glutamic Acid            235
+biotype    236    CG       Glutamic Acid            236
+biotype    237    HG       Glutamic Acid            237
+biotype    238    CD       Glutamic Acid            238
+biotype    239    OE       Glutamic Acid            239
+biotype    240    N        Glutamine                240
+biotype    241    CA       Glutamine                241
+biotype    242    C        Glutamine                242
+biotype    243    HN       Glutamine                243
+biotype    244    O        Glutamine                244
+biotype    245    HA       Glutamine                245
+biotype    246    CB       Glutamine                246
+biotype    247    HB       Glutamine                247
+biotype    248    CG       Glutamine                248
+biotype    249    HG       Glutamine                249
+biotype    250    CD       Glutamine                250
+biotype    251    OE1      Glutamine                251
+biotype    252    NE2      Glutamine                252
+biotype    253    HE2      Glutamine                253
+biotype    254    N        Methionine               254
+biotype    255    CA       Methionine               255
+biotype    256    C        Methionine               256
+biotype    257    HN       Methionine               257
+biotype    258    O        Methionine               258
+biotype    259    HA       Methionine               259
+biotype    260    CB       Methionine               260
+biotype    261    HB       Methionine               261
+biotype    262    CG       Methionine               262
+biotype    263    HG       Methionine               263
+biotype    264    SD       Methionine               264
+biotype    265    CE       Methionine               265
+biotype    266    HE       Methionine               266
+biotype    267    N        Lysine                   267
+biotype    268    CA       Lysine                   268
+biotype    269    C        Lysine                   269
+biotype    270    HN       Lysine                   270
+biotype    271    O        Lysine                   271
+biotype    272    HA       Lysine                   272
+biotype    273    CB       Lysine                   273
+biotype    274    HB       Lysine                   274
+biotype    275    CG       Lysine                   275
+biotype    276    HG       Lysine                   276
+biotype    277    CD       Lysine                   277
+biotype    278    HD       Lysine                   278
+biotype    279    CE       Lysine                   279
+biotype    280    HE       Lysine                   280
+biotype    281    NZ       Lysine                   281
+biotype    282    HZ       Lysine                   282
+biotype    283    N        Arginine                 283
+biotype    284    CA       Arginine                 284
+biotype    285    C        Arginine                 285
+biotype    286    HN       Arginine                 286
+biotype    287    O        Arginine                 287
+biotype    288    HA       Arginine                 288
+biotype    289    CB       Arginine                 289
+biotype    290    HB       Arginine                 290
+biotype    291    CG       Arginine                 291
+biotype    292    HG       Arginine                 292
+biotype    293    CD       Arginine                 293
+biotype    294    HD       Arginine                 294
+biotype    295    NE       Arginine                 295
+biotype    296    HE       Arginine                 296
+biotype    297    CZ       Arginine                 297
+biotype    298    NH       Arginine                 298
+biotype    299    HH       Arginine                 299
+biotype    300    N        Ornithine                300
+biotype    301    CA       Ornithine                301
+biotype    302    C        Ornithine                302
+biotype    303    HN       Ornithine                303
+biotype    304    O        Ornithine                304
+biotype    305    HA       Ornithine                305
+biotype    306    CB       Ornithine                306
+biotype    307    HB       Ornithine                307
+biotype    308    CG       Ornithine                308
+biotype    309    HG       Ornithine                309
+biotype    310    CD       Ornithine                310
+biotype    311    HD       Ornithine                311
+biotype    312    NE       Ornithine                312
+biotype    313    HE       Ornithine                313
+biotype    314    N        MethylAlanine (AIB)      314
+biotype    315    CA       MethylAlanine (AIB)      315
+biotype    316    C        MethylAlanine (AIB)      316
+biotype    317    HN       MethylAlanine (AIB)      317
+biotype    318    O        MethylAlanine (AIB)      318
+biotype    319    CB       MethylAlanine (AIB)      319
+biotype    320    HB       MethylAlanine (AIB)      320
+biotype    321    N        Pyroglutamic Acid        321
+biotype    322    CA       Pyroglutamic Acid        322
+biotype    323    C        Pyroglutamic Acid        323
+biotype    324    HN       Pyroglutamic Acid        324
+biotype    325    O        Pyroglutamic Acid        325
+biotype    326    HA       Pyroglutamic Acid        326
+biotype    327    CB       Pyroglutamic Acid        327
+biotype    328    HB       Pyroglutamic Acid        328
+biotype    329    CG       Pyroglutamic Acid        329
+biotype    330    HG       Pyroglutamic Acid        330
+biotype    331    CD       Pyroglutamic Acid        331
+biotype    332    OE       Pyroglutamic Acid        332
+biotype    333    C        Formyl N-Terminus        333
+biotype    334    H        Formyl N-Terminus        334
+biotype    335    O        Formyl N-Terminus        335
+biotype    336    CH3      Acetyl N-Terminus        336
+biotype    337    H        Acetyl N-Terminus        337
+biotype    338    C        Acetyl N-Terminus        338
+biotype    339    O        Acetyl N-Terminus        339
+biotype    340    N        Amide C-Terminus         340
+biotype    341    HN       Amide C-Terminus         341
+biotype    342    N        N-MeAmide C-Terminus     342
+biotype    343    HN       N-MeAmide C-Terminus     343
+biotype    344    CH3      N-MeAmide C-Terminus     344
+biotype    345    H        N-MeAmide C-Terminus     345
+biotype    346    N        N-Terminal GLY           346
+biotype    347    CA       N-Terminal GLY           347
+biotype    348    C        N-Terminal GLY           348
+biotype    349    HN       N-Terminal GLY           349
+biotype    350    O        N-Terminal GLY           350
+biotype    351    HA       N-Terminal GLY           351
+biotype    352    N        N-Terminal Residue       352
+biotype    353    CA       N-Terminal ALA           353
+biotype    354    C        N-Terminal Residue       354
+biotype    355    HN       N-Terminal Residue       355
+biotype    356    O        N-Terminal Residue       356
+biotype    357    HA       N-Terminal Residue       357
+biotype    358    CA       N-Terminal VAL           358
+biotype    359    CA       N-Terminal LEU           359
+biotype    360    CA       N-Terminal ILE           360
+biotype    361    CA       N-Terminal SER           361
+biotype    362    CA       N-Terminal THR           362
+biotype    363    CA       N-Terminal CYS (-SH)     363
+biotype    364    CA       N-Terminal CYS (-SS)     364
+biotype    365    N        N-Terminal PRO           365
+biotype    366    CA       N-Terminal PRO           366
+biotype    367    C        N-Terminal PRO           367
+biotype    368    HN       N-Terminal PRO           368
+biotype    369    O        N-Terminal PRO           369
+biotype    370    HA       N-Terminal PRO           370
+biotype    371    CD       N-Terminal PRO           371
+biotype    372    HD       N-Terminal PRO           372
+biotype    373    CA       N-Terminal PHE           373
+biotype    374    CA       N-Terminal TYR           374
+biotype    375    CA       N-Terminal TRP           375
+biotype    376    CA       N-Terminal HIS (+)       376
+biotype    377    CA       N-Terminal HIS (HD)      377
+biotype    378    CA       N-Terminal HIS (HE)      378
+biotype    379    CA       N-Terminal ASP           379
+biotype    380    CA       N-Terminal ASN           380
+biotype    381    CA       N-Terminal GLU           381
+biotype    382    CA       N-Terminal GLN           382
+biotype    383    CA       N-Terminal MET           383
+biotype    384    CA       N-Terminal LYS           384
+biotype    385    CA       N-Terminal ARG           385
+biotype    386    CA       N-Terminal ORN           386
+biotype    387    CA       N-Terminal AIB           387
+biotype    388    N        C-Terminal GLY           388
+biotype    389    CA       C-Terminal GLY           389
+biotype    390    C        C-Terminal GLY           390
+biotype    391    HN       C-Terminal GLY           391
+biotype    392    OXT      C-Terminal GLY           392
+biotype    393    HA       C-Terminal GLY           393
+biotype    394    N        C-Terminal Residue       394
+biotype    395    CA       C-Terminal ALA           395
+biotype    396    C        C-Terminal Residue       396
+biotype    397    HN       C-Terminal Residue       397
+biotype    398    OXT      C-Terminal Residue       398
+biotype    399    HA       C-Terminal Residue       399
+biotype    400    CA       C-Terminal VAL           400
+biotype    401    CA       C-Terminal LEU           401
+biotype    402    CA       C-Terminal ILE           402
+biotype    403    CA       C-Terminal SER           403
+biotype    404    CA       C-Terminal THR           404
+biotype    405    CA       C-Terminal CYS (-SH)     405
+biotype    406    CA       C-Terminal CYS (-SS)     406
+biotype    407    N        C-Terminal PRO           407
+biotype    408    CA       C-Terminal PRO           408
+biotype    409    C        C-Terminal PRO           409
+biotype    410    OXT      C-Terminal PRO           410
+biotype    411    HA       C-Terminal PRO           411
+biotype    412    CD       C-Terminal PRO           412
+biotype    413    HD       C-Terminal PRO           413
+biotype    414    CA       C-Terminal PHE           414
+biotype    415    CA       C-Terminal TYR           415
+biotype    416    CA       C-Terminal TRP           416
+biotype    417    CA       C-Terminal HIS (+)       417
+biotype    418    CA       C-Terminal HIS (HD)      418
+biotype    419    CA       C-Terminal HIS (HE)      419
+biotype    420    CA       C-Terminal ASP           420
+biotype    421    CA       C-Terminal ASN           421
+biotype    422    CA       C-Terminal GLU           422
+biotype    423    CA       C-Terminal GLN           423
+biotype    424    CA       C-Terminal MET           424
+biotype    425    CA       C-Terminal LYS           425
+biotype    426    CA       C-Terminal ARG           426
+biotype    427    CA       C-Terminal ORN           427
+biotype    428    CA       C-Terminal AIB           428
+
+
+

@@ -11,7 +11,7 @@ for more detailed information.
 
 The main directory, ParFit, contains subdirectories: Data, Doc, ParFit, and 
 Utils. The Data subdirectory contains the Engine, Gamess, and ParFit 
-subdirectories. The Data/Engine directory contains the MM engine input, output,
+subdirectories. The Data/Engine directory contains the Mengine input, output,
 and parameter files. The Data/Gamess directory contains the QM molecular 
 information. The Data/ParFit subdirectory contains the energy profile and 
 parameters at optimization intervals. The Doc subdirectory contains the ParFit 
@@ -59,7 +59,7 @@ The input file format for torsion angle parameter calculations is as follows:
                  | 
                  | End the lines with "diha" keyword.
                  | 
- N + 1           | The full MM engine path.
+ N + 1           | The full Mengine path.
                  | 
  N + 2           | MM-type: "mm3" or "mmf94" 
                  | 
@@ -102,7 +102,7 @@ The input file format for torsion angle parameter calculations is as follows:
                  | 
                  | "bond/angl": End the line with "bond" or "angl" keyword.
                  | 
- 2               | The full MM engine path.
+ 2               | The full Mengine path.
                  | 
  3               | MM-type: "mm3" or "mmf94" 
                  | 
@@ -124,4 +124,4 @@ The input file format for torsion angle parameter calculations is as follows:
 Sample inputs can be found in the ParFit subdirectory. The "scan_inp_bond",
 "scan_inp_angl", and "scan_inp" are sample inputs for bond length, bond angle, and
 torsion angle, respectively. To use templates, copy to a different filename and change 
-the MM engine path.
+the Mengine path.

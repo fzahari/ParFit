@@ -22,8 +22,8 @@ selected systems. For the Deap library, visit https://pypi.python.org/pypi/deap
 
  * "Engine":
 
-The BSD licensed MM ENGINE software from www.serenasoft.com has 
-to be installed. The MM ENGINE source code is located in the ParFit/mmengine directory.
+The BSD licensed Mengine software from www.serenasoft.com has 
+to be installed. The Mengine source code is located in the ParFit/Mengine directory.
 Update the variable engine_path = “” in the file: ParFit/_Engine.py to the location of
 the MM ENGINE executable file.
 
