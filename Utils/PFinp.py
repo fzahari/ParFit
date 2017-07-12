@@ -170,6 +170,8 @@ elif (alg == 'c'):
 else:
    alg = 'hybr'
    print "Default was chosen."
+ref_point = raw_input("\nEnter "min" or the index number to specify the reference point. If you enter \"n\", the reference point\
+will default to the "min" selection.")
 
 # --- Printing csv file option ---
 printcsv = raw_input("\nEnter \"n\" if you do NOT want ParFit to print a csv format file\ncontaining the angles, QM energy, and the optmized MM energies.\n")
@@ -177,6 +179,7 @@ if (printcsv == 'n'):
     csv = "csv_off"
 else:
     csv = "csv_on"
+step_int = raw_input("\nEnter the step interval of the csv file printout. If you enter \"n\", the step interval will default to 10.")
 
 # --- Print out input file ---
 if (variedCoord == "diha"):
@@ -189,7 +192,10 @@ for s in range(0, len(lines)):
         print >> f, ", ".join(lines[s: s+2])
 print >> f, enginePath
 print >> f, MMType
-print >> f, alg
+if (ref_point == 'n'):
+   print >> f, alg
+else:
+   print >> f, alg, ref_point
 if variedCoord == "diha":
     for i in range(0, len(paramList), 4):
         n = i + 4
@@ -198,7 +204,10 @@ else:
     print >> f, paramList
 #else:                 #print for debugging
 #    print paramList  #print for debugging
-print >> f, csv
+if (step_int == 'n'):
+   print >> f, csv
+else:
+   print >> f, csv, step_int
 
 print "\nYour ParFit input file name {0} has been generated.\n".format(outFileName)
 

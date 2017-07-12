@@ -116,7 +116,18 @@ def par_fit_inp(input_fname):
     #plist=[]
     nc=0
     opt_lin={}
-    alg=lines[n+3].strip()
+    #alg=lines[n+3].strip()
+    ls=lines[n+3].split()
+    lls=len(ls)
+    if lls==1:
+       alg=ls[0]
+       ref_p=-1
+    elif lls==2:
+       alg=ls[0]
+       ref_p=ls[1]
+       if ref_p=="min": ref_p=-1
+    else:
+       print "Warning: more variables on the 'alg' line than allowed!"
     for line in lines[n+4:-1]:
 	t=line.split()
         n=len(t)-1
@@ -156,11 +167,11 @@ def par_fit_inp(input_fname):
        step_int=10
        csv=lines[-1].strip()
     elif len(last_line)==2:
-       step_int,csv=lines[-1].split()
+       csv,step_int=lines[-1].split()
     else:
        print "Wrong csv line in the input file!"
 
-    return scan_type,gopt_type,gopt_scan_fnameb,tup,bes,engine_path,mm,mode,alg,opt_lin,np,nc,step_int,csv
+    return scan_type,gopt_type,gopt_scan_fnameb,tup,bes,engine_path,mm,mode,alg,ref_p,opt_lin,np,nc,step_int,csv
 
 def read_add(mm,opt_lin,np,nc,fl,scan_type):
 

@@ -11,7 +11,7 @@ from Ga import run_ga
 
 def pf_run(PF_if):
 
-   scan_type,gopt_type,gopt_s_fnameb,tup,bes,engine_path,mm,mode,alg,opt_lin,np,nc,step_int,csv=par_fit_inp(PF_if)
+   scan_type,gopt_type,gopt_s_fnameb,tup,bes,engine_path,mm,mode,alg,ref_p,opt_lin,np,nc,step_int,csv=par_fit_inp(PF_if)
    #scan_type=scan_type.strip()   
 
    if engine_path=="":
@@ -61,10 +61,13 @@ def pf_run(PF_if):
    for i in  range(n):
       if gopt_type[i]=="full":
          ds[i].read_gamess_outputs()
+         ds[i].find_min_ge_key()
       elif gopt_type[i]=="comp":
          ds[i].read_gouts_data()
+         ds[i].find_min_ge_key()
       elif gopt_type[i]=="ginp":
          ds[i].write_gamess_inputs()
+         ds[i].find_min_ge_key()
          quit()
       else:
          "Par_Fit: Wrong gopt_type!"
@@ -78,7 +81,7 @@ def pf_run(PF_if):
       for i in range(n):
          write_add(sdir,p,c,mm,ol_templ,lines,1,engine_rmse.step,step_int)
          ds[i].run_scan(p,c,mm,ol_templ)
-         rmse+=ds[i].calc_rmse(csv,i,engine_rmse.step,step_int)
+         rmse+=ds[i].calc_rmse(ref_p,csv,i,engine_rmse.step,step_int)
       print engine_rmse.step,round(rmse/n,4),p
 
       engine_rmse.step+=1
@@ -94,7 +97,7 @@ def pf_run(PF_if):
       for i in range(n):
          write_add(sdir,p,c,mm,ol_templ,lines,1,engine_rmse2.step,step_int)
          ds[i].run_scan(p,c,mm,ol_templ)
-         rmse+=ds[i].calc_rmse(csv,i,engine_rmse2.step,step_int)
+         rmse+=ds[i].calc_rmse(ref_p,csv,i,engine_rmse2.step,step_int)
 
       engine_rmse2.step+=1
 

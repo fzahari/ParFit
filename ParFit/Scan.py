@@ -336,6 +336,7 @@ class Scan(object):
         self._ge={}
         self._ee={}
         self._styp=styp
+        self._min_ge_key=""
 
     @property
     def mm(self):
@@ -365,8 +366,19 @@ class Scan(object):
     def ee(self):
         return self._ee
 
+    @property
+    def min_ge_key(self):
+        return self._min_ge_key
+
     def _gen_geometries(self):
         pass
+
+    def find_min_ge_key(self):
+        assert not self._ge=={}
+        self._min_ge_key=self._ml[0].name
+        for key in self._ge.keys():
+           if self._ge[self._min_ge_key]>self._ge[key]:
+              self._min_ge_key=key
 
     def read_gamess_outputs(self):
         self._ge={}
@@ -519,10 +531,14 @@ class Scan(object):
         #map(self.run_dih_elem,self._ml)
         #os.chdir("../../ParFit")
 
-    def calc_rmse(self,csv,mi,step,step_int):
+    def calc_rmse(self,ref_p,csv,mi,step,step_int):
         self.read_engine_outputs()
-        m0=self._ml[0]
-        n0=m0.name
+        ref_p=int(ref_p)
+        if ref_p==0 or ref_p>0:
+           m0=self._ml[ref_p]
+           n0=m0.name
+        else:
+           n0=self._min_ge_key
         ge0,ee0=self._ge[n0],self._ee[n0]
         rmse=0.
         if csv=="csv_on" and (step-1)%step_int==0:
@@ -859,7 +875,7 @@ if __name__=="__main__":
     #engine_rmse(p)
     default_input_fname="dih_scan_inp"
 
-    gopt_type,gopt_s_fnameb,t1234,bes,engine_path,mm,mode,alg,opt_lin,np,nc,step_int,csv=par_fit_inp(default_input_fname)
+    gopt_type,gopt_s_fnameb,t1234,bes,engine_path,mm,mode,ref_p,alg,opt_lin,np,nc,step_int,csv=par_fit_inp(default_input_fname)
     ds=DihScan(gopt_s_fnameb,engine_path,mm,opt_lin,np,nc,bes,t1234)
     if not gopt_type=="ginp":
        environ["ENGINE_DIR"]=engine_path+"engine_dir"
