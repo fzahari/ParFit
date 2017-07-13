@@ -1,0 +1,46 @@
+# default atomic charges
+default_charge
+H 1.0
+C 6.0
+O 8.0
+P 15.0
+LA 58.00
+
+# atomic MM3 types
+default_mm3_type
+H  5
+C  1
+O  7
+P  153
+LA 338
+
+# atomic MMF94 types
+default_mmff94_type
+H 5
+C 1
+O 32
+P 25
+
+# atomic covalent radii
+cov_radii
+H  0.32
+C  0.77
+O  0.73
+P  1.06
+LA 2.07
+
+# the bond order is determined
+# by the bond length: "single bond"
+# if smaller than the first value,
+# "double bond" if between the first
+# and second values, and "triple bond"
+# if between the second and third values
+bond_ords
+PO 2.00,1.61,1.45
+PC 2.05,1.63,1.49
+PH 1.61
+OC 1.65,1.32,1.20
+OH 1.20
+CC 1.69,1.35,1.22
+CH 1.24
+LAO 3.22
