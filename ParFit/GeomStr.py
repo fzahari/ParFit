@@ -3,45 +3,31 @@
 from numpy import array,pi
 from _GeomCalc import dist,angle,dihedral,norm_vec,uangl,rotu,tra,angle
 
-default_charge={
-  'H':1.0,
-  'C':6.0,
-  'O':8.0,
-  'P':15.0
-}
+keywords=["default_charge", "default_mm3_type", "default_mmff94_type", "cov_radii", "bond_ords"]
 
-default_mm3_type={
-  'H':5,
-  'C':1,
-  'O':7,
-  'P':153,
-  'LA':338
-}
+default_charge={}
+default_mm3_type={}
+default_mmff94_type={}
+cov_radii={}
+bond_ords={}
 
-default_mmff94_type={
-  'H':5,
-  'C':1,
-  'O':32,
-  'P':25
-}
+f=open("atomic.db",'r')
+lines=f.readlines()
+f.close()
 
-cov_radii={
- 'H':0.32,
- 'C':0.77,
- 'O':0.73,
- 'P':1.06,
- 'LA':2.07
-}
-
-bond_ords={
- 'PO':[2.00,1.61,1.45],
- 'PC':[2.05,1.63,1.49],
- 'PH':[1.61],
- 'OC':[1.65,1.32,1.20],
- 'OH':[1.20],
- 'CC':[1.69,1.35,1.22],
- 'CH':[1.24],
-}
+for line in lines:
+   l=line[:-1]
+   if l in keywords:
+      l0=l
+      exec(l0+"={}")
+   ls=l.split()
+   if len(ls)==2:
+      a,b=ls
+      if l0=="bond_ords":
+         b=list(map(float,b.split(',')))
+      else:
+         b=float(b)
+      exec(l0+"[a]=b")
 
 class Atom(object):
     def __init__(self,symbol,r,charge=None,mm=None,mm_type=None):
