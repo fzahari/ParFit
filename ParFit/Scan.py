@@ -6,7 +6,7 @@ from _IO import par_fit_inp,read_add,write_add
 from _Engine import run_engine_timeout, pert_add_param
 from GeomStr import Molecule,default_mm3_type,default_mmff94_type,default_charge
 
-import os
+import os,re
 
 import copy_reg
 import types
@@ -232,42 +232,18 @@ class ScanElem(Molecule):
     def write_gopt_inp(self,fname_base):
         pass
 
-    def write_inp_pcm(self,fname_base,styp):
+    def write_inp_pcm(self,l1,l2,fname_base,styp):
         f=open("../Data/Engine/"+fname_base+"_inp.pcm",'w')
-        if self._mm=="mm3":
-            self.input_pcm_head2 += str(3)
-        elif self._mm=="mmff94":
-            self.input_pcm_head2 += str(7)
-        else:
-            print "ScanElem.write_inp_pcm: Wrong MM-type!"
-        print >>f,self.input_pcm_head1+str(self._na)+self.input_pcm_head2
+        for line in l1:
+           print >>f,line[:-1]
         for i in range(self._na):
-            iconn=self._conn[i]
-            if i in self._br:
-                if self._mm=="mm3":
-                    t=50
-                elif self._mm=="mmff94":
-                    t=37
-                else:
-                    print "ScanElem.write_inp_pcm: Wrong MM-type!"
-            else:
-                t=self.tl[i]
-                if self._mm=="mm3":
-                    if t==1 and len(iconn)==3: t=2
-                    if t==7 and len(iconn)==2: t=6
-                elif self._mm=="mmff94":
-                    if t==1 and len(iconn)==3: t=2
-                    if t==32 and len(iconn)==2: t=6
-                else:
-                    print "ScanElem.write_inp_pcm: Wrong MM-type!"
-            x,y,z=self.rl[i]
-            print >>f,"AT %d %d %10.4f %10.4f %10.4f B"%((i+1),t,x,y,z),
-            for j in iconn:
-                if (i,j) in self._db or (j,i) in self._db:
-                    print >>f,j+1,"2",
-                else:
-                    print >>f,j+1,"1",
-            print >>f
+           x,y,z=self.rl[i]
+           l2s=l2[i].split()
+           t=l2s[2]
+           l2s=l2s[6:]
+           l2s=" ".join(l2s)
+           print >>f,"AT %d %s %10.4f %10.4f %10.4f "%((i+1),t,x,y,z),
+           print >>f,l2s
         if styp=="bond":
            print >>f,"}"
         elif styp=="angl":
@@ -471,9 +447,24 @@ class Scan(object):
             lines=lines[na:]
 
     def write_engine_inputs(self):
+        fname=self.sdir[0][15:]+".et"
+        f=open(fname,'r')
+        lines=f.readlines()
+        f.close()
+        lines1=[]
+        lines2=[]
+        flag=True
+        for line in lines:
+           matchObj=re.match(r'\s*AT\s+',line)
+           if matchObj:
+              flag=False
+              lines2.append(line)
+           if flag:
+              lines1.append(line)
+
         for m in self._ml:
             fnameb=m.name
-            m.write_inp_pcm(fnameb,self._styp)
+            m.write_inp_pcm(lines1,lines2,fnameb,self._styp)
 
     def read_engine_outputs(self):
         self._ee={}
