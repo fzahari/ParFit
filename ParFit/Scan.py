@@ -447,7 +447,7 @@ class Scan(object):
             lines=lines[na:]
 
     def write_engine_inputs(self):
-        fname=self.sdir[0][15:]+".et"
+        fname=self.sdir[0][15:]+".eit"
         f=open(fname,'r')
         lines=f.readlines()
         f.close()
