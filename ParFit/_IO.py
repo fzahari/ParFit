@@ -332,6 +332,9 @@ def write_add(sdir,p,c,mm,ol_templ,lines,fl,step,step_int):
     return
 
 if __name__=="__main__":
+    from numpy import pi
+    from Scan import ScanElem as DihGOpt_Molecule
+    
     gmol=DihGOpt_Molecule(mm="mmff94",name="opmmm")    
     print(gmol.name)
     #gmol.dt=(13,4,0,1)
