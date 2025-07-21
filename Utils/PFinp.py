@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
 # This a ParFit input file generating program.
 #
@@ -19,10 +19,10 @@
 def getPESCoords():
     print("The following prompts define the variables used to generate" +
           "the QM PESs.")
-    atomIndices = raw_input("Enter atom indices separated by a space.\n")
-    iCoord = raw_input("Enter the initial length or angle.\n")
-    fCoord = raw_input("Enter the final length or angle.\n")
-    sCoord = raw_input("Enter the length or angle step size.\n")
+    atomIndices = input("Enter atom indices separated by a space.\n")
+    iCoord = input("Enter the initial length or angle.\n")
+    fCoord = input("Enter the final length or angle.\n")
+    sCoord = input("Enter the length or angle step size.\n")
     return "{0}, {1} {2} {3}".format(atomIndices, iCoord, fCoord, sCoord)
 
 def getQMFileFormat():
@@ -32,7 +32,7 @@ def getQMFileFormat():
           "(b) Series: GAMESS log files, one for each fixed bond length,\n" +
           "    bond angle, or torsion angle geometry.\n" +
           "Enter: a or b. [a]")
-    fileFormat = raw_input()
+    fileFormat = input()
     if fileFormat != "b" :
         fileFormat = "comp"
     else:
@@ -42,7 +42,7 @@ def getQMFileFormat():
 def getQMFilePropertyLines(variedCoord):
     filePropertyLines = []
     if (variedCoord == "bond" or variedCoord == "angl"):
-        QMFilenameRoot = raw_input("Enter the root filename. ")
+        QMFilenameRoot = input("Enter the root filename. ")
         noOfVariedCoords = 1
         QMFormatChoice = getQMFileFormat()
         if QMFormatChoice == "comp":
@@ -50,10 +50,10 @@ def getQMFilePropertyLines(variedCoord):
         elif QMFormatChoice == "full":
             filePropertyLines.extend((QMFormatChoice, QMFilenameRoot, getPESCoords(), variedCoord))
     elif (variedCoord == "diha"):
-        noOfVariedCoords = int(raw_input("Enter the number of PESs to be fit.\n"))
+        noOfVariedCoords = int(input("Enter the number of PESs to be fit.\n"))
         for n in range(0, noOfVariedCoords):
             QMFormatChoice = getQMFileFormat()
-            QMFilenameRoot = raw_input("Enter the root filename. ")
+            QMFilenameRoot = input("Enter the root filename. ")
             if QMFormatChoice == "comp":
                 filePropertyLines.extend((QMFormatChoice, QMFilenameRoot))
             elif QMFormatChoice == "full":
@@ -63,17 +63,17 @@ def getQMFilePropertyLines(variedCoord):
 def getParameterLines(variedCoord):
     paramList = []
     if variedCoord == "diha":
-        noOfParameterLines = int(raw_input("Enter number of parameter lines. "))
+        noOfParameterLines = int(input("Enter number of parameter lines. "))
         for m in range(noOfParameterLines):
-            paramList.append(raw_input("Enter parameter line number for the "
+            paramList.append(input("Enter parameter line number for the "
                 + "dihedral to be fit. "))
             for i in range(1, 4):
-                paramOrConst = raw_input("Enter 'p' if Line " + paramList[m] + " V"
+                paramOrConst = input("Enter 'p' if Line " + paramList[m] + " V"
                     + str(i) + " should be varied during ParFit run. ")
                 if paramOrConst != "p":
                     paramOrConst = "c"
                 paramList.append(paramOrConst)
-        i = raw_input("How many pairs of parameters are coupled? [0] ")
+        i = input("How many pairs of parameters are coupled? [0] ")
         if i == "":
             i = 0
         else:
@@ -83,13 +83,13 @@ def getParameterLines(variedCoord):
                 + "in the following format: \n"
                 + "\t[line number] [line number] [parameter number] ")
         for n in range(i):
-            q, r, s = str.split(raw_input("Enter the line and parameter numbers. "))
+            q, r, s = str.split(input("Enter the line and parameter numbers. "))
             qIndex = int(paramList.index(q))
             rIndex = int(paramList.index(r))
             s = int(s)
             paramList[qIndex + s] = paramList[rIndex + s] = "p" + str(n + 1)
     else:
-        paramList.append(raw_input("Enter parameter line number of the "
+        paramList.append(input("Enter parameter line number of the "
             + "parameters to be fit. ") + " p p")
 #        print paramList  #print for debugging
     return paramList
@@ -99,19 +99,19 @@ def getParameterLines(variedCoord):
 # --- Determine ParFit input file name ---
 print("Enter the name of ParFit input file to create, if blank, the file " +
       "name will be PFinput.\n")
-outFileName = raw_input()
+outFileName = input()
 if (outFileName == ""):
     outFileName = "PFinput"
-    print "[PFinp]: Input filename:", outFileName, "\n"
+    print("[PFinp]: Input filename:", outFileName, "\n")
 else:
     outFileName == outFileName
-    print "[PFinp]: Input filename:", outFileName, "\n"
+    print("[PFinp]: Input filename:", outFileName, "\n")
 
 # --- Open the file for writing ---
 f = open(outFileName,'w')
 
 # --- Select the parameter type, bond length, bond angle, torsion. ---
-property_type = raw_input('''Choose from the properties below:
+property_type = input('''Choose from the properties below:
 (a) bond length
 (b) bond angle
 (c) torsion (default)
@@ -128,7 +128,7 @@ elif (property_type == "c"):
     variedCoord = 'diha'
     parameterize = "torsion angle"
 else:
-    print "The default, torsion angle, was chosen."
+    print("The default, torsion angle, was chosen.")
     variedCoord = 'diha'
     parameterize = "torsion angle"
 
@@ -140,10 +140,10 @@ lines, noOfVariedCoords = getQMFilePropertyLines(variedCoord)
 paramList = getParameterLines(variedCoord)
 
 # --- Get engine path ---
-enginePath = raw_input("\nWhat is the full engine.exe path?\n")
+enginePath = input("\nWhat is the full engine.exe path?\n")
 
 # --- Determine the type of MM file that is to be modified ---
-MMTypeChoice = raw_input("\nChoose the MM type (mm3 or mmff94) parameters to be fit\n(a) MM3 - default\n(b) MMFF94\nChoose a or b.\n")
+MMTypeChoice = input("\nChoose the MM type (mm3 or mmff94) parameters to be fit\n(a) MM3 - default\n(b) MMFF94\nChoose a or b.\n")
 if (MMTypeChoice == 'a' or MMTypeChoice == ""):
     carbontyp = 50
     MMType = 'mm3'
@@ -160,7 +160,7 @@ print("<< Fitting alorithms >>\n" +
       "(a) genetic algorithm\n" +
       "(b) Nedler-Mead algorithm\n" +
       "(c) hybrid: genetic followed by Nedler-Mead algorithm\n")
-alg = raw_input("Select a, b, or c. [c] ")
+alg = input("Select a, b, or c. [c] ")
 if (alg == 'a'):
     alg = 'ga'
 elif (alg == 'b'):
@@ -169,46 +169,45 @@ elif (alg == 'c'):
     alg = 'hybr'
 else:
    alg = 'hybr'
-   print "Default was chosen."
-ref_point = raw_input("\nEnter "min" or the index number to specify the reference point. If you enter \"n\", the reference point\
-will default to the "min" selection.")
+   print("Default was chosen.")
+ref_point = input("\nEnter \"min\" or the index number to specify the reference point. If you enter \"n\", the reference point will default to the \"min\" selection.")
 
 # --- Printing csv file option ---
-printcsv = raw_input("\nEnter \"n\" if you do NOT want ParFit to print a csv format file\ncontaining the angles, QM energy, and the optmized MM energies.\n")
+printcsv = input("\nEnter \"n\" if you do NOT want ParFit to print a csv format file\ncontaining the angles, QM energy, and the optmized MM energies.\n")
 if (printcsv == 'n'):
     csv = "csv_off"
 else:
     csv = "csv_on"
-step_int = raw_input("\nEnter the step interval of the csv file printout. If you enter \"n\", the step interval will default to 10.")
+step_int = input("\nEnter the step interval of the csv file printout. If you enter \"n\", the step interval will default to 10.")
 
 # --- Print out input file ---
 if (variedCoord == "diha"):
-    print >> f, "mult, " + str(noOfVariedCoords)
+    print("mult, " + str(noOfVariedCoords), file=f)
 for n in range(0, len(lines)):
     if lines[n] == "full":
-        print >> f, ", ".join(lines[n: n+3])
+        print(", ".join(lines[n: n+3]), file=f)
 for s in range(0, len(lines)):
     if lines[s] == "comp":
-        print >> f, ", ".join(lines[s: s+2])
-print >> f, enginePath
-print >> f, MMType
+        print(", ".join(lines[s: s+2]), file=f)
+print(enginePath, file=f)
+print(MMType, file=f)
 if (ref_point == 'n'):
-   print >> f, alg
+   print(alg, file=f)
 else:
-   print >> f, alg, ref_point
+   print(alg, ref_point, file=f)
 if variedCoord == "diha":
     for i in range(0, len(paramList), 4):
         n = i + 4
-        print >> f, " ".join(paramList[i:n])
+        print(" ".join(paramList[i:n]), file=f)
 else:
-    print >> f, paramList
+    print(paramList, file=f)
 #else:                 #print for debugging
 #    print paramList  #print for debugging
 if (step_int == 'n'):
-   print >> f, csv
+   print(csv, file=f)
 else:
-   print >> f, csv, step_int
+   print(csv, step_int, file=f)
 
-print "\nYour ParFit input file name {0} has been generated.\n".format(outFileName)
+print("\nYour ParFit input file name {0} has been generated.\n".format(outFileName))
 
 exit()

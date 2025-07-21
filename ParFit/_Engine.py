@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import subprocess as sub
 import threading
@@ -32,10 +32,10 @@ def pert_add_param(add_name):
     f.close()
     f=open("../Data/Engine/"+add_name,'w')
     sline0=lines[0].split()
-    print >>f,"%s          %s    %s  %s    %s       %.3f %s    %s %s  %s %s"%(
-               sline0[0],sline0[1],sline0[2],sline0[3],sline0[4],float(sline0[5])+0.001,sline0[6],sline0[7],sline0[8],sline0[9],sline0[10])
+    print("%s          %s    %s  %s    %s       %.3f %s    %s %s  %s %s"%(
+               sline0[0],sline0[1],sline0[2],sline0[3],sline0[4],float(sline0[5])+0.001,sline0[6],sline0[7],sline0[8],sline0[9],sline0[10]), file=f)
     for line in lines[1:]:
-        print >>f,line[:-1]
+        print(line[:-1], file=f)
     f.close()
 
 def run_engine_timeout(engine_path,coengine_name,timeout):
@@ -57,11 +57,11 @@ if __name__=="__main__":
     restore_hang_prm()
     while True:
         status=run_engine_timeout(engine_path,coeng_name,timeout)
-        print "inside 'while':",status
+        print("inside 'while':", status)
         if status: 
             break
         else:
             pert_add_param("add_MM3_hang.prm")
     status=run_engine_timeout(engine_path,coeng_name,timeout)
-    print status
+    print(status)
     restore_hang_prm()

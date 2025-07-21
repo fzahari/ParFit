@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 #from numpy import rad2deg,arccos,cross,dot,allclose,cos,sin,matrix,array,pi
 from numpy import arccos,cross,dot,allclose,cos,sin,matrix,array,pi
@@ -46,8 +46,8 @@ def rotu(r,u,th):
         unr=nr/nnr
         v=cross(u,unr)
 
-    except Exception, msg:
-        print msg
+    except Exception as msg:
+        print(msg)
 
     return cos(th)*nr+sin(th)*nnr*v+dru*u
 
@@ -73,8 +73,8 @@ def rotu2(r,u,th):
 
         rot_r=rot*r
 
-    except Exception, msg:
-        print msg
+    except Exception as msg:
+        print(msg)
 
     return array(rot_r.T)[0]
 
@@ -86,8 +86,8 @@ def tra(r,u,d):
 
       rt=r+d*u
 
-   except Exception, msg:
-      print msg
+   except Exception as msg:
+      print(msg)
 
    return rt
 
@@ -102,23 +102,23 @@ if __name__=="__main__":
     d=array([1.,1.,1.])
     e=array([0.,1.,0.])
     #
-    print dist(a,b)
-    print angle(b,a,c)
-    print dihedral(a,b,c,d)
+    print(dist(a,b))
+    print(angle(b,a,c))
+    print(dihedral(a,b,c,d))
     d=array([1.,1.,-1.])
-    print dihedral(a,b,c,d)
+    print(dihedral(a,b,c,d))
     #
     #u=array([0.,0.,1.01])
     u=array([0.,0.,1.])
     r=array([2.,0.,0.])
-    print rotu(r,u,pi/2.)
+    print(rotu(r,u,pi/2.))
     # 
-    print rotu2(r,u,pi/2)
+    print(rotu2(r,u,pi/2))
     # 
     d /= norm(d)
-    print rotu(r,d,pi)
+    print(rotu(r,d,pi))
     # 
-    print rotu2(r,d,pi)
-    print tra(r,u,3.)
+    print(rotu2(r,d,pi))
+    print(tra(r,u,3.))
     #
-    print uangl(b,a,e)
+    print(uangl(b,a,e))

@@ -1,11 +1,12 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
-import sys,os
+import sys
+import os
 import numpy
 
-from scipy.optimize import minimize,basinhopping,fmin,fmin_powell,fmin_cg,fmin_tnc
-from Scan import BondScan,AnglScan,DihAScan
-from _IO import par_fit_inp,read_add,write_add
+from scipy.optimize import minimize, basinhopping, fmin, fmin_powell, fmin_cg, fmin_tnc
+from Scan import BondScan, AnglScan, DihAScan
+from _IO import par_fit_inp, read_add, write_add
 
 from Ga import run_ga
 
@@ -21,9 +22,9 @@ def pf_run(PF_if):
    pref="../Data/ParFit/"+PF_if
    sdir.append(pref)
    if os.path.exists(pref):
-      print
-      print 'Warning: The directory',pref,'exists!'
-      print
+      print()
+      print('Warning: The directory', pref, 'exists!')
+      print()
       sys.exit()
    os.mkdir(pref)   
    for gsf in gopt_s_fnameb:
@@ -36,21 +37,21 @@ def pf_run(PF_if):
    if scan_type=="diha":
       for i in range(n):
          if not bes[i]==():
-            bes[i]=map(int,bes[i])
+            bes[i]=list(map(int,bes[i]))
          sds=DihAScan(sdir,gopt_s_fnameb[i],engine_path,mm,opt_lin,np,nc,bes[i],tup[i])
          ds.append(sds)
    elif scan_type=="bond":
       for i in range(n):
          if not bes[i]==():
-            bes[i]=map(lambda x:10.*x,bes[i])
-            bes[i]=map(int,bes[i])
+            bes[i]=list(map(lambda x:10.*x,bes[i]))
+            bes[i]=list(map(int,bes[i]))
          sds=BondScan(sdir,gopt_s_fnameb[i],engine_path,mm,opt_lin,np,nc,bes[i],tup[i])
          ds.append(sds)
    elif scan_type=="angl":
       for i in range(n):
          if not bes[i]==():
-            bes[i]=map(lambda x:10.*x,bes[i])
-            bes[i]=map(int,bes[i])
+            bes[i]=list(map(lambda x:10.*x,bes[i]))
+            bes[i]=list(map(int,bes[i]))
          sds=AnglScan(sdir,gopt_s_fnameb[i],engine_path,mm,opt_lin,np,nc,bes[i],tup[i])
          ds.append(sds)
 
@@ -82,7 +83,7 @@ def pf_run(PF_if):
          write_add(sdir,p,c,mm,ol_templ,lines,1,engine_rmse.step,step_int)
          ds[i].run_scan(p,c,mm,ol_templ)
          rmse+=ds[i].calc_rmse(ref_p,csv,i,engine_rmse.step,step_int)
-      print engine_rmse.step,round(rmse/n,4),p
+      print(engine_rmse.step, round(rmse/n,4), p)
 
       engine_rmse.step+=1
 
@@ -119,19 +120,19 @@ def pf_run(PF_if):
          ppP[i] += eps
          pM=engine_rmse(ppM)
          pP=engine_rmse(ppP)
-         print i+1,(pM-p0)/eps,(pP-p0)/eps
+         print(i+1, (pM-p0)/eps, (pP-p0)/eps)
    else:
       np=len(p)
       if alg=="ga":
-         print "Warning: The genetic algorithm printout will not start immediately!"
+         print("Warning: The genetic algorithm printout will not start immediately!")
          hof=run_ga(engine_rmse2,np,40)
          hof0=numpy.array(hof[0])
          write_add(sdir,hof0,c,mm,ol_templ,lines,1,"ga",None)
       elif alg=="fmin":
          #print fmin_powell(engine_rmse,p)
-         print fmin(engine_rmse,p,ftol=0.2)
+         print(fmin(engine_rmse,p,ftol=0.2))
       elif alg=="hybr":
-         print "Warning: The genetic algorithm printout will not start immediately!"
+         print("Warning: The genetic algorithm printout will not start immediately!")
          hof=run_ga(engine_rmse2,np,40)
          hof0=numpy.array(hof[0])
          write_add(sdir,hof0,c,mm,ol_templ,lines,1,"ga",None)
@@ -139,14 +140,21 @@ def pf_run(PF_if):
       else: 
          "'alg' is not a known algorithm!"
 
-PF_input_fname="scan_inp"
+def main():
+    """Main entry point for ParFit application."""
+    PF_input_fname = "scan_inp"
 
-lsa=len(sys.argv)
-if lsa>2:
-   print 
-   print 'Use: "./ParFit.py name_of_ParFit_input_file"'
-   print 
-elif lsa==2:
-   PF_input_fname=h=sys.argv[1]
+    lsa = len(sys.argv)
+    if lsa > 2:
+        print() 
+        print('Use: "./ParFit.py name_of_ParFit_input_file"')
+        print()
+        return
+    elif lsa == 2:
+        PF_input_fname = sys.argv[1]
 
-pf_run(PF_input_fname)
+    pf_run(PF_input_fname)
+
+
+if __name__ == "__main__":
+    main()
