@@ -1,19 +1,20 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
-from os import system,environ
-from numpy import rad2deg,array,sqrt,pi,around,deg2rad
-from _IO import par_fit_inp,read_add,write_add
+from os import system, environ
+from numpy import rad2deg, array, sqrt, pi, around, deg2rad
+from _IO import par_fit_inp, read_add, write_add
 from _Engine import run_engine_timeout, pert_add_param
-from GeomStr import Molecule,default_mm3_type,default_mmff94_type,default_charge
+from GeomStr import Molecule, default_mm3_type, default_mmff94_type, default_charge
 
-import os,re
+import os
+import re
 
-import copy_reg
+import copyreg
 import types
 
 def _reduce_method(meth):
-    return (getattr,(meth.__self__,meth.__func__.__name__))
-copy_reg.pickle(types.MethodType,_reduce_method)
+    return (getattr, (meth.__self__, meth.__func__.__name__))
+copyreg.pickle(types.MethodType, _reduce_method)
 
 class ScanElem(Molecule):
     """\
@@ -86,7 +87,7 @@ class ScanElem(Molecule):
             elif self._mm=="mmff94":
                 self._tl.append(default_mmff94_type[s])
             else:
-                print "ScanElem.read_gopt_log: Wrong MM-type!"
+                print("ScanElem.read_gopt_log: Wrong MM-type!")
             #s,c,x,y,z=line[:-1].split()
             #symbl=s.upper()
             #coord=map(float,[x,y,z])
@@ -137,7 +138,7 @@ class ScanElem(Molecule):
             elif self._mm=="mmff94":
                 self._tl.append(default_mmff94_type[s])
             else:
-                print "ScanElem.read_gopt_log: Wrong MM-type!"
+                print("ScanElem.read_gopt_log: Wrong MM-type!")
         self._rl=array(self._rl,'d')
         self._cl=array(self._cl,'d')
         self._na=len(self._rl)
@@ -174,7 +175,7 @@ class ScanElem(Molecule):
             elif self._mm=="mmff94":
                 self._tl.append(default_mmff94_type[s])
             else:
-                print "ScanElem.read_gopt_log: Wrong MM-type!"
+                print("ScanElem.read_gopt_log: Wrong MM-type!")
             #s,c,x,y,z=lines[j][:-1].split()
             #symbl=s.upper()
             #coord=map(float,[x,y,z])
@@ -218,7 +219,7 @@ class ScanElem(Molecule):
             elif self._mm=="mmff94":
                 self._tl.append(default_mmff94_type[s])
             else:
-                print "ScanElem.read_gopt_log: Wrong MM-type!"
+                print("ScanElem.read_gopt_log: Wrong MM-type!")
         self._rl=array(self._rl,'d')
         self._cl=array(self._cl,'d')
         self._na=len(self._rl)
@@ -428,7 +429,7 @@ class Scan(object):
                 elif self._mm=="mmff94":
                     se._tl.append(default_mmff94_type[s])
                 else:
-                    print "ScanElem.read_gopt_log: Wrong MM-type!"
+                    print("ScanElem.read_gopt_log: Wrong MM-type!")
                 #s,x,y,z,c=lines[j].split()
                 #symbl=s.upper()
                 #coord=map(float,[x,y,z])
@@ -480,20 +481,20 @@ class Scan(object):
             f=open("../Data/Engine/"+coengine_name,'w')
             #f=open(coengine_name,'w')
             if self._styp=="diha":
-               print >>f,"mode opt"
+               print("mode opt", file=f)
             else:
-               print >>f,"mode single"
-            print >>f,"infile  "+fnameb+"_inp.pcm"
-            print >>f,"outfile "+fnameb+"_out.pcm"
-            print >>f,"print 3"
+               print("mode single", file=f)
+            print("infile  "+fnameb+"_inp.pcm", file=f)
+            print("outfile "+fnameb+"_out.pcm", file=f)
+            print("print 3", file=f)
             if self._mm=="mm3":
-               print >>f,"forcefield mm3"
-               print >>f,"addpar add_MM3.prm"
+               print("forcefield mm3", file=f)
+               print("addpar add_MM3.prm", file=f)
             elif self._mm=="mmff94":
-               print >>f,"forcefield mmff94"
-               print >>f,"addpar add_MMFF94.prm"
+               print("forcefield mmff94", file=f)
+               print("addpar add_MMFF94.prm", file=f)
             else:
-               print "Scan.run_scan: Wrong MM-name!"
+               print("Scan.run_scan: Wrong MM-name!")
             f.close()
             #
             timeout=1
@@ -867,19 +868,19 @@ if __name__=="__main__":
     default_input_fname="dih_scan_inp"
 
     gopt_type,gopt_s_fnameb,t1234,bes,engine_path,mm,mode,ref_p,alg,opt_lin,np,nc,step_int,csv=par_fit_inp(default_input_fname)
-    ds=DihScan(gopt_s_fnameb,engine_path,mm,opt_lin,np,nc,bes,t1234)
+    ds=DihAScan(gopt_s_fnameb,engine_path,mm,opt_lin,np,nc,bes,t1234)
     if not gopt_type=="ginp":
        environ["ENGINE_DIR"]=engine_path+"engine_dir"
        p,c,ol_templ,lines=read_add(mm,opt_lin,np,nc,1)
   
     def engine_rmse(p):
-       print p
+       print(p)
        step=1
        step_int=10
        write_add(p,c,mm,ol_templ,lines,1,step,step_int)
        ds.run_scan(p,c,mm,ol_templ,lines)
        rmse=ds.calc_rmse(csv,step,step_int)
-       print rmse
+       print(rmse)
        return rmse
 
     if gopt_type=="full":
@@ -895,26 +896,26 @@ if __name__=="__main__":
     engine_rmse(p)
 
     gmol=ScanElem(mm="mmff94",name="opmmm")    
-    print gmol.name
+    print(gmol.name)
     #gmol.dt=(13,4,0,1)
     gmol.dt=(1,0,4,13)
-    print gmol.dt
+    print(gmol.dt)
     fn_b="opmmm-mp2-opt"
     gmol.read_gopt_log(fn_b)
-    print "tl:",gmol.tl
-    print gmol.e
-    print gmol.sl
-    print gmol.rl
-    print gmol.cl
-    print gmol.da
+    print("tl:", gmol.tl)
+    print(gmol.e)
+    print(gmol.sl)
+    print(gmol.rl)
+    print(gmol.cl)
+    print(gmol.da)
     gmol.dih_rot(pi/2.0)
-    print gmol.rl
-    print gmol.da
-    print gmol.write_inp_pcm("test")
+    print(gmol.rl)
+    print(gmol.da)
+    print(gmol.write_inp_pcm("test"))
     gmol=ScanElem(mm="mmff94")
     gmol.read_ginp("tempC2")    
     gmol.dt=(13,4,0,1)
-    print gmol._ginp_templ
-    print gmol._rl
+    print(gmol._ginp_templ)
+    print(gmol._rl)
     gmol.dih_rot(pi/2.0)
-    print gmol._rl
+    print(gmol._rl)

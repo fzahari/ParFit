@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from numpy import zeros
 
@@ -127,9 +127,9 @@ def par_fit_inp(input_fname):
        ref_p=ls[1]
        if ref_p=="min": ref_p=-1
     else:
-       print "Warning: more variables on the 'alg' line than allowed!"
+       print("Warning: more variables on the 'alg' line than allowed!")
     for line in lines[n+4:-1]:
-	t=line.split()
+        t=line.split()
         n=len(t)-1
         for i in range(n):
             sflag=False
@@ -169,7 +169,7 @@ def par_fit_inp(input_fname):
     elif len(last_line)==2:
        csv,step_int=lines[-1].split()
     else:
-       print "Wrong csv line in the input file!"
+       print("Wrong csv line in the input file!")
 
     return scan_type,gopt_type,gopt_scan_fnameb,tup,bes,engine_path,mm,mode,alg,ref_p,opt_lin,np,nc,step_int,csv
 
@@ -189,7 +189,7 @@ def read_add(mm,opt_lin,np,nc,fl,scan_type):
         else:
            add_name="../Data/Engine/add_MMFF94_PF.prm"
     else:
-        print "read_add: Wrong MM-type!"
+        print("read_add: Wrong MM-type!")
 
     f=open(add_name,'r')
     lines=f.readlines()
@@ -197,7 +197,7 @@ def read_add(mm,opt_lin,np,nc,fl,scan_type):
         
     i=j=0
     ol_keys=opt_lin.keys()
-    ol_keys.sort()
+    ol_keys = sorted(ol_keys)
     pdict={}
     ol_templ={}
     scan_type=scan_type.strip()
@@ -224,7 +224,7 @@ def read_add(mm,opt_lin,np,nc,fl,scan_type):
             if t[k][0]=='p':
                 plab=t[k][1:]
                 if len(plab)>0:
-                   if pdict.has_key(plab):
+                   if plab in pdict:
                       ii=pdict[plab]
                       constr_count+=1
                    else:
@@ -246,7 +246,7 @@ def read_add(mm,opt_lin,np,nc,fl,scan_type):
                 s2+="c["+str(j)+"],"
                 j+=1
             else:
-                print "Woops!" 
+                print("Woops!") 
         v=lines[ol_sk].split()
         ol_vars=s[:-1]
         ol_vars2=s2[:-1]
@@ -257,10 +257,10 @@ def read_add(mm,opt_lin,np,nc,fl,scan_type):
            #    print v[5+2*k]
               v[5+2*k]=-v[5+2*k]  
            #   v[5+2*k]=str(v[5+2*k])  
-           v[5:10:2]=map(str,v[5:10:2])
-           exec ol_vars+"="+v[5]+","+v[7]+","+v[9]
+           v[5:10:2]=list(map(str,v[5:10:2]))
+           exec(ol_vars+"="+v[5]+","+v[7]+","+v[9])
            #print "minuses",ol_vars
-           v[1:5]=map(int,v[1:5])
+           v[1:5]=list(map(int,v[1:5]))
            s1='"%s        %3i  %3i  %3i  %3i'%(v[0],v[1],v[2],v[3],v[4])
            s2='      %6.3f +1   %6.3f -2 %6.3f +3      "%('+ol_vars2+')'
         elif scan_type=="bond":
@@ -269,8 +269,8 @@ def read_add(mm,opt_lin,np,nc,fl,scan_type):
            #   v[3+k]=-float(v[3+k])  
            #   v[3+k]=str(v[3+k])  
            #v[3:5]=map(str,v[3:5])
-           exec ol_vars+"="+v[3]+","+v[4]
-           v[1:3]=map(int,v[1:3])
+           exec(ol_vars+"="+v[3]+","+v[4])
+           v[1:3]=list(map(int,v[1:3]))
            s1='"%s        %3i  %3i'%(v[0],v[1],v[2])
            s2='      %6.3f    %6.3f        "%('+ol_vars2+')'
         elif scan_type=="angl":
@@ -279,8 +279,8 @@ def read_add(mm,opt_lin,np,nc,fl,scan_type):
            #   v[4+k]=-float(v[4+k])  
            #   v[4+k]=str(v[4+k])  
            #v[4:6]=map(str,v[4:6])
-           exec ol_vars+"="+v[4]+","+v[5]
-           v[1:4]=map(int,v[1:4])
+           exec(ol_vars+"="+v[4]+","+v[5])
+           v[1:4]=list(map(int,v[1:4]))
            s1='"%s        %3i  %3i  %3i'%(v[0],v[1],v[2],v[3])
            s2='      %6.3f    %6.3f        "%('+ol_vars2+')'
         ol_templ.update({ol_sk:s1+s2})
@@ -302,17 +302,17 @@ def write_add(sdir,p,c,mm,ol_templ,lines,fl,step,step_int):
        else:
           add_name="../Data/Engine/add_MMFF94_PF.prm"
     else:
-       print "write_add: Wrong MM-type!"
+       print("write_add: Wrong MM-type!")
 
     f=open(add_name,'w')
 
     ol_keys=ol_templ.keys()
-    ol_keys.sort()
+    ol_keys = sorted(ol_keys)
     for ol_sk in ol_keys:
-        exec 'lines['+str(ol_sk)+']='+ol_templ[ol_sk]
+        exec('lines['+str(ol_sk)+']='+ol_templ[ol_sk])
 
     for line in lines:
-       print >>f,line[:-1]
+       print(line[:-1], file=f)
 
     f.close()
    
@@ -326,33 +326,33 @@ def write_add(sdir,p,c,mm,ol_templ,lines,fl,step,step_int):
 
        f=open(add_name_arch,'w')
        for line in lines:
-          print >>f,line[:-1]
+          print(line[:-1], file=f)
        f.close()
 
     return
 
 if __name__=="__main__":
     gmol=DihGOpt_Molecule(mm="mmff94",name="opmmm")    
-    print gmol.name
+    print(gmol.name)
     #gmol.dt=(13,4,0,1)
     gmol.dt=(1,0,4,13)
-    print gmol.dt
+    print(gmol.dt)
     fn_b="opmmm-mp2-opt"
     gmol.read_gopt_log(fn_b)
-    print "tl:",gmol.tl
-    print gmol.e
-    print gmol.sl
-    print gmol.rl
-    print gmol.cl
-    print gmol.da
+    print("tl:", gmol.tl)
+    print(gmol.e)
+    print(gmol.sl)
+    print(gmol.rl)
+    print(gmol.cl)
+    print(gmol.da)
     gmol.dih_rot(pi/2.0)
-    print gmol.rl
-    print gmol.da
-    print gmol.write_inp_pcm("test")
+    print(gmol.rl)
+    print(gmol.da)
+    print(gmol.write_inp_pcm("test"))
     gmol=DihGOpt_Molecule(mm="mmff94")
     gmol.read_ginp("tempC2")    
     gmol.dt=(13,4,0,1)
-    print gmol._ginp_templ
-    print gmol._rl
+    print(gmol._ginp_templ)
+    print(gmol._rl)
     gmol.dih_rot(pi/2.0)
-    print gmol._rl
+    print(gmol._rl)

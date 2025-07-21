@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
 # This program plots the energy profiles of MM derived 
 # energies after optimizing the parameters 

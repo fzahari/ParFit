@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from numpy import array,pi
 from _GeomCalc import dist,angle,dihedral,norm_vec,uangl,rotu,tra,angle
@@ -50,7 +50,7 @@ class Atom(object):
             else:
                 self._t=mm_type
         else:
-            print "Atom.__init__: Wrong MM-name!"
+            print("Atom.__init__: Wrong MM-name!")
 
     @property
     def s(self):
@@ -85,7 +85,7 @@ class Atom(object):
         elif self._mm=="mmff94":
             self._t=default_mmff94_type[self._s]
         else:
-            print "Atom.mm: Wrong MM-name!"
+            print("Atom.mm: Wrong MM-name!")
 
     @property
     def t(self):
@@ -375,47 +375,47 @@ class Molecule(object):
  
 if __name__=="__main__":
     a=Atom('C',(1.,2.,3.),6.0,"mm3")
-    print a.s
-    print a.r
+    print(a.s)
+    print(a.r)
     a.r=[0.,0.,0.]
-    print a.r
-    print a.c
+    print(a.r)
+    print(a.c)
     a.c=5.0
-    print a.c
+    print(a.c)
     a.t=50
-    print a.t
+    print(a.t)
     a.t
-    print a.t
+    print(a.t)
 
     b=Atom('P',(1.,0.,0.),mm="mm3")
     c=Atom('H',(1.,1.,0.),mm="mm3")
     d=Atom('C',(1.,1.,-1.),mm="mm3")
     m=Molecule((a,b,c,d),"mmff94",name="Mol2")
-    print m.mm,m.tl
-    print m.sl
-    print m.rl
-    print m.cl
-    print "tl: ",m.tl
-    print m.na
-    print m.name
-    print m.conn
+    print(m.mm, m.tl)
+    print(m.sl)
+    print(m.rl)
+    print(m.cl)
+    print("tl: ", m.tl)
+    print(m.na)
+    print(m.name)
+    print(m.conn)
     m.set_conn()
-    print m.conn
-    print m.calc_dist(0,1)
-    print m.calc_angle(1,0,2)
-    print m.calc_dihedral(0,1,2,3)
+    print(m.conn)
+    print(m.calc_dist(0,1))
+    print(m.calc_angle(1,0,2))
+    print(m.calc_dihedral(0,1,2,3))
     m.rl=((1.,1.,1.),(0.,0.,0.),(2.,2.,2.),(3.,3.,3.))
     #m.rl=((1.,1.,1.),(0.,0.,0.),(2.,2.,2.))
-    print m.rl
+    print(m.rl)
 
     m=Molecule()
-    print m.sl
-    print m.rl
-    print m.cl
-    print m.tl
-    print m.na
-    print m.name
-    print m.conn
+    print(m.sl)
+    print(m.rl)
+    print(m.cl)
+    print(m.tl)
+    print(m.na)
+    print(m.name)
+    print(m.conn)
 
     a=Atom('C',(0.,-1.,0.),mm="mmff94")
     #b=Atom('P',(1.,0.,0.),mm="mmff94")
@@ -423,14 +423,14 @@ if __name__=="__main__":
     c=Atom('C',(2.,0.,0.),mm="mmff94")
     d=Atom('H',(3.,1.,0.),mm="mmff94")
     m=Molecule((a,b,c,d),"mm3")
-    print "tl: ",m.tl
+    print("tl: ", m.tl)
     m.set_conn()
-    print m.conn
-    print m.calc_bsplit(0,1)
-    print "1",m.rl
+    print(m.conn)
+    print(m.calc_bsplit(0,1))
+    print("1", m.rl)
     #m.diha_rot((0,1,2,3),pi/2.)
     m.angl_rot((0,1,2),pi/2.)
-    print "2",m.rl
+    print("2", m.rl)
     m.bond_ord()
-    print m.db
-    print m.benz_ring()
+    print(m.db)
+    print(m.benz_ring())

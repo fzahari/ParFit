@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import random,numpy
 from deap import algorithms, base, creator, tools
@@ -38,7 +38,7 @@ def eaSimple(population, toolbox, cxpb, mutpb, ngen, stats=None,
     record = stats.compile(population) if stats else {}
     logbook.record(gen=0, nevals=len(invalid_ind), **record)
     if verbose:
-        print logbook.stream
+        print(logbook.stream)
 
     flag=0
     best_ind=halloffame[0] 
@@ -74,7 +74,7 @@ def eaSimple(population, toolbox, cxpb, mutpb, ngen, stats=None,
         record = stats.compile(population) if stats else {}
         logbook.record(gen=gen, nevals=len(invalid_ind), **record)
         if verbose:
-            print logbook.stream
+            print(logbook.stream)
 
         #print flag, best_ind, halloffame[0]
         if flag==4: break
@@ -107,7 +107,7 @@ def run_ga(engine_rmse,np,ngen):
         def wrapper(*args, **kargs):
             offspring = func(*args, **kargs)
             for child in offspring:
-                for i in xrange(len(child)):
+                for i in range(len(child)):
                     if child[i] > max:
                         child[i] = max
                     elif child[i] < min:
@@ -134,7 +134,7 @@ def run_ga(engine_rmse,np,ngen):
 
    pop=toolbox.population(n=50)
    eaSimple(pop,toolbox,cxpb=0.35,mutpb=0.05,ngen=ngen,stats=stats,halloffame=hof,verbose=True)
-   print "The best rmse is", hof[0].fitness.values[0],"corresponding to the parameters",numpy.array(hof[0])
+   print("The best rmse is", hof[0].fitness.values[0], "corresponding to the parameters", numpy.array(hof[0]))
 
    #return hof[0:int(np/20)]
    return hof
