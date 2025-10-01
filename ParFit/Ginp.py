@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 import sys
-from Scan import DihAScan,BondScan,AnglScan
-from _IO import ginp_inp
+from .Scan import DihAScan,BondScan,AnglScan
+from ._IO import ginp_inp
 
 def pf_inp_run(input_fname):
   

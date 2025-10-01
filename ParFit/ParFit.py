@@ -5,10 +5,10 @@ import os
 import numpy
 
 from scipy.optimize import minimize, basinhopping, fmin, fmin_powell, fmin_cg, fmin_tnc
-from Scan import BondScan, AnglScan, DihAScan
-from _IO import par_fit_inp, read_add, write_add
+from .Scan import BondScan, AnglScan, DihAScan
+from ._IO import par_fit_inp, read_add, write_add
 
-from Ga import run_ga
+from .Ga import run_ga
 
 def pf_run(PF_if):
 

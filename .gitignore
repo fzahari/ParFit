@@ -134,3 +134,16 @@ Data/ParFit/
 *.out
 *.log
 engine_dir/
+
+# C build artifacts
+Mengine/*.o
+Mengine/engine
+
+# IDE files
+.idea/
+.vscode/
+
+# Development and local files
+WARP.md
+.warp/
+test_parfit.py

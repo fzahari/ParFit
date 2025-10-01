@@ -1,24 +1,24 @@
-# Copyright (C) 2004-2016 Kevin E. Gilbert, dba Serena Software
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-# Kevin E. Gilbert
-# Serena Software
-# Box 3076
-# Bloomington, IN 47402-3076
-#
-# gilbert@serenasoft.com
+// Copyright (C) 2004-2016 Kevin E. Gilbert, dba Serena Software
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//
+// Kevin E. Gilbert
+// Serena Software
+// Box 3076
+// Bloomington, IN 47402-3076
+//
+// gilbert@serenasoft.com
 
 #include "pcwin.h"
 #include "pcmod.h"
@@ -229,35 +229,34 @@ void reset_atom_data(void)
      }
 }
 // =======================================
-#ifdef PCM_WIN
-int strcasecmp(char *str1,char *str2)
-{
-     char c1,c2;
-     while(1)
-     {
-         c1 = tolower(*str1++);
-         c2 = tolower(*str2++);
-         if (c1 < c2) return -1;
-         if (c1 > c2) return 1;
-         if (c1 == 0) return 0;
-     }
-}
-// ========================================
-int strncasecmp(char *s1,char *s2,int n)
-{
-    int i;
-    char c1, c2;
-    for (i=0; i<n; i++)
-    {
-        c1 = tolower(*s1++);
-        c2 = tolower(*s2++);
-        if (c1 < c2) return -1;
-        if (c1 > c2) return 1;
-        if (!c1) return 0;
-    }
-    return 0;
-} 
-#endif
+//ifdef PCM_WIN
+// int strcasecmp(char *str1,char *str2)
+// {
+//      char c1,c2;
+//      while(1)
+//      {
+//          c1 = tolower(*str1++);
+//          c2 = tolower(*str2++);
+//          if (c1 < c2) return -1;
+//          if (c1 > c2) return 1;
+//          if (c1 == 0) return 0;
+//      }
+// }
+// // ========================================
+// int strncasecmp(char *s1,char *s2,int n)
+// {
+//     int i;
+//     char c1, c2;
+//     for (i=0; i<n; i++)
+//     {
+//         c1 = tolower(*s1++);
+//         c2 = tolower(*s2++);
+//         if (c1 < c2) return -1;
+//         if (c1 > c2) return 1;
+//         if (!c1) return 0;
+//     }
+//     return 0;
+// } 
 // void itoa(int n,char *s, int radix)
 //{
 //    sprintf(s,"%d",n);

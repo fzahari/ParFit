@@ -2,9 +2,9 @@
 
 from os import system, environ
 from numpy import rad2deg, array, sqrt, pi, around, deg2rad
-from _IO import par_fit_inp, read_add, write_add
-from _Engine import run_engine_timeout, pert_add_param
-from GeomStr import Molecule, default_mm3_type, default_mmff94_type, default_charge
+from ._IO import par_fit_inp, read_add, write_add
+from ._Engine import run_engine_timeout, pert_add_param
+from .GeomStr import Molecule, default_mm3_type, default_mmff94_type, default_charge
 
 import os
 import re

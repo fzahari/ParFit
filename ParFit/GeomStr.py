@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from numpy import array,pi
-from _GeomCalc import dist,angle,dihedral,norm_vec,uangl,rotu,tra,angle
+from ._GeomCalc import dist,angle,dihedral,norm_vec,uangl,rotu,tra,angle
 
 keywords=["default_charge", "default_mm3_type", "default_mmff94_type", "cov_radii", "bond_ords"]
 
@@ -11,7 +11,8 @@ default_mmff94_type={}
 cov_radii={}
 bond_ords={}
 
-f=open("atomic.db",'r')
+import os
+f=open(os.path.join(os.path.dirname(__file__), "atomic.db"),'r')
 lines=f.readlines()
 f.close()
 
