@@ -8,8 +8,8 @@ with open("README", "r", encoding="utf-8") as fh:
 setup(
     name="parfit",
     version="1.0.0",
-    author="Federico Zahariev, Marilu Perez Garcia",
-    author_email="fzahari@ameslab.gov, dr.mperez@icloud.com",
+    author="Federico Zahariev",
+    author_email="fzahari@ameslab.gov",
     description="ParFit automates the process of fitting molecular-mechanics parameters to data obtained by ab-initio calculations.",
     long_description=long_description,
     long_description_content_type="text/plain",
