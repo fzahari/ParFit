@@ -144,6 +144,4 @@ Mengine/engine
 .vscode/
 
 # Development and local files
-WARP.md
-.warp/
 test_parfit.py
